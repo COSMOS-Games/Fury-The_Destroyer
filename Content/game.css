@@ -10,9 +10,31 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 a {
     text-decoration: none;
     color: #000000;
 }
+
+canvas {
+    border: 1px solid #FAFAFA;
+}
+
+/* Logan Kim Begins */
+
+
+/* Logan Kim Ends */
+/* Kei Mizubuchi Begins */
+
+
+/* Kei Mizubuchi Ends */
+/* Hang Li Begins */
+
+
+/* Hang Li Ends */
+/* Ygor Almeida Begins */
+
+
+/* Ygor Almeida Ends */

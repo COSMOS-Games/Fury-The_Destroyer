@@ -27,5 +27,22 @@ let Game = (function() {
         console.log(`%c Main Started...`, "color: green; font-size: 16px;");
     }
 
+    // Logan Kim Begins
+
+
+    // Logan Kim Ends
+    // Kei Mizubuchi Begins
+
+
+    // Kei Mizubuchi Ends
+    // Hand Li Begins
+
+
+    // Hang Li Ends
+    // Ygor Almeida Begins
+
+    
+    // Ygor Almeida Ends
+
     window.addEventListener('load', Start);
 })();
