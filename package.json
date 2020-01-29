@@ -1,0 +1,28 @@
+{
+  "name": "fury-the_destroyer",
+  "version": "1.0.0",
+  "description": "Fury, the Destroyer is a single player top-down tank game which is designed to bring joys to anyone who plays this game. This game will contain three levels. Player levels up once the stage is cleared by meeting all conditions including eliminating all enemies on a map.",
+  "main": "game.js",
+  "repository": "https://github.com/COSMOS-Games/Fury-The_Destroyer",
+  "author": "COSMOS Games",
+  "contributors": [
+    "Logan Junhwi Kim <logan.kim0212@gmail.com>",
+    "Hang Li <HangLi0316@gmail.com>",
+    "Kei Mizubuchi <cdfray@gmail.com>",
+    "Ygor Almeida <ygor.cavalcante67@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "createjs": "^1.0.1",
+    "easeljs": "^1.0.2",
+    "preloadjs": "^1.0.1",
+    "soundjs": "^1.0.1",
+    "tweenjs": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/easeljs": "^1.0.0",
+    "@types/preloadjs": "^0.6.32",
+    "@types/soundjs": "^0.6.27",
+    "@types/tweenjs": "^1.0.0"
+  }
+}
