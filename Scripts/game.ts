@@ -5,6 +5,10 @@ let Game = (function () {
     let canvas: HTMLCanvasElement = document.getElementsByTagName('canvas')[0];
     let stage: createjs.Stage;
 
+    let backgroundImg: createjs.Bitmap;
+    let playerA: objects.Player;
+    let playerB: objects.Player;
+
     /**
      * This method initializes the CreateJS (EaselJS) Library
      * It sets the framerate to 60 FPS and sets up the main Game Loop (Update)
@@ -16,16 +20,21 @@ let Game = (function () {
         createjs.Ticker.framerate = 60; // 60 FPS
         createjs.Ticker.on('tick', Update);
         stage.enableMouseOver(20);
+
         Main();
     }
 
     function Update(): void {
+        playerA.Update();
         stage.update();
     }
 
 
     function Main(): void {
         console.log(`%c Main Started...`, "color: green; font-size: 16px;");
+
+        // first stage
+        firstStage();
     }
 
     // Logan Kim Begins
@@ -33,6 +42,27 @@ let Game = (function () {
 
     // Logan Kim Ends
     // Kei Mizubuchi Begins
+    function firstStage(): void {
+        playerA = new objects.Player();
+        stage.addChild(playerA);
+    }
+
+    // attach keydown event to the window
+    window.addEventListener('keydown', keyPressed);
+
+    function keyPressed(event: KeyboardEvent) {
+        console.log('keydown: ' + event.keyCode);
+        if (event.keyCode === 38) {
+            playerA.moveUp();
+        } else if (event.keyCode === 40) {
+            playerA.moveDown();
+        } else if (event.keyCode === 37) {
+            playerA.moveLeft();
+        } else if (event.keyCode === 39) {
+            // right
+            playerA.moveRight();
+        }
+    }
 
 
     // Kei Mizubuchi Ends

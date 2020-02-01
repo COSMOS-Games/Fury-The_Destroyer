@@ -97,11 +97,14 @@ module objects {
         }
 
         public static up(): Vector2 {
-            return new Vector2(0, -1);
+            // return new Vector2(0, -1);
+            return new Vector2(0, -10);
+
         }
 
         public static down(): Vector2 {
-            return new Vector2(0, 1);
+            // return new Vector2(0, 1);
+            return new Vector2(0, 10);
         }
 
         public static left(): Vector2 {

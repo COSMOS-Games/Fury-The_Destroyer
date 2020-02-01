@@ -2,11 +2,12 @@
 var objects;
 (function (objects) {
     class Player extends objects.GameObject {
-        // PRIVATE INSTANCE MEMBER
         // PUBLIC PROPERTIES
         // CONSTRUCTOR
         constructor() {
             super("./Assets/images/placeholder.png", 0, 0, true);
+            // PRIVATE INSTANCE MEMBER
+            this.state = "";
             this.Start();
         }
         // PRIVATE METHODS
@@ -16,9 +17,26 @@ var objects;
         Start() {
         }
         Update() {
-            this.position = new objects.Vector2(this.stage.mouseX, this.stage.mouseY);
+            //this.position = new Vector2(this.stage.mouseX, this.stage.mouseY);
         }
         Reset() {
+        }
+        // movement
+        moveLeft() {
+            this.position = new objects.Vector2(this.position.x - 10, this.position.y);
+            console.log("LEFT: " + this.position.y);
+        }
+        moveRight() {
+            this.position = new objects.Vector2(this.position.x + 10, this.position.y);
+            console.log("RIGHT: " + this.position.y);
+        }
+        moveUp() {
+            this.position = new objects.Vector2(this.position.x, this.position.y - 10);
+            console.log("UP: " + this.position.y);
+        }
+        moveDown() {
+            this.position = new objects.Vector2(this.position.x, this.position.y + 10);
+            console.log("DOWN: " + this.position.y);
         }
     }
     objects.Player = Player;
