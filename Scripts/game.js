@@ -2,6 +2,7 @@
 // IIFE -- Immediately Invoked Function Expression
 // means? is an anonymous self-executing function
 let Game = (function () {
+    // initialize the needed object
     let canvas = document.getElementsByTagName('canvas')[0];
     let stage;
     /**
@@ -22,6 +23,14 @@ let Game = (function () {
     function Main() {
         console.log(`%c Main Started...`, "color: green; font-size: 16px;");
     }
+    // Logan Kim Begins
+    // Logan Kim Ends
+    // Kei Mizubuchi Begins
+    // Kei Mizubuchi Ends
+    // Hand Li Begins
+    // Hang Li Ends
+    // Ygor Almeida Begins
+    // Ygor Almeida Ends
     window.addEventListener('load', Start);
 })();
 //# sourceMappingURL=game.js.map
