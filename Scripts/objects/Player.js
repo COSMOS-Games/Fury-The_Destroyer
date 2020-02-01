@@ -24,11 +24,11 @@ var objects;
         // movement
         moveLeft() {
             this.position = new objects.Vector2(this.position.x - 10, this.position.y);
-            console.log("LEFT: " + this.position.y);
+            console.log("LEFT: " + this.position.x);
         }
         moveRight() {
             this.position = new objects.Vector2(this.position.x + 10, this.position.y);
-            console.log("RIGHT: " + this.position.y);
+            console.log("RIGHT: " + this.position.x);
         }
         moveUp() {
             this.position = new objects.Vector2(this.position.x, this.position.y - 10);
@@ -39,9 +39,7 @@ var objects;
             console.log("DOWN: " + this.position.y);
         }
         shoot() {
-            let bullet = new objects.Bullet();
-            bullet.position = this.position;
-            console.log('BULLET!!! position:' + bullet.position.x);
+            let bullet = new objects.Bullet(this.position.x, this.position.y);
             return bullet;
         }
     }

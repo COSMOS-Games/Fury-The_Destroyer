@@ -30,12 +30,12 @@ module objects {
         // movement
         public moveLeft(): void {
             this.position = new Vector2(this.position.x - 10, this.position.y);
-            console.log("LEFT: " + this.position.y);
+            console.log("LEFT: " + this.position.x);
         }
 
         public moveRight(): void {
             this.position = new Vector2(this.position.x + 10, this.position.y);
-            console.log("RIGHT: " + this.position.y);
+            console.log("RIGHT: " + this.position.x);
         }
 
         public moveUp(): void {
@@ -49,10 +49,7 @@ module objects {
         }
 
         public shoot(): objects.Bullet {
-            let bullet = new Bullet();
-            bullet.position = this.position;
-            console.log('BULLET!!! position:' + bullet.position.x);
-
+            let bullet = new Bullet(this.position.x, this.position.y);
             return bullet;
         }
     }

@@ -13,10 +13,8 @@ module objects {
         }
 
         // constructor
-        constructor() {
-            // TO-DO: find out how to move bullets
-            super("./Assets/images/placeholder.png", 0, 0, true);
-            console.log("in the constructor: " + this.position.y);
+        constructor(x:number, y:number) {
+            super("./Assets/images/placeholder.png", x, y, true);
             this.Start();
         }
 
@@ -27,16 +25,17 @@ module objects {
 
         // public method
         public Start(): void {
-            createjs.Ticker.framerate = 5;
-            createjs.Ticker.on('tick', this.Update);
+            createjs.Ticker.framerate = 60;
+            createjs.Ticker.on('tick', ()=>{
+                this.Update();
+            });
+            
         }
 
         public Update(): void {
             if (this.position) {
-                console.log(this.position.y);
-                this.position = new Vector2(this.position.x, this.position.y + 2);
+                this.position = new Vector2(this.position.x + 1, this.position.y);
             }
-            console.log("position didn't found!");
         }
         public Reset(): void {
 
