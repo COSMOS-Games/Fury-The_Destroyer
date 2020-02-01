@@ -4,6 +4,8 @@
 let Game = (function () {
     let canvas = document.getElementsByTagName('canvas')[0];
     let stage;
+    let gameTitle;
+    let startButton;
     /**
      * This method initializes the CreateJS (EaselJS) Library
      * It sets the framerate to 60 FPS and sets up the main Game Loop (Update)
@@ -21,7 +23,30 @@ let Game = (function () {
     }
     function Main() {
         console.log(`%c Main Started...`, "color: green; font-size: 16px;");
+        StartScreen();
     }
+    // Logan Kim Begins
+    function StartScreen() {
+        gameTitle = new objects.Label("Fury, The Destroyer", "80px", "Consolas", "#FFFFFF", 480, 100, true);
+        stage.addChild(gameTitle);
+        // Image Reference: https://pngimage.net/game-play-button-png-2/
+        startButton = new objects.Button('./Assets/images/play-btn.png', 480, 500, true);
+        stage.addChild(startButton);
+        console.log("Start screen loaded!");
+        startButton.on("click", function () {
+            // clear the canvas
+            stage.removeAllChildren();
+            stage.update();
+            // call the first stage method below
+        });
+    }
+    // Logan Kim Ends
+    // Kei Mizubuchi Begins
+    // Kei Mizubuchi Ends
+    // Hand Li Begins
+    // Hang Li Ends
+    // Ygor Almeida Begins
+    // Ygor Almeida Ends
     window.addEventListener('load', Start);
 })();
 //# sourceMappingURL=game.js.map

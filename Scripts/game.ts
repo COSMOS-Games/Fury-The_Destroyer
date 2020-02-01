@@ -3,6 +3,8 @@
 let Game = (function() {
     let canvas:HTMLCanvasElement = document.getElementsByTagName('canvas')[0];
     let stage:createjs.Stage;
+    let gameTitle: objects.Label;
+    let startButton: objects.Button;
 
     /**
      * This method initializes the CreateJS (EaselJS) Library
@@ -22,14 +24,30 @@ let Game = (function() {
         stage.update();
     }
 
-
     function Main():void {
         console.log(`%c Main Started...`, "color: green; font-size: 16px;");
+        StartScreen();
     }
 
     // Logan Kim Begins
+    function StartScreen():void {
+        gameTitle = new objects.Label("Fury, The Destroyer", "80px", "Consolas", "#FFFFFF", 480, 100, true);
+        stage.addChild(gameTitle);
 
+        // Image Reference: https://pngimage.net/game-play-button-png-2/
+        startButton = new objects.Button('./Assets/images/play-btn.png', 480, 500, true);
+        stage.addChild(startButton);
 
+        console.log("Start screen loaded!")
+
+        startButton.on("click", function(){
+            // clear the canvas
+            stage.removeAllChildren();
+            stage.update();
+            // call the first stage method below
+
+        });
+    }
     // Logan Kim Ends
     // Kei Mizubuchi Begins
 
