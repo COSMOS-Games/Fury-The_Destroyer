@@ -9,6 +9,7 @@ let Game = (function () {
     let playerA: objects.Player;
     let playerB: objects.Player;
 
+    let bullet: objects.Bullet;
     /**
      * This method initializes the CreateJS (EaselJS) Library
      * It sets the framerate to 60 FPS and sets up the main Game Loop (Update)
@@ -59,8 +60,11 @@ let Game = (function () {
         } else if (event.keyCode === 37) {
             playerA.moveLeft();
         } else if (event.keyCode === 39) {
-            // right
             playerA.moveRight();
+        } else if (event.keyCode === 77) {
+            // M
+            let bullet = playerA.shoot();
+            stage.addChild(bullet);
         }
     }
 

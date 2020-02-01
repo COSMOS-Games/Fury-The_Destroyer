@@ -1,7 +1,8 @@
 module objects {
     export class Player extends GameObject {
         // PRIVATE INSTANCE MEMBER
-        private state: string = "";
+        private _bulletNum: number = 3;
+
         // PUBLIC PROPERTIES
 
         // CONSTRUCTOR
@@ -45,6 +46,14 @@ module objects {
         public moveDown(): void {
             this.position = new Vector2(this.position.x, this.position.y + 10);
             console.log("DOWN: " + this.position.y);
+        }
+
+        public shoot(): objects.Bullet {
+            let bullet = new Bullet();
+            bullet.position = this.position;
+            console.log('BULLET!!! position:' + bullet.position.x);
+
+            return bullet;
         }
     }
 }

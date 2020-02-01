@@ -8,6 +8,7 @@ let Game = (function () {
     let backgroundImg;
     let playerA;
     let playerB;
+    let bullet;
     /**
      * This method initializes the CreateJS (EaselJS) Library
      * It sets the framerate to 60 FPS and sets up the main Game Loop (Update)
@@ -50,8 +51,12 @@ let Game = (function () {
             playerA.moveLeft();
         }
         else if (event.keyCode === 39) {
-            // right
             playerA.moveRight();
+        }
+        else if (event.keyCode === 77) {
+            // M
+            let bullet = playerA.shoot();
+            stage.addChild(bullet);
         }
     }
     // Kei Mizubuchi Ends

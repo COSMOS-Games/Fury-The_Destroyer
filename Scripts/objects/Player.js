@@ -7,7 +7,7 @@ var objects;
         constructor() {
             super("./Assets/images/placeholder.png", 0, 0, true);
             // PRIVATE INSTANCE MEMBER
-            this.state = "";
+            this._bulletNum = 3;
             this.Start();
         }
         // PRIVATE METHODS
@@ -37,6 +37,12 @@ var objects;
         moveDown() {
             this.position = new objects.Vector2(this.position.x, this.position.y + 10);
             console.log("DOWN: " + this.position.y);
+        }
+        shoot() {
+            let bullet = new objects.Bullet();
+            bullet.position = this.position;
+            console.log('BULLET!!! position:' + bullet.position.x);
+            return bullet;
         }
     }
     objects.Player = Player;
