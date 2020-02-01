@@ -9,7 +9,6 @@ let Game = (function () {
     let playerA: objects.Player;
     let playerB: objects.Player;
 
-    let bullet: objects.Bullet;
     /**
      * This method initializes the CreateJS (EaselJS) Library
      * It sets the framerate to 60 FPS and sets up the main Game Loop (Update)
@@ -44,7 +43,7 @@ let Game = (function () {
     // Logan Kim Ends
     // Kei Mizubuchi Begins
     function firstStage(): void {
-        playerA = new objects.Player();
+        playerA = new objects.Player(50,50);
         stage.addChild(playerA);
     }
 
@@ -52,7 +51,6 @@ let Game = (function () {
     window.addEventListener('keydown', keyPressed);
 
     function keyPressed(event: KeyboardEvent) {
-        console.log('keydown: ' + event.keyCode);
         if (event.keyCode === 38) {
             playerA.moveUp();
         } else if (event.keyCode === 40) {
@@ -63,8 +61,9 @@ let Game = (function () {
             playerA.moveRight();
         } else if (event.keyCode === 77) {
             // M
-            let bullet = playerA.shoot();
-            stage.addChild(bullet);
+            let bulletA = playerA.shoot();
+            bulletA.position = playerA.position;
+            stage.addChild(bulletA);
         }
     }
 

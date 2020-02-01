@@ -3,12 +3,11 @@ var objects;
 (function (objects) {
     class Bullet extends objects.GameObject {
         // constructor
-        constructor() {
-            // TO-DO: find out how to move bullets
-            super("./Assets/images/placeholder.png", 0, 0, true);
+        constructor(x, y) {
+            super("./Assets/images/placeholder.png", x, y, true);
             // variables
             this._owner = "";
-            console.log("in the constructor: " + this.position.y);
+            this._dx = 2;
             this.Start();
         }
         // properties
@@ -18,20 +17,34 @@ var objects;
         set owner(newOwner) {
             this._owner = newOwner;
         }
+        get dx() {
+            return this._dx;
+        }
+        set dx(newDx) {
+            this._dx = newDx;
+        }
         // private method
         _checkBounds() {
+            // TODO: check bounds based on direction
+            // simplying check the right border
+            if (this.x >= 960 - this.halfHeight) {
+                this.dx = 0;
+            }
+            // check the left border
+            if (this.x <= this.halfHeight) {
+                this.dx = 2;
+            }
         }
         // public method
         Start() {
-            createjs.Ticker.framerate = 5;
-            createjs.Ticker.on('tick', this.Update);
+            createjs.Ticker.framerate = 60;
+            createjs.Ticker.on('tick', () => {
+                this.Update();
+            });
         }
         Update() {
-            if (this.position) {
-                console.log(this.position.y);
-                this.position = new objects.Vector2(this.position.x, this.position.y + 2);
-            }
-            console.log("position didn't found!");
+            this.position = new objects.Vector2(this.position.x + this.dx, this.position.y);
+            this._checkBounds();
         }
         Reset() {
         }

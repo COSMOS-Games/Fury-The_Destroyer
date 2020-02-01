@@ -2,12 +2,28 @@ module objects {
     export class Player extends GameObject {
         // PRIVATE INSTANCE MEMBER
         private _bulletNum: number = 3;
+        private _dxy:number = 10;
 
         // PUBLIC PROPERTIES
+        get bulletNum():number{
+            return this._bulletNum;
+        }
+
+        set bulletNum(newNum:number){
+            this._bulletNum = newNum;
+        }
+
+        get dxy():number{
+            return this._dxy;
+        }
+
+        set dxy(newNum:number){
+            this._dxy = newNum;
+        }
 
         // CONSTRUCTOR
-        constructor() {
-            super("./Assets/images/placeholder.png", 0, 0, true);
+        constructor(x:number, y:number) {
+            super("./Assets/images/placeholder.png", x, y, true);
             this.Start();
         }
 
@@ -29,30 +45,33 @@ module objects {
 
         // movement
         public moveLeft(): void {
-            this.position = new Vector2(this.position.x - 10, this.position.y);
-            console.log("LEFT: " + this.position.y);
+            // check left bound
+            if(this.x > this.halfWidth){
+                this.position = new Vector2(this.position.x - this.dxy, this.position.y);
+            }
         }
 
         public moveRight(): void {
-            this.position = new Vector2(this.position.x + 10, this.position.y);
-            console.log("RIGHT: " + this.position.y);
+            // check the right bound
+            if(this.x < 960 - this.halfWidth){
+                this.position = new Vector2(this.position.x + this.dxy, this.position.y);
+            }
         }
 
         public moveUp(): void {
-            this.position = new Vector2(this.position.x, this.position.y - 10);
-            console.log("UP: " + this.position.y);
+            if(this.y > this.halfHeight){
+                this.position = new Vector2(this.position.x, this.position.y - this.dxy);
+            }
         }
 
         public moveDown(): void {
-            this.position = new Vector2(this.position.x, this.position.y + 10);
-            console.log("DOWN: " + this.position.y);
+            if(this.y < 640 - this.halfHeight){
+                this.position = new Vector2(this.position.x, this.position.y + this.dxy);
+            }
         }
 
         public shoot(): objects.Bullet {
-            let bullet = new Bullet();
-            bullet.position = this.position;
-            console.log('BULLET!!! position:' + bullet.position.x);
-
+            let bullet = new Bullet(this.position.x, this.position.y);
             return bullet;
         }
     }
