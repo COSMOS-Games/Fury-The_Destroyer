@@ -43,7 +43,7 @@ let Game = (function () {
     // Logan Kim Ends
     // Kei Mizubuchi Begins
     function firstStage(): void {
-        playerA = new objects.Player();
+        playerA = new objects.Player(50,50);
         stage.addChild(playerA);
     }
 

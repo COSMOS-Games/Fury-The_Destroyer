@@ -33,7 +33,7 @@ let Game = (function () {
     // Logan Kim Ends
     // Kei Mizubuchi Begins
     function firstStage() {
-        playerA = new objects.Player();
+        playerA = new objects.Player(50, 50);
         stage.addChild(playerA);
     }
     // attach keydown event to the window
