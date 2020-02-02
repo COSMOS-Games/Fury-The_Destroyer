@@ -15,13 +15,15 @@
                 "${workspaceFolder}/**/*.js"
             ]
         },
+        // debug with Chrome
         {
             "type": "chrome",
             "request": "launch",
             "file": "${workspaceRoot}/index.html",
             "name": "Launch Chrome",
             "url": "${workspaceFolder}/index.html",
-            "webRoot": "${workspaceFolder}"
+            "webRoot": "${workspaceFolder}",
+            "preLaunchTask": "build"
         }
     ]
 }
