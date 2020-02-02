@@ -11,15 +11,15 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
+            }
         },
-        // build task for chrome debug
         {
-            "label": "build",
+            "label": "chrome-debug",
             "type": "typescript",
+            "option": "watch",
             "tsconfig": "tsconfig.json",
             "problemMatcher": [
-                "$tsc"
+                "$tsc-watch"
             ],
             "group": {
                 "kind": "build",

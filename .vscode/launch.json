@@ -23,7 +23,7 @@
             "name": "Launch Chrome",
             "url": "${workspaceFolder}/index.html",
             "webRoot": "${workspaceFolder}",
-            "preLaunchTask": "build"
+            "preLaunchTask": "chrome-debug"
         }
     ]
 }
