@@ -2,6 +2,7 @@ module objects {
     export class Player extends GameObject {
         // PRIVATE INSTANCE MEMBER
         private _bulletNum: number = 3;
+        private _health:number = 1;
         private _dxy:number = 10;
 
         // PUBLIC PROPERTIES
@@ -19,6 +20,14 @@ module objects {
 
         set dxy(newNum:number){
             this._dxy = newNum;
+        }
+
+        get health():number{
+            return this._health;
+        }
+
+        set health(newNum:number){
+            this._health = newNum;
         }
 
         // CONSTRUCTOR
@@ -71,8 +80,20 @@ module objects {
         }
 
         public shoot(): objects.Bullet {
-            let bullet = new Bullet(this.position.x, this.position.y);
-            return bullet;
+            // check if this player still have bullet or not
+            if(this.bulletNum > 0){
+                let bullet = new Bullet(this.position.x, this.position.y);
+                this.bulletNum -= 1;
+                return bullet;
+            }
+            else{
+                // if no availble bullet, return bullet with position negitive
+                // which check on game engineer that this bullet will not be add to stage
+                // not shown to player
+                return new objects.Bullet(-1,-1);
+            }
+            
+            
         }
     }
 }

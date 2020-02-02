@@ -57,8 +57,10 @@ let Game = (function () {
         else if (event.keyCode === 77) {
             // M
             let bulletA = playerA.shoot();
-            bulletA.position = playerA.position;
-            stage.addChild(bulletA);
+            // only add the bullet to stage if the position greater than zero
+            if (bulletA.position.x > 0) {
+                stage.addChild(bulletA);
+            }
         }
         // player B use WASD to move, C to shoot
         if (event.keyCode === 87) {
@@ -80,7 +82,10 @@ let Game = (function () {
         else if (event.keyCode === 67) {
             // C
             let bulletB = playerB.shoot();
-            stage.addChild(bulletB);
+            // only add the bullet to stage if the position greater than zero
+            if (bulletB.position.x > 0) {
+                stage.addChild(bulletB);
+            }
         }
     }
     // Kei Mizubuchi Ends
