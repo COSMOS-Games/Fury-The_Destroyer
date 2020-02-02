@@ -14,7 +14,7 @@
             }
         },
         {
-            "label": "chrome-debug",
+            "label": "tsc: watch",
             "type": "typescript",
             "option": "watch",
             "tsconfig": "tsconfig.json",

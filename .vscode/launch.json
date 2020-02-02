@@ -20,10 +20,10 @@
             "type": "chrome",
             "request": "launch",
             "file": "${workspaceRoot}/index.html",
-            "name": "Launch Chrome",
+            "name": "Launch on Chrome",
             "url": "${workspaceFolder}/index.html",
             "webRoot": "${workspaceFolder}",
-            "preLaunchTask": "chrome-debug"
+            "preLaunchTask": "tsc: watch"
         }
     ]
 }
