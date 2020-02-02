@@ -23,7 +23,7 @@ module objects {
 
         // constructor
         constructor(x:number, y:number) {
-            super("./Assets/images/placeholder.png", x, y, true);
+            super("./Assets/images/bullet-placeholder.png", x, y, true);
             this.Start();
         }
 

@@ -45,12 +45,15 @@ let Game = (function () {
     function firstStage(): void {
         playerA = new objects.Player(50,50);
         stage.addChild(playerA);
+        playerB = new objects.Player(900,600);
+        stage.addChild(playerB);
     }
 
     // attach keydown event to the window
     window.addEventListener('keydown', keyPressed);
 
     function keyPressed(event: KeyboardEvent) {
+        // player A use arrow keys to move, M to shoot
         if (event.keyCode === 38) {
             playerA.moveUp();
         } else if (event.keyCode === 40) {
@@ -62,9 +65,36 @@ let Game = (function () {
         } else if (event.keyCode === 77) {
             // M
             let bulletA = playerA.shoot();
-            bulletA.position = playerA.position;
-            stage.addChild(bulletA);
+            // only add the bullet to stage if the position greater than zero
+            if(bulletA.position.x > 0){
+                stage.addChild(bulletA);
+            }
+            
         }
+
+        // player B use WASD to move, C to shoot
+        if(event.keyCode === 87){
+            // W
+            playerB.moveUp();
+        }else if(event.keyCode === 83){
+            // S
+            playerB.moveDown();
+        }else if(event.keyCode === 65){
+            // A
+            playerB.moveLeft();
+        }else if(event.keyCode === 68){
+            // d
+            playerB.moveRight();
+        }else if(event.keyCode === 67){
+            // C
+            let bulletB = playerB.shoot();
+            // only add the bullet to stage if the position greater than zero
+            if(bulletB.position.x > 0){
+                stage.addChild(bulletB);
+            }
+            
+        }
+
     }
 
 

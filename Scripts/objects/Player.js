@@ -58,8 +58,18 @@ var objects;
             }
         }
         shoot() {
-            let bullet = new objects.Bullet(this.position.x, this.position.y);
-            return bullet;
+            // check if this player still have bullet or not
+            if (this.bulletNum > 0) {
+                let bullet = new objects.Bullet(this.position.x, this.position.y);
+                this.bulletNum -= 1;
+                return bullet;
+            }
+            else {
+                // if no availble bullet, return bullet with position negitive
+                // which check on game engineer that this bullet will not be add to stage
+                // not shown to player
+                return new objects.Bullet(-1, -1);
+            }
         }
     }
     objects.Player = Player;
