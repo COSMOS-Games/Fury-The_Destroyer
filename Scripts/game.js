@@ -35,10 +35,13 @@ let Game = (function () {
     function firstStage() {
         playerA = new objects.Player(50, 50);
         stage.addChild(playerA);
+        playerB = new objects.Player(900, 600);
+        stage.addChild(playerB);
     }
     // attach keydown event to the window
     window.addEventListener('keydown', keyPressed);
     function keyPressed(event) {
+        // player A use arrow keys to move, M to shoot
         if (event.keyCode === 38) {
             playerA.moveUp();
         }
@@ -56,6 +59,28 @@ let Game = (function () {
             let bulletA = playerA.shoot();
             bulletA.position = playerA.position;
             stage.addChild(bulletA);
+        }
+        // player B use WASD to move, C to shoot
+        if (event.keyCode === 87) {
+            // W
+            playerB.moveUp();
+        }
+        else if (event.keyCode === 83) {
+            // S
+            playerB.moveDown();
+        }
+        else if (event.keyCode === 65) {
+            // A
+            playerB.moveLeft();
+        }
+        else if (event.keyCode === 68) {
+            // d
+            playerB.moveRight();
+        }
+        else if (event.keyCode === 67) {
+            // C
+            let bulletB = playerB.shoot();
+            stage.addChild(bulletB);
         }
     }
     // Kei Mizubuchi Ends

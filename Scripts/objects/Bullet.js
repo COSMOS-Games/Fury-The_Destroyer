@@ -4,7 +4,7 @@ var objects;
     class Bullet extends objects.GameObject {
         // constructor
         constructor(x, y) {
-            super("./Assets/images/placeholder.png", x, y, true);
+            super("./Assets/images/bullet-placeholder.png", x, y, true);
             // variables
             this._owner = "";
             this._dx = 2;
