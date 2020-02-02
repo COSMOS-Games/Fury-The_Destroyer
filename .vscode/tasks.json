@@ -15,11 +15,12 @@
         },
         // build task for chrome debug
         {
-            "label": "build",
+            "label": "tsc: watch",
             "type": "typescript",
+            "option": "watch",
             "tsconfig": "tsconfig.json",
             "problemMatcher": [
-                "$tsc"
+                "$tsc-watch"
             ],
             "group": {
                 "kind": "build",
