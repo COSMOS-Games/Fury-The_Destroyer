@@ -57,10 +57,10 @@ module objects {
         }
 
         public Update(): void {
-            this._checkBounds();
-
             // update player position
             this.position = new Vector2(this.position.x, this.position.y);
+
+            this._checkBounds();
         }
 
         public Reset(): void {

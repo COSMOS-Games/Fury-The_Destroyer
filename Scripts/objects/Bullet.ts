@@ -35,12 +35,11 @@ module objects {
         protected _checkBounds(): void {
             // simplying check the right border
             if (this.x >= 960 - this.halfHeight) {
-                this.velocity = Vector2.zero();
+                this.velocity = Vector2.zero(); // stop movement
             }
             // check the left border
-            if (this.x <= this.halfHeight) {
-                // this.dx = 2;
-                this.velocity = Vector2.zero();
+            else if (this.x <= this.halfHeight) {
+                this.velocity = Vector2.zero(); // stop movement
             }
         }
 
@@ -53,10 +52,10 @@ module objects {
         }
 
         public Update(): void {
+            this._checkBounds();
+
             this.position.add(this.velocity); // bullet has velocity, or movement
             this.position = new Vector2(this.position.x, this.position.y);
-
-            this._checkBounds();
         }
 
         public Reset(): void {
