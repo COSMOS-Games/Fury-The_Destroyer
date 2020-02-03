@@ -69,25 +69,25 @@ module objects {
 
         public moveLeft(): void {
             let velocity = Vector2.left();
-            velocity.scale(10);
+            velocity.scale(5);
             this.position.add(velocity);
         }
 
         public moveRight(): void {
             let velocity = Vector2.right();
-            velocity.scale(10);
+            velocity.scale(5);
             this.position.add(velocity);
         }
 
         public moveUp(): void {
             let velocity = Vector2.up();
-            velocity.scale(10);
+            velocity.scale(5);
             this.position.add(velocity);
         }
 
         public moveDown(): void {
             let velocity = Vector2.down();
-            velocity.scale(10);
+            velocity.scale(5);
             this.position.add(velocity);
         }
 

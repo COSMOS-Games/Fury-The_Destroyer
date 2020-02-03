@@ -9,6 +9,8 @@ let Game = (function () {
     let playerA: objects.Player;
     let playerB: objects.Player;
 
+    let keyPressedStates: boolean[] = []; // to detect which keys are down
+
     /**
      * This method initializes the CreateJS (EaselJS) Library
      * It sets the framerate to 60 FPS and sets up the main Game Loop (Update)
@@ -27,6 +29,8 @@ let Game = (function () {
     function Update(): void {
         playerA.Update();
         stage.update();
+
+        monitorKeyPressedStates();
     }
 
 
@@ -49,20 +53,41 @@ let Game = (function () {
         stage.addChild(playerB);
     }
 
-    // attach keydown event to the window
-    window.addEventListener('keydown', keyPressed);
+    // attach keydown and keyup event to the window
+    window.addEventListener('keydown', keyDown);
 
-    function keyPressed(event: KeyboardEvent) {
-        // player A use arrow keys to move, M to shoot
-        if (event.keyCode === 38) {
+    window.addEventListener('keyup', keyUp);
+
+    function keyDown(event: KeyboardEvent) {
+        keyPressedStates[event.keyCode] = true;
+        console.log('key down!: ' + event.keyCode);
+    }
+
+    function keyUp(event: KeyboardEvent) {
+        keyPressedStates[event.keyCode] = false;
+        console.log('key up!: ' + event.keyCode);
+    }
+
+    //
+    function monitorKeyPressedStates(): void {
+        // arrow up
+        if (keyPressedStates[38]) {
             playerA.moveUp();
-        } else if (event.keyCode === 40) {
+        }
+        // arrow down
+        if (keyPressedStates[40]) {
             playerA.moveDown();
-        } else if (event.keyCode === 37) {
+        }
+        // arrow left
+        if (keyPressedStates[37]) {
             playerA.moveLeft();
-        } else if (event.keyCode === 39) {
+        }
+        // arrow right
+        if (keyPressedStates[39]) {
             playerA.moveRight();
-        } else if (event.keyCode === 77) {
+        }
+        // M
+        if (keyPressedStates[77]) {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.right();
 
@@ -72,20 +97,24 @@ let Game = (function () {
                 stage.addChild(bulletA);
             }
         }
-        // player B use WASD to move, C to shoot
-        else if (event.keyCode === 87) {
-            // W
+        // W
+        if (keyPressedStates[87]) {
             playerB.moveUp();
-        } else if (event.keyCode === 83) {
-            // S
+        }
+        // S
+        if (keyPressedStates[83]) {
             playerB.moveDown();
-        } else if (event.keyCode === 65) {
-            // A
+        }
+        // A
+        if (keyPressedStates[65]) {
             playerB.moveLeft();
-        } else if (event.keyCode === 68) {
-            // d
+        }
+        // D
+        if (keyPressedStates[68]) {
             playerB.moveRight();
-        } else if (event.keyCode === 67) {
+        }
+        // C
+        if (keyPressedStates[67]) {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.left();
             let bulletB = playerB.shoot(aim);
@@ -94,7 +123,6 @@ let Game = (function () {
                 stage.addChild(bulletB);
             }
         }
-
     }
 
     // Kei Mizubuchi Ends
