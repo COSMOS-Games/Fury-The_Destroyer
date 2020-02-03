@@ -53,8 +53,8 @@ module objects {
         }
 
         public Update(): void {
+            this.position.add(this.velocity); // bullet has velocity, or movement
             this.position = new Vector2(this.position.x, this.position.y);
-            this.position.add(this.velocity);
 
             this._checkBounds();
         }

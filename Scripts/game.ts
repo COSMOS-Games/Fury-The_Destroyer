@@ -72,9 +72,8 @@ let Game = (function () {
                 stage.addChild(bulletA);
             }
         }
-
         // player B use WASD to move, C to shoot
-        if (event.keyCode === 87) {
+        else if (event.keyCode === 87) {
             // W
             playerB.moveUp();
         } else if (event.keyCode === 83) {
@@ -97,7 +96,6 @@ let Game = (function () {
         }
 
     }
-
 
     // Kei Mizubuchi Ends
     // Hand Li Begins

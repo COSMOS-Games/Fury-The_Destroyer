@@ -3,9 +3,7 @@ module objects {
         // PRIVATE INSTANCE MEMBER
         // private _bulletNum: number = 3;
         private _bulletNum: number = 50;
-
         private _health: number = 1;
-        private _dxy: number = 10;
 
         // PUBLIC PROPERTIES
         get bulletNum(): number {
@@ -14,14 +12,6 @@ module objects {
 
         set bulletNum(newNum: number) {
             this._bulletNum = newNum;
-        }
-
-        get dxy(): number {
-            return this._dxy;
-        }
-
-        set dxy(newNum: number) {
-            this._dxy = newNum;
         }
 
         get health(): number {
@@ -40,45 +30,65 @@ module objects {
 
         // PRIVATE METHODS
         protected _checkBounds(): void {
+            // check left border
+            if (this.x < this.halfWidth) {
+                this.position.x = this.halfWidth;
+            }
+            // check the right border
+            if (this.x > 960 - this.halfWidth) {
+                this.position.x = 960 - this.halfWidth;
+            }
+            // check the top border
+            if (this.y < this.halfHeight) {
+                this.position.y = this.halfHeight;
+            }
+            // check the top border
+            if (this.y > 640 - this.halfHeight) {
+                this.position.y = 640 - this.halfHeight;
+            }
         }
 
         // PUBLIC METHODS
         public Start(): void {
-
+            createjs.Ticker.framerate = 60;
+            createjs.Ticker.on('tick', () => {
+                this.Update();
+            });
         }
 
         public Update(): void {
-            //this.position = new Vector2(this.stage.mouseX, this.stage.mouseY);
+            this._checkBounds();
+
+            // update player position
+            this.position = new Vector2(this.position.x, this.position.y);
         }
 
         public Reset(): void {
+
         }
 
-        // movement
         public moveLeft(): void {
-            // check left bound
-            if (this.x > this.halfWidth) {
-                this.position = new Vector2(this.position.x - this.dxy, this.position.y);
-            }
+            let velocity = Vector2.left();
+            velocity.scale(10);
+            this.position.add(velocity);
         }
 
         public moveRight(): void {
-            // check the right bound
-            if (this.x < 960 - this.halfWidth) {
-                this.position = new Vector2(this.position.x + this.dxy, this.position.y);
-            }
+            let velocity = Vector2.right();
+            velocity.scale(10);
+            this.position.add(velocity);
         }
 
         public moveUp(): void {
-            if (this.y > this.halfHeight) {
-                this.position = new Vector2(this.position.x, this.position.y - this.dxy);
-            }
+            let velocity = Vector2.up();
+            velocity.scale(10);
+            this.position.add(velocity);
         }
 
         public moveDown(): void {
-            if (this.y < 640 - this.halfHeight) {
-                this.position = new Vector2(this.position.x, this.position.y + this.dxy);
-            }
+            let velocity = Vector2.down();
+            velocity.scale(10);
+            this.position.add(velocity);
         }
 
         public shoot(aim: Vector2): objects.Bullet {
