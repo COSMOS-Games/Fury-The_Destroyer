@@ -34,11 +34,11 @@ module objects {
         // private method
         protected _checkBounds(): void {
             // simplying check the right border
-            if (this.x >= 960 - this.halfHeight) {
+            if (this.x >= 960 - this.halfWidth) {
                 this.velocity = Vector2.zero(); // stop movement
             }
             // check the left border
-            else if (this.x <= this.halfHeight) {
+            else if (this.x <= this.halfWidth) {
                 this.velocity = Vector2.zero(); // stop movement
             }
         }
