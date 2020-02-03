@@ -14,7 +14,7 @@ module objects {
         }
 
         get velocity(): Vector2 {
-            return new Vector2(this._velocity.x, this._velocity.y);
+            return this._velocity;
         }
 
         set velocity(newVelocity: Vector2) {
@@ -59,7 +59,7 @@ module objects {
         }
 
         public Reset(): void {
-            //
+
         }
     }
 }
