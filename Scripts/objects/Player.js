@@ -6,8 +6,9 @@ var objects;
         constructor(x, y) {
             super("./Assets/images/placeholder.png", x, y, true);
             // PRIVATE INSTANCE MEMBER
-            this._bulletNum = 3;
-            this._dxy = 10;
+            // private _bulletNum: number = 3;
+            this._bulletNum = 50;
+            this._health = 1;
             this.Start();
         }
         // PUBLIC PROPERTIES
@@ -17,50 +18,69 @@ var objects;
         set bulletNum(newNum) {
             this._bulletNum = newNum;
         }
-        get dxy() {
-            return this._dxy;
+        get health() {
+            return this._health;
         }
-        set dxy(newNum) {
-            this._dxy = newNum;
+        set health(newNum) {
+            this._health = newNum;
         }
         // PRIVATE METHODS
         _checkBounds() {
+            // check left border
+            if (this.x < this.halfWidth) {
+                this.position.x = this.halfWidth;
+            }
+            // check the right border
+            if (this.x > 960 - this.halfWidth) {
+                this.position.x = 960 - this.halfWidth;
+            }
+            // check the top border
+            if (this.y < this.halfHeight) {
+                this.position.y = this.halfHeight;
+            }
+            // check the top border
+            if (this.y > 640 - this.halfHeight) {
+                this.position.y = 640 - this.halfHeight;
+            }
         }
         // PUBLIC METHODS
         Start() {
+            createjs.Ticker.framerate = 60;
+            createjs.Ticker.on('tick', () => {
+                this.Update();
+            });
         }
         Update() {
-            //this.position = new Vector2(this.stage.mouseX, this.stage.mouseY);
+            // update player position
+            this.position = new objects.Vector2(this.position.x, this.position.y);
+            this._checkBounds();
         }
         Reset() {
         }
-        // movement
         moveLeft() {
-            // check left bound
-            if (this.x > this.halfWidth) {
-                this.position = new objects.Vector2(this.position.x - this.dxy, this.position.y);
-            }
+            let velocity = objects.Vector2.left();
+            velocity.scale(5);
+            this.position.add(velocity);
         }
         moveRight() {
-            // check the right bound
-            if (this.x < 960 - this.halfWidth) {
-                this.position = new objects.Vector2(this.position.x + this.dxy, this.position.y);
-            }
+            let velocity = objects.Vector2.right();
+            velocity.scale(5);
+            this.position.add(velocity);
         }
         moveUp() {
-            if (this.y > this.halfHeight) {
-                this.position = new objects.Vector2(this.position.x, this.position.y - this.dxy);
-            }
+            let velocity = objects.Vector2.up();
+            velocity.scale(5);
+            this.position.add(velocity);
         }
         moveDown() {
-            if (this.y < 640 - this.halfHeight) {
-                this.position = new objects.Vector2(this.position.x, this.position.y + this.dxy);
-            }
+            let velocity = objects.Vector2.down();
+            velocity.scale(5);
+            this.position.add(velocity);
         }
-        shoot() {
+        shoot(aim) {
             // check if this player still have bullet or not
             if (this.bulletNum > 0) {
-                let bullet = new objects.Bullet(this.position.x, this.position.y);
+                let bullet = new objects.Bullet(this.position.x, this.position.y, aim);
                 this.bulletNum -= 1;
                 return bullet;
             }
@@ -68,7 +88,7 @@ var objects;
                 // if no availble bullet, return bullet with position negitive
                 // which check on game engineer that this bullet will not be add to stage
                 // not shown to player
-                return new objects.Bullet(-1, -1);
+                return new objects.Bullet(-1, -1, objects.Vector2.zero());
             }
         }
     }

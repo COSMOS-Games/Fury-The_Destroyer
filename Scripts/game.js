@@ -8,6 +8,9 @@ let Game = (function () {
     let backgroundImg;
     let playerA;
     let playerB;
+    let bulletA;
+    let bulletB;
+    let keyPressedStates = []; // to detect which keys are down
     /**
      * This method initializes the CreateJS (EaselJS) Library
      * It sets the framerate to 60 FPS and sets up the main Game Loop (Update)
@@ -21,8 +24,12 @@ let Game = (function () {
         Main();
     }
     function Update() {
-        playerA.Update();
+        // playerA.Update();
+        // bulletB.Update();
         stage.update();
+        //collisionDection();
+        bulletCollisionDection();
+        monitorKeyPressedStates();
     }
     function Main() {
         console.log(`%c Main Started...`, "color: green; font-size: 16px;");
@@ -38,50 +45,64 @@ let Game = (function () {
         playerB = new objects.Player(900, 600);
         stage.addChild(playerB);
     }
-    // attach keydown event to the window
-    window.addEventListener('keydown', keyPressed);
-    function keyPressed(event) {
-        // player A use arrow keys to move, M to shoot
-        if (event.keyCode === 38) {
+    // attach keydown and keyup event to the window
+    window.addEventListener('keydown', keyDown);
+    window.addEventListener('keyup', keyUp);
+    function keyDown(event) {
+        keyPressedStates[event.keyCode] = true;
+    }
+    function keyUp(event) {
+        keyPressedStates[event.keyCode] = false;
+    }
+    //
+    function monitorKeyPressedStates() {
+        // arrow up
+        if (keyPressedStates[38]) {
             playerA.moveUp();
         }
-        else if (event.keyCode === 40) {
+        // arrow down
+        if (keyPressedStates[40]) {
             playerA.moveDown();
         }
-        else if (event.keyCode === 37) {
+        // arrow left
+        if (keyPressedStates[37]) {
             playerA.moveLeft();
         }
-        else if (event.keyCode === 39) {
+        // arrow right
+        if (keyPressedStates[39]) {
             playerA.moveRight();
         }
-        else if (event.keyCode === 77) {
-            // M
-            let bulletA = playerA.shoot();
+        // M
+        if (keyPressedStates[77]) {
+            // aim specifies the direction of shooting
+            let aim = objects.Vector2.right();
+            let bulletA = playerA.shoot(aim);
             // only add the bullet to stage if the position greater than zero
             if (bulletA.position.x > 0) {
                 stage.addChild(bulletA);
             }
         }
-        // player B use WASD to move, C to shoot
-        if (event.keyCode === 87) {
-            // W
+        // W
+        if (keyPressedStates[87]) {
             playerB.moveUp();
         }
-        else if (event.keyCode === 83) {
-            // S
+        // S
+        if (keyPressedStates[83]) {
             playerB.moveDown();
         }
-        else if (event.keyCode === 65) {
-            // A
+        // A
+        if (keyPressedStates[65]) {
             playerB.moveLeft();
         }
-        else if (event.keyCode === 68) {
-            // d
+        // D
+        if (keyPressedStates[68]) {
             playerB.moveRight();
         }
-        else if (event.keyCode === 67) {
-            // C
-            let bulletB = playerB.shoot();
+        // C
+        if (keyPressedStates[67]) {
+            // aim specifies the direction of shooting
+            let aim = objects.Vector2.left();
+            let bulletB = playerB.shoot(aim);
             // only add the bullet to stage if the position greater than zero
             if (bulletB.position.x > 0) {
                 stage.addChild(bulletB);
@@ -90,6 +111,44 @@ let Game = (function () {
     }
     // Kei Mizubuchi Ends
     // Hand Li Begins
+    function collisionDection() {
+        let topLeftPlayerA = new objects.Vector2(playerA.position.x - playerA.halfWidth, playerA.position.y - playerA.halfHeight);
+        let topLeftPlayerB = new objects.Vector2(playerB.position.x - playerB.halfWidth, playerB.position.y - playerB.halfHeight);
+        // AABB Collision Detection
+        if (topLeftPlayerA.x < topLeftPlayerB.x + playerB.width &&
+            topLeftPlayerA.x + playerA.width > topLeftPlayerB.x &&
+            topLeftPlayerA.y < topLeftPlayerB.y + playerB.height &&
+            topLeftPlayerA.y + playerA.height > topLeftPlayerB.y) {
+            if (!playerB.isColliding) {
+                console.log("Player B detected collision with player A!");
+                playerB.isColliding = true;
+            }
+            else {
+                playerA.isColliding = false;
+                playerB.isColliding = false;
+            }
+        }
+    }
+    function bulletCollisionDection() {
+        if (bulletB) {
+            console.log("bullet B");
+            let topLeftPlayerA = new objects.Vector2(playerA.position.x - playerA.halfWidth, playerA.position.y - playerA.halfHeight);
+            let topLeftBulletB = new objects.Vector2(bulletB.position.x - bulletB.halfWidth, bulletB.position.y - bulletB.halfHeight);
+            // AABB Collision Detection
+            if (topLeftPlayerA.x < topLeftBulletB.x + bulletB.width &&
+                topLeftPlayerA.x + playerA.width > topLeftBulletB.x &&
+                topLeftPlayerA.y < topLeftBulletB.y + bulletB.height &&
+                topLeftPlayerA.y + playerA.height > topLeftBulletB.y) {
+                if (!playerA.isColliding) {
+                    console.log("Player A detected collision with bullet!");
+                    playerA.isColliding = true;
+                }
+                else {
+                    playerA.isColliding = false;
+                }
+            }
+        }
+    }
     // Hang Li Ends
     // Ygor Almeida Begins
     // Ygor Almeida Ends

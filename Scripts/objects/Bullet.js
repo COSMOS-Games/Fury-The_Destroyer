@@ -2,12 +2,14 @@
 var objects;
 (function (objects) {
     class Bullet extends objects.GameObject {
-        // constructor
-        constructor(x, y) {
+        constructor(x, y, direction) {
             super("./Assets/images/bullet-placeholder.png", x, y, true);
             // variables
             this._owner = "";
-            this._dx = 2;
+            this._velocity = objects.Vector2.zero(); // velocity = movement
+            let speed = 10;
+            direction.scale(speed);
+            this._velocity = direction; // velocity = direction * speed
             this.Start();
         }
         // properties
@@ -17,22 +19,21 @@ var objects;
         set owner(newOwner) {
             this._owner = newOwner;
         }
-        get dx() {
-            return this._dx;
+        get velocity() {
+            return this._velocity;
         }
-        set dx(newDx) {
-            this._dx = newDx;
+        set velocity(newVelocity) {
+            this._velocity = newVelocity;
         }
         // private method
         _checkBounds() {
-            // TODO: check bounds based on direction
             // simplying check the right border
-            if (this.x >= 960 - this.halfHeight) {
-                this.dx = 0;
+            if (this.x >= 960 - this.halfWidth) {
+                this.velocity = objects.Vector2.zero(); // stop movement
             }
             // check the left border
-            if (this.x <= this.halfHeight) {
-                this.dx = 2;
+            else if (this.x <= this.halfWidth) {
+                this.velocity = objects.Vector2.zero(); // stop movement
             }
         }
         // public method
@@ -43,8 +44,9 @@ var objects;
             });
         }
         Update() {
-            this.position = new objects.Vector2(this.position.x + this.dx, this.position.y);
             this._checkBounds();
+            this.position.add(this.velocity); // bullet has velocity, or movement
+            this.position = new objects.Vector2(this.position.x, this.position.y);
         }
         Reset() {
         }

@@ -8,6 +8,8 @@ let Game = (function () {
     let backgroundImg: createjs.Bitmap;
     let playerA: objects.Player;
     let playerB: objects.Player;
+    let bulletA: objects.Bullet;
+    let bulletB: objects.Bullet;
 
     let keyPressedStates: boolean[] = []; // to detect which keys are down
 
@@ -27,9 +29,11 @@ let Game = (function () {
     }
 
     function Update(): void {
-        playerA.Update();
+        // playerA.Update();
+        // bulletB.Update();
         stage.update();
-
+        //collisionDection();
+        bulletCollisionDection();
         monitorKeyPressedStates();
     }
 
@@ -60,12 +64,10 @@ let Game = (function () {
 
     function keyDown(event: KeyboardEvent) {
         keyPressedStates[event.keyCode] = true;
-        console.log('key down!: ' + event.keyCode);
     }
 
     function keyUp(event: KeyboardEvent) {
         keyPressedStates[event.keyCode] = false;
-        console.log('key up!: ' + event.keyCode);
     }
 
     //
@@ -127,7 +129,64 @@ let Game = (function () {
 
     // Kei Mizubuchi Ends
     // Hand Li Begins
+    function collisionDection():void
+    {
+        let topLeftPlayerA = new objects.Vector2(playerA.position.x - playerA.halfWidth,
+            playerA.position.y - playerA.halfHeight);
+        let topLeftPlayerB = new objects.Vector2(playerB.position.x - playerB.halfWidth,
+            playerB.position.y - playerB.halfHeight);
 
+
+         // AABB Collision Detection
+         if (topLeftPlayerA.x < topLeftPlayerB.x + playerB.width &&
+            topLeftPlayerA.x + playerA.width > topLeftPlayerB.x &&
+            topLeftPlayerA.y < topLeftPlayerB.y + playerB.height &&
+            topLeftPlayerA.y + playerA.height > topLeftPlayerB.y) 
+            {
+                if(!playerB.isColliding)
+                {
+                    console.log("Player B detected collision with player A!");
+                    playerB.isColliding = true;
+                }
+                else
+                {
+                    playerA.isColliding = false;
+                    playerB.isColliding = false;
+                }
+                
+            }
+         
+    }
+
+    function bulletCollisionDection():void
+    {
+        if(bulletB){
+            console.log("bullet B")
+            let topLeftPlayerA = new objects.Vector2(playerA.position.x - playerA.halfWidth,
+                playerA.position.y - playerA.halfHeight);
+            let topLeftBulletB = new objects.Vector2(bulletB.position.x - bulletB.halfWidth,
+                bulletB.position.y - bulletB.halfHeight);
+    
+             // AABB Collision Detection
+             if (topLeftPlayerA.x < topLeftBulletB.x + bulletB.width &&
+                topLeftPlayerA.x + playerA.width > topLeftBulletB.x &&
+                topLeftPlayerA.y < topLeftBulletB.y + bulletB.height &&
+                topLeftPlayerA.y + playerA.height > topLeftBulletB.y) 
+                {
+                    if(!playerA.isColliding)
+                    {
+                        console.log("Player A detected collision with bullet!");
+                        playerA.isColliding = true;
+                    }
+                    else
+                    {
+                        playerA.isColliding = false;
+                    }
+                    
+                }
+        }
+        
+    }
 
     // Hang Li Ends
     // Ygor Almeida Begins
