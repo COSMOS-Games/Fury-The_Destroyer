@@ -43,9 +43,9 @@ let Game = (function () {
     // Logan Kim Ends
     // Kei Mizubuchi Begins
     function firstStage(): void {
-        playerA = new objects.Player(50,50);
+        playerA = new objects.Player(50, 50);
         stage.addChild(playerA);
-        playerB = new objects.Player(900,600);
+        playerB = new objects.Player(900, 600);
         stage.addChild(playerB);
     }
 
@@ -63,36 +63,37 @@ let Game = (function () {
         } else if (event.keyCode === 39) {
             playerA.moveRight();
         } else if (event.keyCode === 77) {
-            // M
-            let bulletA = playerA.shoot();
+            // aim specifies the direction of shooting
+            let aim = objects.Vector2.right();
+
+            let bulletA = playerA.shoot(aim);
             // only add the bullet to stage if the position greater than zero
-            if(bulletA.position.x > 0){
+            if (bulletA.position.x > 0) {
                 stage.addChild(bulletA);
             }
-            
         }
 
         // player B use WASD to move, C to shoot
-        if(event.keyCode === 87){
+        if (event.keyCode === 87) {
             // W
             playerB.moveUp();
-        }else if(event.keyCode === 83){
+        } else if (event.keyCode === 83) {
             // S
             playerB.moveDown();
-        }else if(event.keyCode === 65){
+        } else if (event.keyCode === 65) {
             // A
             playerB.moveLeft();
-        }else if(event.keyCode === 68){
+        } else if (event.keyCode === 68) {
             // d
             playerB.moveRight();
-        }else if(event.keyCode === 67){
-            // C
-            let bulletB = playerB.shoot();
+        } else if (event.keyCode === 67) {
+            // aim specifies the direction of shooting
+            let aim = objects.Vector2.left();
+            let bulletB = playerB.shoot(aim);
             // only add the bullet to stage if the position greater than zero
-            if(bulletB.position.x > 0){
+            if (bulletB.position.x > 0) {
                 stage.addChild(bulletB);
             }
-            
         }
 
     }
