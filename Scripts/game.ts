@@ -66,19 +66,19 @@ let Game = (function () {
     });
 
     function detectPressedKeys(): void {
-        if (keyPressedStates[util.Keycode.UP_ARROW]) {
+        if (keyPressedStates[util.Key.UP]) {
             playerA.moveUp();
         }
-        if (keyPressedStates[util.Keycode.DOWN_ARROW]) {
+        if (keyPressedStates[util.Key.DOWN]) {
             playerA.moveDown();
         }
-        if (keyPressedStates[util.Keycode.LEFT_ARROW]) {
+        if (keyPressedStates[util.Key.LEFT]) {
             playerA.moveLeft();
         }
-        if (keyPressedStates[util.Keycode.RIGHT_ARROW]) {
+        if (keyPressedStates[util.Key.RIGHT]) {
             playerA.moveRight();
         }
-        if (keyPressedStates[util.Keycode.KEY_M]) {
+        if (keyPressedStates[util.Key.M]) {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.right();
 
@@ -88,19 +88,19 @@ let Game = (function () {
                 stage.addChild(bulletA);
             }
         }
-        if (keyPressedStates[util.Keycode.KEY_W]) {
+        if (keyPressedStates[util.Key.W]) {
             playerB.moveUp();
         }
-        if (keyPressedStates[util.Keycode.KEY_S]) {
+        if (keyPressedStates[util.Key.S]) {
             playerB.moveDown();
         }
-        if (keyPressedStates[util.Keycode.KEY_A]) {
+        if (keyPressedStates[util.Key.A]) {
             playerB.moveLeft();
         }
-        if (keyPressedStates[util.Keycode.KEY_D]) {
+        if (keyPressedStates[util.Key.D]) {
             playerB.moveRight();
         }
-        if (keyPressedStates[util.Keycode.KEY_C]) {
+        if (keyPressedStates[util.Key.C]) {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.left();
             let bulletB = playerB.shoot(aim);
