@@ -29,12 +29,11 @@ let Game = (function () {
     }
 
     function Update(): void {
-        // playerA.Update();
-        // bulletB.Update();
         stage.update();
-        //collisionDection();
-        bulletCollisionDection();
-        monitorKeyPressedStates();
+
+        detectPlayersCollision();
+        detectBulletCollision();
+        detectPressedKeys();
     }
 
 
@@ -58,38 +57,28 @@ let Game = (function () {
     }
 
     // attach keydown and keyup event to the window
-    window.addEventListener('keydown', keyDown);
-
-    window.addEventListener('keyup', keyUp);
-
-    function keyDown(event: KeyboardEvent) {
+    window.addEventListener('keydown', (event: KeyboardEvent) => {
         keyPressedStates[event.keyCode] = true;
-    }
+    });
 
-    function keyUp(event: KeyboardEvent) {
+    window.addEventListener('keyup', (event: KeyboardEvent) => {
         keyPressedStates[event.keyCode] = false;
-    }
+    });
 
-    //
-    function monitorKeyPressedStates(): void {
-        // arrow up
-        if (keyPressedStates[38]) {
+    function detectPressedKeys(): void {
+        if (keyPressedStates[util.Keycode.UP_ARROW]) {
             playerA.moveUp();
         }
-        // arrow down
-        if (keyPressedStates[40]) {
+        if (keyPressedStates[util.Keycode.DOWN_ARROW]) {
             playerA.moveDown();
         }
-        // arrow left
-        if (keyPressedStates[37]) {
+        if (keyPressedStates[util.Keycode.LEFT_ARROW]) {
             playerA.moveLeft();
         }
-        // arrow right
-        if (keyPressedStates[39]) {
+        if (keyPressedStates[util.Keycode.RIGHT_ARROW]) {
             playerA.moveRight();
         }
-        // M
-        if (keyPressedStates[77]) {
+        if (keyPressedStates[util.Keycode.KEY_M]) {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.right();
 
@@ -99,24 +88,19 @@ let Game = (function () {
                 stage.addChild(bulletA);
             }
         }
-        // W
-        if (keyPressedStates[87]) {
+        if (keyPressedStates[util.Keycode.KEY_W]) {
             playerB.moveUp();
         }
-        // S
-        if (keyPressedStates[83]) {
+        if (keyPressedStates[util.Keycode.KEY_S]) {
             playerB.moveDown();
         }
-        // A
-        if (keyPressedStates[65]) {
+        if (keyPressedStates[util.Keycode.KEY_A]) {
             playerB.moveLeft();
         }
-        // D
-        if (keyPressedStates[68]) {
+        if (keyPressedStates[util.Keycode.KEY_D]) {
             playerB.moveRight();
         }
-        // C
-        if (keyPressedStates[67]) {
+        if (keyPressedStates[util.Keycode.KEY_C]) {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.left();
             let bulletB = playerB.shoot(aim);
@@ -129,63 +113,56 @@ let Game = (function () {
 
     // Kei Mizubuchi Ends
     // Hand Li Begins
-    function collisionDection():void
-    {
+    function detectPlayersCollision(): void {
         let topLeftPlayerA = new objects.Vector2(playerA.position.x - playerA.halfWidth,
             playerA.position.y - playerA.halfHeight);
         let topLeftPlayerB = new objects.Vector2(playerB.position.x - playerB.halfWidth,
             playerB.position.y - playerB.halfHeight);
 
 
-         // AABB Collision Detection
-         if (topLeftPlayerA.x < topLeftPlayerB.x + playerB.width &&
+        // AABB Collision Detection
+        if (topLeftPlayerA.x < topLeftPlayerB.x + playerB.width &&
             topLeftPlayerA.x + playerA.width > topLeftPlayerB.x &&
             topLeftPlayerA.y < topLeftPlayerB.y + playerB.height &&
-            topLeftPlayerA.y + playerA.height > topLeftPlayerB.y) 
-            {
-                if(!playerB.isColliding)
-                {
-                    console.log("Player B detected collision with player A!");
-                    playerB.isColliding = true;
-                }
-                else
-                {
-                    playerA.isColliding = false;
-                    playerB.isColliding = false;
-                }
-                
+            topLeftPlayerA.y + playerA.height > topLeftPlayerB.y) {
+            if (!playerB.isColliding) {
+                console.log("Player B detected collision with player A!");
+                playerB.isColliding = true;
             }
-         
+            else {
+                playerA.isColliding = false;
+                playerB.isColliding = false;
+            }
+
+        }
+
     }
 
-    function bulletCollisionDection():void
-    {
-        if(bulletB){
+    // collision detection function
+    function detectBulletCollision(): void {
+        if (bulletB) {
             console.log("bullet B")
             let topLeftPlayerA = new objects.Vector2(playerA.position.x - playerA.halfWidth,
                 playerA.position.y - playerA.halfHeight);
             let topLeftBulletB = new objects.Vector2(bulletB.position.x - bulletB.halfWidth,
                 bulletB.position.y - bulletB.halfHeight);
-    
-             // AABB Collision Detection
-             if (topLeftPlayerA.x < topLeftBulletB.x + bulletB.width &&
+
+            // AABB Collision Detection
+            if (topLeftPlayerA.x < topLeftBulletB.x + bulletB.width &&
                 topLeftPlayerA.x + playerA.width > topLeftBulletB.x &&
                 topLeftPlayerA.y < topLeftBulletB.y + bulletB.height &&
-                topLeftPlayerA.y + playerA.height > topLeftBulletB.y) 
-                {
-                    if(!playerA.isColliding)
-                    {
-                        console.log("Player A detected collision with bullet!");
-                        playerA.isColliding = true;
-                    }
-                    else
-                    {
-                        playerA.isColliding = false;
-                    }
-                    
+                topLeftPlayerA.y + playerA.height > topLeftBulletB.y) {
+                if (!playerA.isColliding) {
+                    console.log("Player A detected collision with bullet!");
+                    playerA.isColliding = true;
                 }
+                else {
+                    playerA.isColliding = false;
+                }
+
+            }
         }
-        
+
     }
 
     // Hang Li Ends
