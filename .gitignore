@@ -1,2 +1,6 @@
-*.js
-*.js.map
+/Scripts/*
+!/Scripts/*.ts
+/Scripts/objects/*
+!/Scripts/objects/*.ts
+/Scripts/util/*
+!/Scripts/util/*.ts
