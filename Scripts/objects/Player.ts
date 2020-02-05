@@ -9,7 +9,6 @@ module objects {
         get bulletNum(): number {
             return this._bulletNum;
         }
-
         set bulletNum(newNum: number) {
             this._bulletNum = newNum;
         }

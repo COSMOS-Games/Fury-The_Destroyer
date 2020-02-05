@@ -34,11 +34,9 @@ let Game = (function () {
     function Update(): void {
         stage.update();
 
-        // detectPlayersCollision(playerA, playerB);
-
         detectBulletCollision(bulletBList, playerA);
         detectBulletCollision(bulletAList, playerB);
-
+        detectPlayerHealth();
         detectPressedKeys();
     }
 
@@ -147,6 +145,19 @@ let Game = (function () {
                 // note: the behaviour of collided objects should be defined in each class?
                 target.health -= 1;
             }
+        }
+    }
+
+    function detectPlayerHealth():void{
+        if(playerA.health<= 0){
+            console.log("player B wins!");
+            stage.removeAllChildren();
+            // go to next stage
+        }
+        if(playerB.health <= 0){
+            console.log("player A wins!");
+            stage.removeAllChildren();
+            // go to next stage
         }
     }
 
