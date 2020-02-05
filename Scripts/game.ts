@@ -143,6 +143,10 @@ let Game = (function () {
 
                 // note: the behaviour of collided objects should be defined in each class?
                 target.health -= 1;
+            } else if (bullets[i].x >= 960 - bullets[i].halfWidth || bullets[i].x <= bullets[i].halfWidth) {
+                // simplying check the left and right border
+                stage.removeChild(bullets[i]);
+                bullets.splice(i, 1); // remove the bullet from the list
             }
         }
     }
