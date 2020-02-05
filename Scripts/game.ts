@@ -63,25 +63,8 @@ let Game = (function () {
     // attach keydown and keyup event to the window
     window.addEventListener('keydown', (event: KeyboardEvent) => {
         keyPressedStates[event.keyCode] = true;
-    });
 
-    window.addEventListener('keyup', (event: KeyboardEvent) => {
-        keyPressedStates[event.keyCode] = false;
-    });
-
-    function detectPressedKeys(): void {
-        if (keyPressedStates[util.Key.UP]) {
-            playerA.moveUp();
-        }
-        if (keyPressedStates[util.Key.DOWN]) {
-            playerA.moveDown();
-        }
-        if (keyPressedStates[util.Key.LEFT]) {
-            playerA.moveLeft();
-        }
-        if (keyPressedStates[util.Key.RIGHT]) {
-            playerA.moveRight();
-        }
+        // for shoot keys
         if (keyPressedStates[util.Key.M]) {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.right();
@@ -93,18 +76,6 @@ let Game = (function () {
                 stage.addChild(bulletA);
             }
         }
-        if (keyPressedStates[util.Key.W]) {
-            playerB.moveUp();
-        }
-        if (keyPressedStates[util.Key.S]) {
-            playerB.moveDown();
-        }
-        if (keyPressedStates[util.Key.A]) {
-            playerB.moveLeft();
-        }
-        if (keyPressedStates[util.Key.D]) {
-            playerB.moveRight();
-        }
         if (keyPressedStates[util.Key.C]) {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.left();
@@ -114,6 +85,34 @@ let Game = (function () {
                 bulletBList.push(bulletB);
                 stage.addChild(bulletB);
             }
+        }
+
+    });
+
+    window.addEventListener('keyup', (event: KeyboardEvent) => {
+        keyPressedStates[event.keyCode] = false;
+    });
+
+    function detectPressedKeys(): void {
+        if (keyPressedStates[util.Key.UP]) {
+            playerA.moveUp();
+        } else if (keyPressedStates[util.Key.DOWN]) {
+            playerA.moveDown();
+        }
+        if (keyPressedStates[util.Key.LEFT]) {
+            playerA.moveLeft();
+        } else if (keyPressedStates[util.Key.RIGHT]) {
+            playerA.moveRight();
+        }
+        if (keyPressedStates[util.Key.W]) {
+            playerB.moveUp();
+        } else if (keyPressedStates[util.Key.S]) {
+            playerB.moveDown();
+        }
+        if (keyPressedStates[util.Key.A]) {
+            playerB.moveLeft();
+        } else if (keyPressedStates[util.Key.D]) {
+            playerB.moveRight();
         }
     }
 
@@ -148,13 +147,13 @@ let Game = (function () {
         }
     }
 
-    function detectPlayerHealth():void{
-        if(playerA.health<= 0){
+    function detectPlayerHealth(): void {
+        if (playerA.health <= 0) {
             console.log("player B wins!");
             stage.removeAllChildren();
             // go to next stage
         }
-        if(playerB.health <= 0){
+        if (playerB.health <= 0) {
             console.log("player A wins!");
             stage.removeAllChildren();
             // go to next stage
