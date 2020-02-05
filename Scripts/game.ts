@@ -65,7 +65,7 @@ let Game = (function () {
         keyPressedStates[event.keyCode] = true;
 
         // for shoot keys
-        if (keyPressedStates[util.Key.M]) {
+        if (event.keyCode === util.Key.M) {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.right();
 
@@ -76,7 +76,7 @@ let Game = (function () {
                 stage.addChild(bulletA);
             }
         }
-        if (keyPressedStates[util.Key.C]) {
+        if (event.keyCode === util.Key.C) {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.left();
             let bulletB = playerB.shoot(aim);
