@@ -67,23 +67,23 @@ let Game = (function () {
         // for shoot keys
         if (event.keyCode === util.Key.M) {
             // aim specifies the direction of shooting
-            let aim = objects.Vector2.right();
-
-            let bulletA = playerA.shoot(aim);
-            // only add the bullet to stage if the position greater than zero
-            if (bulletA.position.x > 0) {
-                bulletAList.push(bulletA);
-                stage.addChild(bulletA);
-            }
-        }
-        if (event.keyCode === util.Key.C) {
-            // aim specifies the direction of shooting
             let aim = objects.Vector2.left();
+
             let bulletB = playerB.shoot(aim);
             // only add the bullet to stage if the position greater than zero
             if (bulletB.position.x > 0) {
                 bulletBList.push(bulletB);
                 stage.addChild(bulletB);
+            }
+        }
+        if (event.keyCode === util.Key.C) {
+            // aim specifies the direction of shooting
+            let aim = objects.Vector2.right();
+            let bulletA = playerA.shoot(aim);
+            // only add the bullet to stage if the position greater than zero
+            if (bulletA.position.x > 0) {
+                bulletAList.push(bulletA);
+                stage.addChild(bulletA);
             }
         }
 
@@ -95,24 +95,24 @@ let Game = (function () {
 
     function detectPressedKeys(): void {
         if (keyPressedStates[util.Key.UP]) {
-            playerA.moveUp();
-        } else if (keyPressedStates[util.Key.DOWN]) {
-            playerA.moveDown();
-        }
-        if (keyPressedStates[util.Key.LEFT]) {
-            playerA.moveLeft();
-        } else if (keyPressedStates[util.Key.RIGHT]) {
-            playerA.moveRight();
-        }
-        if (keyPressedStates[util.Key.W]) {
             playerB.moveUp();
-        } else if (keyPressedStates[util.Key.S]) {
+        } else if (keyPressedStates[util.Key.DOWN]) {
             playerB.moveDown();
         }
-        if (keyPressedStates[util.Key.A]) {
+        if (keyPressedStates[util.Key.LEFT]) {
             playerB.moveLeft();
-        } else if (keyPressedStates[util.Key.D]) {
+        } else if (keyPressedStates[util.Key.RIGHT]) {
             playerB.moveRight();
+        }
+        if (keyPressedStates[util.Key.W]) {
+            playerA.moveUp();
+        } else if (keyPressedStates[util.Key.S]) {
+            playerA.moveDown();
+        }
+        if (keyPressedStates[util.Key.A]) {
+            playerA.moveLeft();
+        } else if (keyPressedStates[util.Key.D]) {
+            playerA.moveRight();
         }
     }
 

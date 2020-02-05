@@ -2,8 +2,8 @@ module objects {
     export class Player extends GameObject {
         // PRIVATE INSTANCE MEMBER
         // private _bulletNum: number = 3;
-        private _bulletNum: number = 50;
-        private _health: number = 15;
+        private _bulletNum: number = 5;
+        private _health: number = 2;
 
         // PUBLIC PROPERTIES
         get bulletNum(): number {
