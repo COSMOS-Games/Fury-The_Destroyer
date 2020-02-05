@@ -3,7 +3,7 @@ module objects {
         // PRIVATE INSTANCE MEMBER
         // private _bulletNum: number = 3;
         private _bulletNum: number = 50;
-        private _health: number = 1;
+        private _health: number = 15;
 
         // PUBLIC PROPERTIES
         get bulletNum(): number {
@@ -48,6 +48,12 @@ module objects {
             }
         }
 
+        private _checkHealth(): void {
+            if (this.health <= 0) {
+                console.log("You're already dead");
+            }
+        }
+
         // PUBLIC METHODS
         public Start(): void {
             createjs.Ticker.framerate = 60;
@@ -59,6 +65,8 @@ module objects {
         public Update(): void {
             // update player position
             this.position = new Vector2(this.position.x, this.position.y);
+
+            this._checkHealth();
 
             this._checkBounds();
         }
@@ -105,5 +113,10 @@ module objects {
                 return new objects.Bullet(-1, -1, Vector2.zero());
             }
         }
+
+        public explode(): void {
+
+        }
+
     }
 }

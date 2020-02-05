@@ -11,6 +11,9 @@ let Game = (function () {
     let bulletA: objects.Bullet;
     let bulletB: objects.Bullet;
 
+    let bulletAList: objects.Bullet[] = [];
+    let bulletBList: objects.Bullet[] = [];
+
     let keyPressedStates: boolean[] = []; // to detect which keys are down
 
     /**
@@ -31,8 +34,11 @@ let Game = (function () {
     function Update(): void {
         stage.update();
 
-        detectPlayersCollision();
-        detectBulletCollision();
+        // detectPlayersCollision(playerA, playerB);
+
+        detectBulletCollision(bulletBList, playerA);
+        detectBulletCollision(bulletAList, playerB);
+
         detectPressedKeys();
     }
 
@@ -85,6 +91,7 @@ let Game = (function () {
             let bulletA = playerA.shoot(aim);
             // only add the bullet to stage if the position greater than zero
             if (bulletA.position.x > 0) {
+                bulletAList.push(bulletA);
                 stage.addChild(bulletA);
             }
         }
@@ -106,6 +113,7 @@ let Game = (function () {
             let bulletB = playerB.shoot(aim);
             // only add the bullet to stage if the position greater than zero
             if (bulletB.position.x > 0) {
+                bulletBList.push(bulletB);
                 stage.addChild(bulletB);
             }
         }
@@ -113,56 +121,33 @@ let Game = (function () {
 
     // Kei Mizubuchi Ends
     // Hand Li Begins
-    function detectPlayersCollision(): void {
-        let topLeftPlayerA = new objects.Vector2(playerA.position.x - playerA.halfWidth,
-            playerA.position.y - playerA.halfHeight);
-        let topLeftPlayerB = new objects.Vector2(playerB.position.x - playerB.halfWidth,
-            playerB.position.y - playerB.halfHeight);
 
+    // AABB Collision Detection
 
-        // AABB Collision Detection
-        if (topLeftPlayerA.x < topLeftPlayerB.x + playerB.width &&
-            topLeftPlayerA.x + playerA.width > topLeftPlayerB.x &&
-            topLeftPlayerA.y < topLeftPlayerB.y + playerB.height &&
-            topLeftPlayerA.y + playerA.height > topLeftPlayerB.y) {
-            if (!playerB.isColliding) {
-                console.log("Player B detected collision with player A!");
-                playerB.isColliding = true;
-            }
-            else {
-                playerA.isColliding = false;
-                playerB.isColliding = false;
-            }
-
-        }
-
-    }
+    // good to have: general collision detection for objects
+    // function detectPlayersCollision(obj1: objects.Player, obj2: objects.Player): void {
+    //     if (obj1.x < obj2.x + obj2.halfWidth &&
+    //         obj1.x + obj1.halfWidth > obj2.x &&
+    //         obj1.y < obj2.y + obj2.halfHeight &&
+    //         obj1.y + obj1.halfHeight > obj2.y) {
+    //         console.log("two objects hit!!");
+    //     }
+    // }
 
     // collision detection function
-    function detectBulletCollision(): void {
-        if (bulletB) {
-            console.log("bullet B")
-            let topLeftPlayerA = new objects.Vector2(playerA.position.x - playerA.halfWidth,
-                playerA.position.y - playerA.halfHeight);
-            let topLeftBulletB = new objects.Vector2(bulletB.position.x - bulletB.halfWidth,
-                bulletB.position.y - bulletB.halfHeight);
+    function detectBulletCollision(bullets: objects.Bullet[], target: objects.Player): void {
+        for (let i = 0; i < bullets.length; i++) {
+            if (bullets[i].x < target.x + target.halfWidth &&
+                bullets[i].x + bullets[i].halfWidth > target.x &&
+                bullets[i].y < target.y + target.halfHeight &&
+                bullets[i].y + bullets[i].halfHeight > target.y) {
+                stage.removeChild(bullets[i]); // remove the bullet from the stage
+                bullets.splice(i, 1); // remove the bullet from the list
 
-            // AABB Collision Detection
-            if (topLeftPlayerA.x < topLeftBulletB.x + bulletB.width &&
-                topLeftPlayerA.x + playerA.width > topLeftBulletB.x &&
-                topLeftPlayerA.y < topLeftBulletB.y + bulletB.height &&
-                topLeftPlayerA.y + playerA.height > topLeftBulletB.y) {
-                if (!playerA.isColliding) {
-                    console.log("Player A detected collision with bullet!");
-                    playerA.isColliding = true;
-                }
-                else {
-                    playerA.isColliding = false;
-                }
-
+                // note: the behaviour of collided objects should be defined in each class?
+                target.health -= 1;
             }
         }
-
     }
 
     // Hang Li Ends
