@@ -4,12 +4,10 @@ let Game = (function () {
     // initialize the needed object
     let canvas: HTMLCanvasElement = document.getElementsByTagName('canvas')[0];
     let stage: createjs.Stage;
-
     let backgroundImg: createjs.Bitmap;
+
     let playerA: objects.Player;
     let playerB: objects.Player;
-    let bulletA: objects.Bullet;
-    let bulletB: objects.Bullet;
 
     let bulletAList: objects.Bullet[] = [];
     let bulletBList: objects.Bullet[] = [];
@@ -34,12 +32,11 @@ let Game = (function () {
     function Update(): void {
         stage.update();
 
-        detectBulletCollision(bulletBList, playerA);
         detectBulletCollision(bulletAList, playerB);
+        detectBulletCollision(bulletBList, playerA);
         detectPlayerHealth();
         detectPressedKeys();
     }
-
 
     function Main(): void {
         console.log(`%c Main Started...`, "color: green; font-size: 16px;");
@@ -65,25 +62,28 @@ let Game = (function () {
         keyPressedStates[event.keyCode] = true;
 
         // for shoot keys
-        if (event.keyCode === util.Key.M) {
+        if (keyPressedStates[util.Key.M]) {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.left();
-
             let bulletB = playerB.shoot(aim);
-            // only add the bullet to stage if the position greater than zero
-            if (bulletB.position.x > 0) {
+
+            if (bulletB) {
                 bulletBList.push(bulletB);
                 stage.addChild(bulletB);
+            } else {
+                console.log('Bullets B ran out!!');
             }
         }
-        if (event.keyCode === util.Key.C) {
+
+        if (keyPressedStates[util.Key.C]) {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.right();
             let bulletA = playerA.shoot(aim);
-            // only add the bullet to stage if the position greater than zero
-            if (bulletA.position.x > 0) {
+            if (bulletA) {
                 bulletAList.push(bulletA);
                 stage.addChild(bulletA);
+            } else {
+                console.log('Bullets A ran out!!');
             }
         }
 
@@ -133,15 +133,19 @@ let Game = (function () {
 
     // collision detection function
     function detectBulletCollision(bullets: objects.Bullet[], target: objects.Player): void {
+
         for (let i = 0; i < bullets.length; i++) {
-            if (bullets[i].x < target.x + target.halfWidth &&
-                bullets[i].x + bullets[i].halfWidth > target.x &&
-                bullets[i].y < target.y + target.halfHeight &&
-                bullets[i].y + bullets[i].halfHeight > target.y) {
+            let crossedTargetLeftBound: boolean = bullets[i].x + bullets[i].halfWidth > target.x;
+            let reachingTargetCoreX: boolean = bullets[i].x < target.x + target.halfWidth;
+            let crossedTargetTopBound: boolean = bullets[i].y + bullets[i].halfHeight > target.y;
+            let reachingTargetCoreY: boolean = bullets[i].y < target.y + target.halfHeight;
+
+            if (crossedTargetLeftBound && reachingTargetCoreX
+                && crossedTargetTopBound && reachingTargetCoreY
+            ) {
                 stage.removeChild(bullets[i]); // remove the bullet from the stage
                 bullets.splice(i, 1); // remove the bullet from the list
 
-                // note: the behaviour of collided objects should be defined in each class?
                 target.health -= 1;
             } else if (bullets[i].x >= 960 - bullets[i].halfWidth || bullets[i].x <= bullets[i].halfWidth) {
                 // simplying check the left and right border
@@ -149,6 +153,7 @@ let Game = (function () {
                 bullets.splice(i, 1); // remove the bullet from the list
             }
         }
+
     }
 
     function detectPlayerHealth(): void {
@@ -171,4 +176,5 @@ let Game = (function () {
     // Ygor Almeida Ends
 
     window.addEventListener('load', Start);
+
 })();

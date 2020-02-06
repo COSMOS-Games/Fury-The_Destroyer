@@ -98,18 +98,14 @@ module objects {
             this.position.add(velocity);
         }
 
-        public shoot(aim: Vector2): objects.Bullet {
+        public shoot(aim: Vector2): objects.Bullet | null {
             // check if this player still have bullet or not
             if (this.bulletNum > 0) {
                 let bullet = new Bullet(this.position.x, this.position.y, aim);
                 this.bulletNum -= 1;
                 return bullet;
-            }
-            else {
-                // if no availble bullet, return bullet with position negitive
-                // which check on game engineer that this bullet will not be add to stage
-                // not shown to player
-                return new objects.Bullet(-1, -1, Vector2.zero());
+            } else {
+                return null; // nullable
             }
         }
 
