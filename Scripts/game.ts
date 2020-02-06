@@ -5,6 +5,10 @@ let Game = (function () {
     let canvas: HTMLCanvasElement = document.getElementsByTagName('canvas')[0];
     let stage: createjs.Stage;
     let backgroundImg: createjs.Bitmap;
+    let playerAHealthLabel: objects.Label;
+    let playerABulletLabel: objects.Label;
+    let playerBHealthLabel: objects.Label;
+    let playerBBulletLabel: objects.Label;
 
     let playerA: objects.Player;
     let playerB: objects.Player;
@@ -51,10 +55,23 @@ let Game = (function () {
     // Logan Kim Ends
     // Kei Mizubuchi Begins
     function firstStage(): void {
-        playerA = new objects.Player(50, 50);
+        playerA = new objects.Player(50, 75);
         stage.addChild(playerA);
+        playerAHealthLabel = new objects.Label("Playe A: Health "+playerA.health, "24px",
+            "Times", "white", 100, 25, true);
+        stage.addChild(playerAHealthLabel);
+        playerABulletLabel = new objects.Label("Bullet "+playerA.bulletNum, "24px",
+        "Times", "white", 250, 25, true);
+        stage.addChild(playerABulletLabel);
+
         playerB = new objects.Player(900, 600);
         stage.addChild(playerB);
+        playerBHealthLabel = new objects.Label("Player B: Health "+playerB.health, "24px",
+        "Times", "white", 750, 25, true)
+        stage.addChild(playerBHealthLabel);
+        playerBBulletLabel = new objects.Label("Bullet "+playerB.bulletNum, "24px",
+        "Times", "white", 900, 25, true);
+        stage.addChild(playerBBulletLabel);
     }
 
     // attach keydown and keyup event to the window
@@ -66,7 +83,7 @@ let Game = (function () {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.left();
             let bulletB = playerB.shoot(aim);
-
+            playerBBulletLabel.setText("Bullet "+playerB.bulletNum);
             if (bulletB) {
                 bulletBList.push(bulletB);
                 stage.addChild(bulletB);
@@ -79,6 +96,7 @@ let Game = (function () {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.right();
             let bulletA = playerA.shoot(aim);
+            playerABulletLabel.setText("Bullet "+playerA.bulletNum);
             if (bulletA) {
                 bulletAList.push(bulletA);
                 stage.addChild(bulletA);
@@ -147,6 +165,8 @@ let Game = (function () {
                 bullets.splice(i, 1); // remove the bullet from the list
 
                 target.health -= 1;
+                playerAHealthLabel.setText("Playe A: Health "+playerA.health);
+                playerBHealthLabel.setText("Playe B: Health "+playerB.health);
             } else if (bullets[i].x >= 960 - bullets[i].halfWidth || bullets[i].x <= bullets[i].halfWidth) {
                 // simplying check the left and right border
                 stage.removeChild(bullets[i]);

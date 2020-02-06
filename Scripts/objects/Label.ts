@@ -27,5 +27,9 @@ module objects {
             this.x = x;
             this.y = y;
         }
+
+        setText(newText: string){
+            this.text = newText;
+        }
     }
 }
