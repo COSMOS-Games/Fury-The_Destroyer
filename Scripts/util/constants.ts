@@ -12,9 +12,10 @@ module util {
     export const PLAYER_A_BULLET: string = './Assets/images/MilitaryRocketA.png';
     export const PLAYER_B_BULLET: string = './Assets/images/MilitaryRocketB.png';
 
-    // Image Reference: https://pngimage.net/game-play-button-png-2/
-    export const PLAY_BUTTON: string = './Assets/images/play-btn.png';
-    export const RESTART_BUTTON: string = './Assets/images/play-btn.png';
+    // button image assets
+    // ref: https://www.behance.net/gallery/21061821/UI-elements-for-game-application
+    export const PLAY_BUTTON: string = './Assets/images/btn-play.png';
+    export const RESTART_BUTTON: string = './Assets/images/play-again-btn.png';
 
     // 
     export const STAGE_W: number = 960;
