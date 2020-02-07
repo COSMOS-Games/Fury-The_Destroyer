@@ -1,12 +1,11 @@
 "use strict";
 var objects;
 (function (objects) {
-    class Button extends objects.GameObject {
+    class Image extends objects.GameObject {
         // constructor
-        constructor(imagePath, x = 0, y = 0, isCentered = true) {
+        constructor(imagePath, x = 0, y = 0, width = 0, height = 0, isCentered = false) {
             super(imagePath, x, y, isCentered);
-            this.on("mouseover", this.HoverOver);
-            this.on("mouseout", this.HoverOut);
+            super.CustomSize(width, height, isCentered);
             this.Start();
         }
         // PUBLIC Methods
@@ -15,6 +14,10 @@ var objects;
         }
         HoverOut() {
             this.alpha = 1;
+        }
+        HoverOn() {
+            this.on("mouseover", this.HoverOver);
+            this.on("mouseout", this.HoverOut);
         }
         // PRIVATE LIFE CYCLE METHODS
         _checkBounds() {
@@ -32,6 +35,6 @@ var objects;
         Reset() {
         }
     }
-    objects.Button = Button;
+    objects.Image = Image;
 })(objects || (objects = {}));
-//# sourceMappingURL=Button.js.map
+//# sourceMappingURL=Image.js.map

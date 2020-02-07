@@ -90,6 +90,13 @@ var objects;
             this.x = newPosition.x;
             this.y = newPosition.y;
         }
+        CustomSize(width = this.getBounds().width, height = this.getBounds().height, isCentered = false) {
+            this.image.addEventListener('load', () => {
+                this.scaleX = width / this.getBounds().width;
+                this.scaleY = height / this.getBounds().height;
+                this.isCentered = isCentered;
+            });
+        }
     }
     objects.GameObject = GameObject;
 })(objects || (objects = {}));

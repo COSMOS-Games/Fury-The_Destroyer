@@ -4,8 +4,10 @@
 let Game = (function () {
     let canvas = document.getElementsByTagName('canvas')[0];
     let stage;
+    let background;
     let gameTitle;
     let startButton;
+    const BACKGROUND_PATH = './Assets/images/background.png';
     /**
      * This method initializes the CreateJS (EaselJS) Library
      * It sets the framerate to 60 FPS and sets up the main Game Loop (Update)
@@ -27,10 +29,14 @@ let Game = (function () {
     }
     // Logan Kim Begins
     function StartScreen() {
+        // set background in canvas
+        background = new objects.Image(BACKGROUND_PATH, 0, 0, 960, 640, false);
+        stage.addChild(background);
         gameTitle = new objects.Label("Fury, The Destroyer", "80px", "Consolas", "#FFFFFF", 480, 100, true);
         stage.addChild(gameTitle);
         // Image Reference: https://pngimage.net/game-play-button-png-2/
-        startButton = new objects.Button('./Assets/images/play-btn.png', 480, 500, true);
+        startButton = new objects.Image('./Assets/images/play-btn.png', 480, 500, 200, 80, true);
+        startButton.HoverOn();
         stage.addChild(startButton);
         console.log("Start screen loaded!");
         startButton.on("click", function () {

@@ -1,12 +1,9 @@
 module objects {
-    export class Button extends GameObject {
+    export class Image extends GameObject {
         // constructor
-        constructor(imagePath: string, x: number = 0, y: number = 0, isCentered: boolean = true) {
+        constructor(imagePath: string, x: number = 0, y: number = 0, width: number = 0, height: number = 0, isCentered: boolean = false) {
             super(imagePath, x, y, isCentered);
-
-            this.on("mouseover", this.HoverOver);
-            this.on("mouseout", this.HoverOut);
-
+            super.CustomSize(width, height, isCentered);
             this.Start();
         }
 
@@ -17,6 +14,11 @@ module objects {
 
         HoverOut(): void {
             this.alpha = 1;
+        }
+
+        HoverOn(): void {
+            this.on("mouseover", this.HoverOver);
+            this.on("mouseout", this.HoverOut);
         }
 
         // PRIVATE LIFE CYCLE METHODS

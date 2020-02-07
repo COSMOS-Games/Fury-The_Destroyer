@@ -118,5 +118,12 @@ module objects {
 
         public abstract Reset(): void;
 
+        public CustomSize(width: number = this.getBounds().width, height: number = this.getBounds().height, isCentered: boolean = false): void {
+            this.image.addEventListener('load', () => {
+                this.scaleX = width / this.getBounds().width;
+                this.scaleY = height / this.getBounds().height;
+                this.isCentered = isCentered;
+            });
+        }
     }
 }
