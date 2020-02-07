@@ -89,10 +89,9 @@ module objects {
          */
         constructor(imagePath: string = './Assets/images/placeholder.png',
             x: number = 0, y: number = 0, centered: boolean = false) {
+
             super(imagePath);
             this.isColliding = false;
-
-
             // set the GameObject's position
             this.position = new Vector2(x, y);
 

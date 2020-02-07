@@ -10,7 +10,14 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
+<<<<<<< HEAD
             "program": "${workspaceFolder}\\game.js"
+=======
+            "program": "${workspaceFolder}\\Scripts\\game.ts",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+>>>>>>> firstStage
         },
         // debug with Chrome
         {
@@ -22,6 +29,9 @@
             "webRoot": "${workspaceFolder}",
             "preLaunchTask": "tsc: watch"
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> firstStage
     ]
 }

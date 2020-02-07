@@ -13,7 +13,6 @@
                 "isDefault": true
             }
         },
-        // build task for chrome debug
         {
             "label": "tsc: watch",
             "type": "typescript",

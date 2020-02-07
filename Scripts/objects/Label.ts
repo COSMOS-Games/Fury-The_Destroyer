@@ -28,11 +28,8 @@ module objects {
             this.y = y;
         }
 
-        public setText(newText:string)
-        {
+        setText(newText: string) {
             this.text = newText;
-            this.regX = this.getBounds().width * 0.5;
-            this.regY = this.getMeasuredLineHeight() * 0.5;
         }
     }
 }
