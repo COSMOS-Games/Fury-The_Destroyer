@@ -194,7 +194,7 @@ let Game = (function () {
                 target.health -= 1;
                 playerAHealthLabel.setText("Playe A: Health " + playerA.health);
                 playerBHealthLabel.setText("Playe B: Health " + playerB.health);
-            } else if (bullets[i].x >= util.STAGE_W - bullets[i].width || bullets[i].x <= bullets[i].width) {
+            } else if (bullets[i].x + bullets[i].halfWidth > util.STAGE_W || bullets[i].x < bullets[i].halfWidth) {
                 // simplying check the left and right border
                 stage.removeChild(bullets[i]);
                 bullets.splice(i, 1); // remove the bullet from the list
