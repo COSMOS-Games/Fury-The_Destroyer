@@ -6,7 +6,7 @@ let Game = (function () {
     let background: objects.Image;
     let gameTitle: objects.Label;
     let startButton: objects.Image;
-    const BACKGROUND_PATH: string = './Assets/images/background.png';
+    const BACKGROUND_PATH: string = './Assets/images/first-screen.png';
 
     /**
      * This method initializes the CreateJS (EaselJS) Library
@@ -34,14 +34,14 @@ let Game = (function () {
     // Logan Kim Begins
     function StartScreen(): void {
         // set background in canvas
-        background = new objects.Image(BACKGROUND_PATH, 0, 0, 960, 640, false)
+        background = new objects.Image(BACKGROUND_PATH, 0, 0, 960, 640, false);
         stage.addChild(background);
 
-        gameTitle = new objects.Label("Fury, The Destroyer", "80px", "Consolas", "#FFFFFF", 480, 100, true);
-        stage.addChild(gameTitle);
+        // gameTitle = new objects.Label("Fury, The Destroyer", "80px", "Consolas", "#FFFFFF", 480, 100, true);
+        // stage.addChild(gameTitle);
 
         // Image Reference: https://pngimage.net/game-play-button-png-2/
-        startButton = new objects.Image('./Assets/images/play-btn.png', 480, 500, 200, 80, true);
+        startButton = new objects.Image('./Assets/images/play-btn.png', 480, 450, 200, 80, true);
         startButton.HoverOn();
         stage.addChild(startButton);
 
