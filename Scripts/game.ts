@@ -3,7 +3,6 @@ let Game = (function () {
     // initialize the needed object
     let canvas: HTMLCanvasElement = document.getElementsByTagName('canvas')[0];
     let stage: createjs.Stage;
-    let stageCleared: boolean = false;
 
     // start screen
     let background: objects.Image;
@@ -26,6 +25,8 @@ let Game = (function () {
     // end screen
     let backgroundEnd: objects.Image;
     let restartButton: objects.Image;
+
+
 
     /**
      * This method initializes the CreateJS (EaselJS) Library
@@ -52,26 +53,8 @@ let Game = (function () {
         StartScreen();
     }
 
-    function End(): void {
-        console.log(`%c Game Started!`, "color: lightblue; font-size: 20px; font-weight: bold;");
-        stage = new createjs.Stage(canvas);
-        createjs.Ticker.framerate = 60; // 60 FPS
-        createjs.Ticker.on('tick', Update);
-        stage.enableMouseOver(20);
-
-        MainEnd();
-    }
-
-    function MainEnd(): void {
-        console.log(`%c Main Started...`, "color: green; font-size: 16px;");
-
-        EndScreen();
-    }
-
-
     // Logan Kim Begins
     function StartScreen(): void {
-        stageCleared = false;
 
         // set background in canvas
         background = new objects.Image(util.BACKGROUND_PATH, 0, 0, util.STAGE_W, util.STAGE_H, false);
@@ -122,11 +105,9 @@ let Game = (function () {
     function detectOnUpdate(): void {
         detectBulletCollision(bulletAList, playerB);
         detectBulletCollision(bulletBList, playerA);
-        if (stageCleared == false) {
-            detectPlayerHealth();
-            detectPressedKeys();
-            detectPlayersBullet();
-        }
+        detectPlayerHealth();
+        detectPressedKeys();
+        detectPlayersBullet();
     }
 
     // attach keydown and keyup event to the window
@@ -220,7 +201,8 @@ let Game = (function () {
                 target.health -= 1;
                 playerAHealthLabel.setText("Playe A: Health " + playerA.health);
                 playerBHealthLabel.setText("Playe B: Health " + playerB.health);
-            } else if (bullets[i].x + bullets[i].halfWidth > util.STAGE_W || bullets[i].x < bullets[i].halfWidth) {
+            }
+            if (bullets[i].x + bullets[i].halfWidth > util.STAGE_W || bullets[i].x < bullets[i].halfWidth) {
                 // simplying check the left and right border
                 stage.removeChild(bullets[i]);
                 bullets.splice(i, 1); // remove the bullet from the list
@@ -235,7 +217,8 @@ let Game = (function () {
         ) {
             stage.removeAllChildren()
             // go to next stage
-            stageCleared = true;
+            // remove detect functions for firstStage
+
             EndScreen();
 
         }
@@ -246,14 +229,16 @@ let Game = (function () {
             console.log("player B wins!");
             stage.removeAllChildren();
             // go to next stage
-            stageCleared = true;
+            // remove detect functions for firstStage
+
             EndScreen();
         }
         if (playerB.health <= 0) {
             console.log("player A wins!");
             stage.removeAllChildren();
             // go to next stage
-            stageCleared = true;
+            // remove detect functions for firstStage
+
             EndScreen();
         }
     }
@@ -262,7 +247,13 @@ let Game = (function () {
     // Ygor Almeida Begins
 
     function EndScreen(): void {
-        stageCleared = true;
+        // reset attched events to ticker and variables
+        createjs.Ticker.reset();
+        createjs.Ticker.on('tick', Update);
+        bulletAList = [];
+        bulletBList = [];
+        keyPressedStates = []; // to detect which keys are down
+
 
         // set background in canvas
         backgroundEnd = new objects.Image(util.BACKGROUND_PATH_END, 0, 0, util.STAGE_W, util.STAGE_H, false);
@@ -272,7 +263,7 @@ let Game = (function () {
         restartButton.HoverOn();
         stage.addChild(restartButton);
 
-        console.log("Start screen loaded!")
+        console.log("End screen loaded!")
 
         restartButton.on("click", function () {
             // clear the canvas
@@ -287,7 +278,6 @@ let Game = (function () {
 
     // Ygor Almeida Ends
 
-    window.addEventListener('load', End);
     window.addEventListener('load', Start);
 
 })();
