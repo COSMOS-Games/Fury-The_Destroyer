@@ -236,6 +236,8 @@ let Game = (function () {
             stage.removeAllChildren()
             // go to next stage
             stageCleared = true;
+            EndScreen();
+
         }
     }
 
