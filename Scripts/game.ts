@@ -3,6 +3,7 @@ let Game = (function () {
     // initialize the needed object
     let canvas: HTMLCanvasElement = document.getElementsByTagName('canvas')[0];
     let stage: createjs.Stage;
+    let stageCleared: boolean = false;
 
     // start screen
     let background: objects.Image;
@@ -21,6 +22,10 @@ let Game = (function () {
     let playerBBulletLabel: objects.Label;
 
     let keyPressedStates: boolean[] = []; // to detect which keys are down
+
+    // end screen
+    let backgroundEnd: objects.Image;
+    let restartButton: objects.Image;
 
     /**
      * This method initializes the CreateJS (EaselJS) Library
@@ -49,6 +54,8 @@ let Game = (function () {
 
     // Logan Kim Begins
     function StartScreen(): void {
+        stageCleared = false;
+
         // set background in canvas
         background = new objects.Image(util.BACKGROUND_PATH, 0, 0, util.STAGE_W, util.STAGE_H, false);
         stage.addChild(background);
@@ -98,9 +105,11 @@ let Game = (function () {
     function detectOnUpdate(): void {
         detectBulletCollision(bulletAList, playerB);
         detectBulletCollision(bulletBList, playerA);
-        detectPlayerHealth();
-        detectPressedKeys();
-        detectPlayersBullet();
+        if (stageCleared == false) {
+            detectPlayerHealth();
+            detectPressedKeys();
+            detectPlayersBullet();
+        }
     }
 
     // attach keydown and keyup event to the window
@@ -209,6 +218,7 @@ let Game = (function () {
         ) {
             stage.removeAllChildren()
             // go to next stage
+            stageCleared = true;
         }
     }
 
@@ -217,11 +227,13 @@ let Game = (function () {
             console.log("player B wins!");
             stage.removeAllChildren();
             // go to next stage
+            stageCleared = true;
         }
         if (playerB.health <= 0) {
             console.log("player A wins!");
             stage.removeAllChildren();
             // go to next stage
+            stageCleared = true;
         }
     }
 
