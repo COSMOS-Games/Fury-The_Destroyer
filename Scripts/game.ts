@@ -178,7 +178,9 @@ let Game = (function () {
     }
 
     function detectPlayersBullet(): void {
-        if (playerA.bulletNum == 0 && playerB.bulletNum == 0) {
+        if (playerA.bulletNum == 0 && playerB.bulletNum == 0
+            && bulletAList.length == 0 && bulletBList.length == 0
+        ) {
             stage.removeAllChildren()
             // go to next stage
         }
