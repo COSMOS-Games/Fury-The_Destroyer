@@ -1,9 +1,11 @@
 module util {
     // image assets
     export const BACKGROUND_PATH: string = './Assets/images/first-screen.png';
+    export const BACKGROUND_PATH_END: string = './Assets/images/final-screen.png';
 
     // Image Reference: https://pngimage.net/game-play-button-png-2/
     export const PLAY_BUTTON: string = './Assets/images/play-btn.png';
+    export const RESTART_BUTTON: string = './Assets/images/play-btn.png';
 
     // 
     export const STAGE_W: number = 960;

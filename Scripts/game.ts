@@ -52,6 +52,23 @@ let Game = (function () {
         StartScreen();
     }
 
+    function End(): void {
+        console.log(`%c Game Started!`, "color: lightblue; font-size: 20px; font-weight: bold;");
+        stage = new createjs.Stage(canvas);
+        createjs.Ticker.framerate = 60; // 60 FPS
+        createjs.Ticker.on('tick', Update);
+        stage.enableMouseOver(20);
+
+        MainEnd();
+    }
+
+    function MainEnd(): void {
+        console.log(`%c Main Started...`, "color: green; font-size: 16px;");
+
+        EndScreen();
+    }
+
+
     // Logan Kim Begins
     function StartScreen(): void {
         stageCleared = false;
@@ -228,21 +245,47 @@ let Game = (function () {
             stage.removeAllChildren();
             // go to next stage
             stageCleared = true;
+            EndScreen();
         }
         if (playerB.health <= 0) {
             console.log("player A wins!");
             stage.removeAllChildren();
             // go to next stage
             stageCleared = true;
+            EndScreen();
         }
     }
 
     // Hang Li Ends
     // Ygor Almeida Begins
 
+    function EndScreen(): void {
+        stageCleared = true;
+
+        // set background in canvas
+        backgroundEnd = new objects.Image(util.BACKGROUND_PATH_END, 0, 0, util.STAGE_W, util.STAGE_H, false);
+        stage.addChild(backgroundEnd);
+
+        restartButton = new objects.Image(util.RESTART_BUTTON, 480, 450, 200, 80, true);
+        restartButton.HoverOn();
+        stage.addChild(restartButton);
+
+        console.log("Start screen loaded!")
+
+        restartButton.on("click", function () {
+            // clear the canvas
+            stage.removeAllChildren();
+            // attach detect functions to update event
+            createjs.Ticker.on('tick', detectOnUpdate);
+            // call the first stage method below
+            firstStage();
+        });
+    }
+
 
     // Ygor Almeida Ends
 
+    window.addEventListener('load', End);
     window.addEventListener('load', Start);
 
 })();
