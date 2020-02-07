@@ -22,8 +22,8 @@ module objects {
         }
 
         // CONSTRUCTOR
-        constructor(x: number, y: number) {
-            super("./Assets/images/placeholder.png", x, y, true);
+        constructor(imagePath:string, x: number, y: number) {
+            super(imagePath, x, y, true);
             this.Start();
         }
 
@@ -98,10 +98,10 @@ module objects {
             this.position.add(velocity);
         }
 
-        public shoot(aim: Vector2): objects.Bullet | null {
+        public shoot(imagePath:string, aim: Vector2): objects.Bullet | null {
             // check if this player still have bullet or not
             if (this.bulletNum > 0) {
-                let bullet = new Bullet(this.position.x, this.position.y, aim);
+                let bullet = new Bullet(imagePath, this.position.x, this.position.y, aim);
                 this.bulletNum -= 1;
                 return bullet;
             } else {

@@ -78,8 +78,12 @@ let Game = (function () {
     // Logan Kim Ends
     // Kei Mizubuchi Begins
     function firstStage(): void {
-        // player B
-        playerA = new objects.Player(util.PLAYER_A_POS.x, util.PLAYER_A_POS.y);
+        // set background in canvas
+        background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
+        stage.addChild(background);
+
+        // player A
+        playerA = new objects.Player(util.PALYER_A_SUBMARINE, util.PLAYER_A_POS.x, util.PLAYER_A_POS.y);
         playerAHealthLabel = new objects.Label("Playe A: Health " + playerA.health, "24px",
             "Times", "white", 100, 25, true);
         playerABulletLabel = new objects.Label("Bullet " + playerA.bulletNum, "24px",
@@ -90,7 +94,7 @@ let Game = (function () {
         stage.addChild(playerABulletLabel);
 
         // player B
-        playerB = new objects.Player(util.PLAYER_B_POS.x, util.PLAYER_B_POS.y);
+        playerB = new objects.Player(util.PALYER_B_SUBMARINE, util.PLAYER_B_POS.x, util.PLAYER_B_POS.y);
         playerBHealthLabel = new objects.Label("Player B: Health " + playerB.health, "24px",
             "Times", "white", 750, 25, true)
         playerBBulletLabel = new objects.Label("Bullet " + playerB.bulletNum, "24px",
@@ -117,7 +121,7 @@ let Game = (function () {
         // shoot key for player A
         if (keyPressedStates[util.Key.C]) {
             let aim = objects.Vector2.right();
-            let bulletA = playerA.shoot(aim);
+            let bulletA = playerA.shoot(util.PLAYER_A_BULLET, aim);
             playerABulletLabel.setText("Bullet " + playerA.bulletNum);
             if (bulletA) {
                 bulletAList.push(bulletA);
@@ -131,7 +135,7 @@ let Game = (function () {
         if (keyPressedStates[util.Key.M]) {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.left();
-            let bulletB = playerB.shoot(aim);
+            let bulletB = playerB.shoot(util.PLAYER_B_BULLET, aim);
             playerBBulletLabel.setText("Bullet " + playerB.bulletNum);
             if (bulletB) {
                 bulletBList.push(bulletB);

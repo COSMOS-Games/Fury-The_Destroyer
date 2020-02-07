@@ -21,8 +21,8 @@ module objects {
             this._velocity = newVelocity;
         }
 
-        constructor(x: number, y: number, direction: Vector2) {
-            super("./Assets/images/bullet-placeholder.png", x, y, true);
+        constructor(imagePath:string, x: number, y: number, direction: Vector2) {
+            super(imagePath, x, y, true);
 
             let speed = 10;
             direction.scale(speed);
