@@ -40,6 +40,7 @@ let Game = (function () {
         detectBulletCollision(bulletBList, playerA);
         detectPlayerHealth();
         detectPressedKeys();
+        detectPlayersBullet();
     }
 
     function Main(): void {
@@ -57,20 +58,20 @@ let Game = (function () {
     function firstStage(): void {
         playerA = new objects.Player(50, 75);
         stage.addChild(playerA);
-        playerAHealthLabel = new objects.Label("Playe A: Health "+playerA.health, "24px",
+        playerAHealthLabel = new objects.Label("Playe A: Health " + playerA.health, "24px",
             "Times", "white", 100, 25, true);
         stage.addChild(playerAHealthLabel);
-        playerABulletLabel = new objects.Label("Bullet "+playerA.bulletNum, "24px",
-        "Times", "white", 250, 25, true);
+        playerABulletLabel = new objects.Label("Bullet " + playerA.bulletNum, "24px",
+            "Times", "white", 250, 25, true);
         stage.addChild(playerABulletLabel);
 
         playerB = new objects.Player(900, 600);
         stage.addChild(playerB);
-        playerBHealthLabel = new objects.Label("Player B: Health "+playerB.health, "24px",
-        "Times", "white", 750, 25, true)
+        playerBHealthLabel = new objects.Label("Player B: Health " + playerB.health, "24px",
+            "Times", "white", 750, 25, true)
         stage.addChild(playerBHealthLabel);
-        playerBBulletLabel = new objects.Label("Bullet "+playerB.bulletNum, "24px",
-        "Times", "white", 900, 25, true);
+        playerBBulletLabel = new objects.Label("Bullet " + playerB.bulletNum, "24px",
+            "Times", "white", 900, 25, true);
         stage.addChild(playerBBulletLabel);
     }
 
@@ -83,7 +84,7 @@ let Game = (function () {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.left();
             let bulletB = playerB.shoot(aim);
-            playerBBulletLabel.setText("Bullet "+playerB.bulletNum);
+            playerBBulletLabel.setText("Bullet " + playerB.bulletNum);
             if (bulletB) {
                 bulletBList.push(bulletB);
                 stage.addChild(bulletB);
@@ -96,7 +97,7 @@ let Game = (function () {
             // aim specifies the direction of shooting
             let aim = objects.Vector2.right();
             let bulletA = playerA.shoot(aim);
-            playerABulletLabel.setText("Bullet "+playerA.bulletNum);
+            playerABulletLabel.setText("Bullet " + playerA.bulletNum);
             if (bulletA) {
                 bulletAList.push(bulletA);
                 stage.addChild(bulletA);
@@ -153,27 +154,34 @@ let Game = (function () {
     function detectBulletCollision(bullets: objects.Bullet[], target: objects.Player): void {
 
         for (let i = 0; i < bullets.length; i++) {
-            let crossedTargetLeftBound: boolean = bullets[i].x + bullets[i].halfWidth > target.x;
-            let reachingTargetCoreX: boolean = bullets[i].x < target.x + target.halfWidth;
-            let crossedTargetTopBound: boolean = bullets[i].y + bullets[i].halfHeight > target.y;
-            let reachingTargetCoreY: boolean = bullets[i].y < target.y + target.halfHeight;
+            let crossedTargetLeftBound: boolean = bullets[i].x + bullets[i].width > target.x;
+            let reachingTargetRightBound: boolean = bullets[i].x < target.x + target.width;
+            let crossedTargetTopBound: boolean = bullets[i].y + bullets[i].height > target.y;
+            let reachingTargetBottomBound: boolean = bullets[i].y < target.y + target.height;
 
-            if (crossedTargetLeftBound && reachingTargetCoreX
-                && crossedTargetTopBound && reachingTargetCoreY
+            if (crossedTargetLeftBound && reachingTargetRightBound
+                && crossedTargetTopBound && reachingTargetBottomBound
             ) {
                 stage.removeChild(bullets[i]); // remove the bullet from the stage
                 bullets.splice(i, 1); // remove the bullet from the list
 
                 target.health -= 1;
-                playerAHealthLabel.setText("Playe A: Health "+playerA.health);
-                playerBHealthLabel.setText("Playe B: Health "+playerB.health);
-            } else if (bullets[i].x >= 960 - bullets[i].halfWidth || bullets[i].x <= bullets[i].halfWidth) {
+                playerAHealthLabel.setText("Playe A: Health " + playerA.health);
+                playerBHealthLabel.setText("Playe B: Health " + playerB.health);
+            } else if (bullets[i].x >= 960 - bullets[i].width || bullets[i].x <= bullets[i].width) {
                 // simplying check the left and right border
                 stage.removeChild(bullets[i]);
                 bullets.splice(i, 1); // remove the bullet from the list
             }
         }
 
+    }
+
+    function detectPlayersBullet(): void {
+        if (playerA.bulletNum == 0 && playerB.bulletNum == 0) {
+            stage.removeAllChildren()
+            // go to next stage
+        }
     }
 
     function detectPlayerHealth(): void {
