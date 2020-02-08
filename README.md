@@ -112,6 +112,9 @@ For Alpha release, it will have additional futures on top of first playable buil
 •	Advanced Weapons: stage 2 will allow players to upgrade their weapons which can shoot three torpedoes per shooting.
 
 # Reference
+
+** This game is educational purpose only **
+
 Title page image is released free of copyrights under Creative Commons CC0 (https://pxhere.com/en/photo/667524)
 
 Background image is created by and belongs to COSMOS Games.
