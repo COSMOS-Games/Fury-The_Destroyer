@@ -140,15 +140,10 @@ let Game = (function () {
             playerA.moveRight();
         }
     }
-    // AABB collision detection function
     function detectBulletCollision(bullets, target) {
         for (let i = 0; i < bullets.length; i++) {
-            let crossedTargetLeftBound = bullets[i].x + bullets[i].width > target.x;
-            let reachingTargetRightBound = bullets[i].x < target.x + target.width;
-            let crossedTargetTopBound = bullets[i].y + bullets[i].height > target.y;
-            let reachingTargetBottomBound = bullets[i].y < target.y + target.height;
-            if (crossedTargetLeftBound && reachingTargetRightBound
-                && crossedTargetTopBound && reachingTargetBottomBound) {
+            managers.Collision.AABBCheck(bullets[i], target);
+            if (target.isColliding) {
                 stage.removeChild(bullets[i]); // remove the bullet from the stage
                 bullets.splice(i, 1); // remove the bullet from the list
                 target.health -= 1;

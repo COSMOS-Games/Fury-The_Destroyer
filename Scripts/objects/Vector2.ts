@@ -144,5 +144,21 @@ module objects {
             return Xs * Xs + Ys * Ys;
         }
 
+        public static subtract(lhs: Vector2, rhs: Vector2): Vector2 {
+            // dot x & dot y
+            let dx = lhs.x - rhs.x;
+            let dy = lhs.y - rhs.y;
+
+            return new Vector2(dx, dy);
+        }
+
+        public static scale(lhs: Vector2, scaler: number): Vector2 {
+            // dot x & dot y
+            let dx = lhs.x * scaler;
+            let dy = lhs.y * scaler;
+
+            return new Vector2(dx, dy);
+        }
+
     }
 }

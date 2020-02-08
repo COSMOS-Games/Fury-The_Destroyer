@@ -64,24 +64,16 @@ var objects;
         Reset() {
         }
         moveLeft() {
-            let velocity = objects.Vector2.left();
-            velocity.scale(5);
-            this.position.add(velocity);
+            this.position.add(objects.Vector2.scale(objects.Vector2.left(), 5));
         }
         moveRight() {
-            let velocity = objects.Vector2.right();
-            velocity.scale(5);
-            this.position.add(velocity);
+            this.position.add(objects.Vector2.scale(objects.Vector2.right(), 5));
         }
         moveUp() {
-            let velocity = objects.Vector2.up();
-            velocity.scale(5);
-            this.position.add(velocity);
+            this.position.add(objects.Vector2.scale(objects.Vector2.up(), 5));
         }
         moveDown() {
-            let velocity = objects.Vector2.down();
-            velocity.scale(5);
-            this.position.add(velocity);
+            this.position.add(objects.Vector2.scale(objects.Vector2.down(), 5));
         }
         shoot(imagePath, aim) {
             // check if this player still have bullet or not

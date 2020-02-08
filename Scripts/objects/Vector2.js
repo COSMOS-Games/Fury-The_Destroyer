@@ -118,6 +118,18 @@ var objects;
             let Ys = P2.y - P1.y;
             return Xs * Xs + Ys * Ys;
         }
+        static subtract(lhs, rhs) {
+            // dot x & dot y
+            let dx = lhs.x - rhs.x;
+            let dy = lhs.y - rhs.y;
+            return new Vector2(dx, dy);
+        }
+        static scale(lhs, scaler) {
+            // dot x & dot y
+            let dx = lhs.x * scaler;
+            let dy = lhs.y * scaler;
+            return new Vector2(dx, dy);
+        }
     }
     objects.Vector2 = Vector2;
 })(objects || (objects = {}));

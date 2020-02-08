@@ -22,7 +22,7 @@ module objects {
         }
 
         // CONSTRUCTOR
-        constructor(imagePath:string, x: number, y: number) {
+        constructor(imagePath: string, x: number, y: number) {
             super(imagePath, x, y, true);
             this.Start();
         }
@@ -75,30 +75,22 @@ module objects {
         }
 
         public moveLeft(): void {
-            let velocity = Vector2.left();
-            velocity.scale(5);
-            this.position.add(velocity);
+            this.position.add(Vector2.scale(Vector2.left(), 5));
         }
 
         public moveRight(): void {
-            let velocity = Vector2.right();
-            velocity.scale(5);
-            this.position.add(velocity);
+            this.position.add(Vector2.scale(Vector2.right(), 5));
         }
 
         public moveUp(): void {
-            let velocity = Vector2.up();
-            velocity.scale(5);
-            this.position.add(velocity);
+            this.position.add(Vector2.scale(Vector2.up(), 5));
         }
 
         public moveDown(): void {
-            let velocity = Vector2.down();
-            velocity.scale(5);
-            this.position.add(velocity);
+            this.position.add(Vector2.scale(Vector2.down(), 5));
         }
 
-        public shoot(imagePath:string, aim: Vector2): objects.Bullet | null {
+        public shoot(imagePath: string, aim: Vector2): objects.Bullet | null {
             // check if this player still have bullet or not
             if (this.bulletNum > 0) {
                 let bullet = new Bullet(imagePath, this.position.x, this.position.y, aim);
