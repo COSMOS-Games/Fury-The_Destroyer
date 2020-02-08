@@ -10,15 +10,15 @@ There will be instructions on how to control submarines on the start screen. Eac
 
 ## Mechanics
 -	Points:
-  -	Winner of each stage will gain points which will be used later on to determine the final winner of the game
+    -	Winner of each stage will gain points which will be used later on to determine the final winner of the game
 -	Controls:
-  -	Player 1 will use “WASD” for directions and “C” key for shooting
-  -	Player 2 will use four arrow keys for directions and “M” key for shooting
+    -	Player 1 will use “WASD” for directions and “C” key for shooting
+    -	Player 2 will use four arrow keys for directions and “M” key for shooting
 -	Magazine:
-  -	Players will have three torpedoes at most
+    -	Players will have three torpedoes at most
 -	Health:
-  -	Players lose health when they are hit by a torpedo
-  -	Both players can be destroyed at the same time if they collide each other
+    -	Players lose health when they are hit by a torpedo
+    -	Both players can be destroyed at the same time if they collide each other
 
 ## Dynamics
 -	Constraints:
