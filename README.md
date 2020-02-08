@@ -20,7 +20,7 @@ There will be instructions on how to control submarines on the start screen. Eac
     -	Players lose health when they are hit by a torpedo
     -	Both players can be destroyed at the same time if they collide each other
 
-## Dynamics
+### Dynamics
 -	Constraints:
     -	Players cannot progress to the next stage unless previous stage is cleared.
 -	Choice:
@@ -32,7 +32,7 @@ There will be instructions on how to control submarines on the start screen. Eac
     -	Progress bar which indicates player’s progress of the game.
     -	Game story is linked between stages and progresses when each stage is cleared.
 
-## Aesthetics
+### Aesthetics
 -	Style:
     -	2D Single Screen
 -	Look:
@@ -46,7 +46,7 @@ There will be instructions on how to control submarines on the start screen. Eac
 -	Dynamic game difficulty balancing (DGDB):
     -	DGDB system on each stage based on player’s choice of weapon and players gaming skills.
 
-## Controls
+### Controls
 Player 1 can use “WASD” keys to control the movement of a submarine and “C” to shoot the opponent. Player 2 can use the four arrow keys on a keyboard to move a submarine and “M” key to shoot opponent.
 
 ## Saving and Loading
