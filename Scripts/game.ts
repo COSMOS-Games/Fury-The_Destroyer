@@ -114,24 +114,28 @@ let Game = (function () {
 
         // shoot key for player A
         if (keyPressedStates[util.Key.C]) {
-            let aim = objects.Vector2.right();
-            let bulletA = playerA.shoot(util.PLAYER_A_BULLET, aim);
-            playerABulletLabel.setText("Bullet " + playerA.bulletNum);
-            if (bulletA) {
-                bulletAList.push(bulletA);
-                stage.addChild(bulletA);
+            if (stage.children.indexOf(playerA) !== -1) {
+                let aim = objects.Vector2.right();
+                let bulletA = playerA.shoot(util.PLAYER_A_BULLET, aim);
+                playerABulletLabel.setText("Bullet " + playerA.bulletNum);
+                if (bulletA) {
+                    bulletAList.push(bulletA);
+                    stage.addChild(bulletA);
+                }
             }
         }
 
         // shoot key for player B
         if (keyPressedStates[util.Key.M]) {
-            // aim specifies the direction of shooting
-            let aim = objects.Vector2.left();
-            let bulletB = playerB.shoot(util.PLAYER_B_BULLET, aim);
-            playerBBulletLabel.setText("Bullet " + playerB.bulletNum);
-            if (bulletB) {
-                bulletBList.push(bulletB);
-                stage.addChild(bulletB);
+            if (stage.children.indexOf(playerB) !== -1) {
+                // aim specifies the direction of shooting
+                let aim = objects.Vector2.left();
+                let bulletB = playerB.shoot(util.PLAYER_B_BULLET, aim);
+                playerBBulletLabel.setText("Bullet " + playerB.bulletNum);
+                if (bulletB) {
+                    bulletBList.push(bulletB);
+                    stage.addChild(bulletB);
+                }
             }
         }
 
@@ -182,8 +186,7 @@ let Game = (function () {
                 target.health -= 1;
                 playerAHealthLabel.setText("Playe A: Health " + playerA.health);
                 playerBHealthLabel.setText("Playe B: Health " + playerB.health);
-            }
-            if (bullets[i].x + bullets[i].halfWidth >= util.STAGE_W || bullets[i].x <= bullets[i].halfWidth) {
+            } else if (bullets[i].x + bullets[i].halfWidth >= util.STAGE_W || bullets[i].x <= bullets[i].halfWidth) {
                 // simplying check the left and right border
                 stage.removeChild(bullets[i]);
                 bullets.splice(i, 1); // remove the bullet from the list
