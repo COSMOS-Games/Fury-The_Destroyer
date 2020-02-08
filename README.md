@@ -1,6 +1,6 @@
 # Fury-The_Destroyer
 
-**This game is only for educational purpose.**
+**Please Note:** This game is only for educational purpose.
 
 ## Game Overview 
 Fury, the Destroyers is two players single screen submarine game which is designed to bring joys to number of people who play this game. This game will contain three stages. Players level up once the stage is cleared by meeting all conditions including eliminating all enemies on a map.
