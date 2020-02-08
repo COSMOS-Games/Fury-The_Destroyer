@@ -8,7 +8,7 @@ Fury, the Destroyers is two players single screen submarine game which is design
 ## Game Play Mechanics
 There will be instructions on how to control submarines on the start screen. Each player has ability to upgrade their weapon when each stage is cleared. Player will fight against each other to destroy opponent’s avatar. Once a player’s health goes down to zero, the player will lose the stage and winner will gain points.  Both players can upgrade their weapons before the next stage begins and they will be able to use different tactics. Players can recharge their weapon when they are around their base. After three stages are played, winner will receive a congratulation message with total time played.
 
-## Mechanics
+### Mechanics
 -	Points:
     -	Winner of each stage will gain points which will be used later on to determine the final winner of the game
 -	Controls:
@@ -20,7 +20,7 @@ There will be instructions on how to control submarines on the start screen. Eac
     -	Players lose health when they are hit by a torpedo
     -	Both players can be destroyed at the same time if they collide each other
 
-## Dynamics
+### Dynamics
 -	Constraints:
     -	Players cannot progress to the next stage unless previous stage is cleared.
 -	Choice:
@@ -32,7 +32,7 @@ There will be instructions on how to control submarines on the start screen. Eac
     -	Progress bar which indicates player’s progress of the game.
     -	Game story is linked between stages and progresses when each stage is cleared.
 
-## Aesthetics
+### Aesthetics
 -	Style:
     -	2D Single Screen
 -	Look:
@@ -46,7 +46,7 @@ There will be instructions on how to control submarines on the start screen. Eac
 -	Dynamic game difficulty balancing (DGDB):
     -	DGDB system on each stage based on player’s choice of weapon and players gaming skills.
 
-## Controls
+### Controls
 Player 1 can use “WASD” keys to control the movement of a submarine and “C” to shoot the opponent. Player 2 can use the four arrow keys on a keyboard to move a submarine and “M” key to shoot opponent.
 
 ## Saving and Loading
@@ -114,7 +114,7 @@ For Alpha release, it will have additional futures on top of first playable buil
 -	Mine: Object which randomly generated in different locations on the map. It causes damage to submarines once they make a contact to any mine;
 -	Advanced Weapons: stage 2 will allow players to upgrade their weapons which can shoot three torpedoes per shooting.
 
-## Reference
+## References
 
 - Background image is created by and belongs to COSMOS Games.
 
