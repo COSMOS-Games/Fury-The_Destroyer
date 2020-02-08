@@ -114,7 +114,7 @@ For Alpha release, it will have additional futures on top of first playable buil
 -	Mine: Object which randomly generated in different locations on the map. It causes damage to submarines once they make a contact to any mine;
 -	Advanced Weapons: stage 2 will allow players to upgrade their weapons which can shoot three torpedoes per shooting.
 
-## Reference
+## References
 
 - Background image is created by and belongs to COSMOS Games.
 
