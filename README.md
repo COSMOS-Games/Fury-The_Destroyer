@@ -3,7 +3,7 @@ Game Overview
 Fury, the Destroyers is two players single screen submarine game which is designed to bring joys to number of people who play this game. This game will contain three stages. Players level up once the stage is cleared by meeting all conditions including eliminating all enemies on a map.
 
 # Game Play Mechanics
-There will be an instruction on how to control the tank at a start screen. Each player has ability to upgrade their weapon when each stage is cleared. Player will fight against each other to destroy opponent’s avatar. Once a player’s health goes down to zero, the player will lose the stage and winner will gain points.  Both players can upgrade their weapons before the next stage begins and they will be able to use different tactics. Players can recharge their weapon when they are around their base. After three stages are played, winner will receive a congratulation message with total time played.
+There will be instructions on how to control submarines on the start screen. Each player has ability to upgrade their weapon when each stage is cleared. Player will fight against each other to destroy opponent’s avatar. Once a player’s health goes down to zero, the player will lose the stage and winner will gain points.  Both players can upgrade their weapons before the next stage begins and they will be able to use different tactics. Players can recharge their weapon when they are around their base. After three stages are played, winner will receive a congratulation message with total time played.
 
 # Mechanics
 •	Points:
