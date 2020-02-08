@@ -1,4 +1,4 @@
-# Fury-The_Destroyer
+# Fury, The Destroyer
 
 **Please Note:** This game is only for educational purpose.
 
