@@ -113,7 +113,7 @@ For Alpha release, it will have additional futures on top of first playable buil
 
 # Reference
 
-** This game is educational purpose only **
+** This game is only for educational purpose **
 
 Title page image is released free of copyrights under Creative Commons CC0 (https://pxhere.com/en/photo/667524)
 
