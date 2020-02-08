@@ -22,29 +22,29 @@ There will be instructions on how to control submarines on the start screen. Eac
 
 ## Dynamics
 -	Constraints:
-  -	Players cannot progress to the next stage unless previous stage is cleared.
+    -	Players cannot progress to the next stage unless previous stage is cleared.
 -	Choice:
-  -	Player has ability to choose a nickname.
-  -	Player has ability to choose a different weapon when the stage is cleared.
+    -	Player has ability to choose a nickname.
+    -	Player has ability to choose a different weapon when the stage is cleared.
 -	Chance:
-  -	Random objects will be generated periodically and use as a mine.
+    -	Random objects will be generated periodically and use as a mine.
 -	Completion and Continuation:
-  -	Progress bar which indicates player’s progress of the game.
-  -	Game story is linked between stages and progresses when each stage is cleared.
+    -	Progress bar which indicates player’s progress of the game.
+    -	Game story is linked between stages and progresses when each stage is cleared.
 
 ## Aesthetics
 -	Style:
-  -	2D Single Screen
+    -	2D Single Screen
 -	Look:
-  -	Retro-game like SNES (Super Nintendo Entertainment System)
+    -	Retro-game like SNES (Super Nintendo Entertainment System)
 -	Challenges:
-  -	Player requires to demonstrate decision-making and problem-solving skills
+    -	Player requires to demonstrate decision-making and problem-solving skills
 -	Fantasy:
-  -	Player drives a submarine in the cosmic war
+    -	Player drives a submarine in the cosmic war
 -	Narrative:
-  -	Stages are connected by intriguing and well-designed game narrative
+    -	Stages are connected by intriguing and well-designed game narrative
 -	Dynamic game difficulty balancing (DGDB):
-  -	DGDB system on each stage based on player’s choice of weapon and players gaming skills.
+    -	DGDB system on each stage based on player’s choice of weapon and players gaming skills.
 
 ## Controls
 Player 1 can use “WASD” keys to control the movement of a submarine and “C” to shoot the opponent. Player 2 can use the four arrow keys on a keyboard to move a submarine and “M” key to shoot opponent.
@@ -116,17 +116,15 @@ For Alpha release, it will have additional futures on top of first playable buil
 
 ## Reference
 
-Title page image is released free of copyrights under Creative Commons CC0 (https://pxhere.com/en/photo/667524)
+- Background image is created by and belongs to COSMOS Games.
 
-Background image is created by and belongs to COSMOS Games.
-
-Button layout image is from UI elements for game application (Behance)
+- Button layout image is from UI elements for game application (Behance)
 https://www.behance.net/gallery/21061821/UI-elements-for-game-application 
 
-Submarine image is from Submarine clipart: cute submarine clip art (Clipart Panda)
+- Submarine image is from Submarine clipart: cute submarine clip art (Clipart Panda)
 http://www.clipartpanda.com/clipart_images/cute-submarine-clip-art-13346612 
 
-Torpedo image is from 2D Art (OpenGameArt.org)
+- Torpedo image is from 2D Art (OpenGameArt.org)
 https://opengameart.org/content/2d-sprites-3
 
 ## Contributors:
