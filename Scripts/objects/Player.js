@@ -35,8 +35,8 @@ var objects;
                 this.position.x = 960 - this.halfWidth;
             }
             // check the top border
-            if (this.y < this.halfHeight) {
-                this.position.y = this.halfHeight;
+            if (this.y < this.halfHeight + 45) {
+                this.position.y = this.halfHeight + 45;
             }
             // check the top border
             if (this.y > 640 - this.halfHeight) {
@@ -51,18 +51,16 @@ var objects;
         // PUBLIC METHODS
         Start() {
             createjs.Ticker.framerate = 60;
-            createjs.Ticker.on('tick', () => {
+            createjs.Ticker.on("tick", () => {
                 this.Update();
             });
         }
         Update() {
             // update player position
             this.position = new objects.Vector2(this.position.x, this.position.y);
-            this._checkHealth();
             this._checkBounds();
         }
-        Reset() {
-        }
+        Reset() { }
         moveLeft() {
             this.position.add(objects.Vector2.scale(objects.Vector2.left(), 5));
         }
@@ -86,8 +84,7 @@ var objects;
                 return null; // nullable
             }
         }
-        explode() {
-        }
+        explode() { }
     }
     objects.Player = Player;
 })(objects || (objects = {}));
