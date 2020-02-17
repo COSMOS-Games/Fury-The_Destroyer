@@ -17,6 +17,9 @@ module util {
     export const PLAY_BUTTON: string = './Assets/images/btn-play.png';
     export const RESTART_BUTTON: string = './Assets/images/play-again-btn.png';
 
+    //
+    export const MINE: string = './Assets/images/mine.png';
+    export const MINE_NUM: number = 15;
     // 
     export const STAGE_W: number = 960;
     export const STAGE_H: number = 640;

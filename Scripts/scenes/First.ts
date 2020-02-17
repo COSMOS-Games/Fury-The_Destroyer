@@ -11,6 +11,8 @@ module scenes {
     bulletAList: objects.Bullet[] = [];
     bulletBList: objects.Bullet[] = [];
 
+    mineList: objects.Mine[] = [];
+
     // PUBLIC PROPERTIES
     public keyPressedStates: boolean[]; // to detect which keys are down
 
@@ -76,6 +78,9 @@ module scenes {
         true
       );
 
+      // mine
+      this.mineList = this.generateMines();
+
       this.Start();
     }
 
@@ -88,6 +93,12 @@ module scenes {
       this.addChild(this.playerB);
       this.addChild(this.playerBHealthLabel);
       this.addChild(this.playerBBulletLabel);
+
+      // generate mines
+      for (let i = 0; i < this.mineList.length; i++) {
+        this.addChild(this.mineList[i]);
+      }
+
       this.Main();
     }
 
@@ -95,14 +106,46 @@ module scenes {
       // detect keys to make movement
       this.detectPressedKeys();
       // detect the bullet collision
-      this.detectBulletCollision(this.bulletAList, this.playerB);
-      this.detectBulletCollision(this.bulletBList, this.playerA);
+      this.detectWeaponCollision(this.bulletAList, this.playerB);
+      this.detectWeaponCollision(this.bulletBList, this.playerA);
+      // detect mine collision
+      this.detectWeaponCollision(this.mineList, this.playerA);
+      this.detectWeaponCollision(this.mineList, this.playerB);
       // update health and bullet label
       this.detectPlayerHealth();
       this.detectPlayersBullet();
+
     }
 
-    public Main(): void {}
+    public Main(): void { }
+
+    // PRIVATE METHODS
+    generateMines(): objects.Mine[] {
+      let mines: objects.Mine[] = [];
+
+      for (let i = 0; i < util.MINE_NUM; i++) {
+        // generate position at random
+        let mineX = Math.floor((Math.random() * util.STAGE_W));
+        let mineY = Math.floor((Math.random() * util.STAGE_H));
+
+        // hard corded safe area
+        if (mineX < util.PLAYER_A_POS.x + 100) {
+          mineY = Math.floor((Math.random() * util.STAGE_H) + 250)
+        } else {
+          mineY = Math.floor((Math.random() * util.STAGE_H))
+          if (mineY > util.STAGE_H - 200) {
+            mineX = Math.floor((Math.random() * util.STAGE_W) - mineX);
+          }
+        }
+
+        mines.push(new objects.Mine(
+          util.MINE,
+          mineX,
+          mineY
+        ));
+      }
+      return mines;
+    }
 
     detectPressedKeys(): void {
       if (this.keyPressedStates[util.Key.UP]) {
@@ -156,16 +199,16 @@ module scenes {
       }
     }
 
-    detectBulletCollision(
-      bullets: objects.Bullet[],
+    detectWeaponCollision(
+      weapon: objects.Bullet[] | objects.Mine[],
       target: objects.Player
     ): void {
-      for (let i = 0; i < bullets.length; i++) {
-        managers.Collision.AABBCheck(bullets[i], target);
+      for (let i = 0; i < weapon.length; i++) {
+        managers.Collision.AABBCheck(weapon[i], target);
 
         if (target.isColliding) {
-          this.removeChild(bullets[i]); // remove the bullet from the stage
-          bullets.splice(i, 1); // remove the bullet from the list
+          this.removeChild(weapon[i]); // remove the bullet from the stage
+          weapon.splice(i, 1); // remove the bullet from the list
 
           target.health -= 1;
           this.playerAHealthLabel.setText(
@@ -175,12 +218,12 @@ module scenes {
             "Playe B: Health " + this.playerB.health
           );
         } else if (
-          bullets[i].x + bullets[i].halfWidth >= util.STAGE_W ||
-          bullets[i].x <= bullets[i].halfWidth
+          weapon[i].x + weapon[i].halfWidth >= util.STAGE_W ||
+          weapon[i].x <= weapon[i].halfWidth
         ) {
           // simplying check the left and right border
-          this.removeChild(bullets[i]);
-          bullets.splice(i, 1); // remove the bullet from the list
+          this.removeChild(weapon[i]);
+          weapon.splice(i, 1); // remove the bullet from the list
         }
       }
     }

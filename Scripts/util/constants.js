@@ -15,6 +15,9 @@ var util;
     // ref: https://www.behance.net/gallery/21061821/UI-elements-for-game-application
     util.PLAY_BUTTON = './Assets/images/btn-play.png';
     util.RESTART_BUTTON = './Assets/images/play-again-btn.png';
+    //
+    util.MINE = './Assets/images/mine.png';
+    util.MINE_NUM = 15;
     // 
     util.STAGE_W = 960;
     util.STAGE_H = 640;
