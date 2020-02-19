@@ -40,6 +40,7 @@ module scenes {
 
     public Update(): void { }
 
+    // TODO:consolidate stage cleared scene
     public Main(): void {
       this.startButton.HoverOn();
       this.startButton.on("click", function () {

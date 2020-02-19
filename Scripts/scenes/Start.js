@@ -17,6 +17,7 @@ var scenes;
             this.Main();
         }
         Update() { }
+        // TODO:consolidate stage cleared scene
         Main() {
             this.startButton.HoverOn();
             this.startButton.on("click", function () {
