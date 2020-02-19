@@ -7,7 +7,7 @@ let Game = (function () {
   let currentSceneState: scenes.State;
   let currentScene: objects.Scene;
   let FirstScene: scenes.First;
-  let SecondScene: scenes.First;
+  let SecondScene: scenes.Second;
 
   /**
    * This method initializes the CreateJS (EaselJS) Library
