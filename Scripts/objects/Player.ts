@@ -1,8 +1,8 @@
 module objects {
   export class Player extends GameObject {
     // PRIVATE INSTANCE MEMBER
-    // private _bulletNum: number = 3;
-    private _bulletNum: number = 5;
+    //    private _bulletNum: number = 5;
+    private _bulletNum: number = 50;
     private _health: number = 2;
 
     // PUBLIC PROPERTIES
@@ -67,7 +67,7 @@ module objects {
       this._checkBounds();
     }
 
-    public Reset(): void {}
+    public Reset(): void { }
 
     public moveLeft(): void {
       this.position.add(Vector2.scale(Vector2.left(), 5));
@@ -101,6 +101,6 @@ module objects {
       }
     }
 
-    public explode(): void {}
+    public explode(): void { }
   }
 }

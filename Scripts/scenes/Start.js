@@ -21,6 +21,7 @@ var scenes;
             this.startButton.HoverOn();
             this.startButton.on("click", function () {
                 util.GameConfig.SCENE_STATE = scenes.State.FIRST;
+                // util.GameConfig.SCENE_STATE = scenes.State.SECOND;
             });
         }
     }

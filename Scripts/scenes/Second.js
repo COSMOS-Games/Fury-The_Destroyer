@@ -1,12 +1,13 @@
 "use strict";
 var scenes;
 (function (scenes) {
-    class First extends objects.Scene {
+    class Second extends objects.Scene {
         // CONTRUCTOR
         constructor() {
             super();
             this.bulletAList = [];
             this.bulletBList = [];
+            this.mineList = [];
             this.keyPressedStates = [];
             this.background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
             // player A
@@ -17,6 +18,8 @@ var scenes;
             this.playerB = new objects.Player(util.PALYER_B_SUBMARINE, util.PLAYER_B_POS.x, util.PLAYER_B_POS.y);
             this.playerBHealthLabel = new objects.Label("Player B: Health " + this.playerB.health, "24px", "Times", "white", 750, 25, true);
             this.playerBBulletLabel = new objects.Label("Bullet " + this.playerB.bulletNum, "24px", "Times", "white", 900, 25, true);
+            // mine
+            this.mineList = this.generateMines();
             this.Start();
         }
         // PUBLIC METHODS
@@ -28,19 +31,52 @@ var scenes;
             this.addChild(this.playerB);
             this.addChild(this.playerBHealthLabel);
             this.addChild(this.playerBBulletLabel);
+            // generate mines
+            for (let i = 0; i < this.mineList.length; i++) {
+                this.addChild(this.mineList[i]);
+            }
             this.Main();
         }
         Update() {
             // detect keys to make movement
             this.detectPressedKeys();
             // detect the bullet collision
-            this.detectBulletCollision(this.bulletAList, this.playerB);
-            this.detectBulletCollision(this.bulletBList, this.playerA);
+            this.detectWeaponCollision(this.bulletAList, this.playerB);
+            this.detectWeaponCollision(this.bulletBList, this.playerA);
+            // detect mine collision
+            this.detectWeaponCollision(this.mineList, this.playerA);
+            this.detectWeaponCollision(this.mineList, this.playerB);
+            // detect
+            this.detectDestructablesCollision(this.mineList, this.bulletAList);
+            this.detectDestructablesCollision(this.mineList, this.bulletBList);
+            this.detectDestructablesCollision(this.bulletAList, this.bulletBList);
             // update health and bullet label
             this.detectPlayerHealth();
             this.detectPlayersBullet();
         }
         Main() { }
+        // PRIVATE METHODS
+        // TODO:organize collision detection logic
+        generateMines() {
+            let mines = [];
+            for (let i = 0; i < util.MINE_NUM; i++) {
+                // generate position at random
+                let mineX = Math.floor((Math.random() * util.STAGE_W));
+                let mineY = Math.floor((Math.random() * util.STAGE_H));
+                // hard corded safe area
+                if (mineX < util.PLAYER_A_POS.x + 100) {
+                    mineY = Math.floor((Math.random() * util.STAGE_H) + 250);
+                }
+                else {
+                    mineY = Math.floor((Math.random() * util.STAGE_H));
+                    if (mineY > util.STAGE_H - 200) {
+                        mineX = Math.floor((Math.random() * util.STAGE_W) - mineX);
+                    }
+                }
+                mines.push(new objects.Mine(util.MINE, mineX, mineY));
+            }
+            return mines;
+        }
         detectPressedKeys() {
             if (this.keyPressedStates[38 /* UP */]) {
                 this.playerB.moveUp();
@@ -94,21 +130,34 @@ var scenes;
                 }
             }
         }
-        detectBulletCollision(bullets, target) {
-            for (let i = 0; i < bullets.length; i++) {
-                managers.Collision.AABBCheck(bullets[i], target);
+        detectWeaponCollision(weapon, target) {
+            for (let i = 0; i < weapon.length; i++) {
+                managers.Collision.AABBCheck(weapon[i], target);
                 if (target.isColliding) {
-                    this.removeChild(bullets[i]); // remove the bullet from the stage
-                    bullets.splice(i, 1); // remove the bullet from the list
+                    this.removeChild(weapon[i]); // remove the bullet from the stage
+                    weapon.splice(i, 1); // remove the bullet from the list
                     target.health -= 1;
                     this.playerAHealthLabel.setText("Playe A: Health " + this.playerA.health);
                     this.playerBHealthLabel.setText("Playe B: Health " + this.playerB.health);
                 }
-                else if (bullets[i].x + bullets[i].halfWidth >= util.STAGE_W ||
-                    bullets[i].x <= bullets[i].halfWidth) {
+                else if (weapon[i].x + weapon[i].halfWidth >= util.STAGE_W ||
+                    weapon[i].x <= weapon[i].halfWidth) {
                     // simplying check the left and right border
-                    this.removeChild(bullets[i]);
-                    bullets.splice(i, 1); // remove the bullet from the list
+                    this.removeChild(weapon[i]);
+                    weapon.splice(i, 1); // remove the bullet from the list
+                }
+            }
+        }
+        detectDestructablesCollision(destructableA, destructableB) {
+            for (let i = 0; i < destructableA.length; i++) {
+                for (let j = 0; j < destructableB.length; j++) {
+                    managers.Collision.AABBCheck(destructableA[i], destructableB[j]);
+                    if (destructableB[j].isColliding) {
+                        this.removeChild(destructableA[i]); // remove the bullet from the stage
+                        destructableA.splice(i, 1); // remove the bullet from the list
+                        this.removeChild(destructableB[j]); // remove the bullet from the stage
+                        destructableB.splice(j, 1); // remove the bullet from the list
+                    }
                 }
             }
         }
@@ -126,6 +175,6 @@ var scenes;
             }
         }
     }
-    scenes.First = First;
+    scenes.Second = Second;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=First.js.map
+//# sourceMappingURL=Second.js.map

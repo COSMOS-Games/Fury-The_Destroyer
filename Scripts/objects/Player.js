@@ -6,8 +6,8 @@ var objects;
         constructor(imagePath, x, y) {
             super(imagePath, x, y, true);
             // PRIVATE INSTANCE MEMBER
-            // private _bulletNum: number = 3;
-            this._bulletNum = 5;
+            //    private _bulletNum: number = 5;
+            this._bulletNum = 50;
             this._health = 2;
             this.Start();
         }

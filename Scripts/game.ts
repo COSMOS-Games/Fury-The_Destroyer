@@ -1,5 +1,5 @@
 // Game engine
-let Game = (function() {
+let Game = (function () {
   // initialize the needed object
   let canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
   let stage: createjs.Stage;
@@ -7,6 +7,7 @@ let Game = (function() {
   let currentSceneState: scenes.State;
   let currentScene: objects.Scene;
   let FirstScene: scenes.First;
+  let SecondScene: scenes.First;
 
   /**
    * This method initializes the CreateJS (EaselJS) Library
@@ -51,6 +52,10 @@ let Game = (function() {
         FirstScene = new scenes.First();
         currentScene = FirstScene;
         break;
+      case scenes.State.SECOND:
+        SecondScene = new scenes.Second();
+        currentScene = SecondScene;
+        break;
       case scenes.State.END:
         currentScene = new scenes.End();
         break;
@@ -64,6 +69,11 @@ let Game = (function() {
     if (FirstScene && FirstScene.keyPressedStates) {
       FirstScene.keyPressedStates[event.keyCode] = false;
     }
+    // second
+    if (SecondScene && SecondScene.keyPressedStates) {
+      SecondScene.keyPressedStates[event.keyCode] = false;
+    }
+
   });
 
   // attach keydown and keyup event to the window
@@ -72,6 +82,11 @@ let Game = (function() {
       FirstScene.keyPressedStates[event.keyCode] = true;
       FirstScene.detectShootingEvent();
     }
+    if (SecondScene && SecondScene.keyPressedStates) {
+      SecondScene.keyPressedStates[event.keyCode] = true;
+      SecondScene.detectShootingEvent();
+    }
+
   });
 
   window.addEventListener("load", Start);

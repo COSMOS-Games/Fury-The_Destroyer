@@ -38,12 +38,13 @@ module scenes {
       this.Main();
     }
 
-    public Update(): void {}
+    public Update(): void { }
 
     public Main(): void {
       this.startButton.HoverOn();
-      this.startButton.on("click", function() {
+      this.startButton.on("click", function () {
         util.GameConfig.SCENE_STATE = scenes.State.FIRST;
+        // util.GameConfig.SCENE_STATE = scenes.State.SECOND;
       });
     }
   }
