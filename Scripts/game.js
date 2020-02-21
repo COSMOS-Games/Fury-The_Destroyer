@@ -46,6 +46,9 @@ let Game = (function () {
                 SecondScene = new scenes.Second();
                 currentScene = SecondScene;
                 break;
+            case scenes.State.STAGECLEANED:
+                currentScene = new scenes.StageCleaned();
+                break;
             case scenes.State.END:
                 currentScene = new scenes.End();
                 break;

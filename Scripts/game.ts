@@ -1,5 +1,5 @@
 // Game engine
-let Game = (function () {
+let Game = (function() {
   // initialize the needed object
   let canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
   let stage: createjs.Stage;
@@ -56,6 +56,9 @@ let Game = (function () {
         SecondScene = new scenes.Second();
         currentScene = SecondScene;
         break;
+      case scenes.State.STAGECLEANED:
+        currentScene = new scenes.StageCleaned();
+        break;
       case scenes.State.END:
         currentScene = new scenes.End();
         break;
@@ -73,7 +76,6 @@ let Game = (function () {
     if (SecondScene && SecondScene.keyPressedStates) {
       SecondScene.keyPressedStates[event.keyCode] = false;
     }
-
   });
 
   // attach keydown and keyup event to the window
@@ -86,7 +88,6 @@ let Game = (function () {
       SecondScene.keyPressedStates[event.keyCode] = true;
       SecondScene.detectShootingEvent();
     }
-
   });
 
   window.addEventListener("load", Start);
