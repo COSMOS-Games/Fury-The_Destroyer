@@ -102,7 +102,7 @@ module scenes {
       this.detectPlayersBullet();
     }
 
-    public Main(): void { }
+    public Main(): void {}
 
     detectPressedKeys(): void {
       if (this.keyPressedStates[util.Key.UP]) {
@@ -192,13 +192,15 @@ module scenes {
         this.bulletAList.length == 0 &&
         this.bulletBList.length == 0
       ) {
-        util.GameConfig.SCENE_STATE = scenes.State.END;
+        //util.GameConfig.SCENE_STATE = scenes.State.END;
+        util.GameConfig.SCENE_STATE = scenes.State.STAGECLEANED;
       }
     }
 
     detectPlayerHealth(): void {
       if (this.playerA.health <= 0 || this.playerB.health <= 0) {
-        util.GameConfig.SCENE_STATE = scenes.State.END;
+        //util.GameConfig.SCENE_STATE = scenes.State.END;
+        util.GameConfig.SCENE_STATE = scenes.State.STAGECLEANED;
       }
     }
   }
