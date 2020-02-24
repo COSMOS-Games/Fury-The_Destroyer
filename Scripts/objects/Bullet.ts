@@ -2,7 +2,6 @@ module objects {
     export class Bullet extends GameObject {
         // variables
         private _owner: string = "";
-        private _velocity: Vector2 = Vector2.zero(); // velocity = movement
 
         // properties
         get owner(): string {
@@ -13,20 +12,13 @@ module objects {
             this._owner = newOwner;
         }
 
-        get velocity(): Vector2 {
-            return this._velocity;
-        }
 
-        set velocity(newVelocity: Vector2) {
-            this._velocity = newVelocity;
-        }
-
-        constructor(imagePath:string, x: number, y: number, direction: Vector2) {
+        constructor(imagePath: string, x: number, y: number, direction: Vector2) {
             super(imagePath, x, y, true);
 
             let speed = 10;
             direction.scale(speed);
-            this._velocity = direction; // velocity = direction * speed
+            this.velocity = direction; // velocity = direction * speed
 
             this.Start();
         }
@@ -34,7 +26,7 @@ module objects {
         // private method
         protected _checkBounds(): void {
             // simplying check the right border
-            if (this.x >= 960 - this.halfWidth) {
+            if (this.x >= util.STAGE_W - this.halfWidth) {
                 this.velocity = Vector2.zero(); // stop movement
             }
             // check the left border

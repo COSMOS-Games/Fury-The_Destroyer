@@ -3,16 +3,18 @@ var objects;
 (function (objects) {
     class Vector2 {
         // CONSTRUCTOR
-        constructor(x = 0, y = 0) {
-            // PRIVATE INSTANCE MEMBERS
+        constructor(x = 0, y = 0, displayObject) {
+            // Initialize member variables
             this._x = 0;
             this._y = 0;
             this._magnitude = 0;
             this._sqrMagnitude = 0;
+            if (displayObject != undefined) {
+                this._displayObject = displayObject;
+            }
+            // set x and y
             this.x = x;
             this.y = y;
-            this.sqrMagnitude = this.x * this.x + this.y * this.y;
-            this.magnitude = Math.sqrt(this.sqrMagnitude);
         }
         // PUBLIC PROPERTIES
         get x() {
@@ -20,12 +22,22 @@ var objects;
         }
         set x(newX) {
             this._x = newX;
+            this.sqrMagnitude = this._computeSqrMagnitude();
+            this.magnitude = this._computeMagnitude();
+            if (this._displayObject != undefined) {
+                this._displayObject.x = this._x;
+            }
         }
         get y() {
             return this._y;
         }
         set y(newY) {
             this._y = newY;
+            this.sqrMagnitude = this._computeSqrMagnitude();
+            this.magnitude = this._computeMagnitude();
+            if (this._displayObject != undefined) {
+                this._displayObject.y = this._y;
+            }
         }
         get magnitude() {
             return this._magnitude;
@@ -36,17 +48,17 @@ var objects;
         get sqrMagnitude() {
             return this._sqrMagnitude;
         }
-        set sqrMagnitude(newSQRMagnitude) {
-            this._sqrMagnitude = newSQRMagnitude;
-        }
-        get normalized() {
-            let vector2 = new Vector2(this.x, this.y);
-            vector2.normalize();
-            return vector2;
+        set sqrMagnitude(newSqrMagnitude) {
+            this._sqrMagnitude = newSqrMagnitude;
         }
         // PRIVATE METHODS
+        _computeSqrMagnitude() {
+            return (this._x * this._x) + (this._y * this._y);
+        }
+        _computeMagnitude() {
+            return Math.sqrt(this._computeSqrMagnitude());
+        }
         // PUBLIC METHODS
-        //right hand side
         add(rhs) {
             this.x += rhs.x;
             this.y += rhs.y;
@@ -59,16 +71,30 @@ var objects;
             this.x *= scalar;
             this.y *= scalar;
         }
+        toString() {
+            return "(" + this.x + ", " + this.y + ")";
+        }
+        /**
+         * This method sets the current vector to a magnitude of 1 (the unit vector)
+         *
+         * @memberof Vector2
+         */
         normalize() {
-            let magnitude = this.magnitude;
-            if (magnitude > 9.99999974737875E-06) {
-                this.x = this.x / this.magnitude;
-                this.y = this.y / this.magnitude;
-            }
-            else {
-                this.x = 0;
-                this.y = 0;
-            }
+            let tempX = this.x / this.magnitude;
+            let tempY = this.y / this.magnitude;
+            this.x = tempX;
+            this.y = tempY;
+        }
+        /**
+         * Computes the current vector's direction without changing it
+         *
+         * @returns {Vector2}
+         * @memberof Vector2
+         */
+        normalized() {
+            let vector = new Vector2(this.x, this.y);
+            vector.normalize();
+            return vector;
         }
         // PUBLIC STATIC METHODS
         static zero() {
@@ -90,45 +116,33 @@ var objects;
             return new Vector2(1, 0);
         }
         static dot(lhs, rhs) {
-            return lhs.x * rhs.x + lhs.y + rhs.y;
+            return (lhs.x * rhs.x) + (lhs.y * rhs.y);
         }
-        /**
-         * Returns the Pythogorean Distance between P1 and P2
-         *
-         * @static
-         * @param {Vector2} P1
-         * @param {Vector2} P2
-         * @returns {number}
-         */
         static distance(P1, P2) {
-            let Xs = P2.x - P1.x;
-            let Ys = P2.y - P1.y;
-            return Math.sqrt(Xs * Xs + Ys * Ys);
+            let diffXs = P2.x - P1.x;
+            let diffYs = P2.y - P1.y;
+            return Math.sqrt((diffXs * diffXs) + (diffYs * diffYs));
         }
-        /**
-         * Returns the squared distance between P1 and P2
-         *
-         * @static
-         * @param {Vector2} P1
-         * @param {Vector2} P2
-         * @returns {number}
-         */
         static sqrDistance(P1, P2) {
-            let Xs = P2.x - P1.x;
-            let Ys = P2.y - P1.y;
-            return Xs * Xs + Ys * Ys;
+            let diffXs = P2.x - P1.x;
+            let diffYs = P2.y - P1.y;
+            return (diffXs * diffXs) + (diffYs * diffYs);
+        }
+        static add(lhs, rhs) {
+            let theXs = lhs.x + rhs.x;
+            let theYs = lhs.y + rhs.y;
+            return new Vector2(theXs, theYs);
         }
         static subtract(lhs, rhs) {
-            // dot x & dot y
-            let dx = lhs.x - rhs.x;
-            let dy = lhs.y - rhs.y;
-            return new Vector2(dx, dy);
+            let theXs = lhs.x - rhs.x;
+            let theYs = lhs.y - rhs.y;
+            return new Vector2(theXs, theYs);
         }
         static scale(lhs, scaler) {
             // dot x & dot y
-            let dx = lhs.x * scaler;
-            let dy = lhs.y * scaler;
-            return new Vector2(dx, dy);
+            let theXs = lhs.x * scaler;
+            let theYs = lhs.y * scaler;
+            return new Vector2(theXs, theYs);
         }
     }
     objects.Vector2 = Vector2;

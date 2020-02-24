@@ -1,21 +1,23 @@
 module objects {
     export abstract class GameObject extends createjs.Bitmap {
-        // MEMBER VARIABLES
-        private _width: number = 0;
-        private _height: number = 0;
-        private _halfWidth: number = 0;
-        private _halfHeight: number = 0;
-        private _isColliding: boolean = false;
-        private _isCentered: boolean = false;
-        private _position: Vector2 = new Vector2(0, 0);
+        // PRIVATE INSTANCE MEMBERS
+        private _width: number;
+        private _height: number;
+        private _halfWidth: number;
+        private _halfHeight: number;
+        private _position: Vector2;
+        private _velocity: Vector2;
+        private _isColliding: boolean;
+        private _isCentered: boolean;
 
-        // PROPERTIES
+        // PUBLIC PROPERTIES
         get width(): number {
             return this._width;
         }
 
         set width(newWidth: number) {
             this._width = newWidth;
+            this._halfWidth = this._computeHalfWidth();
         }
 
         get height(): number {
@@ -24,24 +26,33 @@ module objects {
 
         set height(newHeight: number) {
             this._height = newHeight;
+            this._halfHeight = this._computeHalfHeight();
         }
 
         get halfWidth(): number {
-            this._halfWidth = this._width * 0.5;
             return this._halfWidth;
         }
 
-        set halfWidth(newHalfWidth: number) {
-            this._halfWidth = newHalfWidth;
-        }
-
         get halfHeight(): number {
-            this._halfHeight = this._height * 0.5;
             return this._halfHeight;
         }
 
-        set halfHeight(newHalfHeight: number) {
-            this._halfHeight = newHalfHeight;
+        get position(): Vector2 {
+            return this._position;
+        }
+
+        set position(newPosition: Vector2) {
+            this._position = newPosition;
+            this.x = newPosition.x;
+            this.y = newPosition.y;
+        }
+
+        get velocity(): Vector2 {
+            return this._velocity;
+        }
+
+        set velocity(newVelocity: Vector2) {
+            this._velocity = newVelocity;
         }
 
         get isColliding(): boolean {
@@ -59,58 +70,58 @@ module objects {
         set isCentered(newState: boolean) {
             this._isCentered = newState;
             if (newState) {
-                // set the anchor point to the center
-                this.regX = this.halfWidth;
-                this.regY = this.halfHeight;
-            } else {
-                this.regX = 0;
-                this.regY = 0;
+                this._centerGameObject();
             }
         }
 
-        get position(): Vector2 {
-            return this._position;
-        }
-
-        set position(newPosition: Vector2) {
-            this._position = newPosition;
-            this.x = newPosition.x;
-            this.y = newPosition.y;
-        }
 
         // CONSTRUCTOR
-        /**
-         *Creates an instance of GameObject.
-         * @param {string} [imagePath='./Assets/images/placeholder.png']
-         * @param {number} [x=0]
-         * @param {number} [y=0]
-         * @param {boolean} [centered=false]
-         * @memberof GameObject
-         */
-        constructor(imagePath: string = './Assets/images/placeholder.png',
+        constructor(imageString: Object = './Assets/images/placeholder.png',
             x: number = 0, y: number = 0, centered: boolean = false) {
+            super(imageString);
 
-            super(imagePath);
-            this.isColliding = false;
-            // set the GameObject's position
-            this.position = new Vector2(x, y);
+            // initialization
+            this._width = 0;
+            this._height = 0;
+            this._halfWidth = 0;
+            this._halfHeight = 0;
+            this._position = new Vector2(0, 0, this);
+            this._velocity = new Vector2(0, 0);
+            this._isColliding = false;
+            this._isCentered = false;
 
-            // wait for the  image to load before calculating its width and height
+            this.position = new Vector2(x, y, this);
+
+            this.isCentered = centered;
             this.image.addEventListener('load', () => {
                 this.width = this.getBounds().width;
                 this.height = this.getBounds().height;
-                this.halfWidth = this.width * 0.5;
-                this.halfHeight = this.height * 0.5;
-
-                console.log('image loaded');
-                this.isCentered = centered;
+                if (this.isCentered) {
+                    this._centerGameObject();
+                }
             })
+
         }
 
         // PRIVATE METHODS
+        private _computeHalfWidth(): number {
+            return this.width * 0.5;
+        }
+
+        private _computeHalfHeight(): number {
+            return this.height * 0.5;
+        }
+
+        private _centerGameObject(): void {
+            this.regX = this.halfWidth;
+            this.regY = this.halfHeight;
+        }
+
         protected abstract _checkBounds(): void;
 
+
         // PUBLIC METHODS
+
         public abstract Start(): void;
 
         public abstract Update(): void;
@@ -122,7 +133,13 @@ module objects {
                 this.scaleX = width / this.getBounds().width;
                 this.scaleY = height / this.getBounds().height;
                 this.isCentered = isCentered;
+                if (this.isCentered) {
+                    this._centerGameObject();
+                }
+
             });
         }
+
     }
+
 }

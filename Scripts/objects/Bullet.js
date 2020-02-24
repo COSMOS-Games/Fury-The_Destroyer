@@ -6,10 +6,9 @@ var objects;
             super(imagePath, x, y, true);
             // variables
             this._owner = "";
-            this._velocity = objects.Vector2.zero(); // velocity = movement
             let speed = 10;
             direction.scale(speed);
-            this._velocity = direction; // velocity = direction * speed
+            this.velocity = direction; // velocity = direction * speed
             this.Start();
         }
         // properties
@@ -19,16 +18,10 @@ var objects;
         set owner(newOwner) {
             this._owner = newOwner;
         }
-        get velocity() {
-            return this._velocity;
-        }
-        set velocity(newVelocity) {
-            this._velocity = newVelocity;
-        }
         // private method
         _checkBounds() {
             // simplying check the right border
-            if (this.x >= 960 - this.halfWidth) {
+            if (this.x >= util.STAGE_W - this.halfWidth) {
                 this.velocity = objects.Vector2.zero(); // stop movement
             }
             // check the left border

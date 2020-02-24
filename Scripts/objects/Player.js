@@ -31,16 +31,16 @@ var objects;
                 this.position.x = this.halfWidth;
             }
             // check the right border
-            if (this.x > 960 - this.halfWidth) {
-                this.position.x = 960 - this.halfWidth;
+            if (this.x > util.STAGE_W - this.halfWidth) {
+                this.position.x = util.STAGE_W - this.halfWidth;
             }
             // check the top border
-            if (this.y < this.halfHeight + 45) {
-                this.position.y = this.halfHeight + 45;
+            if (this.y < 45 + this.halfHeight) {
+                this.position.y = 45 + this.halfHeight;
             }
             // check the top border
-            if (this.y > 640 - this.halfHeight) {
-                this.position.y = 640 - this.halfHeight;
+            if (this.y > util.STAGE_H - this.halfHeight) {
+                this.position.y = util.STAGE_H - this.halfHeight;
             }
         }
         _checkHealth() {
@@ -76,7 +76,7 @@ var objects;
         shoot(imagePath, aim) {
             // check if this player still have bullet or not
             if (this.bulletNum > 0) {
-                let bullet = new objects.Bullet(imagePath, this.position.x, this.position.y, aim);
+                let bullet = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, aim);
                 this.bulletNum -= 1;
                 return bullet;
             }

@@ -4,16 +4,7 @@ var objects;
     class Mine extends objects.GameObject {
         constructor(imagePath, x, y) {
             super(imagePath, x, y, true);
-            // variables
-            this._velocity = objects.Vector2.zero(); // velocity = movement
             this.Start();
-        }
-        // properties
-        get velocity() {
-            return this._velocity;
-        }
-        set velocity(newVelocity) {
-            this._velocity = newVelocity;
         }
         // private method
         _checkBounds() {

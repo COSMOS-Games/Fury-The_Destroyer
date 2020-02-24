@@ -34,17 +34,18 @@ module objects {
         this.position.x = this.halfWidth;
       }
       // check the right border
-      if (this.x > 960 - this.halfWidth) {
-        this.position.x = 960 - this.halfWidth;
+      if (this.x > util.STAGE_W - this.halfWidth) {
+        this.position.x = util.STAGE_W - this.halfWidth;
       }
       // check the top border
-      if (this.y < this.halfHeight + 45) {
-        this.position.y = this.halfHeight + 45;
+      if (this.y < 45 + this.halfHeight) {
+        this.position.y = 45 + this.halfHeight;
       }
       // check the top border
-      if (this.y > 640 - this.halfHeight) {
-        this.position.y = 640 - this.halfHeight;
+      if (this.y > util.STAGE_H - this.halfHeight) {
+        this.position.y = util.STAGE_H - this.halfHeight;
       }
+
     }
 
     private _checkHealth(): void {
@@ -91,7 +92,7 @@ module objects {
         let bullet = new Bullet(
           imagePath,
           this.position.x,
-          this.position.y,
+          this.position.y + 10,
           aim
         );
         this.bulletNum -= 1;
