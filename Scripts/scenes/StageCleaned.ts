@@ -4,6 +4,7 @@ module scenes {
     private _background: objects.Image;
     private _nextBattleLabel: objects.Image;
     private _descriptionLabel: objects.Label;
+    private _scoresLabel: objects.Label;
     private _startButton: objects.Image;
 
     // PUBLIC PROPERTIES
@@ -47,7 +48,20 @@ module scenes {
         250,
         false
       );
-      //this._descriptionLabel.lineWidth = 500;
+      let score =
+        "Player A Score: " +
+        util.GameConfig.PLAYER_A_SCORE +
+        "        Player B Score: " +
+        util.GameConfig.PLAYER_B_SCORE;
+      this._scoresLabel = new objects.Label(
+        score,
+        "22px",
+        util.FONT_FAMILY,
+        "Black",
+        450,
+        200,
+        true
+      );
 
       this.Start();
     }
@@ -56,6 +70,7 @@ module scenes {
     public Start(): void {
       this.addChild(this._background);
       this.addChild(this._nextBattleLabel);
+      this.addChild(this._scoresLabel);
       this.addChild(this._descriptionLabel);
       this.addChild(this._startButton);
 
