@@ -3,6 +3,7 @@ module scenes {
     // PRIVATE INSTANCE MEMEBERS
     background: objects.Image;
     restartButton: objects.Image;
+    mainButton: objects.Image;
 
     // PUBLIC PROPERTIES
 
@@ -27,6 +28,15 @@ module scenes {
         true
       );
 
+      this.mainButton = new objects.Image(
+        util.MAIN_BUTTON,
+        480,
+        550,
+        200,
+        80,
+        true
+      );
+
       this.Start();
     }
 
@@ -34,6 +44,7 @@ module scenes {
     public Start(): void {
       this.addChild(this.background);
       this.addChild(this.restartButton);
+      this.addChild(this.mainButton);
 
       this.Main();
     }
@@ -44,6 +55,11 @@ module scenes {
       this.restartButton.HoverOn();
       this.restartButton.on("click", function() {
         util.GameConfig.SCENE_STATE = scenes.State.FIRST;
+      });
+
+      this.mainButton.HoverOn();
+      this.mainButton.on("click", function(){
+        util.GameConfig.SCENE_STATE = scenes.State.START
       });
     }
   }
