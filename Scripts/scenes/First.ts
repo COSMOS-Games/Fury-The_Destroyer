@@ -97,12 +97,19 @@ module scenes {
       // detect the bullet collision
       this.detectBulletCollision(this.bulletAList, this.playerB);
       this.detectBulletCollision(this.bulletBList, this.playerA);
+
+      // detect bullet collision with each other
+      this.detectDestructablesBulletCollision(
+        this.bulletAList,
+        this.bulletBList
+      );
+
       // update health and bullet label
       this.detectPlayerHealth();
       this.detectPlayersBullet();
     }
 
-    public Main(): void {}
+    public Main(): void { }
 
     detectPressedKeys(): void {
       if (this.keyPressedStates[util.Key.UP]) {
@@ -198,6 +205,24 @@ module scenes {
           // simplying check the left and right border
           this.removeChild(bullets[i]);
           bullets.splice(i, 1); // remove the bullet from the list
+        }
+      }
+    }
+
+
+    detectDestructablesBulletCollision(
+      destructableA: objects.Bullet[],
+      destructableB: objects.Bullet[]
+    ): void {
+      for (let i = 0; i < destructableA.length; i++) {
+        for (let j = 0; j < destructableB.length; j++) {
+          managers.Collision.AABBCheck(destructableA[i], destructableB[j]);
+          if (destructableB[j].isColliding) {
+            this.removeChild(destructableA[i]); // remove the bullet from the stage
+            destructableA.splice(i, 1); // remove the bullet from the list
+            this.removeChild(destructableB[j]); // remove the bullet from the stage
+            destructableB.splice(j, 1); // remove the bullet from the list
+          }
         }
       }
     }
