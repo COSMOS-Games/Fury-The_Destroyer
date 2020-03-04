@@ -51,6 +51,8 @@ var scenes;
             this.detectDestructablesCollision(this.mineList, this.bulletBList);
             // detect bullet collision with each other
             this.detectDestructablesBulletCollision(this.bulletAList, this.bulletBList);
+            //
+            //      detectPlayersCollision();
             // update health and bullet label
             this.detectPlayerHealth();
             this.detectPlayersBullet();
@@ -214,6 +216,20 @@ var scenes;
                         destructableB.splice(j, 1); // remove the bullet from the list
                     }
                 }
+            }
+        }
+        detectPlayersCollision(playerA, playerB) {
+            managers.Collision.AABBCheck(playerA, playerB);
+            managers.Collision.AABBCheck(playerB, playerA);
+            if (playerA.isColliding && playerB.isColliding) {
+                playerA.health -= 1;
+                playerB.health -= 1;
+                this.playerAHealthLabel.setText("Playe A: Health " + this.playerA.health);
+                this.playerBHealthLabel.setText("Playe B: Health " + this.playerB.health);
+                // TODO:
+                // implement knock back time:
+                // Player's heath goes down to 0 because of collision detection in 60fps
+                // need the logic to prevent detection for a while after collision
             }
         }
         detectPlayersBullet() {

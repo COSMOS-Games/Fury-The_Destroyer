@@ -123,12 +123,15 @@ module scenes {
         this.bulletBList
       );
 
+      //
+      //      detectPlayersCollision();
+
       // update health and bullet label
       this.detectPlayerHealth();
       this.detectPlayersBullet();
     }
 
-    public Main(): void {}
+    public Main(): void { }
 
     // PRIVATE METHODS
     generateMines(): objects.Mine[] {
@@ -334,6 +337,34 @@ module scenes {
         }
       }
     }
+
+    detectPlayersCollision(
+      playerA: objects.Player,
+      playerB: objects.Player
+    ): void {
+
+      managers.Collision.AABBCheck(playerA, playerB);
+      managers.Collision.AABBCheck(playerB, playerA);
+
+      if (playerA.isColliding && playerB.isColliding) {
+        playerA.health -= 1;
+        playerB.health -= 1;
+        this.playerAHealthLabel.setText(
+          "Playe A: Health " + this.playerA.health
+        );
+        this.playerBHealthLabel.setText(
+          "Playe B: Health " + this.playerB.health
+        );
+        // TODO:
+        // implement knock back time:
+        // Player's heath goes down to 0 because of collision detection in 60fps
+        // need the logic to prevent detection for a while after collision
+
+      }
+
+    }
+
+
 
     detectPlayersBullet(): void {
       if (
