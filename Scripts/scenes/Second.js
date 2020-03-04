@@ -40,16 +40,17 @@ var scenes;
         Update() {
             // detect keys to make movement
             this.detectPressedKeys();
-            // detect the bullet collision
+            // detect the bullet collision with player
             this.detectWeaponCollision(this.bulletAList, this.playerB);
             this.detectWeaponCollision(this.bulletBList, this.playerA);
-            // detect mine collision
-            this.detectWeaponCollision(this.mineList, this.playerA);
-            this.detectWeaponCollision(this.mineList, this.playerB);
-            // detect
+            // detect mine collision with player
+            this.detectMineCollision(this.mineList, this.playerA);
+            this.detectMineCollision(this.mineList, this.playerB);
+            // detect bullet collision with mine
             this.detectDestructablesCollision(this.mineList, this.bulletAList);
             this.detectDestructablesCollision(this.mineList, this.bulletBList);
-            this.detectDestructablesCollision(this.bulletAList, this.bulletBList);
+            // detect bullet collision with each other
+            this.detectDestructablesBulletCollision(this.bulletAList, this.bulletBList);
             // update health and bullet label
             this.detectPlayerHealth();
             this.detectPlayersBullet();
@@ -60,18 +61,18 @@ var scenes;
             let mines = [];
             for (let i = 0; i < util.MINE_NUM; i++) {
                 // generate position at random
-                let mineX = Math.floor((Math.random() * util.STAGE_W));
-                let mineY = Math.floor((Math.random() * util.STAGE_H) + util.STAGE_BOUNDARY_TOP);
+                let mineX = Math.floor(Math.random() * util.STAGE_W);
+                let mineY = Math.floor(Math.random() * util.STAGE_H + util.STAGE_BOUNDARY_TOP);
                 // hard corded safe area
                 if (mineX < util.PLAYER_A_POS.x + 100) {
                     // determine Y so that the mine won't hit the player A
-                    mineY = Math.floor((Math.random() * util.STAGE_H) + 250 + util.STAGE_BOUNDARY_TOP);
+                    mineY = Math.floor(Math.random() * util.STAGE_H + 250 + util.STAGE_BOUNDARY_TOP);
                 }
                 else {
-                    mineY = Math.floor((Math.random() * util.STAGE_H) + util.STAGE_BOUNDARY_TOP);
+                    mineY = Math.floor(Math.random() * util.STAGE_H + util.STAGE_BOUNDARY_TOP);
                     if (mineY > util.STAGE_H - 200) {
                         // determine X so that the mine won't hit the player A
-                        mineX = Math.floor((Math.random() * util.STAGE_W) - mineX);
+                        mineX = Math.floor(Math.random() * util.STAGE_W - mineX);
                     }
                 }
                 mines.push(new objects.Mine(util.MINE, mineX, mineY));
@@ -135,6 +136,35 @@ var scenes;
             for (let i = 0; i < weapon.length; i++) {
                 managers.Collision.AABBCheck(weapon[i], target);
                 if (target.isColliding) {
+                    let healthA = this.playerA.health;
+                    let healthB = this.playerB.health;
+                    this.removeChild(weapon[i]); // remove the bullet from the stage
+                    weapon.splice(i, 1); // remove the bullet from the list
+                    target.health -= 1;
+                    this.playerAHealthLabel.setText("Playe A: Health " + this.playerA.health);
+                    this.playerBHealthLabel.setText("Playe B: Health " + this.playerB.health);
+                    // update player score;
+                    if (healthA == this.playerA.health &&
+                        healthB - 1 == this.playerB.health) {
+                        util.GameConfig.PLAYER_A_SCORE += 10;
+                    }
+                    else if (healthA - 1 == this.playerA.health &&
+                        healthB == this.playerB.health) {
+                        util.GameConfig.PLAYER_B_SCORE += 10;
+                    }
+                }
+                else if (weapon[i].x + weapon[i].halfWidth >= util.STAGE_W ||
+                    weapon[i].x <= weapon[i].halfWidth) {
+                    // simplying check the left and right border
+                    this.removeChild(weapon[i]);
+                    weapon.splice(i, 1); // remove the bullet from the list
+                }
+            }
+        }
+        detectMineCollision(weapon, target) {
+            for (let i = 0; i < weapon.length; i++) {
+                managers.Collision.AABBCheck(weapon[i], target);
+                if (target.isColliding) {
                     this.removeChild(weapon[i]); // remove the bullet from the stage
                     weapon.splice(i, 1); // remove the bullet from the list
                     target.health -= 1;
@@ -150,6 +180,30 @@ var scenes;
             }
         }
         detectDestructablesCollision(destructableA, destructableB) {
+            for (let i = 0; i < destructableA.length; i++) {
+                for (let j = 0; j < destructableB.length; j++) {
+                    managers.Collision.AABBCheck(destructableA[i], destructableB[j]);
+                    if (destructableB[j].isColliding) {
+                        let bulletNumA = this.bulletAList.length;
+                        let bulletNumB = this.bulletBList.length;
+                        this.removeChild(destructableA[i]); // remove the bullet from the stage
+                        destructableA.splice(i, 1); // remove the bullet from the list
+                        this.removeChild(destructableB[j]); // remove the bullet from the stage
+                        destructableB.splice(j, 1); // remove the bullet from the list
+                        // update player score;
+                        if (bulletNumA == this.bulletAList.length &&
+                            bulletNumB - 1 == this.bulletBList.length) {
+                            util.GameConfig.PLAYER_B_SCORE += 5;
+                        }
+                        else if (bulletNumA - 1 == this.bulletAList.length &&
+                            bulletNumB == this.bulletBList.length) {
+                            util.GameConfig.PLAYER_A_SCORE += 5;
+                        }
+                    }
+                }
+            }
+        }
+        detectDestructablesBulletCollision(destructableA, destructableB) {
             for (let i = 0; i < destructableA.length; i++) {
                 for (let j = 0; j < destructableB.length; j++) {
                     managers.Collision.AABBCheck(destructableA[i], destructableB[j]);

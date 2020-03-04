@@ -164,9 +164,13 @@ module scenes {
         managers.Collision.AABBCheck(bullets[i], target);
 
         if (target.isColliding) {
+          let healthA = this.playerA.health;
+          let healthB = this.playerB.health;
+
           this.removeChild(bullets[i]); // remove the bullet from the stage
           bullets.splice(i, 1); // remove the bullet from the list
 
+          // update player health
           target.health -= 1;
           this.playerAHealthLabel.setText(
             "Playe A: Health " + this.playerA.health
@@ -174,6 +178,19 @@ module scenes {
           this.playerBHealthLabel.setText(
             "Playe B: Health " + this.playerB.health
           );
+
+          // update player score;
+          if (
+            healthA == this.playerA.health &&
+            healthB - 1 == this.playerB.health
+          ) {
+            util.GameConfig.PLAYER_A_SCORE += 10;
+          } else if (
+            healthA - 1 == this.playerA.health &&
+            healthB == this.playerB.health
+          ) {
+            util.GameConfig.PLAYER_B_SCORE += 10;
+          }
         } else if (
           bullets[i].x + bullets[i].halfWidth >= util.STAGE_W ||
           bullets[i].x <= bullets[i].halfWidth
