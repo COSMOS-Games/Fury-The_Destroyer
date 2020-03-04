@@ -35,8 +35,8 @@ var objects;
                 this.position.x = util.STAGE_W - this.halfWidth;
             }
             // check the top border
-            if (this.y < 45 + this.halfHeight) {
-                this.position.y = 45 + this.halfHeight;
+            if (this.y < util.STAGE_BOUNDARY_TOP + this.halfHeight) {
+                this.position.y = util.STAGE_BOUNDARY_TOP + this.halfHeight;
             }
             // check the top border
             if (this.y > util.STAGE_H - this.halfHeight) {

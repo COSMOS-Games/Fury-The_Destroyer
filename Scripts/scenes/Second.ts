@@ -127,21 +127,22 @@ module scenes {
     public Main(): void { }
 
     // PRIVATE METHODS
-    // TODO:organize collision detection logic
     generateMines(): objects.Mine[] {
       let mines: objects.Mine[] = [];
 
       for (let i = 0; i < util.MINE_NUM; i++) {
         // generate position at random
         let mineX = Math.floor((Math.random() * util.STAGE_W));
-        let mineY = Math.floor((Math.random() * util.STAGE_H));
+        let mineY = Math.floor((Math.random() * util.STAGE_H) + util.STAGE_BOUNDARY_TOP);
 
         // hard corded safe area
         if (mineX < util.PLAYER_A_POS.x + 100) {
-          mineY = Math.floor((Math.random() * util.STAGE_H) + 250)
+          // determine Y so that the mine won't hit the player A
+          mineY = Math.floor((Math.random() * util.STAGE_H) + 250 + util.STAGE_BOUNDARY_TOP)
         } else {
-          mineY = Math.floor((Math.random() * util.STAGE_H))
+          mineY = Math.floor((Math.random() * util.STAGE_H) + util.STAGE_BOUNDARY_TOP)
           if (mineY > util.STAGE_H - 200) {
+            // determine X so that the mine won't hit the player A
             mineX = Math.floor((Math.random() * util.STAGE_W) - mineX);
           }
         }

@@ -27,6 +27,8 @@ var util;
     //
     util.STAGE_W = 960;
     util.STAGE_H = 640;
+    //
+    util.STAGE_BOUNDARY_TOP = 45;
     util.PLAYER_A_POS = new objects.Vector2(50, 75);
     util.PLAYER_B_POS = new objects.Vector2(900, 500);
 })(util || (util = {}));

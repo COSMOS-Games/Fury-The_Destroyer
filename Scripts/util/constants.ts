@@ -31,6 +31,10 @@ module util {
   export const STAGE_W: number = 960;
   export const STAGE_H: number = 640;
 
+  //
+  export const STAGE_BOUNDARY_TOP = 45;
+
   export const PLAYER_A_POS: objects.Vector2 = new objects.Vector2(50, 75);
   export const PLAYER_B_POS: objects.Vector2 = new objects.Vector2(900, 500);
+
 }
