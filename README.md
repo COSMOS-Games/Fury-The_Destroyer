@@ -127,6 +127,9 @@ http://www.clipartpanda.com/clipart_images/cute-submarine-clip-art-13346612
 - Torpedo image is from 2D Art (OpenGameArt.org)
 https://opengameart.org/content/2d-sprites-3
 
+- Mine image is from Sea Mine Icons (DLPNG)
+https://dlpng.com/png/4473785
+
 - Scroll image is from Document Clipart Papyrus Scroll (WebStockReview.org)
 https://webstockreview.net/startdownload.html
 
