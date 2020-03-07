@@ -8,7 +8,7 @@ var scenes;
             super();
             this._background = new objects.Image(util.BACKGROUND_PATH_END, 0, 0, util.STAGE_W, util.STAGE_H, false);
             this._restartButton = new objects.Image(util.RESTART_BUTTON, 480, 450, 200, 80, true);
-            this._mainButton = new objects.Image(util.MAIN_BUTTON, 480, 550, 200, 80, true);
+            this._mainButton = new objects.Image(util.PLAY_BUTTON, 480, 550, 200, 80, true);
             let score = "Player A Score: " +
                 util.GameConfig.PLAYER_A_SCORE +
                 "        Player B Score: " +
