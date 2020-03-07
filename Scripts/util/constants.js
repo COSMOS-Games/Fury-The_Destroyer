@@ -6,6 +6,7 @@ var util;
     util.BACKGROUND_PATH_GAME = "./Assets/images/game-screen.png";
     util.BACKGROUND_PATH_END = "./Assets/images/final-screen.png";
     util.NEXT_BATTLE_PATH = "./Assets/images/NextBattle.png";
+    util.INSTRUCTION_PATH = "./Assets/images/instruction.png";
     // Player image assets
     util.PALYER_A_SUBMARINE = "./Assets/images/submarineA.png";
     util.PALYER_B_SUBMARINE = "./Assets/images/submarineB.png";

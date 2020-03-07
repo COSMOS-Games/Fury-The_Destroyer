@@ -2,6 +2,8 @@ module scenes {
   export class Start extends objects.Scene {
     // PRIVATE INSTANCE MEMEBERS
     private _background: objects.Image;
+    private _instruction: objects.Image;
+
     private _startButton: objects.Image;
     private _introduction: objects.Label;
 
@@ -19,6 +21,16 @@ module scenes {
         util.STAGE_H,
         false
       );
+
+      this._instruction = new objects.Image(
+        util.INSTRUCTION_PATH,
+        650,
+        270,
+        225,
+        288,
+        false
+      );
+
       this._startButton = new objects.Image(
         util.PLAY_BUTTON,
         480,
@@ -44,6 +56,7 @@ module scenes {
     // PUBLIC METHODS
     public Start(): void {
       this.addChild(this._background);
+      this.addChild(this._instruction);
       this.addChild(this._introduction);
       this.addChild(this._startButton);
 
