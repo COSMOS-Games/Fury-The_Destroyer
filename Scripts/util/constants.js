@@ -6,6 +6,7 @@ var util;
     util.BACKGROUND_PATH_GAME = "./Assets/images/game-screen.png";
     util.BACKGROUND_PATH_END = "./Assets/images/final-screen.png";
     util.NEXT_BATTLE_PATH = "./Assets/images/NextBattle.png";
+    util.INSTRUCTIONS = "./Assets/images/instructions.png";
     util.INSTRUCTION_PATH = "./Assets/images/instruction.png";
     // Player image assets
     util.PALYER_A_SUBMARINE = "./Assets/images/submarineA.png";
@@ -17,7 +18,8 @@ var util;
     // ref: https://www.behance.net/gallery/21061821/UI-elements-for-game-application
     util.PLAY_BUTTON = "./Assets/images/btn-play.png";
     util.RESTART_BUTTON = "./Assets/images/play-again-btn.png";
-    util.MAIN_BUTTON = "./Assets/images/play-btn.png";
+    util.MAIN_BUTTON = "./Assets/images/btn-main-menu.png";
+    util.INSTRUCTION_BUTTON = "./Assets/images/btn-instructions.png";
     // font
     util.FONT_SIZE = "28px";
     util.FONT_FAMILY = "Consolas";

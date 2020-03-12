@@ -2,10 +2,8 @@ module scenes {
   export class Start extends objects.Scene {
     // PRIVATE INSTANCE MEMEBERS
     private _background: objects.Image;
-    private _instruction: objects.Image;
-
     private _startButton: objects.Image;
-    private _introduction: objects.Label;
+    private _instructionsButton: objects.Image;
 
     // PUBLIC PROPERTIES
 
@@ -22,14 +20,6 @@ module scenes {
         false
       );
 
-      this._instruction = new objects.Image(
-        util.INSTRUCTION_PATH,
-        650,
-        270,
-        225,
-        288,
-        false
-      );
 
       this._startButton = new objects.Image(
         util.PLAY_BUTTON,
@@ -40,15 +30,15 @@ module scenes {
         true
       );
 
-      this._introduction = new objects.Label(
-        "Score counts: \n\n    shot Submarine + 10\n\n    shot Mine + 5",
-        util.FONT_SIZE,
-        util.FONT_FAMILY,
-        util.FONT_COLOR,
-        50,
-        300,
-        false
+      this._instructionsButton = new objects.Image(
+        util.INSTRUCTION_BUTTON,
+        480,
+        550,
+        200,
+        80,
+        true
       );
+
 
       this.Start();
     }
@@ -56,9 +46,8 @@ module scenes {
     // PUBLIC METHODS
     public Start(): void {
       this.addChild(this._background);
-      this.addChild(this._instruction);
-      this.addChild(this._introduction);
       this.addChild(this._startButton);
+      this.addChild(this._instructionsButton)
 
       this.Main();
     }
@@ -75,6 +64,11 @@ module scenes {
         util.GameConfig.PLAYER_B_SCORE = 0;
         // util.GameConfig.SCENE_STATE = scenes.State.SECOND;
       });
+      this._instructionsButton.HoverOn();
+      this._instructionsButton.on("click", function() {
+        util.GameConfig.SCENE_STATE = scenes.State.INSTRUCTIONS;
+      });
+      
     }
   }
 }
