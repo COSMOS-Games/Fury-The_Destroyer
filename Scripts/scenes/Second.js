@@ -9,7 +9,7 @@ var scenes;
             this.bulletBList = [];
             this.mineList = [];
             this.keyPressedStates = [];
-            this.background = new objects.Image(util.BACKGROUND_PATH_GAME_THREE, 0, 0, util.STAGE_W, util.STAGE_H, false);
+            this.background = new objects.Image(util.BACKGROUND_PATH_GAME_TWO, 0, 0, util.STAGE_W, util.STAGE_H, false);
             // player A
             this.playerA = new objects.Player(util.PALYER_A_SUBMARINE, util.PLAYER_A_POS.x, util.PLAYER_A_POS.y);
             this.playerAHealthLabel = new objects.Label("Playe A: Health " + this.playerA.health, "24px", "Times", "white", 100, 25, true);
