@@ -59,7 +59,7 @@ module scenes {
         "32px",
         util.FONT_FAMILY,
         "Black",
-        450,
+        480,
         250,
         true
       );

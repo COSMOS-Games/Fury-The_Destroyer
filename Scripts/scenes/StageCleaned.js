@@ -15,7 +15,7 @@ var scenes;
                 util.GameConfig.PLAYER_A_SCORE +
                 "        Player B Score: " +
                 util.GameConfig.PLAYER_B_SCORE;
-            this._scoresLabel = new objects.Label(score, "22px", util.FONT_FAMILY, "Black", 450, 200, true);
+            this._scoresLabel = new objects.Label(score, "22px", util.FONT_FAMILY, "Black", 480, 200, true);
             this.Start();
         }
         // PUBLIC METHODS
