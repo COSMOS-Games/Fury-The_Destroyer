@@ -38,6 +38,9 @@ let Game = (function () {
             case scenes.State.START:
                 currentScene = new scenes.Start();
                 break;
+            case scenes.State.INSTRUCTIONS:
+                currentScene = new scenes.Instructions();
+                break;
             case scenes.State.FIRST:
                 FirstScene = new scenes.First();
                 currentScene = FirstScene;

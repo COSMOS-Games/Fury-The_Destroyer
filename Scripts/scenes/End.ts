@@ -4,6 +4,7 @@ module scenes {
     private _background: objects.Image;
     private _restartButton: objects.Image;
     private _mainButton: objects.Image;
+    private _gameOverLabel: objects.Image;
     private _scoresLabel: objects.Label;
 
     // PUBLIC PROPERTIES
@@ -13,28 +14,38 @@ module scenes {
       super();
 
       this._background = new objects.Image(
-        util.BACKGROUND_PATH_END,
+        util.BACKGROUND_PATH_GAME,
         0,
         0,
         util.STAGE_W,
         util.STAGE_H,
         false
       );
+
+      this._gameOverLabel = new objects.Image(
+        util.GAME_OVER_PATH,
+        480,
+        100,
+        500,
+        150,
+        true
+      );
+
       this._restartButton = new objects.Image(
         util.RESTART_BUTTON,
         480,
         450,
-        200,
-        80,
+        150,
+        50,
         true
       );
 
       this._mainButton = new objects.Image(
-        util.PLAY_BUTTON,
+        util.MAIN_BUTTON,
         480,
-        550,
-        200,
-        80,
+        530,
+        150,
+        50,
         true
       );
 
@@ -62,6 +73,7 @@ module scenes {
       this.addChild(this._scoresLabel);
       this.addChild(this._restartButton);
       this.addChild(this._mainButton);
+      this.addChild(this._gameOverLabel);
 
       this.Main();
     }

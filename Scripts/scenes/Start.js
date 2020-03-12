@@ -6,18 +6,20 @@ var scenes;
         // CONTRUCTOR
         constructor() {
             super();
-            this._background = new objects.Image(util.BACKGROUND_PATH, 0, 0, util.STAGE_W, util.STAGE_H, false);
-            this._instruction = new objects.Image(util.INSTRUCTION_PATH, 650, 270, 225, 288, false);
-            this._startButton = new objects.Image(util.PLAY_BUTTON, 480, 450, 200, 80, true);
-            this._introduction = new objects.Label("Score counts: \n\n    shot Submarine + 10\n\n    shot Mine + 5", util.FONT_SIZE, util.FONT_FAMILY, util.FONT_COLOR, 50, 300, false);
+            this._background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
+            this._furyLabel = new objects.Image(util.FURY_PATH, 480, 100, 500, 150, true);
+            this._theDestroyerLabel = new objects.Image(util.THE_DESTROYER_PATH, 480, 240, 400, 100, true);
+            this._startButton = new objects.Image(util.PLAY_BUTTON, 480, 450, 150, 50, true);
+            this._instructionsButton = new objects.Image(util.INSTRUCTION_BUTTON, 480, 530, 150, 50, true);
             this.Start();
         }
         // PUBLIC METHODS
         Start() {
             this.addChild(this._background);
-            this.addChild(this._instruction);
-            this.addChild(this._introduction);
             this.addChild(this._startButton);
+            this.addChild(this._instructionsButton);
+            this.addChild(this._furyLabel);
+            this.addChild(this._theDestroyerLabel);
             this.Main();
         }
         Update() { }
@@ -30,6 +32,10 @@ var scenes;
                 util.GameConfig.PLAYER_A_SCORE = 0;
                 util.GameConfig.PLAYER_B_SCORE = 0;
                 // util.GameConfig.SCENE_STATE = scenes.State.SECOND;
+            });
+            this._instructionsButton.HoverOn();
+            this._instructionsButton.on("click", function () {
+                util.GameConfig.SCENE_STATE = scenes.State.INSTRUCTIONS;
             });
         }
     }
