@@ -6,7 +6,7 @@ var scenes;
         // CONTRUCTOR
         constructor() {
             super();
-            this._background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
+            this._background = new objects.Image(util.BACKGROUND_PATH_GAME_ONE, 0, 0, util.STAGE_W, util.STAGE_H, false);
             this._nextButton = new objects.Image(util.NEXT_BUTTON, 480, 530, 150, 50, true);
             this._nextBattleLabel = new objects.Image(util.NEXT_BATTLE_PATH, 480, 100, 500, 150, true);
             let description = "In next level, they met in a more dangerous place.  \n\nAdvanced map with randomly generated MINEs \n\nwhich might damage the submarines. \n\nBe careful! \n\nAvoid mines and kill them all!";

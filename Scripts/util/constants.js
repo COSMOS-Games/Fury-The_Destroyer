@@ -3,6 +3,9 @@ var util;
 (function (util) {
     // image assets
     util.BACKGROUND_PATH_GAME = "./Assets/images/game-screen.png";
+    util.BACKGROUND_PATH_GAME_ONE = "./Assets/images/game-screen-one.png";
+    util.BACKGROUND_PATH_GAME_TWO = "./Assets/images/game-screen-two.png";
+    util.BACKGROUND_PATH_GAME_THREE = "./Assets/images/game-screen-three.png";
     util.FURY_PATH = "./Assets/images/fury.png";
     util.THE_DESTROYER_PATH = "./Assets/images/the-destroyer.png";
     util.GAME_OVER_PATH = "./Assets/images/game-over.png";

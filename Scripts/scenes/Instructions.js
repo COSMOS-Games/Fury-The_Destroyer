@@ -6,7 +6,7 @@ var scenes;
         // CONTRUCTOR
         constructor() {
             super();
-            this._background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
+            this._background = new objects.Image(util.BACKGROUND_PATH_GAME_ONE, 0, 0, util.STAGE_W, util.STAGE_H, false);
             this._instructionsLabel = new objects.Image(util.INSTRUCTIONS, 480, 100, 500, 150, true);
             this._introduction = new objects.Label("Score counts: \n\n    shot Submarine + 10\n\n    shot Mine + 5", util.FONT_SIZE, util.FONT_FAMILY, util.FONT_COLOR, 50, 300, false);
             this._instruction = new objects.Image(util.INSTRUCTION_PATH, 650, 270, 225, 288, false);

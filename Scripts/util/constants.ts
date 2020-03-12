@@ -1,6 +1,9 @@
 module util {
   // image assets
   export const BACKGROUND_PATH_GAME: string = "./Assets/images/game-screen.png";
+  export const BACKGROUND_PATH_GAME_ONE: string = "./Assets/images/game-screen-one.png";
+  export const BACKGROUND_PATH_GAME_TWO: string = "./Assets/images/game-screen-two.png";
+  export const BACKGROUND_PATH_GAME_THREE: string = "./Assets/images/game-screen-three.png";
   export const FURY_PATH: string = "./Assets/images/fury.png";
   export const THE_DESTROYER_PATH: string = "./Assets/images/the-destroyer.png";
   export const GAME_OVER_PATH: string = "./Assets/images/game-over.png";
@@ -20,9 +23,9 @@ module util {
   // ref: https://www.behance.net/gallery/21061821/UI-elements-for-game-application
   export const PLAY_BUTTON: string = "./Assets/images/btn-play.png";
   export const RESTART_BUTTON: string = "./Assets/images/btn-play-again.png";
-  export const MAIN_BUTTON: string = "./Assets/images/btn-main-menu.png"
-  export const INSTRUCTION_BUTTON: string = "./Assets/images/btn-instructions.png"
-  export const NEXT_BUTTON: string = "./Assets/images/btn-next.png"
+  export const MAIN_BUTTON: string = "./Assets/images/btn-main-menu.png";
+  export const INSTRUCTION_BUTTON: string = "./Assets/images/btn-instructions.png";
+  export const NEXT_BUTTON: string = "./Assets/images/btn-next.png";
 
   // font
   export const FONT_SIZE: string = "28px";

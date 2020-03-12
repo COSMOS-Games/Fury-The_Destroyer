@@ -15,7 +15,7 @@ module scenes {
         super();
   
         this._background = new objects.Image(
-          util.BACKGROUND_PATH_GAME,
+          util.BACKGROUND_PATH_GAME_ONE,
           0,
           0,
           util.STAGE_W,
