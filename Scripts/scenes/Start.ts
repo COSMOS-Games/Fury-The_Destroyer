@@ -4,6 +4,7 @@ module scenes {
     private _background: objects.Image;
     private _startButton: objects.Image;
     private _instructionsButton: objects.Image;
+    private _furyLabel: objects.Image;
 
     // PUBLIC PROPERTIES
 
@@ -12,13 +13,23 @@ module scenes {
       super();
 
       this._background = new objects.Image(
-        util.BACKGROUND_PATH,
+        util.BACKGROUND_PATH_GAME,
         0,
         0,
         util.STAGE_W,
         util.STAGE_H,
         false
       );
+
+      this._furyLabel = new objects.Image(
+        util.FURY_PATH,
+        500,
+        100,
+        500,
+        150,
+        true
+      );
+
 
 
       this._startButton = new objects.Image(
@@ -48,7 +59,7 @@ module scenes {
       this.addChild(this._background);
       this.addChild(this._startButton);
       this.addChild(this._instructionsButton)
-
+      this.addChild(this._furyLabel)
       this.Main();
     }
 

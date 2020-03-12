@@ -21,6 +21,7 @@ module scenes {
         util.STAGE_H,
         false
       );
+      
       this._nextButton = new objects.Image(
         util.NEXT_BUTTON,
         480,
@@ -29,6 +30,7 @@ module scenes {
         50,
         true
       );
+
       this._nextBattleLabel = new objects.Image(
         util.NEXT_BATTLE_PATH,
         500,
@@ -37,6 +39,7 @@ module scenes {
         150,
         true
       );
+
       let description =
         "In next level, they met in a more dangerous place.  \n\nAdvanced map with randomly generated MINEs \n\nwhich might damage the submarines. \n\nBe careful! \n\nAvoid mines and kill them all!";
       this._descriptionLabel = new objects.Label(

@@ -6,7 +6,8 @@ var scenes;
         // CONTRUCTOR
         constructor() {
             super();
-            this._background = new objects.Image(util.BACKGROUND_PATH_END, 0, 0, util.STAGE_W, util.STAGE_H, false);
+            this._background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
+            this._gameOverLabel = new objects.Image(util.GAME_OVER_PATH, 500, 100, 500, 150, true);
             this._restartButton = new objects.Image(util.RESTART_BUTTON, 480, 450, 150, 50, true);
             this._mainButton = new objects.Image(util.MAIN_BUTTON, 480, 530, 150, 50, true);
             let score = "Player A Score: " +
@@ -22,6 +23,7 @@ var scenes;
             this.addChild(this._scoresLabel);
             this.addChild(this._restartButton);
             this.addChild(this._mainButton);
+            this.addChild(this._gameOverLabel);
             this.Main();
         }
         Update() { }

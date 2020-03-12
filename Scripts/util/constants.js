@@ -2,10 +2,10 @@
 var util;
 (function (util) {
     // image assets
-    util.BACKGROUND_PATH = "./Assets/images/first-screen.png";
     util.BACKGROUND_PATH_GAME = "./Assets/images/game-screen.png";
-    util.BACKGROUND_PATH_END = "./Assets/images/final-screen.png";
-    util.NEXT_BATTLE_PATH = "./Assets/images/NextBattle.png";
+    util.FURY_PATH = "./Assets/images/fury.png";
+    util.GAME_OVER_PATH = "./Assets/images/game-over.png";
+    util.NEXT_BATTLE_PATH = "./Assets/images/next-battle.png";
     util.INSTRUCTIONS = "./Assets/images/instructions.png";
     util.INSTRUCTION_PATH = "./Assets/images/instruction.png";
     // Player image assets

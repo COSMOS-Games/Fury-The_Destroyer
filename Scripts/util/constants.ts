@@ -1,9 +1,9 @@
 module util {
   // image assets
-  export const BACKGROUND_PATH: string = "./Assets/images/first-screen.png";
   export const BACKGROUND_PATH_GAME: string = "./Assets/images/game-screen.png";
-  export const BACKGROUND_PATH_END: string = "./Assets/images/final-screen.png";
-  export const NEXT_BATTLE_PATH: string = "./Assets/images/NextBattle.png";
+  export const FURY_PATH: string = "./Assets/images/fury.png";
+  export const GAME_OVER_PATH: string = "./Assets/images/game-over.png";
+  export const NEXT_BATTLE_PATH: string = "./Assets/images/next-battle.png";
   export const INSTRUCTIONS: string = "./Assets/images/instructions.png"
   export const INSTRUCTION_PATH: string = "./Assets/images/instruction.png";
 
