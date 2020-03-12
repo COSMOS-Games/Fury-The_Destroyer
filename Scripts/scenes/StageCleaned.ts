@@ -5,7 +5,7 @@ module scenes {
     private _nextBattleLabel: objects.Image;
     private _descriptionLabel: objects.Label;
     private _scoresLabel: objects.Label;
-    private _startButton: objects.Image;
+    private _nextButton: objects.Image;
 
     // PUBLIC PROPERTIES
 
@@ -21,12 +21,12 @@ module scenes {
         util.STAGE_H,
         false
       );
-      this._startButton = new objects.Image(
-        util.PLAY_BUTTON,
+      this._nextButton = new objects.Image(
+        util.NEXT_BUTTON,
         480,
-        500,
-        200,
-        80,
+        530,
+        150,
+        50,
         true
       );
       this._nextBattleLabel = new objects.Image(
@@ -72,7 +72,7 @@ module scenes {
       this.addChild(this._nextBattleLabel);
       this.addChild(this._scoresLabel);
       this.addChild(this._descriptionLabel);
-      this.addChild(this._startButton);
+      this.addChild(this._nextButton);
 
       this.Main();
     }
@@ -80,8 +80,8 @@ module scenes {
     public Update(): void {}
 
     public Main(): void {
-      this._startButton.HoverOn();
-      this._startButton.on("click", function() {
+      this._nextButton.HoverOn();
+      this._nextButton.on("click", function() {
         util.GameConfig.SCENE_STATE = scenes.State.SECOND;
       });
     }

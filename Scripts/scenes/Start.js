@@ -7,8 +7,8 @@ var scenes;
         constructor() {
             super();
             this._background = new objects.Image(util.BACKGROUND_PATH, 0, 0, util.STAGE_W, util.STAGE_H, false);
-            this._startButton = new objects.Image(util.PLAY_BUTTON, 480, 450, 200, 80, true);
-            this._instructionsButton = new objects.Image(util.INSTRUCTION_BUTTON, 480, 550, 200, 80, true);
+            this._startButton = new objects.Image(util.PLAY_BUTTON, 480, 450, 150, 50, true);
+            this._instructionsButton = new objects.Image(util.INSTRUCTION_BUTTON, 480, 530, 150, 50, true);
             this.Start();
         }
         // PUBLIC METHODS

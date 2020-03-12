@@ -18,9 +18,10 @@ module util {
   // button image assets
   // ref: https://www.behance.net/gallery/21061821/UI-elements-for-game-application
   export const PLAY_BUTTON: string = "./Assets/images/btn-play.png";
-  export const RESTART_BUTTON: string = "./Assets/images/play-again-btn.png";
+  export const RESTART_BUTTON: string = "./Assets/images/btn-play-again.png";
   export const MAIN_BUTTON: string = "./Assets/images/btn-main-menu.png"
   export const INSTRUCTION_BUTTON: string = "./Assets/images/btn-instructions.png"
+  export const NEXT_BUTTON: string = "./Assets/images/btn-next.png"
 
   // font
   export const FONT_SIZE: string = "28px";

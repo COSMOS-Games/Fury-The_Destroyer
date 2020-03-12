@@ -56,17 +56,17 @@ module scenes {
           util.PLAY_BUTTON,
           480,
           450,
-          200,
-          80,
+          150,
+          50,
           true
         );
 
         this._mainButton = new objects.Image(
           util.MAIN_BUTTON,
           480,
-          550,
-          200,
-          80,
+          530,
+          150,
+          50,
           true
         );
 

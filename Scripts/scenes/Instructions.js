@@ -10,8 +10,8 @@ var scenes;
             this._instructionsLabel = new objects.Image(util.INSTRUCTIONS, 500, 100, 500, 150, true);
             this._introduction = new objects.Label("Score counts: \n\n    shot Submarine + 10\n\n    shot Mine + 5", util.FONT_SIZE, util.FONT_FAMILY, util.FONT_COLOR, 50, 300, false);
             this._instruction = new objects.Image(util.INSTRUCTION_PATH, 650, 270, 225, 288, false);
-            this._startButton = new objects.Image(util.PLAY_BUTTON, 480, 450, 200, 80, true);
-            this._mainButton = new objects.Image(util.MAIN_BUTTON, 480, 550, 200, 80, true);
+            this._startButton = new objects.Image(util.PLAY_BUTTON, 480, 450, 150, 50, true);
+            this._mainButton = new objects.Image(util.MAIN_BUTTON, 480, 530, 150, 50, true);
             this.Start();
         }
         // PUBLIC METHODS

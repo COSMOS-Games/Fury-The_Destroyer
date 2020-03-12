@@ -25,17 +25,17 @@ module scenes {
         util.PLAY_BUTTON,
         480,
         450,
-        200,
-        80,
+        150,
+        50,
         true
       );
 
       this._instructionsButton = new objects.Image(
         util.INSTRUCTION_BUTTON,
         480,
-        550,
-        200,
-        80,
+        530,
+        150,
+        50,
         true
       );
 

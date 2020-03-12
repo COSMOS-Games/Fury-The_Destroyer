@@ -17,9 +17,10 @@ var util;
     // button image assets
     // ref: https://www.behance.net/gallery/21061821/UI-elements-for-game-application
     util.PLAY_BUTTON = "./Assets/images/btn-play.png";
-    util.RESTART_BUTTON = "./Assets/images/play-again-btn.png";
+    util.RESTART_BUTTON = "./Assets/images/btn-play-again.png";
     util.MAIN_BUTTON = "./Assets/images/btn-main-menu.png";
     util.INSTRUCTION_BUTTON = "./Assets/images/btn-instructions.png";
+    util.NEXT_BUTTON = "./Assets/images/btn-next.png";
     // font
     util.FONT_SIZE = "28px";
     util.FONT_FAMILY = "Consolas";
