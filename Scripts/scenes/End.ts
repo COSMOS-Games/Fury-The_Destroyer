@@ -30,7 +30,7 @@ module scenes {
       );
 
       this._mainButton = new objects.Image(
-        util.MAIN_BUTTON,
+        util.PLAY_BUTTON,
         480,
         550,
         200,

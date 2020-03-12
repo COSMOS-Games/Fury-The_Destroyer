@@ -77,13 +77,13 @@ Players’ avatars are submarine drones named Fury, the Destroyers, built in 202
 
 ## Weapons
 ### Level One
-One torpedo per shoot and straight movement. Maximum five torpedoes can be loaded when recharging torpedoes at player’s base.
+One torpedo per shoot and straight movement. Maximum 50 torpedoes are loaded initially.
 
 ### Level Two
-Players have a capability to upgrade their weapons to advanced torpedoes which will be shoot for three torpedoes per shoot. Maximum nine torpedoes can be loaded when recharging torpedoes at players’ bases.
+Players play with randomly generated mines. They should either destroy or avoid those mines and attach each other. Maximum 50 torpedoes are loaded initially.
 
 ### Level Three
-Players have a capability to upgrade his/her weapon to exploding torpedoes which explodes when it hits an enemy or wall. Maximum five torpedoes can be loaded when recharging torpedoes at players’ bases.
+Players play with randomly generated mines. Players also have a capability to upgrade his/her weapon to exploding torpedoes which explodes when it hits an enemy or wall. Maximum 50 torpedoes can be loaded when recharging torpedoes at players’ bases.
 
 ## Items
 Players will have their own base at the top-left corner and bottom-right corner. When players control their submarines to stay around their own base area, torpedoes will be recharged.
@@ -108,11 +108,11 @@ Finally, Fury joins back to the military camp. The real war is going to start!
 Winner of each stage will gain points which will be used later on to determine the final winner of the game.
  
 ## Future Features
-For Alpha release, it will have additional futures on top of first playable build, such as:
--	Instruction: Instruction on how to play this game on the start screen;
--	Second Stage: Second stage which includes randomly generated mines and introduce advanced weapons to players;
--	Mine: Object which randomly generated in different locations on the map. It causes damage to submarines once they make a contact to any mine;
--	Advanced Weapons: stage 2 will allow players to upgrade their weapons which can shoot three torpedoes per shooting.
+For beta release, it will have additional futures on top of alpha release, such as:
+- Third Stage: Second stage which introduces advanced weapons and let players to decide if which one to use for the third stage;
+- Base: Base for each player that allows players to recharge their torpedoes;
+- Advanced Graphic: Advanced graphic will be adapted in order to provide better user experience.
+- Sound Index: Sound index will be added in order to provide better user experience.
 
 ## References
 
@@ -126,6 +126,12 @@ http://www.clipartpanda.com/clipart_images/cute-submarine-clip-art-13346612
 
 - Torpedo image is from 2D Art (OpenGameArt.org)
 https://opengameart.org/content/2d-sprites-3
+
+- Mine image is from Sea Mine Icons (DLPNG)
+https://dlpng.com/png/4473785
+
+- Scroll image is from Document Clipart Papyrus Scroll (WebStockReview.org)
+https://webstockreview.net/startdownload.html
 
 ## Contributors:
 - Logan J. Kim, Project Manager;
