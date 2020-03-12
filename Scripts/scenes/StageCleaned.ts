@@ -21,7 +21,7 @@ module scenes {
         util.STAGE_H,
         false
       );
-      
+
       this._nextButton = new objects.Image(
         util.NEXT_BUTTON,
         480,
@@ -33,7 +33,7 @@ module scenes {
 
       this._nextBattleLabel = new objects.Image(
         util.NEXT_BATTLE_PATH,
-        500,
+        480,
         100,
         500,
         150,

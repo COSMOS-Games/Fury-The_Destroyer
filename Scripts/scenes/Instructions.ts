@@ -25,7 +25,7 @@ module scenes {
 
         this._instructionsLabel = new objects.Image(
           util.INSTRUCTIONS,
-          500,
+          480,
           100,
           500,
           150,

@@ -24,7 +24,7 @@ module scenes {
 
       this._gameOverLabel = new objects.Image(
         util.GAME_OVER_PATH,
-        500,
+        480,
         100,
         500,
         150,

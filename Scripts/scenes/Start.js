@@ -7,7 +7,8 @@ var scenes;
         constructor() {
             super();
             this._background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
-            this._furyLabel = new objects.Image(util.FURY_PATH, 500, 100, 500, 150, true);
+            this._furyLabel = new objects.Image(util.FURY_PATH, 480, 100, 500, 150, true);
+            this._theDestroyerLabel = new objects.Image(util.THE_DESTROYER_PATH, 480, 240, 400, 100, true);
             this._startButton = new objects.Image(util.PLAY_BUTTON, 480, 450, 150, 50, true);
             this._instructionsButton = new objects.Image(util.INSTRUCTION_BUTTON, 480, 530, 150, 50, true);
             this.Start();
@@ -18,6 +19,7 @@ var scenes;
             this.addChild(this._startButton);
             this.addChild(this._instructionsButton);
             this.addChild(this._furyLabel);
+            this.addChild(this._theDestroyerLabel);
             this.Main();
         }
         Update() { }

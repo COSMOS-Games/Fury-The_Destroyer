@@ -4,6 +4,7 @@ var util;
     // image assets
     util.BACKGROUND_PATH_GAME = "./Assets/images/game-screen.png";
     util.FURY_PATH = "./Assets/images/fury.png";
+    util.THE_DESTROYER_PATH = "./Assets/images/the-destroyer.png";
     util.GAME_OVER_PATH = "./Assets/images/game-over.png";
     util.NEXT_BATTLE_PATH = "./Assets/images/next-battle.png";
     util.INSTRUCTIONS = "./Assets/images/instructions.png";

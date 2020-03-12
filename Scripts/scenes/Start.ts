@@ -5,6 +5,7 @@ module scenes {
     private _startButton: objects.Image;
     private _instructionsButton: objects.Image;
     private _furyLabel: objects.Image;
+    private _theDestroyerLabel: objects.Image;
 
     // PUBLIC PROPERTIES
 
@@ -23,10 +24,19 @@ module scenes {
 
       this._furyLabel = new objects.Image(
         util.FURY_PATH,
-        500,
+        480,
         100,
         500,
         150,
+        true
+      );
+
+      this._theDestroyerLabel = new objects.Image(
+        util.THE_DESTROYER_PATH,
+        480,
+        240,
+        400,
+        100,
         true
       );
 
@@ -60,6 +70,7 @@ module scenes {
       this.addChild(this._startButton);
       this.addChild(this._instructionsButton)
       this.addChild(this._furyLabel)
+      this.addChild(this._theDestroyerLabel)
       this.Main();
     }
 
