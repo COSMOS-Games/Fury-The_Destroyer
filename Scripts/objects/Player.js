@@ -9,6 +9,7 @@ var objects;
             //    private _bulletNum: number = 5;
             this._bulletNum = 50;
             this._health = 2;
+            this._weaponType = "normal";
             this.Start();
         }
         // PUBLIC PROPERTIES
@@ -23,6 +24,12 @@ var objects;
         }
         set health(newNum) {
             this._health = newNum;
+        }
+        get weaponType() {
+            return this._weaponType;
+        }
+        set weaponType(newWeapon) {
+            this._weaponType = newWeapon;
         }
         // PRIVATE METHODS
         _checkBounds() {
@@ -74,11 +81,30 @@ var objects;
             this.position.add(objects.Vector2.scale(objects.Vector2.down(), 5));
         }
         shoot(imagePath, aim) {
+            let bullets = new Array();
+            switch (this.weaponType) {
+                case "normal":
+                    {
+                        let bullet = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, aim);
+                        bullets.push(bullet);
+                    }
+                    break;
+                case "3way":
+                    {
+                        let bullet1 = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, objects.Vector2.scale(aim, 10), true);
+                        let bullet2 = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, objects.Vector2.scale(objects.Vector2.add(aim, new objects.Vector2(aim.x, 1)), 3), true);
+                        let bullet3 = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, objects.Vector2.scale(objects.Vector2.add(aim, new objects.Vector2(aim.x, -1)), 3), true);
+                        bullets.push(bullet1);
+                        bullets.push(bullet2);
+                        bullets.push(bullet3);
+                    }
+                    break;
+            }
             // check if this player still have bullet or not
             if (this.bulletNum > 0) {
-                let bullet = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, aim);
                 this.bulletNum -= 1;
-                return bullet;
+                // return bullet;
+                return bullets;
             }
             else {
                 return null; // nullable

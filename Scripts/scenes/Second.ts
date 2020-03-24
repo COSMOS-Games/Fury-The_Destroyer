@@ -81,6 +81,10 @@ module scenes {
       // mine
       this.mineList = this.generateMines();
 
+      // selectedd weapon type
+      this.playerA.weaponType = "normal";
+      this.playerB.weaponType = "normal";
+
       this.Start();
     }
 
@@ -193,11 +197,13 @@ module scenes {
       if (this.keyPressedStates[util.Key.C]) {
         if (this.children.indexOf(this.playerA) !== -1) {
           let aim = objects.Vector2.right();
-          let bulletA = this.playerA.shoot(util.PLAYER_A_BULLET, aim);
+          let bulletsA = this.playerA.shoot(util.PLAYER_A_BULLET, aim);
           this.playerABulletLabel.setText("Bullet " + this.playerA.bulletNum);
-          if (bulletA) {
-            this.bulletAList.push(bulletA);
-            this.addChild(bulletA);
+          if (bulletsA) {
+            bulletsA.forEach(b => {
+              this.bulletAList.push(b);
+              this.addChild(b);
+            });
           }
         }
       }
@@ -207,11 +213,13 @@ module scenes {
         if (this.children.indexOf(this.playerB) !== -1) {
           // aim specifies the direction of shooting
           let aim = objects.Vector2.left();
-          let bulletB = this.playerB.shoot(util.PLAYER_B_BULLET, aim);
+          let bulletsB = this.playerB.shoot(util.PLAYER_B_BULLET, aim);
           this.playerBBulletLabel.setText("Bullet " + this.playerB.bulletNum);
-          if (bulletB) {
-            this.bulletBList.push(bulletB);
-            this.addChild(bulletB);
+          if (bulletsB) {
+            bulletsB.forEach(b => {
+              this.bulletBList.push(b);
+              this.addChild(b);
+            });
           }
         }
       }

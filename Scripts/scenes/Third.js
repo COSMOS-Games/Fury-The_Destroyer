@@ -1,12 +1,13 @@
 "use strict";
 var scenes;
 (function (scenes) {
-    class First extends objects.Scene {
+    class Third extends objects.Scene {
         // CONTRUCTOR
         constructor() {
             super();
             this.bulletAList = [];
             this.bulletBList = [];
+            this.mineList = [];
             this.keyPressedStates = [];
             this.background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
             // player A
@@ -17,9 +18,11 @@ var scenes;
             this.playerB = new objects.Player(util.PALYER_B_SUBMARINE, util.PLAYER_B_POS.x, util.PLAYER_B_POS.y);
             this.playerBHealthLabel = new objects.Label("Player B: Health " + this.playerB.health, "24px", "Times", "white", 750, 25, true);
             this.playerBBulletLabel = new objects.Label("Bullet " + this.playerB.bulletNum, "24px", "Times", "white", 900, 25, true);
+            // mine
+            this.mineList = this.generateMines();
             // selectedd weapon type
-            this.playerA.weaponType = "normal";
-            this.playerB.weaponType = "normal";
+            this.playerA.weaponType = "3way";
+            this.playerB.weaponType = "3way";
             this.Start();
         }
         // PUBLIC METHODS
@@ -31,21 +34,56 @@ var scenes;
             this.addChild(this.playerB);
             this.addChild(this.playerBHealthLabel);
             this.addChild(this.playerBBulletLabel);
+            // generate mines
+            for (let i = 0; i < this.mineList.length; i++) {
+                this.addChild(this.mineList[i]);
+            }
             this.Main();
         }
         Update() {
             // detect keys to make movement
             this.detectPressedKeys();
-            // detect the bullet collision
-            this.detectBulletCollision(this.bulletAList, this.playerB);
-            this.detectBulletCollision(this.bulletBList, this.playerA);
+            // detect the bullet collision with player
+            this.detectWeaponCollision(this.bulletAList, this.playerB);
+            this.detectWeaponCollision(this.bulletBList, this.playerA);
+            // detect mine collision with player
+            this.detectMineCollision(this.mineList, this.playerA);
+            this.detectMineCollision(this.mineList, this.playerB);
+            // detect bullet collision with mine
+            this.detectDestructablesCollision(this.mineList, this.bulletAList);
+            this.detectDestructablesCollision(this.mineList, this.bulletBList);
             // detect bullet collision with each other
             this.detectDestructablesBulletCollision(this.bulletAList, this.bulletBList);
+            //
+            //      detectPlayersCollision();
             // update health and bullet label
             this.detectPlayerHealth();
             this.detectPlayersBullet();
         }
         Main() { }
+        // PRIVATE METHODS
+        generateMines() {
+            let mines = [];
+            for (let i = 0; i < util.MINE_NUM + 20; i++) {
+                // generate position at random
+                let mineX = Math.floor(Math.random() * util.STAGE_W);
+                let mineY = Math.floor(Math.random() * util.STAGE_H + util.STAGE_BOUNDARY_TOP);
+                // hard corded safe area
+                if (mineX < util.PLAYER_A_POS.x + 100) {
+                    // determine Y so that the mine won't hit the player A
+                    mineY = Math.floor(Math.random() * util.STAGE_H + 250 + util.STAGE_BOUNDARY_TOP);
+                }
+                else {
+                    mineY = Math.floor(Math.random() * util.STAGE_H + util.STAGE_BOUNDARY_TOP);
+                    if (mineY > util.STAGE_H - 200) {
+                        // determine X so that the mine won't hit the player A
+                        mineX = Math.floor(Math.random() * util.STAGE_W - mineX);
+                    }
+                }
+                mines.push(new objects.Mine(util.MINE, mineX, mineY));
+            }
+            return mines;
+        }
         detectPressedKeys() {
             if (this.keyPressedStates[38 /* UP */]) {
                 this.playerB.moveUp();
@@ -103,15 +141,14 @@ var scenes;
                 }
             }
         }
-        detectBulletCollision(bullets, target) {
-            for (let i = 0; i < bullets.length; i++) {
-                managers.Collision.AABBCheck(bullets[i], target);
+        detectWeaponCollision(weapon, target) {
+            for (let i = 0; i < weapon.length; i++) {
+                managers.Collision.AABBCheck(weapon[i], target);
                 if (target.isColliding) {
                     let healthA = this.playerA.health;
                     let healthB = this.playerB.health;
-                    this.removeChild(bullets[i]); // remove the bullet from the stage
-                    bullets.splice(i, 1); // remove the bullet from the list
-                    // update player health
+                    this.removeChild(weapon[i]); // remove the bullet from the stage
+                    weapon.splice(i, 1); // remove the bullet from the list
                     target.health -= 1;
                     this.playerAHealthLabel.setText("Playe A: Health " + this.playerA.health);
                     this.playerBHealthLabel.setText("Playe B: Health " + this.playerB.health);
@@ -125,11 +162,53 @@ var scenes;
                         util.GameConfig.PLAYER_B_SCORE += 10;
                     }
                 }
-                else if (bullets[i].x + bullets[i].halfWidth >= util.STAGE_W ||
-                    bullets[i].x <= bullets[i].halfWidth) {
+                else if (weapon[i].x + weapon[i].halfWidth >= util.STAGE_W ||
+                    weapon[i].x <= weapon[i].halfWidth) {
                     // simplying check the left and right border
-                    this.removeChild(bullets[i]);
-                    bullets.splice(i, 1); // remove the bullet from the list
+                    this.removeChild(weapon[i]);
+                    weapon.splice(i, 1); // remove the bullet from the list
+                }
+            }
+        }
+        detectMineCollision(weapon, target) {
+            for (let i = 0; i < weapon.length; i++) {
+                managers.Collision.AABBCheck(weapon[i], target);
+                if (target.isColliding) {
+                    this.removeChild(weapon[i]); // remove the bullet from the stage
+                    weapon.splice(i, 1); // remove the bullet from the list
+                    target.health -= 1;
+                    this.playerAHealthLabel.setText("Playe A: Health " + this.playerA.health);
+                    this.playerBHealthLabel.setText("Playe B: Health " + this.playerB.health);
+                }
+                else if (weapon[i].x + weapon[i].halfWidth >= util.STAGE_W ||
+                    weapon[i].x <= weapon[i].halfWidth) {
+                    // simplying check the left and right border
+                    this.removeChild(weapon[i]);
+                    weapon.splice(i, 1); // remove the bullet from the list
+                }
+            }
+        }
+        detectDestructablesCollision(destructableA, destructableB) {
+            for (let i = 0; i < destructableA.length; i++) {
+                for (let j = 0; j < destructableB.length; j++) {
+                    managers.Collision.AABBCheck(destructableA[i], destructableB[j]);
+                    if (destructableB[j].isColliding) {
+                        let bulletNumA = this.bulletAList.length;
+                        let bulletNumB = this.bulletBList.length;
+                        this.removeChild(destructableA[i]); // remove the bullet from the stage
+                        destructableA.splice(i, 1); // remove the bullet from the list
+                        this.removeChild(destructableB[j]); // remove the bullet from the stage
+                        destructableB.splice(j, 1); // remove the bullet from the list
+                        // update player score;
+                        if (bulletNumA == this.bulletAList.length &&
+                            bulletNumB - 1 == this.bulletBList.length) {
+                            util.GameConfig.PLAYER_B_SCORE += 5;
+                        }
+                        else if (bulletNumA - 1 == this.bulletAList.length &&
+                            bulletNumB == this.bulletBList.length) {
+                            util.GameConfig.PLAYER_A_SCORE += 5;
+                        }
+                    }
                 }
             }
         }
@@ -146,22 +225,34 @@ var scenes;
                 }
             }
         }
+        detectPlayersCollision(playerA, playerB) {
+            managers.Collision.AABBCheck(playerA, playerB);
+            managers.Collision.AABBCheck(playerB, playerA);
+            if (playerA.isColliding && playerB.isColliding) {
+                playerA.health -= 1;
+                playerB.health -= 1;
+                this.playerAHealthLabel.setText("Playe A: Health " + this.playerA.health);
+                this.playerBHealthLabel.setText("Playe B: Health " + this.playerB.health);
+                // TODO:
+                // implement knock back time:
+                // Player's heath goes down to 0 because of collision detection in 60fps
+                // need the logic to prevent detection for a while after collision
+            }
+        }
         detectPlayersBullet() {
             if (this.playerA.bulletNum == 0 &&
                 this.playerB.bulletNum == 0 &&
                 this.bulletAList.length == 0 &&
                 this.bulletBList.length == 0) {
-                //util.GameConfig.SCENE_STATE = scenes.State.END;
-                util.GameConfig.SCENE_STATE = scenes.State.STAGECLEANED;
+                util.GameConfig.SCENE_STATE = scenes.State.END;
             }
         }
         detectPlayerHealth() {
             if (this.playerA.health <= 0 || this.playerB.health <= 0) {
-                //util.GameConfig.SCENE_STATE = scenes.State.END;
-                util.GameConfig.SCENE_STATE = scenes.State.STAGECLEANED;
+                util.GameConfig.SCENE_STATE = scenes.State.END;
             }
         }
     }
-    scenes.First = First;
+    scenes.Third = Third;
 })(scenes || (scenes = {}));
-//# sourceMappingURL=First.js.map
+//# sourceMappingURL=Third.js.map

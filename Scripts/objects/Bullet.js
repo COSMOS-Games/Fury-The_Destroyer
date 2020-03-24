@@ -2,13 +2,20 @@
 var objects;
 (function (objects) {
     class Bullet extends objects.GameObject {
-        constructor(imagePath, x, y, direction) {
+        constructor(imagePath, x, y, direction, isSpecialWeapon) {
             super(imagePath, x, y, true);
             // variables
             this._owner = "";
-            let speed = 10;
-            direction.scale(speed);
-            this.velocity = direction; // velocity = direction * speed
+            if (isSpecialWeapon) {
+                // let speed = 10;
+                // direction.scale(speed);
+                this.velocity = direction; // velocity = direction * speed
+            }
+            else {
+                let speed = 10;
+                direction.scale(speed);
+                this.velocity = direction; // velocity = direction * speed
+            }
             this.Start();
         }
         // properties

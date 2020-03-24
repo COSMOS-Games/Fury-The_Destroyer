@@ -8,6 +8,7 @@ let Game = (function () {
     let currentScene;
     let FirstScene;
     let SecondScene;
+    let ThirdScene;
     /**
      * This method initializes the CreateJS (EaselJS) Library
      * It sets the framerate to 60 FPS and sets up the main Game Loop (Update)
@@ -49,6 +50,10 @@ let Game = (function () {
                 SecondScene = new scenes.Second();
                 currentScene = SecondScene;
                 break;
+            case scenes.State.THIRD:
+                ThirdScene = new scenes.Third();
+                currentScene = ThirdScene;
+                break;
             case scenes.State.STAGECLEANED:
                 currentScene = new scenes.StageCleaned();
                 break;
@@ -67,6 +72,9 @@ let Game = (function () {
         if (SecondScene && SecondScene.keyPressedStates) {
             SecondScene.keyPressedStates[event.keyCode] = false;
         }
+        if (ThirdScene && ThirdScene.keyPressedStates) {
+            ThirdScene.keyPressedStates[event.keyCode] = false;
+        }
     });
     // attach keydown and keyup event to the window
     window.addEventListener("keydown", (event) => {
@@ -77,6 +85,10 @@ let Game = (function () {
         if (SecondScene && SecondScene.keyPressedStates) {
             SecondScene.keyPressedStates[event.keyCode] = true;
             SecondScene.detectShootingEvent();
+        }
+        if (ThirdScene && ThirdScene.keyPressedStates) {
+            ThirdScene.keyPressedStates[event.keyCode] = true;
+            ThirdScene.detectShootingEvent();
         }
     });
     window.addEventListener("load", Start);

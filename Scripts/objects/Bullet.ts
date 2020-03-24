@@ -13,12 +13,18 @@ module objects {
         }
 
 
-        constructor(imagePath: string, x: number, y: number, direction: Vector2) {
+        constructor(imagePath: string, x: number, y: number, direction: Vector2, isSpecialWeapon?: true) {
             super(imagePath, x, y, true);
 
-            let speed = 10;
-            direction.scale(speed);
-            this.velocity = direction; // velocity = direction * speed
+            if (isSpecialWeapon) {
+                // let speed = 10;
+                // direction.scale(speed);
+                this.velocity = direction; // velocity = direction * speed
+            } else {
+                let speed = 10;
+                direction.scale(speed);
+                this.velocity = direction; // velocity = direction * speed
+            }
 
             this.Start();
         }

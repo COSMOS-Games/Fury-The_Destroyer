@@ -4,6 +4,7 @@ module objects {
     //    private _bulletNum: number = 5;
     private _bulletNum: number = 50;
     private _health: number = 2;
+    private _weaponType: String = "normal";
 
     // PUBLIC PROPERTIES
     get bulletNum(): number {
@@ -19,6 +20,14 @@ module objects {
 
     set health(newNum: number) {
       this._health = newNum;
+    }
+
+    get weaponType(): String {
+      return this._weaponType;
+    }
+
+    set weaponType(newWeapon: String) {
+      this._weaponType = newWeapon;
     }
 
     // CONSTRUCTOR
@@ -86,17 +95,56 @@ module objects {
       this.position.add(Vector2.scale(Vector2.down(), 5));
     }
 
-    public shoot(imagePath: string, aim: Vector2): objects.Bullet | null {
+    public shoot(imagePath: string, aim: Vector2): Array<objects.Bullet> | null {
+      let bullets = new Array<Bullet>();
+      switch (this.weaponType) {
+        case "normal":
+          {
+            let bullet = new Bullet(
+              imagePath,
+              this.position.x,
+              this.position.y + 10,
+              aim
+            );
+
+            bullets.push(bullet);
+          }
+          break;
+        case "3way":
+          {
+            let bullet1 = new Bullet(
+              imagePath,
+              this.position.x,
+              this.position.y + 10,
+              Vector2.scale(aim, 10),
+              true
+            );
+            let bullet2 = new Bullet(
+              imagePath,
+              this.position.x,
+              this.position.y + 10,
+              Vector2.scale(Vector2.add(aim, new Vector2(aim.x, 1)), 3),
+              true
+            );
+            let bullet3 = new Bullet(
+              imagePath,
+              this.position.x,
+              this.position.y + 10,
+              Vector2.scale(Vector2.add(aim, new Vector2(aim.x, -1)), 3),
+              true
+            );
+
+            bullets.push(bullet1);
+            bullets.push(bullet2);
+            bullets.push(bullet3);
+          }
+          break;
+      }
       // check if this player still have bullet or not
       if (this.bulletNum > 0) {
-        let bullet = new Bullet(
-          imagePath,
-          this.position.x,
-          this.position.y + 10,
-          aim
-        );
         this.bulletNum -= 1;
-        return bullet;
+        // return bullet;
+        return bullets;
       } else {
         return null; // nullable
       }
