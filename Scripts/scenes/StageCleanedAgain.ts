@@ -1,10 +1,11 @@
 module scenes {
-  export class StageCleaned extends objects.Scene {
+  export class StageCleanedAgain extends objects.Scene {
     // PRIVATE INSTANCE MEMEBERS
     private _background: objects.Image;
     private _nextBattleLabel: objects.Image;
     private _descriptionLabel: objects.Label;
     private _nextButton: objects.Image;
+    private _nextButtonUpgradeWeapon: objects.Image;
     private _scoreBoard: managers.ScoreBorad;
 
     // PUBLIC PROPERTIES
@@ -24,7 +25,16 @@ module scenes {
 
       this._nextButton = new objects.Image(
         util.NEXT_BUTTON,
-        480,
+        380,
+        530,
+        150,
+        50,
+        true
+      );
+
+      this._nextButtonUpgradeWeapon = new objects.Image(
+        util.NEXT_BUTTON_UPGRADE,
+        580,
         530,
         150,
         50,
@@ -41,7 +51,8 @@ module scenes {
       );
 
       let description =
-        "In next level, they met in a more dangerous place.  \n\nAdvanced map with randomly generated MINEs \n\nwhich might damage the submarines. \n\nBe careful! \n\nAvoid mines and kill them all!";
+        "In next level, more randomly generated MINEs in map!  \n\nBe careful!  \n\n" +
+        "In addition, you can choose to upgrade the advanced weapon   \n\nIt can shoot 3 bullets at one time!";
       this._descriptionLabel = new objects.Label(
         description,
         util.FONT_SIZE,
@@ -64,6 +75,7 @@ module scenes {
       this.addChild(this._scoreBoard.ScoreLabelB);
       this.addChild(this._descriptionLabel);
       this.addChild(this._nextButton);
+      this.addChild(this._nextButtonUpgradeWeapon);
 
       this.Main();
     }
@@ -72,8 +84,16 @@ module scenes {
 
     public Main(): void {
       this._nextButton.HoverOn();
+      this._nextButtonUpgradeWeapon.HoverOn();
+
       this._nextButton.on("click", function() {
-        util.GameConfig.SCENE_STATE = scenes.State.SECOND;
+        util.GameConfig.WEAPON_TYPE = "normal";
+        util.GameConfig.SCENE_STATE = scenes.State.THIRD;
+      });
+
+      this._nextButtonUpgradeWeapon.on("click", function() {
+        util.GameConfig.WEAPON_TYPE = "3way";
+        util.GameConfig.SCENE_STATE = scenes.State.THIRD;
       });
     }
   }

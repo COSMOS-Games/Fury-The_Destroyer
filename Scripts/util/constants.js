@@ -22,6 +22,7 @@ var util;
     util.MAIN_BUTTON = "./Assets/images/btn-main-menu.png";
     util.INSTRUCTION_BUTTON = "./Assets/images/btn-instructions.png";
     util.NEXT_BUTTON = "./Assets/images/btn-next.png";
+    util.NEXT_BUTTON_UPGRADE = "./Assets/images/btn-next-upgrade.png";
     // font
     util.FONT_SIZE = "28px";
     util.FONT_FAMILY = "Consolas";
