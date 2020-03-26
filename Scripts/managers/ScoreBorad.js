@@ -8,8 +8,8 @@ var managers;
             this._bulletLabelA = new objects.Label("Bullet 999", "24px", "Times", "white", 250, 25, true);
             this._livesLabelB = new objects.Label("Player B: Health 99", "24px", "Times", "white", 750, 25, true);
             this._bulletLabelB = new objects.Label("Bullet 999", "24px", "Times", "white", 900, 25, true);
-            this._scoreLabelA = new objects.Label("Player A Score: 999", "22px", util.FONT_FAMILY, "Black", 450, 200, true);
-            this._scoreLabelB = new objects.Label("Player B Score: 999", "22px", util.FONT_FAMILY, "Black", 450, 300, true);
+            this._scoreLabelA = new objects.Label("Player A Score: 999", "24px", util.FONT_FAMILY, "white", 330, 200, true);
+            this._scoreLabelB = new objects.Label("Player B Score: 999", "24px", util.FONT_FAMILY, "white", 630, 200, true);
             // initial values
             this._livesA = 0;
             this._livesB = 0;

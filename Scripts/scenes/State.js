@@ -9,9 +9,10 @@ var scenes;
         State[State["FIRST"] = 2] = "FIRST";
         State[State["STAGECLEANED"] = 3] = "STAGECLEANED";
         State[State["SECOND"] = 4] = "SECOND";
-        State[State["THIRD"] = 5] = "THIRD";
-        State[State["END"] = 6] = "END";
-        State[State["NUM_OF_SCENES"] = 7] = "NUM_OF_SCENES";
+        State[State["STAGECLEANEDAGAIN"] = 5] = "STAGECLEANEDAGAIN";
+        State[State["THIRD"] = 6] = "THIRD";
+        State[State["END"] = 7] = "END";
+        State[State["NUM_OF_SCENES"] = 8] = "NUM_OF_SCENES";
     })(State = scenes.State || (scenes.State = {}));
 })(scenes || (scenes = {}));
 //# sourceMappingURL=State.js.map

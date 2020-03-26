@@ -339,7 +339,7 @@ module scenes {
 
     detectPlayerHealth(): void {
       if (this.playerA.health <= 0 || this.playerB.health <= 0) {
-        util.GameConfig.SCENE_STATE = scenes.State.END;
+        util.GameConfig.SCENE_STATE = scenes.State.STAGECLEANEDAGAIN;
       }
     }
   }

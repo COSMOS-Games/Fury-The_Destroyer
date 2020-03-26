@@ -23,8 +23,10 @@ var scenes;
             // mine
             this.mineList = this.generateMines();
             // selectedd weapon type
-            this.playerA.weaponType = "3way";
-            this.playerB.weaponType = "3way";
+            //this.playerA.weaponType = "3way";
+            //this.playerB.weaponType = "3way";
+            this.playerA.weaponType = util.GameConfig.WEAPON_TYPE;
+            this.playerB.weaponType = util.GameConfig.WEAPON_TYPE;
             this.Start();
         }
         // PUBLIC METHODS

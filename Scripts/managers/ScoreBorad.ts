@@ -135,21 +135,21 @@ module managers {
       );
       this._scoreLabelA = new objects.Label(
         "Player A Score: 999",
-        "22px",
+        "24px",
         util.FONT_FAMILY,
-        "Black",
-        450,
+        "white",
+        330,
         200,
         true
       );
 
       this._scoreLabelB = new objects.Label(
         "Player B Score: 999",
-        "22px",
+        "24px",
         util.FONT_FAMILY,
-        "Black",
-        450,
-        300,
+        "white",
+        630,
+        200,
         true
       );
 

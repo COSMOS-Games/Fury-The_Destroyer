@@ -6,6 +6,7 @@ module scenes {
     FIRST,
     STAGECLEANED,
     SECOND,
+    STAGECLEANEDAGAIN,
     THIRD,
     END,
     NUM_OF_SCENES

@@ -8,5 +8,6 @@ module util {
     public static PLAYER_B_BULLETS: number;
     public static PLAYER_A_SCORE: number;
     public static PLAYER_B_SCORE: number;
+    public static WEAPON_TYPE: string;
   }
 }
