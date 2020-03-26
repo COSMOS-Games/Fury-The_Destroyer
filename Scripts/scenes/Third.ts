@@ -4,14 +4,10 @@ module scenes {
     background: objects.Image;
     playerA: objects.Player;
     playerB: objects.Player;
-    playerAHealthLabel: objects.Label;
-    playerABulletLabel: objects.Label;
-    playerBHealthLabel: objects.Label;
-    playerBBulletLabel: objects.Label;
     bulletAList: objects.Bullet[] = [];
     bulletBList: objects.Bullet[] = [];
-
     mineList: objects.Mine[] = [];
+    scoreBorad: managers.ScoreBorad;
 
     // PUBLIC PROPERTIES
     public keyPressedStates: boolean[]; // to detect which keys are down
@@ -33,50 +29,22 @@ module scenes {
       this.playerA = new objects.Player(
         util.PALYER_A_SUBMARINE,
         util.PLAYER_A_POS.x,
-        util.PLAYER_A_POS.y
+        util.PLAYER_A_POS.y,
+        "PlayerA"
       );
-      this.playerAHealthLabel = new objects.Label(
-        "Playe A: Health " + this.playerA.health,
-        "24px",
-        "Times",
-        "white",
-        100,
-        25,
-        true
-      );
-      this.playerABulletLabel = new objects.Label(
-        "Bullet " + this.playerA.bulletNum,
-        "24px",
-        "Times",
-        "white",
-        250,
-        25,
-        true
-      );
+      util.GameConfig.PLAYER_A_LIVES = this.playerA.health;
+      util.GameConfig.PLAYER_A_BULLETS = this.playerA.bulletNum;
       // player B
       this.playerB = new objects.Player(
         util.PALYER_B_SUBMARINE,
         util.PLAYER_B_POS.x,
-        util.PLAYER_B_POS.y
+        util.PLAYER_B_POS.y,
+        "PlayerB"
       );
-      this.playerBHealthLabel = new objects.Label(
-        "Player B: Health " + this.playerB.health,
-        "24px",
-        "Times",
-        "white",
-        750,
-        25,
-        true
-      );
-      this.playerBBulletLabel = new objects.Label(
-        "Bullet " + this.playerB.bulletNum,
-        "24px",
-        "Times",
-        "white",
-        900,
-        25,
-        true
-      );
+      util.GameConfig.PLAYER_B_LIVES = this.playerB.health;
+      util.GameConfig.PLAYER_B_BULLETS = this.playerB.bulletNum;
+      // scoreboard
+      this.scoreBorad = new managers.ScoreBorad();
 
       // mine
       this.mineList = this.generateMines();
@@ -92,11 +60,11 @@ module scenes {
     public Start(): void {
       this.addChild(this.background);
       this.addChild(this.playerA);
-      this.addChild(this.playerAHealthLabel);
-      this.addChild(this.playerABulletLabel);
+      this.addChild(this.scoreBorad.LivesLabelA);
+      this.addChild(this.scoreBorad.BulletLabelA);
       this.addChild(this.playerB);
-      this.addChild(this.playerBHealthLabel);
-      this.addChild(this.playerBBulletLabel);
+      this.addChild(this.scoreBorad.LivesLabelB);
+      this.addChild(this.scoreBorad.BulletLabelB);
 
       // generate mines
       for (let i = 0; i < this.mineList.length; i++) {
@@ -135,7 +103,7 @@ module scenes {
       this.detectPlayersBullet();
     }
 
-    public Main(): void { }
+    public Main(): void {}
 
     // PRIVATE METHODS
     generateMines(): objects.Mine[] {
@@ -198,7 +166,7 @@ module scenes {
         if (this.children.indexOf(this.playerA) !== -1) {
           let aim = objects.Vector2.right();
           let bulletsA = this.playerA.shoot(util.PLAYER_A_BULLET, aim);
-          this.playerABulletLabel.setText("Bullet " + this.playerA.bulletNum);
+          this.scoreBorad.BulletsA = this.playerA.bulletNum;
           if (bulletsA) {
             bulletsA.forEach(b => {
               this.bulletAList.push(b);
@@ -208,16 +176,13 @@ module scenes {
         }
       }
 
-
-
-
       // shoot key for player B
       if (this.keyPressedStates[util.Key.M]) {
         if (this.children.indexOf(this.playerB) !== -1) {
           // aim specifies the direction of shooting
           let aim = objects.Vector2.left();
           let bulletsB = this.playerB.shoot(util.PLAYER_B_BULLET, aim);
-          this.playerBBulletLabel.setText("Bullet " + this.playerB.bulletNum);
+          this.scoreBorad.BulletsB = this.playerB.bulletNum;
           if (bulletsB) {
             bulletsB.forEach(b => {
               this.bulletBList.push(b);
@@ -243,24 +208,19 @@ module scenes {
           weapon.splice(i, 1); // remove the bullet from the list
 
           target.health -= 1;
-          this.playerAHealthLabel.setText(
-            "Playe A: Health " + this.playerA.health
-          );
-          this.playerBHealthLabel.setText(
-            "Playe B: Health " + this.playerB.health
-          );
-
-          // update player score;
-          if (
-            healthA == this.playerA.health &&
-            healthB - 1 == this.playerB.health
-          ) {
-            util.GameConfig.PLAYER_A_SCORE += 10;
-          } else if (
-            healthA - 1 == this.playerA.health &&
-            healthB == this.playerB.health
-          ) {
-            util.GameConfig.PLAYER_B_SCORE += 10;
+          switch (target.name) {
+            case "PlayerA":
+              {
+                this.scoreBorad.LivesA = this.playerA.health;
+                this.scoreBorad.ScoreB += 10;
+              }
+              break;
+            case "PlayerB":
+              {
+                this.scoreBorad.LivesB = this.playerB.health;
+                this.scoreBorad.ScoreA += 10;
+              }
+              break;
           }
         } else if (
           weapon[i].x + weapon[i].halfWidth >= util.STAGE_W ||
@@ -282,12 +242,8 @@ module scenes {
           weapon.splice(i, 1); // remove the bullet from the list
 
           target.health -= 1;
-          this.playerAHealthLabel.setText(
-            "Playe A: Health " + this.playerA.health
-          );
-          this.playerBHealthLabel.setText(
-            "Playe B: Health " + this.playerB.health
-          );
+          this.scoreBorad.LivesA = this.playerA.health;
+          this.scoreBorad.LivesB = this.playerB.health;
         } else if (
           weapon[i].x + weapon[i].halfWidth >= util.STAGE_W ||
           weapon[i].x <= weapon[i].halfWidth
@@ -320,12 +276,12 @@ module scenes {
               bulletNumA == this.bulletAList.length &&
               bulletNumB - 1 == this.bulletBList.length
             ) {
-              util.GameConfig.PLAYER_B_SCORE += 5;
+              this.scoreBorad.ScoreB += 5;
             } else if (
               bulletNumA - 1 == this.bulletAList.length &&
               bulletNumB == this.bulletBList.length
             ) {
-              util.GameConfig.PLAYER_A_SCORE += 5;
+              this.scoreBorad.ScoreA += 5;
             }
           }
         }
@@ -353,29 +309,20 @@ module scenes {
       playerA: objects.Player,
       playerB: objects.Player
     ): void {
-
       managers.Collision.AABBCheck(playerA, playerB);
       managers.Collision.AABBCheck(playerB, playerA);
 
       if (playerA.isColliding && playerB.isColliding) {
         playerA.health -= 1;
         playerB.health -= 1;
-        this.playerAHealthLabel.setText(
-          "Playe A: Health " + this.playerA.health
-        );
-        this.playerBHealthLabel.setText(
-          "Playe B: Health " + this.playerB.health
-        );
+        this.scoreBorad.LivesA = this.playerA.health;
+        this.scoreBorad.LivesB = this.playerB.health;
         // TODO:
         // implement knock back time:
         // Player's heath goes down to 0 because of collision detection in 60fps
         // need the logic to prevent detection for a while after collision
-
       }
-
     }
-
-
 
     detectPlayersBullet(): void {
       if (
