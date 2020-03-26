@@ -4,6 +4,7 @@ module objects {
     //    private _bulletNum: number = 5;
     private _bulletNum: number = 50;
     private _health: number = 2;
+    private _name: string = "player";
     private _weaponType: String = "normal";
 
     // PUBLIC PROPERTIES
@@ -22,6 +23,14 @@ module objects {
       this._health = newNum;
     }
 
+    get name(): string {
+      return this._name;
+    }
+
+    set name(newName: string) {
+      this._name = newName;
+    }
+
     get weaponType(): String {
       return this._weaponType;
     }
@@ -31,8 +40,9 @@ module objects {
     }
 
     // CONSTRUCTOR
-    constructor(imagePath: string, x: number, y: number) {
+    constructor(imagePath: string, x: number, y: number, name: string) {
       super(imagePath, x, y, true);
+      this.name = name;
       this.Start();
     }
 
@@ -54,7 +64,6 @@ module objects {
       if (this.y > util.STAGE_H - this.halfHeight) {
         this.position.y = util.STAGE_H - this.halfHeight;
       }
-
     }
 
     private _checkHealth(): void {
@@ -77,7 +86,7 @@ module objects {
       this._checkBounds();
     }
 
-    public Reset(): void { }
+    public Reset(): void {}
 
     public moveLeft(): void {
       this.position.add(Vector2.scale(Vector2.left(), 5));
@@ -95,7 +104,10 @@ module objects {
       this.position.add(Vector2.scale(Vector2.down(), 5));
     }
 
-    public shoot(imagePath: string, aim: Vector2): Array<objects.Bullet> | null {
+    public shoot(
+      imagePath: string,
+      aim: Vector2
+    ): Array<objects.Bullet> | null {
       let bullets = new Array<Bullet>();
       switch (this.weaponType) {
         case "normal":
@@ -150,6 +162,6 @@ module objects {
       }
     }
 
-    public explode(): void { }
+    public explode(): void {}
   }
 }

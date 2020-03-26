@@ -40,8 +40,6 @@ module scenes {
         true
       );
 
-
-
       this._startButton = new objects.Image(
         util.PLAY_BUTTON,
         480,
@@ -60,7 +58,6 @@ module scenes {
         true
       );
 
-
       this.Start();
     }
 
@@ -68,39 +65,37 @@ module scenes {
     public Start(): void {
       this.addChild(this._background);
       this.addChild(this._startButton);
-      this.addChild(this._instructionsButton)
-      this.addChild(this._furyLabel)
-      this.addChild(this._theDestroyerLabel)
+      this.addChild(this._instructionsButton);
+      this.addChild(this._furyLabel);
+      this.addChild(this._theDestroyerLabel);
       this.Main();
     }
 
-    public Update(): void { }
+    public Update(): void {}
 
     // TODO:consolidate stage cleared scene
     public Main(): void {
       this._startButton.HoverOn();
-      // this._startButton.on("click", function() {
-      //   util.GameConfig.SCENE_STATE = scenes.State.FIRST;
-      //   // initialize the scores for players
-      //   util.GameConfig.PLAYER_A_SCORE = 0;
-      //   util.GameConfig.PLAYER_B_SCORE = 0;
-      //   // util.GameConfig.SCENE_STATE = scenes.State.SECOND;
-      // });
-
-      // for Third level testing
-      this._startButton.on("click", function () {
-        util.GameConfig.SCENE_STATE = scenes.State.THIRD;
+      this._startButton.on("click", function() {
+        util.GameConfig.SCENE_STATE = scenes.State.FIRST;
         // initialize the scores for players
         util.GameConfig.PLAYER_A_SCORE = 0;
         util.GameConfig.PLAYER_B_SCORE = 0;
-        // util.GameConfig.SCENE_STATE = scenes.State.SECOND;
       });
+
+      // for Third level testing
+      //this._startButton.on("click", function () {
+      //  util.GameConfig.SCENE_STATE = scenes.State.THIRD;
+      //  // initialize the scores for players
+      //  util.GameConfig.PLAYER_A_SCORE = 0;
+      //  util.GameConfig.PLAYER_B_SCORE = 0;
+      //  // util.GameConfig.SCENE_STATE = scenes.State.SECOND;
+      //});
 
       this._instructionsButton.HoverOn();
-      this._instructionsButton.on("click", function () {
+      this._instructionsButton.on("click", function() {
         util.GameConfig.SCENE_STATE = scenes.State.INSTRUCTIONS;
       });
-
     }
   }
 }

@@ -3,13 +3,15 @@ var objects;
 (function (objects) {
     class Player extends objects.GameObject {
         // CONSTRUCTOR
-        constructor(imagePath, x, y) {
+        constructor(imagePath, x, y, name) {
             super(imagePath, x, y, true);
             // PRIVATE INSTANCE MEMBER
             //    private _bulletNum: number = 5;
             this._bulletNum = 50;
             this._health = 2;
+            this._name = "player";
             this._weaponType = "normal";
+            this.name = name;
             this.Start();
         }
         // PUBLIC PROPERTIES
@@ -24,6 +26,12 @@ var objects;
         }
         set health(newNum) {
             this._health = newNum;
+        }
+        get name() {
+            return this._name;
+        }
+        set name(newName) {
+            this._name = newName;
         }
         get weaponType() {
             return this._weaponType;
