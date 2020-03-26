@@ -53,7 +53,7 @@ var scenes;
             this.detectDestructablesBulletCollision(this.bulletAList, this.bulletBList);
             // update health and bullet label
             this.detectPlayerHealth();
-            this.detectPlayersBullet();
+            //      this.detectPlayersBullet();
         }
         Main() { }
         detectPressedKeys() {

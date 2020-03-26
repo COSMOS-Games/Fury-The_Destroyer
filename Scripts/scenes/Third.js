@@ -69,7 +69,7 @@ var scenes;
             //      detectPlayersCollision();
             // update health and bullet label
             this.detectPlayerHealth();
-            this.detectPlayersBullet();
+            //      this.detectPlayersBullet();
         }
         Main() { }
         // PRIVATE METHODS

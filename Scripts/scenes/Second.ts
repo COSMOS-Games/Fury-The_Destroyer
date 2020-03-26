@@ -126,10 +126,10 @@ module scenes {
 
       // update health and bullet label
       this.detectPlayerHealth();
-      this.detectPlayersBullet();
+      //      this.detectPlayersBullet();
     }
 
-    public Main(): void {}
+    public Main(): void { }
 
     // PRIVATE METHODS
     generateMines(): objects.Mine[] {

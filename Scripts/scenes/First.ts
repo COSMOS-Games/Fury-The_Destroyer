@@ -105,7 +105,7 @@ module scenes {
 
       // update health and bullet label
       this.detectPlayerHealth();
-      this.detectPlayersBullet();
+      //      this.detectPlayersBullet();
     }
 
     public Main(): void { }
