@@ -20,7 +20,9 @@ let Game = (function () {
         createjs.Ticker.on("tick", Update);
         stage.enableMouseOver(20);
         currentSceneState = scenes.State.NO_SCENE;
-        util.GameConfig.SCENE_STATE = scenes.State.START;
+        util.GameConfig.SCENE_STATE = scenes.State.SPLASH;
+        // currentSceneState = scenes.State.NO_SCENE;
+        // util.GameConfig.SCENE_STATE = scenes.State.START;
     }
     function Update() {
         if (currentSceneState != util.GameConfig.SCENE_STATE) {
@@ -36,6 +38,9 @@ let Game = (function () {
             stage.removeAllChildren();
         }
         switch (util.GameConfig.SCENE_STATE) {
+            case scenes.State.SPLASH:
+                currentScene = new scenes.Splash();
+                break;
             case scenes.State.START:
                 currentScene = new scenes.Start();
                 break;

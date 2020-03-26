@@ -1,5 +1,5 @@
 // Game engine
-let Game = (function() {
+let Game = (function () {
   // initialize the needed object
   let canvas: HTMLCanvasElement = document.getElementsByTagName("canvas")[0];
   let stage: createjs.Stage;
@@ -25,11 +25,17 @@ let Game = (function() {
     createjs.Ticker.on("tick", Update);
     stage.enableMouseOver(20);
 
+
     currentSceneState = scenes.State.NO_SCENE;
-    util.GameConfig.SCENE_STATE = scenes.State.START;
+    util.GameConfig.SCENE_STATE = scenes.State.SPLASH;
+
+
+    // currentSceneState = scenes.State.NO_SCENE;
+    // util.GameConfig.SCENE_STATE = scenes.State.START;
   }
 
   function Update(): void {
+
     if (currentSceneState != util.GameConfig.SCENE_STATE) {
       Main();
     }
@@ -46,6 +52,9 @@ let Game = (function() {
     }
 
     switch (util.GameConfig.SCENE_STATE) {
+      case scenes.State.SPLASH:
+        currentScene = new scenes.Splash();
+        break;
       case scenes.State.START:
         currentScene = new scenes.Start();
         break;
