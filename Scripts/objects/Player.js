@@ -7,7 +7,7 @@ var objects;
             super(imagePath, x, y, true);
             // PRIVATE INSTANCE MEMBER
             //    private _bulletNum: number = 5;
-            this._bulletNum = 50;
+            this._bulletNum = 10;
             this._health = 2;
             this._name = "player";
             this._weaponType = "normal";

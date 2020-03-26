@@ -2,6 +2,8 @@ module scenes {
   export class First extends objects.Scene {
     // PRIVATE INSTANCE MEMEBERS
     background: objects.Image;
+    baseA: objects.Image;
+    baseB: objects.Image;
     playerA: objects.Player;
     playerB: objects.Player;
     bulletAList: objects.Bullet[] = [];
@@ -23,6 +25,22 @@ module scenes {
         util.STAGE_W,
         util.STAGE_H,
         false
+      );
+      this.baseA = new objects.Image(
+        util.BASE_A_PATH,
+        55,
+        90,
+        100,
+        100,
+        true
+      );
+      this.baseB = new objects.Image(
+        util.BASE_B_PATH,
+        900,
+        580,
+        100,
+        100,
+        true
       );
       // player A
       this.playerA = new objects.Player(
@@ -57,6 +75,8 @@ module scenes {
     // PUBLIC METHODS
     public Start(): void {
       this.addChild(this.background);
+      this.addChild(this.baseA);
+      this.addChild(this.baseB);
       this.addChild(this.playerA);
       this.addChild(this.ScoreBorad.LivesLabelA);
       this.addChild(this.ScoreBorad.BulletLabelA);
@@ -73,6 +93,10 @@ module scenes {
       this.detectBulletCollision(this.bulletAList, this.playerB);
       this.detectBulletCollision(this.bulletBList, this.playerA);
 
+      // detect the base collision
+      this.detectBaseCollision(this.baseA, this.playerA);
+      this.detectBaseCollision(this.baseB, this.playerB);
+
       // detect bullet collision with each other
       this.detectDestructablesBulletCollision(
         this.bulletAList,
@@ -84,7 +108,7 @@ module scenes {
       this.detectPlayersBullet();
     }
 
-    public Main(): void {}
+    public Main(): void { }
 
     detectPressedKeys(): void {
       if (this.keyPressedStates[util.Key.UP]) {
@@ -213,6 +237,30 @@ module scenes {
       if (this.playerA.health <= 0 || this.playerB.health <= 0) {
         //util.GameConfig.SCENE_STATE = scenes.State.END;
         util.GameConfig.SCENE_STATE = scenes.State.STAGECLEANED;
+      }
+    }
+
+    detectBaseCollision(
+      base: objects.Image,
+      target: objects.Player
+    ): void {
+      managers.Collision.AABBCheck(base, target);
+
+      if (target.isColliding) {
+        switch (target.name) {
+          case "PlayerA":
+            {
+              this.playerA.bulletNum = 10;
+              this.ScoreBorad.BulletsA = this.playerA.bulletNum;
+            }
+            break;
+          case "PlayerB":
+            {
+              this.playerB.bulletNum = 10;
+              this.ScoreBorad.BulletsB = this.playerB.bulletNum;
+            }
+            break;
+        }
       }
     }
   }

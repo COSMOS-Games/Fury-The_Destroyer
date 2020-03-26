@@ -2,6 +2,8 @@ module scenes {
   export class Second extends objects.Scene {
     // PRIVATE INSTANCE MEMEBERS
     background: objects.Image;
+    baseA: objects.Image;
+    baseB: objects.Image;
     playerA: objects.Player;
     playerB: objects.Player;
     bulletAList: objects.Bullet[] = [];
@@ -26,6 +28,22 @@ module scenes {
         util.STAGE_W,
         util.STAGE_H,
         false
+      );
+      this.baseA = new objects.Image(
+        util.BASE_A_PATH,
+        55,
+        90,
+        100,
+        100,
+        true
+      );
+      this.baseB = new objects.Image(
+        util.BASE_B_PATH,
+        900,
+        580,
+        100,
+        100,
+        true
       );
       // player A
       this.playerA = new objects.Player(
@@ -61,6 +79,8 @@ module scenes {
     // PUBLIC METHODS
     public Start(): void {
       this.addChild(this.background);
+      this.addChild(this.baseA);
+      this.addChild(this.baseB);
       this.addChild(this.playerA);
       this.addChild(this.scoreBorad.LivesLabelA);
       this.addChild(this.scoreBorad.BulletLabelA);
@@ -86,6 +106,10 @@ module scenes {
       // detect mine collision with player
       this.detectMineCollision(this.mineList, this.playerA);
       this.detectMineCollision(this.mineList, this.playerB);
+
+      // detect the base collision
+      this.detectBaseCollision(this.baseA, this.playerA);
+      this.detectBaseCollision(this.baseB, this.playerB);
 
       // detect bullet collision with mine
       this.detectDestructablesCollision(this.mineList, this.bulletAList);
@@ -340,6 +364,30 @@ module scenes {
     detectPlayerHealth(): void {
       if (this.playerA.health <= 0 || this.playerB.health <= 0) {
         util.GameConfig.SCENE_STATE = scenes.State.STAGECLEANEDAGAIN;
+      }
+    }
+
+    detectBaseCollision(
+      base: objects.Image,
+      target: objects.Player
+    ): void {
+      managers.Collision.AABBCheck(base, target);
+
+      if (target.isColliding) {
+        switch (target.name) {
+          case "PlayerA":
+            {
+              this.playerA.bulletNum = 10;
+              this.scoreBorad.BulletsA = this.playerA.bulletNum;
+            }
+            break;
+          case "PlayerB":
+            {
+              this.playerB.bulletNum = 10;
+              this.scoreBorad.BulletsB = this.playerB.bulletNum;
+            }
+            break;
+        }
       }
     }
   }

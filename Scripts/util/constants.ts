@@ -7,6 +7,8 @@ module util {
   export const NEXT_BATTLE_PATH: string = "./Assets/images/next-battle.png";
   export const INSTRUCTIONS: string = "./Assets/images/instructions.png";
   export const INSTRUCTION_PATH: string = "./Assets/images/instruction.png";
+  export const BASE_A_PATH: string = "./Assets/images/baseA.png";
+  export const BASE_B_PATH: string = "./Assets/images/baseB.png";
 
   // Player image assets
   export const PALYER_A_SUBMARINE: string = "./Assets/images/submarineA.png";
@@ -42,6 +44,6 @@ module util {
   //
   export const STAGE_BOUNDARY_TOP = 45;
 
-  export const PLAYER_A_POS: objects.Vector2 = new objects.Vector2(50, 75);
-  export const PLAYER_B_POS: objects.Vector2 = new objects.Vector2(900, 500);
+  export const PLAYER_A_POS: objects.Vector2 = new objects.Vector2(55, 90);
+  export const PLAYER_B_POS: objects.Vector2 = new objects.Vector2(900, 580);
 }

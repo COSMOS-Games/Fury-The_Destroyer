@@ -2,7 +2,7 @@ module objects {
   export class Player extends GameObject {
     // PRIVATE INSTANCE MEMBER
     //    private _bulletNum: number = 5;
-    private _bulletNum: number = 50;
+    private _bulletNum: number = 10;
     private _health: number = 2;
     private _name: string = "player";
     private _weaponType: String = "normal";

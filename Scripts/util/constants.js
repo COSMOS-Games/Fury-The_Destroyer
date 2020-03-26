@@ -9,6 +9,8 @@ var util;
     util.NEXT_BATTLE_PATH = "./Assets/images/next-battle.png";
     util.INSTRUCTIONS = "./Assets/images/instructions.png";
     util.INSTRUCTION_PATH = "./Assets/images/instruction.png";
+    util.BASE_A_PATH = "./Assets/images/baseA.png";
+    util.BASE_B_PATH = "./Assets/images/baseB.png";
     // Player image assets
     util.PALYER_A_SUBMARINE = "./Assets/images/submarineA.png";
     util.PALYER_B_SUBMARINE = "./Assets/images/submarineB.png";
@@ -35,7 +37,7 @@ var util;
     util.STAGE_H = 640;
     //
     util.STAGE_BOUNDARY_TOP = 45;
-    util.PLAYER_A_POS = new objects.Vector2(50, 75);
-    util.PLAYER_B_POS = new objects.Vector2(900, 500);
+    util.PLAYER_A_POS = new objects.Vector2(55, 90);
+    util.PLAYER_B_POS = new objects.Vector2(900, 580);
 })(util || (util = {}));
 //# sourceMappingURL=constants.js.map
