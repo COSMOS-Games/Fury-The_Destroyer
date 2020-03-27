@@ -58,8 +58,8 @@ module scenes {
         score,
         "32px",
         util.FONT_FAMILY,
-        "Black",
-        450,
+        "White",
+        480,
         250,
         true
       );
