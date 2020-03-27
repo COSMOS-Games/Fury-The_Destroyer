@@ -4,7 +4,7 @@ var managers;
     class ScoreBorad {
         constructor() {
             // set up the labels
-            this._livesLabelA = new objects.Label("Playe A: Health 99", "24px", "Times", "white", 100, 25, true);
+            this._livesLabelA = new objects.Label("Player A: Health 99", "24px", "Times", "white", 100, 25, true);
             this._bulletLabelA = new objects.Label("Bullet 999", "24px", "Times", "white", 250, 25, true);
             this._livesLabelB = new objects.Label("Player B: Health 99", "24px", "Times", "white", 750, 25, true);
             this._bulletLabelB = new objects.Label("Bullet 999", "24px", "Times", "white", 900, 25, true);
@@ -82,7 +82,7 @@ var managers;
         set LivesA(v) {
             this._livesA = v;
             util.GameConfig.PLAYER_A_LIVES = this._livesA;
-            this.LivesLabelA.setText("Playe A: Health " + this._livesA);
+            this.LivesLabelA.setText("Player A: Health " + this._livesA);
         }
         get LivesB() {
             return this._livesB;
@@ -90,7 +90,7 @@ var managers;
         set LivesB(v) {
             this._livesB = v;
             util.GameConfig.PLAYER_B_LIVES = this._livesB;
-            this.LivesLabelB.setText("Playe B: Health " + this._livesB);
+            this.LivesLabelB.setText("Player B: Health " + this._livesB);
         }
     }
     managers.ScoreBorad = ScoreBorad;

@@ -82,7 +82,7 @@ module managers {
     public set LivesA(v: number) {
       this._livesA = v;
       util.GameConfig.PLAYER_A_LIVES = this._livesA;
-      this.LivesLabelA.setText("Playe A: Health " + this._livesA);
+      this.LivesLabelA.setText("Player A: Health " + this._livesA);
     }
 
     public get LivesB(): number {
@@ -91,13 +91,13 @@ module managers {
     public set LivesB(v: number) {
       this._livesB = v;
       util.GameConfig.PLAYER_B_LIVES = this._livesB;
-      this.LivesLabelB.setText("Playe B: Health " + this._livesB);
+      this.LivesLabelB.setText("Player B: Health " + this._livesB);
     }
 
     constructor() {
       // set up the labels
       this._livesLabelA = new objects.Label(
-        "Playe A: Health 99",
+        "Player A: Health 99",
         "24px",
         "Times",
         "white",
