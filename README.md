@@ -118,20 +118,25 @@ For beta release, it will have additional futures on top of alpha release, such 
 
 - Background image is created by and belongs to COSMOS Games.
 
-- Button layout image is from UI elements for game application (Behance)
-https://www.behance.net/gallery/21061821/UI-elements-for-game-application 
+- Submarines
+http://www.pngmart.com/image/79275
+https://www.pngfuel.com/free-png/dumpr
 
-- Submarine image is from Submarine clipart: cute submarine clip art (Clipart Panda)
-http://www.clipartpanda.com/clipart_images/cute-submarine-clip-art-13346612 
+- Missiles
+https://favpng.com/png_view/missile-anti-tank-missile-weapon-rocket-launcher-png/H9jfyyM1
 
-- Torpedo image is from 2D Art (OpenGameArt.org)
-https://opengameart.org/content/2d-sprites-3
+https://fallout.gamepedia.com/Missile_(Fallout_4)#/media/File:Fallout4MissileAlternate.png
 
-- Mine image is from Sea Mine Icons (DLPNG)
-https://dlpng.com/png/4473785
+- Corals
+https://images.fineartamerica.com/images/artworkimages/medium/1/4-sea-anemone-michal-boubin-transparent.png
 
-- Scroll image is from Document Clipart Papyrus Scroll (WebStockReview.org)
-https://webstockreview.net/startdownload.html
+https://www.pngkey.com/png/full/401-4013452_free-download-orange-coral-png-clipart-coral-reef.png
+
+- Background
+http://pluspng.com/png-129011.html
+
+- Mine
+https://www.roblox.com/library/2257017281/sea-mine
 
 ## Contributors:
 - Logan J. Kim, Project Manager;
