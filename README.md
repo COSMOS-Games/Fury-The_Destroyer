@@ -119,24 +119,22 @@ For beta release, it will have additional futures on top of alpha release, such 
 - Background image is created by and belongs to COSMOS Games.
 
 - Submarines
-http://www.pngmart.com/image/79275
-https://www.pngfuel.com/free-png/dumpr
+  - http://www.pngmart.com/image/79275
+  - https://www.pngfuel.com/free-png/dumpr
 
 - Missiles
-https://favpng.com/png_view/missile-anti-tank-missile-weapon-rocket-launcher-png/H9jfyyM1
+  - https://favpng.com/png_view/missile-anti-tank-missile-weapon-rocket-launcher-png/H9jfyyM1
+  - https://fallout.gamepedia.com/Missile_(Fallout_4)#/media/File:Fallout4MissileAlternate.png
 
-https://fallout.gamepedia.com/Missile_(Fallout_4)#/media/File:Fallout4MissileAlternate.png
-
-- Corals
-https://images.fineartamerica.com/images/artworkimages/medium/1/4-sea-anemone-michal-boubin-transparent.png
-
-https://www.pngkey.com/png/full/401-4013452_free-download-orange-coral-png-clipart-coral-reef.png
+- Bases
+  - https://images.fineartamerica.com/images/artworkimages/medium/1/4-sea-anemone-michal-boubin-transparent.png
+  - https://www.pngkey.com/png/full/401-4013452_free-download-orange-coral-png-clipart-coral-reef.png
 
 - Background
-http://pluspng.com/png-129011.html
+  - http://pluspng.com/png-129011.html
 
 - Mine
-https://www.roblox.com/library/2257017281/sea-mine
+  - https://www.roblox.com/library/2257017281/sea-mine
 
 ## Contributors:
 - Logan J. Kim, Project Manager;
