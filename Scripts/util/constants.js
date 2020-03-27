@@ -2,6 +2,7 @@
 var util;
 (function (util) {
     // image assets
+    util.SPLASH_SCREEN = "./Assets/images/splash.png";
     util.BACKGROUND_PATH_GAME = "./Assets/images/game-screen.png";
     util.FURY_PATH = "./Assets/images/fury.png";
     util.THE_DESTROYER_PATH = "./Assets/images/the-destroyer.png";

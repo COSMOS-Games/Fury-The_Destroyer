@@ -1,5 +1,7 @@
 module util {
   // image assets
+  export const SPLASH_SCREEN: string = "./Assets/images/splash.png";
+
   export const BACKGROUND_PATH_GAME: string = "./Assets/images/game-screen.png";
   export const FURY_PATH: string = "./Assets/images/fury.png";
   export const THE_DESTROYER_PATH: string = "./Assets/images/the-destroyer.png";

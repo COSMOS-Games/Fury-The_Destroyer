@@ -6,18 +6,16 @@ var scenes;
         // CONTRUCTOR
         constructor() {
             super();
-            this._background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
-            this._furyLabel = new objects.Image(util.FURY_PATH, 480, 100, 500, 150, true);
+            this._splashScreen = new objects.Image(util.SPLASH_SCREEN, 0, 0, util.STAGE_W, util.STAGE_H, false);
             this.Start();
         }
         // PUBLIC METHODS
         Start() {
-            this.addChild(this._background);
-            this.addChild(this._furyLabel);
+            this.addChild(this._splashScreen);
             this.Main();
         }
         Update() {
-            if (createjs.Ticker.getTime() >= 3000) {
+            if (createjs.Ticker.getTime() >= 4000) {
                 util.GameConfig.SCENE_STATE = scenes.State.START;
             }
         }
