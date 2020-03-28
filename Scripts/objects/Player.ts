@@ -86,7 +86,7 @@ module objects {
       this._checkBounds();
     }
 
-    public Reset(): void {}
+    public Reset(): void { }
 
     public moveLeft(): void {
       this.position.add(Vector2.scale(Vector2.left(), 5));
@@ -109,7 +109,6 @@ module objects {
       aim: Vector2
     ): Array<objects.Bullet> | null {
 
-      createjs.Sound.play("shoot");
 
       let bullets = new Array<Bullet>();
       switch (this.weaponType) {
@@ -157,6 +156,8 @@ module objects {
       }
       // check if this player still have bullet or not
       if (this.bulletNum > 0) {
+        createjs.Sound.play("shoot");
+
         this.bulletNum -= 1;
         // return bullet;
         return bullets;
@@ -165,6 +166,6 @@ module objects {
       }
     }
 
-    public explode(): void {}
+    public explode(): void { }
   }
 }

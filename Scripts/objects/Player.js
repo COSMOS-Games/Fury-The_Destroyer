@@ -89,7 +89,6 @@ var objects;
             this.position.add(objects.Vector2.scale(objects.Vector2.down(), 5));
         }
         shoot(imagePath, aim) {
-            createjs.Sound.play("shoot");
             let bullets = new Array();
             switch (this.weaponType) {
                 case "normal":
@@ -111,6 +110,7 @@ var objects;
             }
             // check if this player still have bullet or not
             if (this.bulletNum > 0) {
+                createjs.Sound.play("shoot");
                 this.bulletNum -= 1;
                 // return bullet;
                 return bullets;
