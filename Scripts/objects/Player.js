@@ -89,6 +89,7 @@ var objects;
             this.position.add(objects.Vector2.scale(objects.Vector2.down(), 5));
         }
         shoot(imagePath, aim) {
+            createjs.Sound.play("shoot");
             let bullets = new Array();
             switch (this.weaponType) {
                 case "normal":

@@ -25,9 +25,12 @@ let Game = (function () {
     createjs.Ticker.on("tick", Update);
     stage.enableMouseOver(20);
 
-
     currentSceneState = scenes.State.NO_SCENE;
     util.GameConfig.SCENE_STATE = scenes.State.SPLASH;
+
+    // Load Files
+    createjs.Sound.alternateExtensions = ["mp3"];
+    createjs.Sound.registerSound ("./Assets/audio/shoot.mp3" , "shoot");
 
 
     // currentSceneState = scenes.State.NO_SCENE;
