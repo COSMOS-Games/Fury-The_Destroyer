@@ -63,6 +63,9 @@ module scenes {
 
     // PUBLIC METHODS
     public Start(): void {
+
+      createjs.Sound.play("shoot" , {volume: 1});
+
       this.addChild(this._background);
       this.addChild(this._startButton);
       this.addChild(this._instructionsButton);

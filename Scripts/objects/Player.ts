@@ -108,6 +108,9 @@ module objects {
       imagePath: string,
       aim: Vector2
     ): Array<objects.Bullet> | null {
+
+      createjs.Sound.play("shoot");
+
       let bullets = new Array<Bullet>();
       switch (this.weaponType) {
         case "normal":

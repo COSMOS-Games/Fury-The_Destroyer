@@ -15,6 +15,7 @@ var scenes;
         }
         // PUBLIC METHODS
         Start() {
+            createjs.Sound.play("shoot", { volume: 1 });
             this.addChild(this._background);
             this.addChild(this._startButton);
             this.addChild(this._instructionsButton);
