@@ -1,5 +1,5 @@
 module objects {
-  export class Player extends GameObject {
+  export class Player extends GameObjectSprite {
     // PRIVATE INSTANCE MEMBER
     //    private _bulletNum: number = 5;
     private _bulletNum: number = 10;
@@ -40,8 +40,8 @@ module objects {
     }
 
     // CONSTRUCTOR
-    constructor(imagePath: string, x: number, y: number, name: string) {
-      super(imagePath, x, y, true);
+    constructor(spritePath: createjs.SpriteSheet, imageName: string, x: number, y: number, name: string) {
+      super(spritePath, imageName, x, y, true);
       this.name = name;
       this.Start();
     }

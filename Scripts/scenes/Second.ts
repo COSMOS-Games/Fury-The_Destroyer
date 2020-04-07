@@ -49,7 +49,8 @@ module scenes {
       );
       // player A
       this.playerA = new objects.Player(
-        util.PALYER_A_SUBMARINE,
+        util.GameConfig.ATLAS,
+        "submarineA",
         util.PLAYER_A_POS.x,
         util.PLAYER_A_POS.y,
         "PlayerA"
@@ -58,7 +59,8 @@ module scenes {
       util.GameConfig.PLAYER_A_BULLETS = this.playerA.bulletNum;
       // player B
       this.playerB = new objects.Player(
-        util.PALYER_B_SUBMARINE,
+        util.GameConfig.ATLAS,
+        "submarineB",
         util.PLAYER_B_POS.x,
         util.PLAYER_B_POS.y,
         "PlayerB"

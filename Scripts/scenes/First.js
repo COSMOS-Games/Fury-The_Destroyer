@@ -12,12 +12,12 @@ var scenes;
             this.baseA = new objects.Image(util.BASE_A_PATH, 55, 90, 100, 100, true);
             this.baseB = new objects.Image(util.BASE_B_PATH, 900, 580, 100, 100, true);
             // player A
-            this.playerA = new objects.Player(util.PALYER_A_SUBMARINE, util.PLAYER_A_POS.x, util.PLAYER_A_POS.y, "PlayerA");
+            this.playerA = new objects.Player(util.GameConfig.ATLAS, "submarineA", util.PLAYER_A_POS.x, util.PLAYER_A_POS.y, "PlayerA");
             util.GameConfig.PLAYER_A_LIVES = this.playerA.health;
             util.GameConfig.PLAYER_A_BULLETS = this.playerA.bulletNum;
             util.GameConfig.PLAYER_A_SCORE = 0;
             // player B
-            this.playerB = new objects.Player(util.PALYER_B_SUBMARINE, util.PLAYER_B_POS.x, util.PLAYER_B_POS.y, "PlayerB");
+            this.playerB = new objects.Player(util.GameConfig.ATLAS, "submarineB", util.PLAYER_B_POS.x, util.PLAYER_B_POS.y, "PlayerB");
             util.GameConfig.PLAYER_B_LIVES = this.playerB.health;
             util.GameConfig.PLAYER_B_BULLETS = this.playerB.bulletNum;
             util.GameConfig.PLAYER_B_SCORE = 0;

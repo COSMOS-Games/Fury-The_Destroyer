@@ -1,10 +1,10 @@
 "use strict";
 var objects;
 (function (objects) {
-    class Player extends objects.GameObject {
+    class Player extends objects.GameObjectSprite {
         // CONSTRUCTOR
-        constructor(imagePath, x, y, name) {
-            super(imagePath, x, y, true);
+        constructor(spritePath, imageName, x, y, name) {
+            super(spritePath, imageName, x, y, true);
             // PRIVATE INSTANCE MEMBER
             //    private _bulletNum: number = 5;
             this._bulletNum = 10;

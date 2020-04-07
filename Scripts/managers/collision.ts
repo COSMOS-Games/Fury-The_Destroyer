@@ -15,7 +15,7 @@ module managers {
         }
 
         // Access Aligned Bounding Boxes
-        public static AABBCheck(object1: objects.GameObject, object2: objects.GameObject) {
+        public static AABBCheck(object1: objects.GameObject | objects.GameObjectSprite, object2: objects.GameObject | objects.GameObjectSprite) {
             let object1Offset = new objects.Vector2(0, 0);
             let object2Offset = new objects.Vector2(0, 0);
 
