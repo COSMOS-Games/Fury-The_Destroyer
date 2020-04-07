@@ -1,1 +1,1 @@
-{"version":3,"file":"GameConfig.js","sourceRoot":"","sources":["GameConfig.ts"],"names":[],"mappings":";AAAA,IAAO,IAAI,CAYV;AAZD,WAAO,IAAI;IACT,MAAa,UAAU;KAUtB;IAVY,eAAU,aAUtB,CAAA;AACH,CAAC,EAZM,IAAI,KAAJ,IAAI,QAYV"}
+{"version":3,"file":"GameConfig.js","sourceRoot":"","sources":["GameConfig.ts"],"names":[],"mappings":";AAAA,IAAO,IAAI,CAcV;AAdD,WAAO,IAAI;IACP,MAAa,UAAU;KAYtB;IAZY,eAAU,aAYtB,CAAA;AACL,CAAC,EAdM,IAAI,KAAJ,IAAI,QAcV"}
