@@ -64,7 +64,7 @@ module scenes {
     // PUBLIC METHODS
     public Start(): void {
 
-      createjs.Sound.play("shoot" , {volume: 1});
+      createjs.Sound.play("shoot", { volume: 1 });
 
       this.addChild(this._background);
       this.addChild(this._startButton);
@@ -74,12 +74,12 @@ module scenes {
       this.Main();
     }
 
-    public Update(): void {}
+    public Update(): void { }
 
     // TODO:consolidate stage cleared scene
     public Main(): void {
       this._startButton.HoverOn();
-      this._startButton.on("click", function() {
+      this._startButton.on("click", function () {
         util.GameConfig.SCENE_STATE = scenes.State.FIRST;
         // initialize the scores for players
         util.GameConfig.PLAYER_A_SCORE = 0;
@@ -96,7 +96,7 @@ module scenes {
       //});
 
       this._instructionsButton.HoverOn();
-      this._instructionsButton.on("click", function() {
+      this._instructionsButton.on("click", function () {
         util.GameConfig.SCENE_STATE = scenes.State.INSTRUCTIONS;
       });
     }
