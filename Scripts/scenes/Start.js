@@ -28,7 +28,7 @@ var scenes;
         Main() {
             this._startButton.HoverOn();
             this._startButton.on("click", function () {
-                util.GameConfig.SCENE_STATE = scenes.State.FIRST;
+                util.GameConfig.SCENE_STATE = scenes.State.SECOND;
                 // initialize the scores for players
                 util.GameConfig.PLAYER_A_SCORE = 0;
                 util.GameConfig.PLAYER_B_SCORE = 0;

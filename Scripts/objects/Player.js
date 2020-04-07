@@ -94,6 +94,7 @@ var objects;
                 case "normal":
                     {
                         let bullet = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, aim);
+                        bullet.owner = this.name;
                         bullets.push(bullet);
                     }
                     break;
@@ -102,6 +103,9 @@ var objects;
                         let bullet1 = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, objects.Vector2.scale(aim, 10), true);
                         let bullet2 = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, objects.Vector2.scale(objects.Vector2.add(aim, new objects.Vector2(aim.x, 1)), 3), true);
                         let bullet3 = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, objects.Vector2.scale(objects.Vector2.add(aim, new objects.Vector2(aim.x, -1)), 3), true);
+                        bullet1.owner = this.name;
+                        bullet2.owner = this.name;
+                        bullet3.owner = this.name;
                         bullets.push(bullet1);
                         bullets.push(bullet2);
                         bullets.push(bullet3);

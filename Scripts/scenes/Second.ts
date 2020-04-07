@@ -11,6 +11,8 @@ module scenes {
 
     mineList: objects.Mine[] = [];
 
+    squid: objects.Squid;
+
     scoreBorad: managers.ScoreBorad;
 
     // PUBLIC PROPERTIES
@@ -69,6 +71,9 @@ module scenes {
       // mine
       this.mineList = this.generateMines();
 
+      // squid
+      this.squid = new objects.Squid(util.PLAYER_A_BULLET, 100, 100);
+
       // selectedd weapon type
       this.playerA.weaponType = "normal";
       this.playerB.weaponType = "normal";
@@ -87,6 +92,8 @@ module scenes {
       this.addChild(this.playerB);
       this.addChild(this.scoreBorad.LivesLabelB);
       this.addChild(this.scoreBorad.BulletLabelB);
+
+      this.addChild(this.squid);
 
       // generate mines
       for (let i = 0; i < this.mineList.length; i++) {
@@ -119,6 +126,21 @@ module scenes {
       this.detectDestructablesBulletCollision(
         this.bulletAList,
         this.bulletBList
+      );
+
+      //
+      this.detectSquidAndBulletCollision(
+        this.bulletAList,
+        this.squid
+      );
+      this.detectSquidAndBulletCollision(
+        this.bulletBList,
+        this.squid
+      );
+      this.detectSquidPlayerCollision(
+        this.squid,
+        this.playerA,
+        this.playerB
       );
 
       //
@@ -330,6 +352,66 @@ module scenes {
         }
       }
     }
+
+    detectSquidAndBulletCollision(
+      bullets: objects.Bullet[],
+      target: objects.Squid
+    ): void {
+      for (let i = 0; i < bullets.length; i++) {
+        managers.Collision.AABBCheck(bullets[i], target);
+
+        if (target.isColliding) {
+          // update player health
+          target.health -= 1;
+
+          if (target.health <= 0) {
+            switch (bullets[i].owner) {
+              case "PlayerA":
+                {
+                  this.scoreBorad.ScoreA += 500;
+                }
+                break;
+              case "PlayerB":
+                {
+                  this.scoreBorad.ScoreB += 500;
+                }
+                break;
+            }
+
+            target.Reset();
+          }
+
+          this.removeChild(bullets[i]); // remove the bullet from the stage
+          bullets.splice(i, 1); // remove the bullet from the list
+
+        }
+      }
+    }
+
+    detectSquidPlayerCollision(
+      squid: objects.Squid,
+      playerA: objects.Player,
+      playerB: objects.Player,
+    ): void {
+      managers.Collision.AABBCheck(playerB, squid);
+
+      if (squid.isColliding) {
+        squid.scaleX = squid.scaleX > 0 ? 1.1 : -1.1;
+        squid.scaleY = squid.scaleY > 0 ? 1.1 : -1.1;
+      } else {
+        managers.Collision.AABBCheck(playerA, squid);
+        if (squid.isColliding) {
+          squid.scaleX = squid.scaleX > 0 ? 1.1 : -1.1;
+          squid.scaleY = squid.scaleY > 0 ? 1.1 : -1.1;
+        } else {
+          squid.scaleX = squid.scaleX > 0 ? 1 : -1;
+          squid.scaleY = squid.scaleY > 0 ? 1 : -1;
+
+        }
+      }
+
+    }
+
 
     detectPlayersCollision(
       playerA: objects.Player,

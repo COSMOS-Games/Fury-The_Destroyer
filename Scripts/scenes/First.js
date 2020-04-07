@@ -22,6 +22,7 @@ var scenes;
             util.GameConfig.PLAYER_B_BULLETS = this.playerB.bulletNum;
             util.GameConfig.PLAYER_B_SCORE = 0;
             this.ScoreBorad = new managers.ScoreBorad();
+            this.squid = new objects.Squid(util.PLAYER_A_BULLET, 100, 100);
             // selectedd weapon type
             this.playerA.weaponType = "normal";
             this.playerB.weaponType = "normal";
@@ -38,6 +39,7 @@ var scenes;
             this.addChild(this.playerB);
             this.addChild(this.ScoreBorad.LivesLabelB);
             this.addChild(this.ScoreBorad.BulletLabelB);
+            this.addChild(this.squid);
             this.Main();
         }
         Update() {
@@ -51,6 +53,10 @@ var scenes;
             this.detectBaseCollision(this.baseB, this.playerB);
             // detect bullet collision with each other
             this.detectDestructablesBulletCollision(this.bulletAList, this.bulletBList);
+            //
+            this.detectSquidAndBulletCollision(this.bulletAList, this.squid);
+            this.detectSquidAndBulletCollision(this.bulletBList, this.squid);
+            this.detectSquidPlayerCollision(this.squid, this.playerA, this.playerB);
             // update health and bullet label
             this.detectPlayerHealth();
             //      this.detectPlayersBullet();
@@ -141,6 +147,50 @@ var scenes;
                     // simplying check the left and right border
                     this.removeChild(bullets[i]);
                     bullets.splice(i, 1); // remove the bullet from the list
+                }
+            }
+        }
+        detectSquidAndBulletCollision(bullets, target) {
+            for (let i = 0; i < bullets.length; i++) {
+                managers.Collision.AABBCheck(bullets[i], target);
+                if (target.isColliding) {
+                    // update player health
+                    target.health -= 1;
+                    if (target.health <= 0) {
+                        switch (bullets[i].owner) {
+                            case "PlayerA":
+                                {
+                                    this.ScoreBorad.ScoreA += 500;
+                                }
+                                break;
+                            case "PlayerB":
+                                {
+                                    this.ScoreBorad.ScoreB += 500;
+                                }
+                                break;
+                        }
+                        target.Reset();
+                    }
+                    this.removeChild(bullets[i]); // remove the bullet from the stage
+                    bullets.splice(i, 1); // remove the bullet from the list
+                }
+            }
+        }
+        detectSquidPlayerCollision(squid, playerA, playerB) {
+            managers.Collision.AABBCheck(playerB, squid);
+            if (squid.isColliding) {
+                squid.scaleX = squid.scaleX > 0 ? 1.1 : -1.1;
+                squid.scaleY = squid.scaleY > 0 ? 1.1 : -1.1;
+            }
+            else {
+                managers.Collision.AABBCheck(playerA, squid);
+                if (squid.isColliding) {
+                    squid.scaleX = squid.scaleX > 0 ? 1.1 : -1.1;
+                    squid.scaleY = squid.scaleY > 0 ? 1.1 : -1.1;
+                }
+                else {
+                    squid.scaleX = squid.scaleX > 0 ? 1 : -1;
+                    squid.scaleY = squid.scaleY > 0 ? 1 : -1;
                 }
             }
         }

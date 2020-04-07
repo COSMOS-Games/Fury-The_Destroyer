@@ -120,6 +120,7 @@ module objects {
               this.position.y + 10,
               aim
             );
+            bullet.owner = this.name;
 
             bullets.push(bullet);
           }
@@ -147,6 +148,10 @@ module objects {
               Vector2.scale(Vector2.add(aim, new Vector2(aim.x, -1)), 3),
               true
             );
+
+            bullet1.owner = this.name;
+            bullet2.owner = this.name;
+            bullet3.owner = this.name;
 
             bullets.push(bullet1);
             bullets.push(bullet2);
