@@ -7,7 +7,7 @@ let Game = (function () {
   let currentSceneState: scenes.State;
   let currentScene: objects.Scene;
   let MoveInstruction: scenes.MoveInstruction;
-  //let ShootInstruction: objects.Scene;
+  let ShootInstruction: scenes.ShootInstruction;
   let FirstScene: scenes.First;
   let SecondScene: scenes.Second;
   let ThirdScene: scenes.Third;
@@ -174,6 +174,10 @@ let Game = (function () {
         MoveInstruction = new scenes.MoveInstruction();
         currentScene = MoveInstruction;
         break;
+      case scenes.State.SHOOT_INSTRUCTION:
+        ShootInstruction = new scenes.ShootInstruction();
+        currentScene = ShootInstruction;
+        break;
       case scenes.State.FIRST:
         FirstScene = new scenes.First();
         currentScene = FirstScene;
@@ -207,6 +211,11 @@ let Game = (function () {
       MoveInstruction.keyPressedStates[event.keyCode] = false;
     }
 
+    // shoot instruction scene
+    if (ShootInstruction && ShootInstruction.keyPressedStates) {
+      ShootInstruction.keyPressedStates[event.keyCode] = false;
+    }
+
     // first scene
     if (FirstScene && FirstScene.keyPressedStates) {
       FirstScene.keyPressedStates[event.keyCode] = false;
@@ -228,6 +237,12 @@ let Game = (function () {
     // move instruction scene
     if (MoveInstruction && MoveInstruction.keyPressedStates) {
       MoveInstruction.keyPressedStates[event.keyCode] = true;
+    }
+
+    // shoot instruction scene
+    if (ShootInstruction && ShootInstruction.keyPressedStates) {
+      ShootInstruction.keyPressedStates[event.keyCode] = true;
+      ShootInstruction.detectShootingEvent();
     }
 
     // first scene

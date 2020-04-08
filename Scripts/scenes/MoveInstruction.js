@@ -56,7 +56,7 @@ var scenes;
             // player A instruction label
             this._playerAInstruction = new objects.Label("Player A: Press WASD key to move", "20px", util.FONT_FAMILY, "black", 10, 10, false);
             // player B instruction label
-            this._playerBInstruction = new objects.Label("Player B: press arrow key to move", "20px", util.FONT_FAMILY, "black", 585, 10, false);
+            this._playerBInstruction = new objects.Label("Player B: Press arrow key to move", "20px", util.FONT_FAMILY, "black", 585, 10, false);
             // instruction label
             this._instructionLabel = new objects.Label("Go find your base", "20px", util.FONT_FAMILY, "red", 380, 35, false);
             // button
@@ -95,6 +95,11 @@ var scenes;
             this.detectBaseCollision(this._baseA, this._playerA);
             this.detectBaseCollision(this._baseB, this._playerB);
         }
+        /**
+         * Main function, add button onclick event
+         *
+         * @memberof MoveInstruction
+         */
         Main() {
             this._nextButton.HoverOn();
             this._nextButton.on("click", function () {
@@ -102,6 +107,13 @@ var scenes;
                 util.GameConfig.SCENE_STATE = scenes.State.SHOOT_INSTRUCTION;
             });
         }
+        /**
+         * detect base and player collision
+         *
+         * @param {objects.Image} base
+         * @param {objects.Player} target
+         * @memberof MoveInstruction
+         */
         detectBaseCollision(base, target) {
             // check AABB collision
             managers.Collision.AABBCheck(base, target);
@@ -139,6 +151,12 @@ var scenes;
                 this.addChild(this._nextButton);
             }
         }
+        /**
+         * return randome Vector2 object
+         *
+         * @returns {objects.Vector2}
+         * @memberof MoveInstruction
+         */
         setRandomLocation() {
             // generate position at random
             let randomX = Math.floor(Math.random() * (util.STAGE_W - 100));

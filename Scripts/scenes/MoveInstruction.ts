@@ -126,7 +126,7 @@ module scenes {
 
       // player B instruction label
       this._playerBInstruction = new objects.Label(
-        "Player B: press arrow key to move",
+        "Player B: Press arrow key to move",
         "20px",
         util.FONT_FAMILY,
         "black",
@@ -196,6 +196,11 @@ module scenes {
       this.detectBaseCollision(this._baseB, this._playerB);
     }
 
+    /**
+     * Main function, add button onclick event
+     *
+     * @memberof MoveInstruction
+     */
     public Main(): void {
       this._nextButton.HoverOn();
       this._nextButton.on("click", function () {
@@ -204,6 +209,13 @@ module scenes {
       });
     }
 
+    /**
+     * detect base and player collision
+     *
+     * @param {objects.Image} base
+     * @param {objects.Player} target
+     * @memberof MoveInstruction
+     */
     public detectBaseCollision(
       base: objects.Image,
       target: objects.Player
@@ -245,6 +257,12 @@ module scenes {
       }
     }
 
+    /**
+     * return randome Vector2 object
+     *
+     * @returns {objects.Vector2}
+     * @memberof MoveInstruction
+     */
     public setRandomLocation(): objects.Vector2 {
       // generate position at random
       let randomX = Math.floor(Math.random() * (util.STAGE_W - 100));
