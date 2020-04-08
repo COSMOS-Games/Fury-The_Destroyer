@@ -2,13 +2,13 @@ module objects {
 
 
 
-    export class Mine extends GameObject {
+    export class Mine extends GameObjectSprite {
 
         // private fields
         private _angle: number = 0;
 
-        constructor(imagePath: string, x: number, y: number) {
-            super(imagePath, x, y, true);
+        constructor(atlas: createjs.SpriteSheet, imageName: string, x: number, y: number) {
+            super(atlas, imageName, x, y, true);
 
             this.Start();
         }

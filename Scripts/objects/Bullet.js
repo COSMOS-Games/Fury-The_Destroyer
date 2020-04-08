@@ -1,9 +1,9 @@
 "use strict";
 var objects;
 (function (objects) {
-    class Bullet extends objects.GameObject {
-        constructor(imagePath, x, y, direction, isSpecialWeapon) {
-            super(imagePath, x, y, true);
+    class Bullet extends objects.GameObjectSprite {
+        constructor(atlas, imageName, x, y, direction, isSpecialWeapon) {
+            super(atlas, imageName, x, y, true);
             // variables
             this._owner = "";
             if (isSpecialWeapon) {

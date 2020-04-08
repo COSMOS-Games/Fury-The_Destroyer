@@ -163,7 +163,7 @@ module scenes {
       if (this.keyPressedStates[util.Key.C]) {
         if (this.children.indexOf(this.playerA) !== -1) {
           let aim = objects.Vector2.right();
-          let bulletsA = this.playerA.shoot(util.PLAYER_A_BULLET, aim);
+          let bulletsA = this.playerA.shoot(util.GameConfig.ATLAS, "missileA", aim);
           this.ScoreBorad.BulletsA = this.playerA.bulletNum;
           if (bulletsA) {
             bulletsA.forEach(b => {
@@ -179,7 +179,7 @@ module scenes {
         if (this.children.indexOf(this.playerB) !== -1) {
           // aim specifies the direction of shooting
           let aim = objects.Vector2.left();
-          let bulletsB = this.playerB.shoot(util.PLAYER_B_BULLET, aim);
+          let bulletsB = this.playerB.shoot(util.GameConfig.ATLAS, "missileB", aim);
           this.ScoreBorad.BulletsB = this.playerB.bulletNum;
           if (bulletsB) {
             bulletsB.forEach(b => {

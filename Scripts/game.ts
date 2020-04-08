@@ -73,10 +73,14 @@ let Game = (function () {
                 "speed": 0.2
             },
             "mine": { "frames": [9] },
-            "missileA": { "frames": [10] },
-            "missileA1": { "frames": [11] },
-            "missileB": { "frames": [12] },
-            "missileB1": { "frames": [13] },
+            "missileA": {
+                "frames": [10, 11],
+                "speed": 0.2
+            },
+            "missileB": {
+                "frames": [12, 13],
+                "speed": 0.2
+            },
             "submarineA": {
                 "frames": [14, 15, 16, 17, 18, 19],
                 "speed": 0.2

@@ -88,21 +88,21 @@ var objects;
         moveDown() {
             this.position.add(objects.Vector2.scale(objects.Vector2.down(), 5));
         }
-        shoot(imagePath, aim) {
+        shoot(atlas, imageName, aim) {
             let bullets = new Array();
             switch (this.weaponType) {
                 case "normal":
                     {
-                        let bullet = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, aim);
+                        let bullet = new objects.Bullet(atlas, imageName, this.position.x, this.position.y + 10, aim);
                         bullet.owner = this.name;
                         bullets.push(bullet);
                     }
                     break;
                 case "3way":
                     {
-                        let bullet1 = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, objects.Vector2.scale(aim, 10), true);
-                        let bullet2 = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, objects.Vector2.scale(objects.Vector2.add(aim, new objects.Vector2(aim.x, 1)), 3), true);
-                        let bullet3 = new objects.Bullet(imagePath, this.position.x, this.position.y + 10, objects.Vector2.scale(objects.Vector2.add(aim, new objects.Vector2(aim.x, -1)), 3), true);
+                        let bullet1 = new objects.Bullet(atlas, imageName, this.position.x, this.position.y + 10, objects.Vector2.scale(aim, 10), true);
+                        let bullet2 = new objects.Bullet(atlas, imageName, this.position.x, this.position.y + 10, objects.Vector2.scale(objects.Vector2.add(aim, new objects.Vector2(aim.x, 1)), 3), true);
+                        let bullet3 = new objects.Bullet(atlas, imageName, this.position.x, this.position.y + 10, objects.Vector2.scale(objects.Vector2.add(aim, new objects.Vector2(aim.x, -1)), 3), true);
                         bullet1.owner = this.name;
                         bullet2.owner = this.name;
                         bullet3.owner = this.name;
