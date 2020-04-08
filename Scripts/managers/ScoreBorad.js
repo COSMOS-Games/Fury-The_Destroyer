@@ -1,6 +1,12 @@
 "use strict";
 var managers;
 (function (managers) {
+    /**
+     * Class for managing score board
+     *
+     * @export
+     * @class ScoreBorad
+     */
     class ScoreBorad {
         /**
          * Creates an instance of ScoreBorad.

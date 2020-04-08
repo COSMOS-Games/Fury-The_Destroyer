@@ -1,4 +1,10 @@
 module managers {
+    /**
+     * Class for managing score board
+     *
+     * @export
+     * @class ScoreBorad
+     */
     export class ScoreBorad {
         // private instance
         // player A values

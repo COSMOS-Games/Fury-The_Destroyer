@@ -1,19 +1,10 @@
 module scenes {
-  /**
-   * 
-   *
-   * @export
-   * @class End
-   * @extends {objects.Scene}
-   */
   export class End extends objects.Scene {
     // PRIVATE INSTANCE MEMEBERS
-    // images
     private _background: objects.Image;
     private _restartButton: objects.Image;
     private _mainButton: objects.Image;
     private _gameOverLabel: objects.Image;
-    // label
     private _scoresLabel: objects.Label;
 
     // PUBLIC PROPERTIES

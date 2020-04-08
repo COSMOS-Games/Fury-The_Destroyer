@@ -1,4 +1,10 @@
 module managers {
+    /**
+     * Class to manage all collision
+     *
+     * @export
+     * @class Collision
+     */
     export class Collision {
         /**
          * Method to check AABB Collision by accessing aligned bounding boxes

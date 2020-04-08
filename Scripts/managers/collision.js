@@ -1,6 +1,12 @@
 "use strict";
 var managers;
 (function (managers) {
+    /**
+     * Class to manage all collision
+     *
+     * @export
+     * @class Collision
+     */
     class Collision {
         /**
          * Method to check AABB Collision by accessing aligned bounding boxes
