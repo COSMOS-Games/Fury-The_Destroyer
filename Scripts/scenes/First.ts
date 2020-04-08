@@ -9,6 +9,8 @@ module scenes {
     bulletAList: objects.Bullet[] = [];
     bulletBList: objects.Bullet[] = [];
     ScoreBorad: managers.ScoreBorad;
+    isChangedA: boolean = false;
+    isChangedB: boolean = false;
 
     squid: objects.Squid;
 
@@ -328,7 +330,24 @@ module scenes {
 
 
     detectPlayerHealth(): void {
+        if (!this.isChangedA) {
+            if (this.playerA.health == 1) {
+                this.isChangedA = true;
+                console.log("this.playerA.health: " + this.playerA.health);
+                this.playerA.ChangeAnimation("submarineA", "submarineA2");
+            }
+        }
+        if (!this.isChangedB) {
+            if (this.playerB.health == 1) {
+                this.isChangedB = true;
+                console.log("this.playerB.health: " + this.playerB.health);
+                this.playerB.ChangeAnimation("submarineB", "submarineB2");
+            }
+        }
+
       if (this.playerA.health <= 0 || this.playerB.health <= 0) {
+        this.isChangedA = false;
+        this.isChangedB = false;
         //util.GameConfig.SCENE_STATE = scenes.State.END;
         util.GameConfig.SCENE_STATE = scenes.State.STAGECLEANED;
       }
@@ -357,7 +376,6 @@ module scenes {
         }
       }
     }
-
 
   }
 }

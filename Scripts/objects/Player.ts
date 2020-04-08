@@ -175,5 +175,9 @@ module objects {
         }
 
         public explode(): void { }
+
+        public ChangeAnimation(stop: string, start: string): void {
+            this.UpdateAnimation(stop, start);
+        }
     }
 }

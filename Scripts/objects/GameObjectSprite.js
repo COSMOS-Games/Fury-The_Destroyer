@@ -102,6 +102,10 @@ var objects;
         set isActive(v) {
             this._isActive = v;
         }
+        UpdateAnimation(stop, start) {
+            this.gotoAndStop(stop);
+            this.gotoAndPlay(start);
+        }
         // PRIVATE METHODS
         /**
          * Method for calculating half width

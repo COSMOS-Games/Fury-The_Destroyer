@@ -96,6 +96,11 @@ module objects {
             this._isActive = v;
         }
 
+        public UpdateAnimation(stop: string, start: string) {
+            this.gotoAndStop(stop);
+            this.gotoAndPlay(start);
+        }
+
         // CONSTRUCTOR
         /**
          * Creates an instance of Game Object Sprite
