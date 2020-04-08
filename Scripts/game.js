@@ -87,11 +87,11 @@ let Game = (function () {
                 "frames": [27, 28, 29, 30, 31, 32],
                 "speed": 0.2
             },
-            "submarineB6": {
+            "submarineB2": {
                 "frames": [33, 34, 35, 36, 37, 38],
                 "speed": 0.2
             },
-            "submarineB12": { "frames": [39] }
+            "submarineB3": { "frames": [39] }
         }
     };
     /**
