@@ -6,6 +6,8 @@ let Game = (function () {
     let stage;
     let currentSceneState;
     let currentScene;
+    let MoveInstruction;
+    //let ShootInstruction: objects.Scene;
     let FirstScene;
     let SecondScene;
     let ThirdScene;
@@ -17,8 +19,8 @@ let Game = (function () {
         { id: "atlas", src: "./Assets/sprites/atlas.png" },
     ];
     let atlasData = {
-        "images": {},
-        "frames": [
+        images: {},
+        frames: [
             [0, 0, 102, 105, 0, 0, 0],
             [118, 0, 102, 105, 0, 0, 0],
             [236, 0, 102, 105, 0, 0, 0],
@@ -58,41 +60,41 @@ let Game = (function () {
             [0, 630, 88, 86, 0, 0, 0],
             [118, 630, 88, 86, 0, 0, 0],
             [236, 630, 88, 86, 0, 0, 0],
-            [354, 630, 88, 86, 0, 0, 0]
+            [354, 630, 88, 86, 0, 0, 0],
         ],
-        "animations": {
-            "explosion": {
-                "frames": [0, 1, 2, 3, 4, 5, 6, 7, 8],
-                "speed": 0.2
+        animations: {
+            explosion: {
+                frames: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+                speed: 0.2,
             },
-            "mine": { "frames": [9] },
-            "missileA": {
-                "frames": [10, 11],
-                "speed": 0.2
+            mine: { frames: [9] },
+            missileA: {
+                frames: [10, 11],
+                speed: 0.2,
             },
-            "missileB": {
-                "frames": [12, 13],
-                "speed": 0.2
+            missileB: {
+                frames: [12, 13],
+                speed: 0.2,
             },
-            "submarineA": {
-                "frames": [14, 15, 16, 17, 18, 19],
-                "speed": 0.2
+            submarineA: {
+                frames: [14, 15, 16, 17, 18, 19],
+                speed: 0.2,
             },
-            "submarineA2": {
-                "frames": [20, 21, 22, 23, 24, 25],
-                "speed": 0.2
+            submarineA2: {
+                frames: [20, 21, 22, 23, 24, 25],
+                speed: 0.2,
             },
-            "submarineA3": { "frames": [26] },
-            "submarineB": {
-                "frames": [27, 28, 29, 30, 31, 32],
-                "speed": 0.2
+            submarineA3: { frames: [26] },
+            submarineB: {
+                frames: [27, 28, 29, 30, 31, 32],
+                speed: 0.2,
             },
-            "submarineB2": {
-                "frames": [33, 34, 35, 36, 37, 38],
-                "speed": 0.2
+            submarineB2: {
+                frames: [33, 34, 35, 36, 37, 38],
+                speed: 0.2,
             },
-            "submarineB3": { "frames": [39] }
-        }
+            submarineB3: { frames: [39] },
+        },
     };
     /**
      * Function for preloading assets
@@ -150,18 +152,22 @@ let Game = (function () {
             case scenes.State.INSTRUCTIONS:
                 currentScene = new scenes.Instructions();
                 break;
+            case scenes.State.MOVE_INSTRUCTION:
+                MoveInstruction = new scenes.MoveInstruction();
+                currentScene = MoveInstruction;
+                break;
             case scenes.State.FIRST:
                 FirstScene = new scenes.First();
                 currentScene = FirstScene;
                 break;
-            case scenes.State.STAGECLEANED:
+            case scenes.State.STAGE_CLEANED:
                 currentScene = new scenes.StageCleaned();
                 break;
             case scenes.State.SECOND:
                 SecondScene = new scenes.Second();
                 currentScene = SecondScene;
                 break;
-            case scenes.State.STAGECLEANEDAGAIN:
+            case scenes.State.STAGE_CLEANEDAGAIN:
                 currentScene = new scenes.StageCleanedAgain();
                 break;
             case scenes.State.THIRD:
@@ -176,27 +182,40 @@ let Game = (function () {
         currentSceneState = util.GameConfig.SCENE_STATE;
     }
     window.addEventListener("keyup", (event) => {
+        // move instruction scene
+        if (MoveInstruction && MoveInstruction.keyPressedStates) {
+            MoveInstruction.keyPressedStates[event.keyCode] = false;
+        }
+        // first scene
         if (FirstScene && FirstScene.keyPressedStates) {
             FirstScene.keyPressedStates[event.keyCode] = false;
         }
-        // second
+        // second scene
         if (SecondScene && SecondScene.keyPressedStates) {
             SecondScene.keyPressedStates[event.keyCode] = false;
         }
+        // third scene
         if (ThirdScene && ThirdScene.keyPressedStates) {
             ThirdScene.keyPressedStates[event.keyCode] = false;
         }
     });
     // attach keydown and keyup event to the window
     window.addEventListener("keydown", (event) => {
+        // move instruction scene
+        if (MoveInstruction && MoveInstruction.keyPressedStates) {
+            MoveInstruction.keyPressedStates[event.keyCode] = true;
+        }
+        // first scene
         if (FirstScene && FirstScene.keyPressedStates) {
             FirstScene.keyPressedStates[event.keyCode] = true;
             FirstScene.detectShootingEvent();
         }
+        // second scene
         if (SecondScene && SecondScene.keyPressedStates) {
             SecondScene.keyPressedStates[event.keyCode] = true;
             SecondScene.detectShootingEvent();
         }
+        // third scene
         if (ThirdScene && ThirdScene.keyPressedStates) {
             ThirdScene.keyPressedStates[event.keyCode] = true;
             ThirdScene.detectShootingEvent();

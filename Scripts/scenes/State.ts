@@ -1,14 +1,14 @@
 /**
  * COSMOS Games
- * 
+ *
  * April 12, 2020
- * 
+ *
  * Contributors:
  * - Logan J. Kim
  * - Kei Mizubuchi
  * - Hang Li
  * - Ygor Almeida
- * 
+ *
  * Description:
  * Fury, the Destroyers, is two players single screen submarine game which is designed to bring joys
  * to number of people who play this game. This game will contain three stages.
@@ -22,23 +22,26 @@
  */
 
 module scenes {
-    /**
-     * This is used for the scene state which can be assigned to each scene and accessed everywhere
-     *
-     * @export
-     * @enum {number}
-     */
-    export enum State {
-        NO_SCENE = -1,
-        SPLASH,
-        START,
-        INSTRUCTIONS,
-        FIRST,
-        STAGECLEANED,
-        SECOND,
-        STAGECLEANEDAGAIN,
-        THIRD,
-        END,
-        NUM_OF_SCENES
-    }
+  /**
+   * This is used for the scene state which can be assigned to each scene and accessed everywhere
+   *
+   * @export
+   * @enum {number}
+   */
+  export enum State {
+    NO_SCENE = -1,
+    SPLASH,
+    START,
+    INSTRUCTIONS,
+    MOVE_INSTRUCTION,
+    SHOOT_INSTRUCTION,
+    INSTRUCTION_CLEAN,
+    FIRST,
+    STAGE_CLEANED,
+    SECOND,
+    STAGE_CLEANEDAGAIN,
+    THIRD,
+    END,
+    NUM_OF_SCENES,
+  }
 }
