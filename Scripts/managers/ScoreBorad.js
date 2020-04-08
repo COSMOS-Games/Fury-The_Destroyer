@@ -1,12 +1,44 @@
 "use strict";
+/**
+ * COSMOS Games
+ *
+ * April 12, 2020
+ *
+ * Contributors:
+ * - Logan J. Kim
+ * - Kei Mizubuchi
+ * - Hang Li
+ * - Ygor Almeida
+ *
+ * Description:
+ * Fury, the Destroyers, is two players single screen submarine game which is designed to bring joys
+ * to number of people who play this game. This game will contain three stages.
+ * Players level up once the stage is cleared by meeting all conditions including eliminating all enemies on a map.
+ *
+ * Versions:
+ * - v4.0 Final Release
+ * - v3.0 Beta Release
+ * - v2.0 Alpha Release
+ * - v1.0 Pre-Alpha Release
+ */
 var managers;
 (function (managers) {
+    /**
+     * Class for managing score board
+     *
+     * @export
+     * @class ScoreBorad
+     */
     class ScoreBorad {
+        /**
+         * Creates an instance of ScoreBorad.
+         * @memberof ScoreBorad
+         */
         constructor() {
-            // set up the labels
-            this._livesLabelA = new objects.Label("Player A: Health 99", "20px", util.FONT_FAMILY, "white", 25, 25, false);
+            // setup the labels
+            this._livesLabelA = new objects.Label("Player A Health: 99", "20px", util.FONT_FAMILY, "white", 25, 25, false);
             this._bulletLabelA = new objects.Label("Bullet 999", "20px", util.FONT_FAMILY, "white", 233, 25, false);
-            this._livesLabelB = new objects.Label("Player B: Health 99", "20px", util.FONT_FAMILY, "white", 598, 25, false);
+            this._livesLabelB = new objects.Label("Player B Health: 99", "20px", util.FONT_FAMILY, "white", 598, 25, false);
             this._bulletLabelB = new objects.Label("Bullet 999", "20px", util.FONT_FAMILY, "white", 805, 25, false);
             this._scoreLabelA = new objects.Label("Player A Score: 999", "24px", util.FONT_FAMILY, "white", 330, 200, true);
             this._scoreLabelB = new objects.Label("Player B Score: 999", "24px", util.FONT_FAMILY, "white", 630, 200, true);
@@ -26,6 +58,7 @@ var managers;
             this.ScoreB = util.GameConfig.PLAYER_B_SCORE;
         }
         // public properties
+        // getters and setters
         get ScoreLabelA() {
             return this._scoreLabelA;
         }
@@ -49,7 +82,9 @@ var managers;
         }
         set ScoreA(v) {
             this._scoreA = v;
+            // set global score variable
             util.GameConfig.PLAYER_A_SCORE = this._scoreA;
+            // update score label text
             this.ScoreLabelA.setText("Player A Score: " + this._scoreA);
         }
         get ScoreB() {
@@ -57,7 +92,9 @@ var managers;
         }
         set ScoreB(v) {
             this._scoreB = v;
+            // set global score variable
             util.GameConfig.PLAYER_B_SCORE = this._scoreB;
+            // update score label text
             this.ScoreLabelB.setText("Player B Score: " + this._scoreB);
         }
         get BulletsA() {
@@ -65,7 +102,9 @@ var managers;
         }
         set BulletsA(v) {
             this._bulletsA = v;
+            // set global bullet number variable
             util.GameConfig.PLAYER_A_BULLETS = this._bulletsA;
+            // update bullet label text
             this.BulletLabelA.setText("| Bullet: " + this.BulletsA);
         }
         get BulletsB() {
@@ -73,7 +112,9 @@ var managers;
         }
         set BulletsB(v) {
             this._bulletsB = v;
+            // set global bullet number variable
             util.GameConfig.PLAYER_B_BULLETS = this._bulletsB;
+            // update bullet label text
             this.BulletLabelB.setText("| Bullet: " + this.BulletsB);
         }
         get LivesA() {
@@ -81,16 +122,20 @@ var managers;
         }
         set LivesA(v) {
             this._livesA = v;
+            // set global lives variable
             util.GameConfig.PLAYER_A_LIVES = this._livesA;
-            this.LivesLabelA.setText("Player A: Health " + this._livesA);
+            // update health label text
+            this.LivesLabelA.setText("Player A Health: " + this._livesA);
         }
         get LivesB() {
             return this._livesB;
         }
         set LivesB(v) {
             this._livesB = v;
+            // set global lives variable
             util.GameConfig.PLAYER_B_LIVES = this._livesB;
-            this.LivesLabelB.setText("Player B: Health " + this._livesB);
+            // update health label text
+            this.LivesLabelB.setText("Player B Health: " + this._livesB);
         }
     }
     managers.ScoreBorad = ScoreBorad;
