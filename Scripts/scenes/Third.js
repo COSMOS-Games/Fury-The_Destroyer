@@ -8,6 +8,8 @@ var scenes;
             this.bulletAList = [];
             this.bulletBList = [];
             this.mineList = [];
+            this.isChangedA = false;
+            this.isChangedB = false;
             this.keyPressedStates = [];
             this.background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
             this.baseA = new objects.Image(util.BASE_A_PATH, 55, 90, 100, 100, true);
@@ -323,7 +325,23 @@ var scenes;
             }
         }
         detectPlayerHealth() {
+            if (!this.isChangedA) {
+                if (this.playerA.health == 1) {
+                    this.isChangedA = true;
+                    console.log("this.playerA.health: " + this.playerA.health);
+                    this.playerA.ChangeAnimation("submarineA", "submarineA2");
+                }
+            }
+            if (!this.isChangedB) {
+                if (this.playerB.health == 1) {
+                    this.isChangedB = true;
+                    console.log("this.playerB.health: " + this.playerB.health);
+                    this.playerB.ChangeAnimation("submarineB", "submarineB2");
+                }
+            }
             if (this.playerA.health <= 0 || this.playerB.health <= 0) {
+                this.isChangedA = false;
+                this.isChangedB = false;
                 util.GameConfig.SCENE_STATE = scenes.State.END;
             }
         }

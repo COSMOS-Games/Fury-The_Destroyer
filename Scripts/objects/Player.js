@@ -124,6 +124,9 @@ var objects;
             }
         }
         explode() { }
+        ChangeAnimation(stop, start) {
+            this.UpdateAnimation(stop, start);
+        }
     }
     objects.Player = Player;
 })(objects || (objects = {}));
