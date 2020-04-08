@@ -46,7 +46,7 @@ var scenes;
             this.isChangedB = false;
             // initialization
             // background
-            this.background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
+            this.background = new objects.Image(util.BACKGROUND_PATH_GAME2, 0, 0, util.STAGE_W, util.STAGE_H, false);
             // bases
             this.baseA = new objects.Image(util.BASE_A_PATH, 55, 90, 100, 100, true);
             this.baseB = new objects.Image(util.BASE_B_PATH, 900, 580, 100, 100, true);

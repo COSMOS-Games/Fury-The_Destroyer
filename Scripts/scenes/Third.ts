@@ -62,7 +62,7 @@ module scenes {
             // initialization
             // background
             this.background = new objects.Image(
-                util.BACKGROUND_PATH_GAME,
+                util.BACKGROUND_PATH_GAME3,
                 0,
                 0,
                 util.STAGE_W,

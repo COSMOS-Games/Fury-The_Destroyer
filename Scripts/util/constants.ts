@@ -3,6 +3,9 @@ module util {
   export const SPLASH_SCREEN: string = "./Assets/images/splash.png";
 
   export const BACKGROUND_PATH_GAME: string = "./Assets/images/game-screen.png";
+  export const BACKGROUND_PATH_GAME1: string = "./Assets/images/game-screen1.png";
+  export const BACKGROUND_PATH_GAME2: string = "./Assets/images/game-screen2.png";
+  export const BACKGROUND_PATH_GAME3: string = "./Assets/images/game-screen3.png";
   export const FURY_PATH: string = "./Assets/images/fury.png";
   export const THE_DESTROYER_PATH: string = "./Assets/images/the-destroyer.png";
   export const GAME_OVER_PATH: string = "./Assets/images/game-over.png";
