@@ -54,7 +54,7 @@ module scenes {
     // CONSTRUCTOR
     /**
      * Creates an instance of MoveInstruction.
-     * @memberof MoveInstruction
+     * @memberof ShootInstruction
      */
     constructor() {
       super();
@@ -149,7 +149,7 @@ module scenes {
     /**
      * add objects to the scene
      *
-     * @memberof MoveInstruction
+     * @memberof ShootInstruction
      */
     public Start(): void {
       this.addChild(this._background);
@@ -165,7 +165,7 @@ module scenes {
     /**
      * update function
      *
-     * @memberof MoveInstruction
+     * @memberof ShootInstruction
      */
     public Update(): void {
       // update fish movement
@@ -188,7 +188,7 @@ module scenes {
     /**
      * Main function, add button onclick event
      *
-     * @memberof MoveInstruction
+     * @memberof ShootInstruction
      */
     public Main(): void {
       this._mainMenuButton.HoverOn();
@@ -202,7 +202,7 @@ module scenes {
      * return randome Vector2 object
      *
      * @returns {objects.Vector2}
-     * @memberof MoveInstruction
+     * @memberof ShootInstruction
      */
     public setRandomLocation(): objects.Vector2 {
       // generate position at random
@@ -215,7 +215,7 @@ module scenes {
     /**
      * Method for detecting which key is pressed
      *
-     * @memberof MoveInstruction
+     * @memberof ShootInstruction
      */
     public detectPressedKeys(): void {
       // move either up (Up) or down (DOWN)
@@ -250,7 +250,7 @@ module scenes {
     /**
      * Method for detecting shooting event
      *
-     * @memberof First
+     * @memberof ShootInstruction
      */
     public detectShootingEvent(): void {
       // shoot key for player A
@@ -305,7 +305,7 @@ module scenes {
      *
      * @param {objects.Bullet[]} bullets
      * @param {objects.Player} target
-     * @memberof First
+     * @memberof ShootInstruction
      */
     public detectBulletCollision(
       bullets: objects.Bullet[],
@@ -337,11 +337,11 @@ module scenes {
     }
 
     /**
-     * Method for detecting collision between squid and bullet
+     * Method for detecting collision between Fish and bullet
      *
      * @param {objects.Bullet[]} bullets
-     * @param {objects.Squid} target
-     * @memberof First
+     * @param {objects.Fish} target
+     * @memberof ShootInstruction
      */
     public detectFishAndBulletCollision(
       bullets: objects.Bullet[],

@@ -33,7 +33,7 @@ var scenes;
         // CONSTRUCTOR
         /**
          * Creates an instance of MoveInstruction.
-         * @memberof MoveInstruction
+         * @memberof ShootInstruction
          */
         constructor() {
             super();
@@ -67,7 +67,7 @@ var scenes;
         /**
          * add objects to the scene
          *
-         * @memberof MoveInstruction
+         * @memberof ShootInstruction
          */
         Start() {
             this.addChild(this._background);
@@ -82,7 +82,7 @@ var scenes;
         /**
          * update function
          *
-         * @memberof MoveInstruction
+         * @memberof ShootInstruction
          */
         Update() {
             // update fish movement
@@ -100,7 +100,7 @@ var scenes;
         /**
          * Main function, add button onclick event
          *
-         * @memberof MoveInstruction
+         * @memberof ShootInstruction
          */
         Main() {
             this._mainMenuButton.HoverOn();
@@ -113,7 +113,7 @@ var scenes;
          * return randome Vector2 object
          *
          * @returns {objects.Vector2}
-         * @memberof MoveInstruction
+         * @memberof ShootInstruction
          */
         setRandomLocation() {
             // generate position at random
@@ -124,7 +124,7 @@ var scenes;
         /**
          * Method for detecting which key is pressed
          *
-         * @memberof MoveInstruction
+         * @memberof ShootInstruction
          */
         detectPressedKeys() {
             // move either up (Up) or down (DOWN)
@@ -159,7 +159,7 @@ var scenes;
         /**
          * Method for detecting shooting event
          *
-         * @memberof First
+         * @memberof ShootInstruction
          */
         detectShootingEvent() {
             // shoot key for player A
@@ -202,7 +202,7 @@ var scenes;
          *
          * @param {objects.Bullet[]} bullets
          * @param {objects.Player} target
-         * @memberof First
+         * @memberof ShootInstruction
          */
         detectBulletCollision(bullets, target) {
             // for all bullets
@@ -226,11 +226,11 @@ var scenes;
             }
         }
         /**
-         * Method for detecting collision between squid and bullet
+         * Method for detecting collision between Fish and bullet
          *
          * @param {objects.Bullet[]} bullets
-         * @param {objects.Squid} target
-         * @memberof First
+         * @param {objects.Fish} target
+         * @memberof ShootInstruction
          */
         detectFishAndBulletCollision(bullets, target) {
             // for all bullets
