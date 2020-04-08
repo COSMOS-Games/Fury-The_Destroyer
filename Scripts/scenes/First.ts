@@ -209,12 +209,16 @@ module scenes {
               {
                 this.ScoreBorad.LivesA = this.playerA.health;
                 this.ScoreBorad.ScoreB += 10;
+                let explosion = new objects.Explosion(10, 10);
+                this.addChild(explosion);
               }
               break;
             case "PlayerB":
               {
                 this.ScoreBorad.LivesB = this.playerB.health;
                 this.ScoreBorad.ScoreA += 10;
+                let explosion = new objects.Explosion(10, 10);
+                this.addChild(explosion);
               }
               break;
           }

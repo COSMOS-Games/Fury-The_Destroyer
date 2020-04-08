@@ -70,7 +70,7 @@ let Game = (function () {
         "animations": {
             "explosion": {
                 "frames": [0, 1, 2, 3, 4, 5, 6, 7, 8],
-                "speed": 0.5
+                "speed": 0.2
             },
             "mine": { "frames": [9] },
             "missileA": { "frames": [10] },
