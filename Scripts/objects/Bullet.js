@@ -23,10 +23,27 @@
  */
 var objects;
 (function (objects) {
+    /**
+     * Class for Bullet
+     *
+     * @export
+     * @class Bullet
+     * @extends {GameObjectSprite}
+     */
     class Bullet extends objects.GameObjectSprite {
+        // CONSTRUCTOR
+        /**
+         * Creates an instance of Bullet
+         * @param atlas
+         * @param imageName
+         * @param x
+         * @param y
+         * @param direction
+         * @param isSpecialWeapon
+         */
         constructor(atlas, imageName, x, y, direction, isSpecialWeapon) {
             super(atlas, imageName, x, y, true);
-            // variables
+            // PRIVATE INSTANCE MEMBERS
             this._owner = "";
             if (isSpecialWeapon) {
                 // let speed = 10;
@@ -40,14 +57,20 @@ var objects;
             }
             this.Start();
         }
-        // properties
+        // PUBLIC PROPETIES
         get owner() {
             return this._owner;
         }
         set owner(newOwner) {
             this._owner = newOwner;
         }
-        // private method
+        // PRIVATE METHODS
+        /**
+         * Method for check bounds with right and left borders
+         *
+         * @protected
+         * @memberof Bullet
+         */
         _checkBounds() {
             // simplying check the right border
             if (this.x >= util.STAGE_W - this.halfWidth) {
@@ -58,18 +81,34 @@ var objects;
                 this.velocity = objects.Vector2.zero(); // stop movement
             }
         }
-        // public method
+        // PUBLIC METHODS
+        // Life Cycle Methods
+        /**
+         * This method is used for initialization
+         *
+         * @memberof Bullet
+         */
         Start() {
             createjs.Ticker.framerate = 60;
             createjs.Ticker.on('tick', () => {
                 this.Update();
             });
         }
+        /**
+         * This method is used to update the object
+         *
+         * @memberof Bullet
+         */
         Update() {
             this._checkBounds();
             this.position.add(this.velocity); // bullet has velocity, or movement
             this.position = new objects.Vector2(this.position.x, this.position.y);
         }
+        /**
+         * This method is used to reset to the initial status
+         *
+         * @memberof Bullet
+         */
         Reset() {
         }
     }

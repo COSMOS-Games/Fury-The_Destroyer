@@ -22,11 +22,18 @@
  */
 
 module objects {
+    /**
+     * Class for Bullet
+     *
+     * @export
+     * @class Bullet
+     * @extends {GameObjectSprite}
+     */
     export class Bullet extends GameObjectSprite {
-        // variables
+        // PRIVATE INSTANCE MEMBERS
         private _owner: string = "";
 
-        // properties
+        // PUBLIC PROPETIES
         get owner(): string {
             return this._owner;
         }
@@ -35,7 +42,16 @@ module objects {
             this._owner = newOwner;
         }
 
-
+        // CONSTRUCTOR
+        /**
+         * Creates an instance of Bullet
+         * @param atlas 
+         * @param imageName 
+         * @param x 
+         * @param y 
+         * @param direction 
+         * @param isSpecialWeapon 
+         */
         constructor(atlas: createjs.SpriteSheet, imageName: string, x: number, y: number, direction: Vector2, isSpecialWeapon?: true) {
             super(atlas, imageName, x, y, true);
 
@@ -52,7 +68,13 @@ module objects {
             this.Start();
         }
 
-        // private method
+        // PRIVATE METHODS
+        /**
+         * Method for check bounds with right and left borders
+         *
+         * @protected
+         * @memberof Bullet
+         */
         protected _checkBounds(): void {
             // simplying check the right border
             if (this.x >= util.STAGE_W - this.halfWidth) {
@@ -64,7 +86,13 @@ module objects {
             }
         }
 
-        // public method
+        // PUBLIC METHODS
+        // Life Cycle Methods
+        /**
+         * This method is used for initialization
+         *
+         * @memberof Bullet
+         */
         public Start(): void {
             createjs.Ticker.framerate = 60;
             createjs.Ticker.on('tick', () => {
@@ -72,6 +100,11 @@ module objects {
             });
         }
 
+        /**
+         * This method is used to update the object
+         *
+         * @memberof Bullet
+         */
         public Update(): void {
             this._checkBounds();
 
@@ -79,6 +112,11 @@ module objects {
             this.position = new Vector2(this.position.x, this.position.y);
         }
 
+        /**
+         * This method is used to reset to the initial status
+         *
+         * @memberof Bullet
+         */
         public Reset(): void {
 
         }
