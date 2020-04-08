@@ -292,6 +292,8 @@ module scenes {
         managers.Collision.AABBCheck(weapon[i], target);
 
         if (target.isColliding) {
+            let explosion = new objects.Explosion(weapon[i].x, weapon[i].y);
+            this.addChild(explosion);
           this.removeChild(weapon[i]); // remove the bullet from the stage
           weapon.splice(i, 1); // remove the bullet from the list
 
@@ -320,7 +322,7 @@ module scenes {
             let bulletNumA = this.bulletAList.length;
             let bulletNumB = this.bulletBList.length;
 
-            let explosion = new objects.Explosion(destructableA[i].x + destructableA[i].halfWidth, destructableA[i].y);
+            let explosion = new objects.Explosion(destructableA[i].x, destructableA[i].y);
             this.addChild(explosion);
             this.removeChild(destructableA[i]); // remove the bullet from the stage
             destructableA.splice(i, 1); // remove the bullet from the list
