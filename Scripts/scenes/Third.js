@@ -74,8 +74,6 @@ var scenes;
             this.detectSquidAndBulletCollision(this.bulletAList, this.squid);
             this.detectSquidAndBulletCollision(this.bulletBList, this.squid);
             this.detectSquidPlayerCollision(this.squid, this.playerA, this.playerB);
-            //
-            //      detectPlayersCollision();
             // update health and bullet label
             this.detectPlayerHealth();
             //      this.detectPlayersBullet();
@@ -256,20 +254,6 @@ var scenes;
                         destructableB.splice(j, 1); // remove the bullet from the list
                     }
                 }
-            }
-        }
-        detectPlayersCollision(playerA, playerB) {
-            managers.Collision.AABBCheck(playerA, playerB);
-            managers.Collision.AABBCheck(playerB, playerA);
-            if (playerA.isColliding && playerB.isColliding) {
-                playerA.health -= 1;
-                playerB.health -= 1;
-                this.scoreBorad.LivesA = this.playerA.health;
-                this.scoreBorad.LivesB = this.playerB.health;
-                // TODO:
-                // implement knock back time:
-                // Player's heath goes down to 0 because of collision detection in 60fps
-                // need the logic to prevent detection for a while after collision
             }
         }
         detectSquidAndBulletCollision(bullets, target) {
