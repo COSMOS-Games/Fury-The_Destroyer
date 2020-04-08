@@ -21,9 +21,15 @@
  * - v1.0 Pre-Alpha Release
  */
 module objects {
+    /**
+     * Class for Player
+     *
+     * @export
+     * @class Player
+     * @extends {GameObjectSprite}
+     */
     export class Player extends GameObjectSprite {
         // PRIVATE INSTANCE MEMBER
-        //    private _bulletNum: number = 5;
         private _bulletNum: number = 10;
         private _health: number = 2;
         private _name: string = "player";
@@ -33,6 +39,7 @@ module objects {
         get bulletNum(): number {
             return this._bulletNum;
         }
+
         set bulletNum(newNum: number) {
             this._bulletNum = newNum;
         }
@@ -62,6 +69,15 @@ module objects {
         }
 
         // CONSTRUCTOR
+        /**
+         *Creates an instance of Player.
+         * @param {createjs.SpriteSheet} spritePath
+         * @param {string} imageName
+         * @param {number} x
+         * @param {number} y
+         * @param {string} name
+         * @memberof Player
+         */
         constructor(spritePath: createjs.SpriteSheet, imageName: string, x: number, y: number, name: string) {
             super(spritePath, imageName, x, y, true);
             this.name = name;
@@ -69,6 +85,12 @@ module objects {
         }
 
         // PRIVATE METHODS
+        /**
+         * Method for check bounds with stage boundaries
+         *
+         * @protected
+         * @memberof Player
+         */
         protected _checkBounds(): void {
             // check left border
             if (this.x < this.halfWidth) {
@@ -89,6 +111,13 @@ module objects {
         }
 
         // PUBLIC METHODS
+        // Life Cycle Methods
+
+        /**
+         * This method is used for initialization
+         *
+         * @memberof Player
+         */
         public Start(): void {
             createjs.Ticker.framerate = 60;
             createjs.Ticker.on("tick", () => {
@@ -96,30 +125,66 @@ module objects {
             });
         }
 
+        /**
+         * This method is used to update the object
+         *
+         * @memberof Player
+         */
         public Update(): void {
             // update player position
             this.position = new Vector2(this.position.x, this.position.y);
             this._checkBounds();
         }
 
+        /**
+         * This method is used to reset to the initial status
+         *
+         * @memberof Player
+         */
         public Reset(): void { }
 
+        // PUBLIC CLASS SPECIFIC METHODS
+        /**
+         * Method to move the object to left
+         *
+         * @memberof Player
+         */
         public moveLeft(): void {
             this.position.add(Vector2.scale(Vector2.left(), 5));
         }
 
+        /**
+         * Method to move the object to right
+         *
+         * @memberof Player
+         */
         public moveRight(): void {
             this.position.add(Vector2.scale(Vector2.right(), 5));
         }
 
+        /**
+         * Method to move the object to up
+         *
+         * @memberof Player
+         */
         public moveUp(): void {
             this.position.add(Vector2.scale(Vector2.up(), 5));
         }
 
+        /**
+         * Method to move the object to down
+         *
+         * @memberof Player
+         */
         public moveDown(): void {
             this.position.add(Vector2.scale(Vector2.down(), 5));
         }
 
+        /**
+         * Method to make player shoot bullets
+         *
+         * @memberof Player
+         */
         public shoot(
             atlas: createjs.SpriteSheet,
             imageName: string,
@@ -190,8 +255,21 @@ module objects {
             }
         }
 
+
+        /**
+         * Method to explode
+         *
+         * @memberof Player
+         */
         public explode(): void { }
 
+        /**
+         * Method to animate the object
+         *
+         * @param {string} stop
+         * @param {string} start
+         * @memberof Player
+         */
         public ChangeAnimation(stop: string, start: string): void {
             this.UpdateAnimation(stop, start);
         }

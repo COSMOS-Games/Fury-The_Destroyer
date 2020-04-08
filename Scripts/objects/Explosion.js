@@ -23,25 +23,65 @@
  */
 var objects;
 (function (objects) {
+    /**
+     * Class for Explosion
+     *
+     * @export
+     * @class Explosion
+     * @extends {objects.GameObjectSprite}
+     */
     class Explosion extends objects.GameObjectSprite {
-        // public properties
-        // constructor
+        // PRIVATE INSTANCE MEMBERS
+        // CONSTRUCTORS
+        /**
+         *Creates an instance of Explosion.
+         * @param {number} x
+         * @param {number} y
+         * @memberof Explosion
+         */
         constructor(x, y) {
             super(util.GameConfig.ATLAS, "explosion", x, y, true);
             setTimeout(() => {
                 this.Destroy();
             }, 700);
         }
-        // private methods
+        // PRIVATE METHODS
+        /**
+         * Method for check bounds
+         *
+         * @protected
+         * @memberof Explosion
+         */
         _checkBounds() {
         }
-        // public methods
-        Reset() {
-        }
+        // PUBLIC METHODS
+        // Life Cycle Methods
+        /**
+         * This method is used for initialization
+         *
+         * @memberof Explosion
+         */
         Start() {
         }
+        /**
+         * This method is used to update the object
+         *
+         * @memberof Explosion
+         */
         Update() {
         }
+        /**
+         * This method is used to reset to the initial status
+         *
+         * @memberof Explosion
+         */
+        Reset() {
+        }
+        /**
+         * This method is used to remove the object from the stage
+         *
+         * @memberof Explosion
+         */
         Destroy() {
             this.parent.removeChild(this);
         }

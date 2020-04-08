@@ -23,10 +23,25 @@
  */
 var objects;
 (function (objects) {
+    /**
+     * Class for Squid
+     *
+     * @export
+     * @class Squid
+     * @extends {GameObject}
+     */
     class Squid extends objects.GameObject {
+        // CONSTRUCTORS
+        /**
+         *Creates an instance of Squid.
+         * @param {string} imagePath
+         * @param {number} x
+         * @param {number} y
+         * @memberof Squid
+         */
         constructor(imagePath, x, y) {
             super(imagePath, x, y, true);
-            // private fields
+            // PRIVATE INSTANCE MEMBERS
             this._angle = 0;
             this._health = 6;
             this.Start();
@@ -38,7 +53,13 @@ var objects;
         set health(newNum) {
             this._health = newNum;
         }
-        // private method
+        // PRIVATE METHODS
+        /**
+         * Method for check bounds with stage boundaries
+         *
+         * @protected
+         * @memberof Squid
+         */
         _checkBounds() {
             // check left border
             if (this.x < -150) {
@@ -59,7 +80,13 @@ var objects;
                 this.position.y = util.STAGE_H - this.halfHeight;
             }
         }
-        // public method
+        // PUBLIC METHODS
+        // Life Cycle Methods
+        /**
+         * This method is used for initialization
+         *
+         * @memberof Squid
+         */
         Start() {
             createjs.Ticker.framerate = 60;
             createjs.Ticker.on('tick', () => {
@@ -67,6 +94,11 @@ var objects;
             });
             this.Reset();
         }
+        /**
+         * This method is used to update the object
+         *
+         * @memberof Squid
+         */
         Update() {
             this._checkBounds();
             // change position in cyclic movement
@@ -76,6 +108,11 @@ var objects;
             this.position.add(this.velocity);
             this.position.add(accelaration);
         }
+        /**
+         * This method is used to reset to the initial status
+         *
+         * @memberof Squid
+         */
         Reset() {
             let spawnX;
             let randomness = Math.round(Math.random());

@@ -23,31 +23,64 @@
  */
 var objects;
 (function (objects) {
+    /**
+     * Class for Mine
+     *
+     * @export
+     * @class Mine
+     * @extends {GameObjectSprite}
+     */
     class Mine extends objects.GameObjectSprite {
+        // CONSTRUCTORS
+        /**
+         *Creates an instance of Mine.
+         * @param {createjs.SpriteSheet} atlas
+         * @param {string} imageName
+         * @param {number} x
+         * @param {number} y
+         * @memberof Mine
+         */
         constructor(atlas, imageName, x, y) {
             super(atlas, imageName, x, y, true);
-            // private fields
+            // PRIVATE INSTANCE MEMBERS
             this._angle = 0;
             this.Start();
         }
-        // private method
+        // PRIVATE METHODS
+        /**
+         * Method for check bounds with top and bottom boders
+         *
+         * @protected
+         * @memberof Mine
+         */
         _checkBounds() {
             // check the top border
             if (this.y < util.STAGE_BOUNDARY_TOP + this.halfHeight) {
                 this.position.y = util.STAGE_BOUNDARY_TOP + this.halfHeight;
             }
-            // check the top border
+            // check the buttom border
             if (this.y > util.STAGE_H - this.halfHeight) {
                 this.position.y = util.STAGE_H - this.halfHeight;
             }
         }
-        // public method
+        // PUBLIC METHODS
+        // Life Cycle Methods
+        /**
+         * This method is used for initialization
+         *
+         * @memberof Mine
+         */
         Start() {
             createjs.Ticker.framerate = 60;
             createjs.Ticker.on('tick', () => {
                 this.Update();
             });
         }
+        /**
+         * This method is used to update the object
+         *
+         * @memberof Mine
+         */
         Update() {
             this._checkBounds();
             // change position in cyclic movement
@@ -58,6 +91,11 @@ var objects;
             this._angle += 0.02;
             this.position = new objects.Vector2(this.position.x, this.position.y);
         }
+        /**
+         * This method is used to reset to the initial status
+         *
+         * @memberof Mine
+         */
         Reset() {
         }
     }

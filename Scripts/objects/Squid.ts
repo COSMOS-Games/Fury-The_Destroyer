@@ -21,17 +21,28 @@
  * - v1.0 Pre-Alpha Release
  */
 module objects {
+    /**
+     * Class for Squid
+     *
+     * @export
+     * @class Squid
+     * @extends {GameObject}
+     */
     export class Squid extends GameObject {
-
-        // private fields
+        // PRIVATE INSTANCE MEMBERS
         private _angle: number = 0;
-
         private _health: number = 6;
 
+        // CONSTRUCTORS
+        /**
+         *Creates an instance of Squid.
+         * @param {string} imagePath
+         * @param {number} x
+         * @param {number} y
+         * @memberof Squid
+         */
         constructor(imagePath: string, x: number, y: number) {
             super(imagePath, x, y, true);
-
-
             this.Start();
         }
 
@@ -44,7 +55,13 @@ module objects {
             this._health = newNum;
         }
 
-        // private method
+        // PRIVATE METHODS
+        /**
+         * Method for check bounds with stage boundaries
+         *
+         * @protected
+         * @memberof Squid
+         */
         protected _checkBounds(): void {
             // check left border
             if (this.x < -150) {
@@ -68,8 +85,13 @@ module objects {
             }
 
         }
-
-        // public method
+        // PUBLIC METHODS
+        // Life Cycle Methods
+        /**
+         * This method is used for initialization
+         *
+         * @memberof Squid
+         */
         public Start(): void {
             createjs.Ticker.framerate = 60;
             createjs.Ticker.on('tick', () => {
@@ -79,6 +101,11 @@ module objects {
             this.Reset();
         }
 
+        /**
+         * This method is used to update the object
+         *
+         * @memberof Squid
+         */
         public Update(): void {
             this._checkBounds();
 
@@ -92,6 +119,11 @@ module objects {
 
         }
 
+        /**
+         * This method is used to reset to the initial status
+         *
+         * @memberof Squid
+         */
         public Reset(): void {
 
             let spawnX;
@@ -130,7 +162,6 @@ module objects {
                     spawnY = Math.floor(Math.random() * util.STAGE_W - spawnY);
                 }
             }
-
 
             this.position = new Vector2(spawnX, spawnY, this);
 

@@ -23,8 +23,21 @@
  */
 var objects;
 (function (objects) {
+    /**
+     * Class for 2D Vector
+     *
+     * @export
+     * @class Vector2
+     */
     class Vector2 {
         // CONSTRUCTOR
+        /**
+         *Creates an instance of Vector2.
+         * @param {number} [x=0]
+         * @param {number} [y=0]
+         * @param {createjs.DisplayObject} [displayObject]
+         * @memberof Vector2
+         */
         constructor(x = 0, y = 0, displayObject) {
             // Initialize member variables
             this._x = 0;
@@ -74,25 +87,63 @@ var objects;
             this._sqrMagnitude = newSqrMagnitude;
         }
         // PRIVATE METHODS
+        /**
+         * Method to compute square maagnitude of Vector
+         *
+         * @private
+         * @returns {number}
+         * @memberof Vector2
+         */
         _computeSqrMagnitude() {
             return (this._x * this._x) + (this._y * this._y);
         }
+        /**
+         * Method to compute magnitude of Vector
+         *
+         * @private
+         * @returns {number}
+         * @memberof Vector2
+         */
         _computeMagnitude() {
             return Math.sqrt(this._computeSqrMagnitude());
         }
         // PUBLIC METHODS
+        /**
+         * Method for Vector addition
+         *
+         * @param {Vector2} rhs
+         * @memberof Vector2
+         */
         add(rhs) {
             this.x += rhs.x;
             this.y += rhs.y;
         }
+        /**
+         * Method for Vector subtraction
+         *
+         * @param {Vector2} rhs
+         * @memberof Vector2
+         */
         subtract(rhs) {
             this.x -= rhs.x;
             this.y -= rhs.y;
         }
+        /**
+         * Method for Vector scaling
+         *
+         * @param {number} scalar
+         * @memberof Vector2
+         */
         scale(scalar) {
             this.x *= scalar;
             this.y *= scalar;
         }
+        /**
+         * ToString method
+         *
+         * @returns {string}
+         * @memberof Vector2
+         */
         toString() {
             return "(" + this.x + ", " + this.y + ")";
         }
@@ -119,47 +170,143 @@ var objects;
             return vector;
         }
         // PUBLIC STATIC METHODS
+        /**
+         * Method to get zero vector
+         *
+         * @static
+         * @returns {Vector2}
+         * @memberof Vector2
+         */
         static zero() {
             return new Vector2(0, 0);
         }
+        /**
+         * Method to get a simple Vector
+         *
+         * @static
+         * @returns {Vector2}
+         * @memberof Vector2
+         */
         static one() {
             return new Vector2(1, 1);
         }
+        /**
+         * Method to get a simple Vector which represents up movement
+         *
+         * @static
+         * @returns {Vector2}
+         * @memberof Vector2
+         */
         static up() {
             return new Vector2(0, -1);
         }
+        /**
+         * Method to get a simple Vector which represents down movement
+         *
+         * @static
+         * @returns {Vector2}
+         * @memberof Vector2
+         */
         static down() {
             return new Vector2(0, 1);
         }
+        /**
+         * Method to get a simple Vector which represents left movement
+         *
+         * @static
+         * @returns {Vector2}
+         * @memberof Vector2
+         */
         static left() {
             return new Vector2(-1, 0);
         }
+        /**
+         * Method to get a simple Vector which represents right movement
+         *
+         * @static
+         * @returns {Vector2}
+         * @memberof Vector2
+         */
         static right() {
             return new Vector2(1, 0);
         }
+        /**
+         * Method to calculate dot product of two vectors
+         *
+         * @static
+         * @param {Vector2} lhs
+         * @param {Vector2} rhs
+         * @returns {number}
+         * @memberof Vector2
+         */
         static dot(lhs, rhs) {
             return (lhs.x * rhs.x) + (lhs.y * rhs.y);
         }
+        /**
+         * Method to calculate distance of two points
+         *
+         * @static
+         * @param {Vector2} P1
+         * @param {Vector2} P2
+         * @returns {number}
+         * @memberof Vector2
+         */
         static distance(P1, P2) {
             let diffXs = P2.x - P1.x;
             let diffYs = P2.y - P1.y;
             return Math.sqrt((diffXs * diffXs) + (diffYs * diffYs));
         }
+        /**
+         * Method to calculate square distance of two points
+         *
+         * @static
+         * @param {Vector2} P1
+         * @param {Vector2} P2
+         * @returns {number}
+         * @memberof Vector2
+         */
         static sqrDistance(P1, P2) {
             let diffXs = P2.x - P1.x;
             let diffYs = P2.y - P1.y;
             return (diffXs * diffXs) + (diffYs * diffYs);
         }
+        /**
+         * Method to get addition of two vectors
+         *
+         * @static
+         * @param {Vector2} lhs
+         * @param {Vector2} rhs
+         * @returns {Vector2}
+         * @memberof Vector2
+         */
         static add(lhs, rhs) {
             let theXs = lhs.x + rhs.x;
             let theYs = lhs.y + rhs.y;
             return new Vector2(theXs, theYs);
         }
+        /**
+         * Method to get subtract of two vectors
+         *
+         * @static
+         * @param {Vector2} lhs
+         * @param {Vector2} rhs
+         * @returns {Vector2}
+         * @memberof Vector2
+         */
         static subtract(lhs, rhs) {
             let theXs = lhs.x - rhs.x;
             let theYs = lhs.y - rhs.y;
             return new Vector2(theXs, theYs);
         }
+        /**
+         * Method to get scaled vector
+         *
+         * @static
+         * @param {Vector2} lhs
+         * @param {number} scaler
+         * @returns {Vector2}
+         * @memberof Vector2
+         */
         static scale(lhs, scaler) {
             // dot x & dot y
             let theXs = lhs.x * scaler;

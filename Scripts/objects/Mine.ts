@@ -21,30 +21,57 @@
  * - v1.0 Pre-Alpha Release
  */
 module objects {
+    /**
+     * Class for Mine
+     *
+     * @export
+     * @class Mine
+     * @extends {GameObjectSprite}
+     */
     export class Mine extends GameObjectSprite {
-
-        // private fields
+        // PRIVATE INSTANCE MEMBERS
         private _angle: number = 0;
 
+        // CONSTRUCTORS
+        /**
+         *Creates an instance of Mine.
+         * @param {createjs.SpriteSheet} atlas
+         * @param {string} imageName
+         * @param {number} x
+         * @param {number} y
+         * @memberof Mine
+         */
         constructor(atlas: createjs.SpriteSheet, imageName: string, x: number, y: number) {
             super(atlas, imageName, x, y, true);
 
             this.Start();
         }
 
-        // private method
+        // PRIVATE METHODS
+        /**
+         * Method for check bounds with top and bottom boders
+         *
+         * @protected
+         * @memberof Mine
+         */
         protected _checkBounds(): void {
             // check the top border
             if (this.y < util.STAGE_BOUNDARY_TOP + this.halfHeight) {
                 this.position.y = util.STAGE_BOUNDARY_TOP + this.halfHeight;
             }
-            // check the top border
+            // check the buttom border
             if (this.y > util.STAGE_H - this.halfHeight) {
                 this.position.y = util.STAGE_H - this.halfHeight;
             }
         }
 
-        // public method
+        // PUBLIC METHODS
+        // Life Cycle Methods
+        /**
+         * This method is used for initialization
+         *
+         * @memberof Mine
+         */
         public Start(): void {
             createjs.Ticker.framerate = 60;
             createjs.Ticker.on('tick', () => {
@@ -52,6 +79,11 @@ module objects {
             });
         }
 
+        /**
+         * This method is used to update the object
+         *
+         * @memberof Mine
+         */
         public Update(): void {
             this._checkBounds();
 
@@ -67,6 +99,11 @@ module objects {
             this.position = new Vector2(this.position.x, this.position.y);
         }
 
+        /**
+         * This method is used to reset to the initial status
+         *
+         * @memberof Mine
+         */
         public Reset(): void {
 
         }

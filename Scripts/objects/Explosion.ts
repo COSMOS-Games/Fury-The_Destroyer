@@ -21,10 +21,24 @@
  * - v1.0 Pre-Alpha Release
  */
 module objects {
+    /**
+     * Class for Explosion
+     *
+     * @export
+     * @class Explosion
+     * @extends {objects.GameObjectSprite}
+     */
     export class Explosion extends objects.GameObjectSprite {
-        // public properties
+        // PRIVATE INSTANCE MEMBERS
 
-        // constructor
+
+        // CONSTRUCTORS
+        /**
+         *Creates an instance of Explosion.
+         * @param {number} x
+         * @param {number} y
+         * @memberof Explosion
+         */
         constructor(x: number, y: number) {
             super(util.GameConfig.ATLAS, "explosion", x, y, true);
 
@@ -33,25 +47,52 @@ module objects {
             }, 700);
         }
 
-        // private methods
+        // PRIVATE METHODS
+        /**
+         * Method for check bounds 
+         * 
+         * @protected
+         * @memberof Explosion
+         */
         protected _checkBounds(): void {
 
         }
 
-        // public methods
+        // PUBLIC METHODS
+        // Life Cycle Methods
 
-        public Reset(): void {
-
-        }
-
+        /**
+         * This method is used for initialization
+         *
+         * @memberof Explosion
+         */
         public Start(): void {
 
         }
 
+        /**
+         * This method is used to update the object
+         *
+         * @memberof Explosion
+         */
         public Update(): void {
 
         }
 
+        /**
+         * This method is used to reset to the initial status
+         *
+         * @memberof Explosion
+         */
+        public Reset(): void {
+
+        }
+
+        /**
+         * This method is used to remove the object from the stage
+         *
+         * @memberof Explosion
+         */
         public Destroy(): void {
             this.parent.removeChild(this);
         }

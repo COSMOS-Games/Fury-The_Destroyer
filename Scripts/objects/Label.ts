@@ -21,8 +21,17 @@
  * - v1.0 Pre-Alpha Release
  */
 module objects {
+    /**
+     * Class for Label
+     *
+     * @export
+     * @class Label
+     * @extends {createjs.Text}
+     */
     export class Label extends createjs.Text {
+        // PRIVATE INSTANCE MEMBERS
 
+        // CONSTRUCTOR
         /**
          * Creates an instance of Label.
          * @param {string} labelString
@@ -50,6 +59,7 @@ module objects {
             this.y = y;
         }
 
+        // PUBLIC METHODS
         SetText(newText: string) {
             this.text = newText;
         }

@@ -21,13 +21,28 @@
  * - v1.0 Pre-Alpha Release
  */
 module objects {
+  /**
+   * Class for Scene
+   *
+   * @export
+   * @abstract
+   * @class Scene
+   * @extends {createjs.Container}
+   */
   export abstract class Scene extends createjs.Container {
+    // PRIVATE INSTANCE MEMBERS
+
+    // CONSTRUCTORS
+    /**
+     *Creates an instance of Scene.
+     * @memberof Scene
+     */
     constructor() {
       super();
     }
 
-    // Life Cycle Functions
-
+    // PUBLIC METHODS
+    // Life Cycle Methods
     /**
      * Initialization Method
      *

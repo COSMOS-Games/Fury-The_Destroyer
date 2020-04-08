@@ -23,7 +23,16 @@
  */
 var objects;
 (function (objects) {
+    /**
+     * Class for Label
+     *
+     * @export
+     * @class Label
+     * @extends {createjs.Text}
+     */
     class Label extends createjs.Text {
+        // PRIVATE INSTANCE MEMBERS
+        // CONSTRUCTOR
         /**
          * Creates an instance of Label.
          * @param {string} labelString
@@ -44,6 +53,7 @@ var objects;
             this.x = x;
             this.y = y;
         }
+        // PUBLIC METHODS
         SetText(newText) {
             this.text = newText;
         }

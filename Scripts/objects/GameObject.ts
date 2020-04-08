@@ -21,6 +21,14 @@
  * - v1.0 Pre-Alpha Release
  */
 module objects {
+    /**
+     * Class for Game Object
+     *
+     * @export
+     * @abstract
+     * @class GameObject
+     * @extends {createjs.Bitmap}
+     */
     export abstract class GameObject extends createjs.Bitmap {
         // PRIVATE INSTANCE MEMBERS
         private _width: number;
@@ -96,8 +104,15 @@ module objects {
             }
         }
 
-
         // CONSTRUCTOR
+        /**
+         *Creates an instance of GameObject.
+         * @param {Object} [imageString='./Assets/images/placeholder.png']
+         * @param {number} [x=0]
+         * @param {number} [y=0]
+         * @param {boolean} [centered=false]
+         * @memberof GameObject
+         */
         constructor(imageString: Object = './Assets/images/placeholder.png',
             x: number = 0, y: number = 0, centered: boolean = false) {
             super(imageString);
@@ -126,30 +141,82 @@ module objects {
         }
 
         // PRIVATE METHODS
+        /**
+         * Method for computing half width
+         *
+         * @private
+         * @returns {number}
+         * @memberof GameObject
+         */
         private _computeHalfWidth(): number {
             return this.width * 0.5;
         }
 
+        /**
+         * Method for computing half height
+         *
+         * @private
+         * @returns {number}
+         * @memberof GameObject
+         */
         private _computeHalfHeight(): number {
             return this.height * 0.5;
         }
 
+        /**
+         * Method for centering the object
+         *
+         * @private
+         * @memberof GameObject
+         */
         private _centerGameObject(): void {
             this.regX = this.halfWidth;
             this.regY = this.halfHeight;
         }
 
+        /**
+         * abstract method for checking bounds
+         *
+         * @protected
+         * @abstract
+         * @memberof GameObject
+         */
         protected abstract _checkBounds(): void;
 
-
         // PUBLIC METHODS
-
+        // Life Cycle methods
+        /**
+         * abstract method to initialize the object
+         *
+         * @abstract
+         * @memberof GameObject
+         */
         public abstract Start(): void;
 
+        /**
+         * abstract method for Updating the object
+         *
+         * @abstract
+         * @memberof GameObject
+         */
         public abstract Update(): void;
 
+        /**
+         * abstract method for initializing the object
+         *
+         * @abstract
+         * @memberof GameObject
+         */
         public abstract Reset(): void;
 
+        /**
+         * utility for customizing object size
+         *
+         * @param {number} [width=this.getBounds().width]
+         * @param {number} [height=this.getBounds().height]
+         * @param {boolean} [isCentered=false]
+         * @memberof GameObject
+         */
         public CustomSize(width: number = this.getBounds().width, height: number = this.getBounds().height, isCentered: boolean = false): void {
             this.image.addEventListener('load', () => {
                 this.scaleX = width / this.getBounds().width;

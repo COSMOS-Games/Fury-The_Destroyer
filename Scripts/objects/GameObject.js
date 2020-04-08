@@ -23,8 +23,24 @@
  */
 var objects;
 (function (objects) {
+    /**
+     * Class for Game Object
+     *
+     * @export
+     * @abstract
+     * @class GameObject
+     * @extends {createjs.Bitmap}
+     */
     class GameObject extends createjs.Bitmap {
         // CONSTRUCTOR
+        /**
+         *Creates an instance of GameObject.
+         * @param {Object} [imageString='./Assets/images/placeholder.png']
+         * @param {number} [x=0]
+         * @param {number} [y=0]
+         * @param {boolean} [centered=false]
+         * @memberof GameObject
+         */
         constructor(imageString = './Assets/images/placeholder.png', x = 0, y = 0, centered = false) {
             super(imageString);
             // initialization
@@ -97,16 +113,44 @@ var objects;
             }
         }
         // PRIVATE METHODS
+        /**
+         * Method for computing half width
+         *
+         * @private
+         * @returns {number}
+         * @memberof GameObject
+         */
         _computeHalfWidth() {
             return this.width * 0.5;
         }
+        /**
+         * Method for computing half height
+         *
+         * @private
+         * @returns {number}
+         * @memberof GameObject
+         */
         _computeHalfHeight() {
             return this.height * 0.5;
         }
+        /**
+         * Method for centering the object
+         *
+         * @private
+         * @memberof GameObject
+         */
         _centerGameObject() {
             this.regX = this.halfWidth;
             this.regY = this.halfHeight;
         }
+        /**
+         * utility for customizing object size
+         *
+         * @param {number} [width=this.getBounds().width]
+         * @param {number} [height=this.getBounds().height]
+         * @param {boolean} [isCentered=false]
+         * @memberof GameObject
+         */
         CustomSize(width = this.getBounds().width, height = this.getBounds().height, isCentered = false) {
             this.image.addEventListener('load', () => {
                 this.scaleX = width / this.getBounds().width;

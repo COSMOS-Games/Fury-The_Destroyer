@@ -23,7 +23,21 @@
  */
 var objects;
 (function (objects) {
+    /**
+     * Class for Scene
+     *
+     * @export
+     * @abstract
+     * @class Scene
+     * @extends {createjs.Container}
+     */
     class Scene extends createjs.Container {
+        // PRIVATE INSTANCE MEMBERS
+        // CONSTRUCTORS
+        /**
+         *Creates an instance of Scene.
+         * @memberof Scene
+         */
         constructor() {
             super();
         }

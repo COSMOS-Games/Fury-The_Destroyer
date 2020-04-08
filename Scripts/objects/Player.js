@@ -23,12 +23,27 @@
  */
 var objects;
 (function (objects) {
+    /**
+     * Class for Player
+     *
+     * @export
+     * @class Player
+     * @extends {GameObjectSprite}
+     */
     class Player extends objects.GameObjectSprite {
         // CONSTRUCTOR
+        /**
+         *Creates an instance of Player.
+         * @param {createjs.SpriteSheet} spritePath
+         * @param {string} imageName
+         * @param {number} x
+         * @param {number} y
+         * @param {string} name
+         * @memberof Player
+         */
         constructor(spritePath, imageName, x, y, name) {
             super(spritePath, imageName, x, y, true);
             // PRIVATE INSTANCE MEMBER
-            //    private _bulletNum: number = 5;
             this._bulletNum = 10;
             this._health = 2;
             this._name = "player";
@@ -62,6 +77,12 @@ var objects;
             this._weaponType = newWeapon;
         }
         // PRIVATE METHODS
+        /**
+         * Method for check bounds with stage boundaries
+         *
+         * @protected
+         * @memberof Player
+         */
         _checkBounds() {
             // check left border
             if (this.x < this.halfWidth) {
@@ -81,30 +102,72 @@ var objects;
             }
         }
         // PUBLIC METHODS
+        // Life Cycle Methods
+        /**
+         * This method is used for initialization
+         *
+         * @memberof Player
+         */
         Start() {
             createjs.Ticker.framerate = 60;
             createjs.Ticker.on("tick", () => {
                 this.Update();
             });
         }
+        /**
+         * This method is used to update the object
+         *
+         * @memberof Player
+         */
         Update() {
             // update player position
             this.position = new objects.Vector2(this.position.x, this.position.y);
             this._checkBounds();
         }
+        /**
+         * This method is used to reset to the initial status
+         *
+         * @memberof Player
+         */
         Reset() { }
+        // PUBLIC CLASS SPECIFIC METHODS
+        /**
+         * Method to move the object to left
+         *
+         * @memberof Player
+         */
         moveLeft() {
             this.position.add(objects.Vector2.scale(objects.Vector2.left(), 5));
         }
+        /**
+         * Method to move the object to right
+         *
+         * @memberof Player
+         */
         moveRight() {
             this.position.add(objects.Vector2.scale(objects.Vector2.right(), 5));
         }
+        /**
+         * Method to move the object to up
+         *
+         * @memberof Player
+         */
         moveUp() {
             this.position.add(objects.Vector2.scale(objects.Vector2.up(), 5));
         }
+        /**
+         * Method to move the object to down
+         *
+         * @memberof Player
+         */
         moveDown() {
             this.position.add(objects.Vector2.scale(objects.Vector2.down(), 5));
         }
+        /**
+         * Method to make player shoot bullets
+         *
+         * @memberof Player
+         */
         shoot(atlas, imageName, aim) {
             let bullets = new Array();
             switch (this.weaponType) {
@@ -140,7 +203,19 @@ var objects;
                 return null; // nullable
             }
         }
+        /**
+         * Method to explode
+         *
+         * @memberof Player
+         */
         explode() { }
+        /**
+         * Method to animate the object
+         *
+         * @param {string} stop
+         * @param {string} start
+         * @memberof Player
+         */
         ChangeAnimation(stop, start) {
             this.UpdateAnimation(stop, start);
         }
