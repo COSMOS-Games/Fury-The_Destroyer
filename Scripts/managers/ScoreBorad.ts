@@ -81,7 +81,7 @@ module managers {
             // set global score variable
             util.GameConfig.PLAYER_A_SCORE = this._scoreA;
             // update score label text
-            this.ScoreLabelA.setText("Player A Score: " + this._scoreA);
+            this.ScoreLabelA.SetText("Player A Score: " + this._scoreA);
         }
 
         public get ScoreB(): number {
@@ -93,7 +93,7 @@ module managers {
             // set global score variable
             util.GameConfig.PLAYER_B_SCORE = this._scoreB;
             // update score label text
-            this.ScoreLabelB.setText("Player B Score: " + this._scoreB);
+            this.ScoreLabelB.SetText("Player B Score: " + this._scoreB);
         }
 
         public get BulletsA(): number {
@@ -105,7 +105,7 @@ module managers {
             // set global bullet number variable
             util.GameConfig.PLAYER_A_BULLETS = this._bulletsA;
             // update bullet label text
-            this.BulletLabelA.setText("| Bullet: " + this.BulletsA);
+            this.BulletLabelA.SetText("| Bullet: " + this.BulletsA);
         }
 
         public get BulletsB(): number {
@@ -117,7 +117,7 @@ module managers {
             // set global bullet number variable
             util.GameConfig.PLAYER_B_BULLETS = this._bulletsB;
             // update bullet label text
-            this.BulletLabelB.setText("| Bullet: " + this.BulletsB);
+            this.BulletLabelB.SetText("| Bullet: " + this.BulletsB);
         }
 
         public get LivesA(): number {
@@ -129,7 +129,7 @@ module managers {
             // set global lives variable
             util.GameConfig.PLAYER_A_LIVES = this._livesA;
             // update health label text
-            this.LivesLabelA.setText("Player A Health: " + this._livesA);
+            this.LivesLabelA.SetText("Player A Health: " + this._livesA);
         }
 
         public get LivesB(): number {
@@ -141,7 +141,7 @@ module managers {
             // set global lives variable
             util.GameConfig.PLAYER_B_LIVES = this._livesB;
             // update health label text
-            this.LivesLabelB.setText("Player B Health: " + this._livesB);
+            this.LivesLabelB.SetText("Player B Health: " + this._livesB);
         }
 
         /**
