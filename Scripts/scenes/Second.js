@@ -213,7 +213,7 @@ var scenes;
                     this.scoreBorad.BulletsA = this.playerA.bulletNum;
                     // push all bullets in bulletsA and add to the scene
                     if (bulletsA) {
-                        bulletsA.forEach(b => {
+                        bulletsA.forEach((b) => {
                             this.bulletAList.push(b);
                             this.addChild(b);
                         });
@@ -229,7 +229,7 @@ var scenes;
                     this.scoreBorad.BulletsB = this.playerB.bulletNum;
                     // push all bullets in bulletsB and add to the scene
                     if (bulletsB) {
-                        bulletsB.forEach(b => {
+                        bulletsB.forEach((b) => {
                             this.bulletBList.push(b);
                             this.addChild(b);
                         });
@@ -437,7 +437,7 @@ var scenes;
          * @memberof Second
          */
         detectSquidPlayerCollision(squid, playerA, playerB) {
-            // check if player B is colliding 
+            // check if player B is colliding
             managers.Collision.AABBCheck(playerB, squid);
             if (squid.isColliding) {
                 // change squid's scale based on the status
@@ -486,11 +486,11 @@ var scenes;
             }
             // either player dies
             if (this.playerA.health <= 0 || this.playerB.health <= 0) {
-                // reset damaged status 
+                // reset damaged status
                 this.isChangedA = false;
                 this.isChangedB = false;
                 // move to the next scene
-                util.GameConfig.SCENE_STATE = scenes.State.STAGECLEANEDAGAIN;
+                util.GameConfig.SCENE_STATE = scenes.State.STAGE_CLEANEDAGAIN;
             }
         }
         /**

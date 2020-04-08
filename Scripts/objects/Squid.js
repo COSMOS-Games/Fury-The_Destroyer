@@ -40,7 +40,7 @@ var objects;
         // public method
         Start() {
             createjs.Ticker.framerate = 60;
-            createjs.Ticker.on('tick', () => {
+            createjs.Ticker.on("tick", () => {
                 this.Update();
             });
             this.Reset();
