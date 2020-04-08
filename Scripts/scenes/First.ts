@@ -107,7 +107,7 @@ module scenes {
       this.ScoreBorad = new managers.ScoreBorad();
 
       // squid
-      this.squid = new objects.Squid(util.PLAYER_A_BULLET, 100, 100);
+      this.squid = new objects.Squid(util.ENEMY, 100, 100);
 
       // key pressed state
       this.keyPressedStates = [];
