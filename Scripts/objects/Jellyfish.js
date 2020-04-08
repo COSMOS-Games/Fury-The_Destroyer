@@ -1,7 +1,7 @@
 "use strict";
 var objects;
 (function (objects) {
-    class Squid extends objects.GameObject {
+    class Jellyfish extends objects.GameObject {
         constructor(imagePath, x, y) {
             super(imagePath, x, y, true);
             // private fields
@@ -49,6 +49,14 @@ var objects;
             this._checkBounds();
             // change position in cyclic movement
             let accelaration = new objects.Vector2(Math.sin(this._angle), 0);
+            // make jellyfish look like swimming
+            this.scaleX = Math.sin(this._angle / 4) * Math.tanh(this._angle / 3) / 3;
+            if (this.velocity.x > 0) {
+                this.scaleX = Math.abs(this.scaleX) * 1.1 + 0.8;
+            }
+            else {
+                this.scaleX = -Math.abs(this.scaleX) * 1.1 - 0.8;
+            }
             this._angle += 0.1;
             // base velocity
             this.position.add(this.velocity);
@@ -85,6 +93,6 @@ var objects;
             this.position = new objects.Vector2(spawnX, spawnY, this);
         }
     }
-    objects.Squid = Squid;
+    objects.Jellyfish = Jellyfish;
 })(objects || (objects = {}));
-//# sourceMappingURL=Squid.js.map
+//# sourceMappingURL=Jellyfish.js.map

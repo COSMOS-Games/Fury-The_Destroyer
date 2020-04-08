@@ -41,7 +41,7 @@ module scenes {
         bulletAList: objects.Bullet[] = [];
         bulletBList: objects.Bullet[] = [];
         mineList: objects.Mine[] = [];
-        squid: objects.Squid;
+        jellyfish: objects.Jellyfish;
         // status
         isChangedA: boolean = false;
         isChangedB: boolean = false;
@@ -116,8 +116,8 @@ module scenes {
             // mine
             this.mineList = this.generateMines();
 
-            // squid
-            this.squid = new objects.Squid(util.ENEMY, 100, 100);
+            // jellyfish
+            this.jellyfish = new objects.Jellyfish(util.ENEMY, 100, 100);
 
             // key pressed state
             this.keyPressedStates = [];
@@ -146,7 +146,7 @@ module scenes {
             this.addChild(this.playerB);
             this.addChild(this.scoreBorad.LivesLabelB);
             this.addChild(this.scoreBorad.BulletLabelB);
-            this.addChild(this.squid);
+            this.addChild(this.jellyfish);
 
             // generate mines
             for (let i = 0; i < this.mineList.length; i++) {
@@ -187,24 +187,18 @@ module scenes {
                 this.bulletBList
             );
 
-            // detect bullet collision with squid from player A
-            this.detectSquidAndBulletCollision(
+            // detect bullet collision with jellyfish from player A
+            this.detectJellyfishAndBulletCollision(
                 this.bulletAList,
-                this.squid
+                this.jellyfish
             );
 
-            // detect bullet collision with squid from player B
-            this.detectSquidAndBulletCollision(
+            // detect bullet collision with jellyfish from player B
+            this.detectJellyfishAndBulletCollision(
                 this.bulletBList,
-                this.squid
+                this.jellyfish
             );
 
-            // detect players collision with squid
-            this.detectSquidPlayerCollision(
-                this.squid,
-                this.playerA,
-                this.playerB
-            );
 
             // update health and bullet label
             this.detectPlayerHealth();
@@ -368,7 +362,7 @@ module scenes {
                             {
                                 // update scoreboard
                                 this.scoreBorad.LivesA = this.playerA.health;
-                                this.scoreBorad.ScoreB += 10;
+                                this.scoreBorad.ScoreB += 100;
 
                                 // display explosion effect
                                 let explosion = new objects.Explosion(this.playerA.x + this.playerA.halfWidth, this.playerA.y);
@@ -379,7 +373,7 @@ module scenes {
                             {
                                 // update scoreboard
                                 this.scoreBorad.LivesB = this.playerB.health;
-                                this.scoreBorad.ScoreA += 10;
+                                this.scoreBorad.ScoreA += 100;
 
                                 // display explosion effect
                                 let explosion = new objects.Explosion(this.playerB.x - this.playerB.halfWidth, this.playerB.y);
@@ -473,10 +467,10 @@ module scenes {
                         // update player score;
                         if (bulletNumA == this.bulletAList.length &&
                             bulletNumB - 1 == this.bulletBList.length) {
-                            this.scoreBorad.ScoreB += 5;
+                            this.scoreBorad.ScoreB += 30;
                         } else if (bulletNumA - 1 == this.bulletAList.length &&
                             bulletNumB == this.bulletBList.length) {
-                            this.scoreBorad.ScoreA += 5;
+                            this.scoreBorad.ScoreA += 30;
                         }
                     }
                 }
@@ -517,15 +511,15 @@ module scenes {
         }
 
         /**
-         * Method for detecting collision between bullet and squid
+         * Method for detecting collision between bullet and jellyfish
          *
          * @param {objects.Bullet[]} bullets
-         * @param {objects.Squid} target
+         * @param {objects.Jellyfish} target
          * @memberof Third
          */
-        public detectSquidAndBulletCollision(
+        public detectJellyfishAndBulletCollision(
             bullets: objects.Bullet[],
-            target: objects.Squid
+            target: objects.Jellyfish
         ): void {
             // for all bullets
             for (let i = 0; i < bullets.length; i++) {
@@ -537,7 +531,16 @@ module scenes {
                     // update player health
                     target.health -= 1;
 
-                    // if squid dies, update score
+                    // explosion
+                    let diff = bullets[i].owner == "PlayerA" ? -50 : 50;
+                    let explosion = new objects.Explosion(
+                        this.jellyfish.x + diff,
+                        this.jellyfish.y
+                    );
+                    this.addChild(explosion);
+
+
+                    // if jellyfish dies, update score
                     if (target.health <= 0) {
                         switch (bullets[i].owner) {
                             case "PlayerA":
@@ -552,7 +555,7 @@ module scenes {
                                 break;
                         }
 
-                        // reset squid
+                        // reset jellyfish
                         target.Reset();
                     }
 
@@ -561,43 +564,6 @@ module scenes {
 
                 }
             }
-        }
-
-        /**
-         * Method for detecting collision between squid and players
-         *
-         * @param {objects.Squid} squid
-         * @param {objects.Player} playerA
-         * @param {objects.Player} playerB
-         * @memberof Third
-         */
-        public detectSquidPlayerCollision(
-            squid: objects.Squid,
-            playerA: objects.Player,
-            playerB: objects.Player,
-        ): void {
-            // check if player B is colliding 
-            managers.Collision.AABBCheck(playerB, squid);
-
-            if (squid.isColliding) {
-                // change squid's scale based on the status
-                squid.scaleX = squid.scaleX > 0 ? 1.1 : -1.1;
-                squid.scaleY = squid.scaleY > 0 ? 1.1 : -1.1;
-            } else {
-                // check if player A is colliding
-                managers.Collision.AABBCheck(playerA, squid);
-
-                // change squid's scale based on the status
-                if (squid.isColliding) {
-                    squid.scaleX = squid.scaleX > 0 ? 1.1 : -1.1;
-                    squid.scaleY = squid.scaleY > 0 ? 1.1 : -1.1;
-                } else {
-                    squid.scaleX = squid.scaleX > 0 ? 1 : -1;
-                    squid.scaleY = squid.scaleY > 0 ? 1 : -1;
-
-                }
-            }
-
         }
 
         /**

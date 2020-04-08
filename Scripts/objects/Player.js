@@ -8,7 +8,7 @@ var objects;
             // PRIVATE INSTANCE MEMBER
             //    private _bulletNum: number = 5;
             this._bulletNum = 10;
-            this._health = 2;
+            this._health = 3;
             this._name = "player";
             this._weaponType = "normal";
             this.name = name;
@@ -74,6 +74,15 @@ var objects;
             // update player position
             this.position = new objects.Vector2(this.position.x, this.position.y);
             this._checkBounds();
+            if (this.health == 1) {
+                let rotationDirection = this.name == "PlayerA" ? -1 : 1;
+                if (createjs.Ticker.getTicks() % 15 == 0) {
+                    this.rotation += 4 * rotationDirection;
+                }
+                else if (createjs.Ticker.getTicks() % 5 == 0) {
+                    this.rotation -= 2 * rotationDirection;
+                }
+            }
         }
         Reset() { }
         moveLeft() {

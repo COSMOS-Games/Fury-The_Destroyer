@@ -41,7 +41,7 @@ module scenes {
     bulletAList: objects.Bullet[] = [];
     bulletBList: objects.Bullet[] = [];
     ScoreBorad: managers.ScoreBorad;
-    squid: objects.Squid;
+    jellyfish: objects.Jellyfish;
     // states
     isDamagedA: boolean = false;
     isDamagedB: boolean = false;
@@ -106,8 +106,8 @@ module scenes {
       // score board
       this.ScoreBorad = new managers.ScoreBorad();
 
-      // squid
-      this.squid = new objects.Squid(util.ENEMY, 100, 100);
+      // jellyfish
+      this.jellyfish = new objects.Jellyfish(util.ENEMY, 100, 100);
 
       // key pressed state
       this.keyPressedStates = [];
@@ -136,7 +136,7 @@ module scenes {
       this.addChild(this.playerB);
       this.addChild(this.ScoreBorad.LivesLabelB);
       this.addChild(this.ScoreBorad.BulletLabelB);
-      this.addChild(this.squid);
+      this.addChild(this.jellyfish);
 
       this.Main();
     }
@@ -164,14 +164,11 @@ module scenes {
         this.bulletBList
       );
 
-      // detect bullet collision with squid from player A
-      this.detectSquidAndBulletCollision(this.bulletAList, this.squid);
+      // detect bullet collision with jellyfish from player A
+      this.detectJellyfishAndBulletCollision(this.bulletAList, this.jellyfish);
 
-      // detect bullet collision with squid from player B
-      this.detectSquidAndBulletCollision(this.bulletBList, this.squid);
-
-      // detect players collision with squid
-      this.detectSquidPlayerCollision(this.squid, this.playerA, this.playerB);
+      // detect bullet collision with jellyfish from player B
+      this.detectJellyfishAndBulletCollision(this.bulletBList, this.jellyfish);
 
       // update health and bullet label
       this.detectPlayerHealth();
@@ -182,7 +179,7 @@ module scenes {
      *
      * @memberof First
      */
-    public Main(): void {}
+    public Main(): void { }
 
     /**
      * Method for detecting which key is pressed
@@ -303,7 +300,7 @@ module scenes {
               {
                 // update scoreboard
                 this.ScoreBorad.LivesA = this.playerA.health;
-                this.ScoreBorad.ScoreB += 10;
+                this.ScoreBorad.ScoreB += 100;
 
                 // display explosion effect
                 let explosion = new objects.Explosion(
@@ -317,7 +314,7 @@ module scenes {
               {
                 // update scoreboard
                 this.ScoreBorad.LivesB = this.playerB.health;
-                this.ScoreBorad.ScoreA += 10;
+                this.ScoreBorad.ScoreA += 100;
 
                 // display explosion effect
                 let explosion = new objects.Explosion(
@@ -342,15 +339,15 @@ module scenes {
     }
 
     /**
-     * Method for detecting collision between squid and bullet
+     * Method for detecting collision between jellyfish and bullet
      *
      * @param {objects.Bullet[]} bullets
-     * @param {objects.Squid} target
+     * @param {objects.Jellyfish} target
      * @memberof First
      */
-    public detectSquidAndBulletCollision(
+    public detectJellyfishAndBulletCollision(
       bullets: objects.Bullet[],
-      target: objects.Squid
+      target: objects.Jellyfish
     ): void {
       // for all bullets
       for (let i = 0; i < bullets.length; i++) {
@@ -362,7 +359,15 @@ module scenes {
           // update player health
           target.health -= 1;
 
-          // once squid's health goes to 0, update score based on who killed it
+          // explosion
+          let diff = bullets[i].owner == "PlayerA" ? -50 : 50;
+          let explosion = new objects.Explosion(
+            this.jellyfish.x + diff,
+            this.jellyfish.y
+          );
+          this.addChild(explosion);
+
+          // once jellyfish's health goes to 0, update score based on who killed it
           if (target.health <= 0) {
             switch (bullets[i].owner) {
               case "PlayerA":
@@ -377,7 +382,7 @@ module scenes {
                 break;
             }
 
-            // reset squid
+            // reset jellyfish
             target.Reset();
           }
 
@@ -389,40 +394,6 @@ module scenes {
       }
     }
 
-    /**
-     * Method for detecting collision between squid and players
-     *
-     * @param {objects.Squid} squid
-     * @param {objects.Player} playerA
-     * @param {objects.Player} playerB
-     * @memberof First
-     */
-    public detectSquidPlayerCollision(
-      squid: objects.Squid,
-      playerA: objects.Player,
-      playerB: objects.Player
-    ): void {
-      // check if player B is colliding
-      managers.Collision.AABBCheck(playerB, squid);
-
-      if (squid.isColliding) {
-        // change squid's scale based on the status
-        squid.scaleX = squid.scaleX > 0 ? 1.1 : -1.1;
-        squid.scaleY = squid.scaleY > 0 ? 1.1 : -1.1;
-      } else {
-        // check if player A is colliding
-        managers.Collision.AABBCheck(playerA, squid);
-
-        // change squid's scale based on the status
-        if (squid.isColliding) {
-          squid.scaleX = squid.scaleX > 0 ? 1.1 : -1.1;
-          squid.scaleY = squid.scaleY > 0 ? 1.1 : -1.1;
-        } else {
-          squid.scaleX = squid.scaleX > 0 ? 1 : -1;
-          squid.scaleY = squid.scaleY > 0 ? 1 : -1;
-        }
-      }
-    }
 
     /**
      * Method for detecting collision between bullets

@@ -3,7 +3,7 @@ module objects {
         // PRIVATE INSTANCE MEMBER
         //    private _bulletNum: number = 5;
         private _bulletNum: number = 10;
-        private _health: number = 2;
+        private _health: number = 3;
         private _name: string = "player";
         private _weaponType: String = "normal";
 
@@ -84,6 +84,17 @@ module objects {
             // update player position
             this.position = new Vector2(this.position.x, this.position.y);
             this._checkBounds();
+
+            if (this.health == 1) {
+                let rotationDirection = this.name == "PlayerA" ? -1 : 1;
+
+                if (createjs.Ticker.getTicks() % 15 == 0) {
+                    this.rotation += 4 * rotationDirection;
+                } else if (createjs.Ticker.getTicks() % 5 == 0) {
+                    this.rotation -= 2 * rotationDirection;
+                }
+            }
+
         }
 
         public Reset(): void { }

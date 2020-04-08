@@ -1,5 +1,5 @@
 module objects {
-  export class Squid extends GameObject {
+  export class Jellyfish extends GameObject {
     // private fields
     private _angle: number = 0;
 
@@ -58,6 +58,15 @@ module objects {
 
       // change position in cyclic movement
       let accelaration = new Vector2(Math.sin(this._angle), 0);
+
+      // make jellyfish look like swimming
+      this.scaleX = Math.sin(this._angle / 4) * Math.tanh(this._angle / 3) / 3;
+      if (this.velocity.x > 0) {
+        this.scaleX = Math.abs(this.scaleX) * 1.1 + 0.8;
+      } else {
+        this.scaleX = - Math.abs(this.scaleX) * 1.1 - 0.8;
+      }
+
       this._angle += 0.1;
 
       // base velocity

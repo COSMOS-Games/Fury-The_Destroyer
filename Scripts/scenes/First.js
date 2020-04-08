@@ -61,8 +61,8 @@ var scenes;
             util.GameConfig.PLAYER_B_SCORE = 0;
             // score board
             this.ScoreBorad = new managers.ScoreBorad();
-            // squid
-            this.squid = new objects.Squid(util.ENEMY, 100, 100);
+            // jellyfish
+            this.jellyfish = new objects.Jellyfish(util.ENEMY, 100, 100);
             // key pressed state
             this.keyPressedStates = [];
             // selected weapon type
@@ -87,7 +87,7 @@ var scenes;
             this.addChild(this.playerB);
             this.addChild(this.ScoreBorad.LivesLabelB);
             this.addChild(this.ScoreBorad.BulletLabelB);
-            this.addChild(this.squid);
+            this.addChild(this.jellyfish);
             this.Main();
         }
         /**
@@ -106,12 +106,10 @@ var scenes;
             this.detectBaseCollision(this.baseB, this.playerB);
             // detect bullet collision with each other
             this.detectDestructablesBulletCollision(this.bulletAList, this.bulletBList);
-            // detect bullet collision with squid from player A
-            this.detectSquidAndBulletCollision(this.bulletAList, this.squid);
-            // detect bullet collision with squid from player B
-            this.detectSquidAndBulletCollision(this.bulletBList, this.squid);
-            // detect players collision with squid
-            this.detectSquidPlayerCollision(this.squid, this.playerA, this.playerB);
+            // detect bullet collision with jellyfish from player A
+            this.detectJellyfishAndBulletCollision(this.bulletAList, this.jellyfish);
+            // detect bullet collision with jellyfish from player B
+            this.detectJellyfishAndBulletCollision(this.bulletBList, this.jellyfish);
             // update health and bullet label
             this.detectPlayerHealth();
         }
@@ -221,7 +219,7 @@ var scenes;
                             {
                                 // update scoreboard
                                 this.ScoreBorad.LivesA = this.playerA.health;
-                                this.ScoreBorad.ScoreB += 10;
+                                this.ScoreBorad.ScoreB += 100;
                                 // display explosion effect
                                 let explosion = new objects.Explosion(this.playerA.x + this.playerA.halfWidth, this.playerA.y);
                                 this.addChild(explosion);
@@ -231,7 +229,7 @@ var scenes;
                             {
                                 // update scoreboard
                                 this.ScoreBorad.LivesB = this.playerB.health;
-                                this.ScoreBorad.ScoreA += 10;
+                                this.ScoreBorad.ScoreA += 100;
                                 // display explosion effect
                                 let explosion = new objects.Explosion(this.playerB.x - this.playerB.halfWidth, this.playerB.y);
                                 this.addChild(explosion);
@@ -249,13 +247,13 @@ var scenes;
             }
         }
         /**
-         * Method for detecting collision between squid and bullet
+         * Method for detecting collision between jellyfish and bullet
          *
          * @param {objects.Bullet[]} bullets
-         * @param {objects.Squid} target
+         * @param {objects.Jellyfish} target
          * @memberof First
          */
-        detectSquidAndBulletCollision(bullets, target) {
+        detectJellyfishAndBulletCollision(bullets, target) {
             // for all bullets
             for (let i = 0; i < bullets.length; i++) {
                 // check AABB detection
@@ -264,7 +262,11 @@ var scenes;
                 if (target.isColliding) {
                     // update player health
                     target.health -= 1;
-                    // once squid's health goes to 0, update score based on who killed it
+                    // explosion
+                    let diff = bullets[i].owner == "PlayerA" ? -50 : 50;
+                    let explosion = new objects.Explosion(this.jellyfish.x + diff, this.jellyfish.y);
+                    this.addChild(explosion);
+                    // once jellyfish's health goes to 0, update score based on who killed it
                     if (target.health <= 0) {
                         switch (bullets[i].owner) {
                             case "PlayerA":
@@ -278,43 +280,13 @@ var scenes;
                                 }
                                 break;
                         }
-                        // reset squid
+                        // reset jellyfish
                         target.Reset();
                     }
                     // remove the bullet from the stage
                     this.removeChild(bullets[i]);
                     // remove the bullet from the list
                     bullets.splice(i, 1);
-                }
-            }
-        }
-        /**
-         * Method for detecting collision between squid and players
-         *
-         * @param {objects.Squid} squid
-         * @param {objects.Player} playerA
-         * @param {objects.Player} playerB
-         * @memberof First
-         */
-        detectSquidPlayerCollision(squid, playerA, playerB) {
-            // check if player B is colliding
-            managers.Collision.AABBCheck(playerB, squid);
-            if (squid.isColliding) {
-                // change squid's scale based on the status
-                squid.scaleX = squid.scaleX > 0 ? 1.1 : -1.1;
-                squid.scaleY = squid.scaleY > 0 ? 1.1 : -1.1;
-            }
-            else {
-                // check if player A is colliding
-                managers.Collision.AABBCheck(playerA, squid);
-                // change squid's scale based on the status
-                if (squid.isColliding) {
-                    squid.scaleX = squid.scaleX > 0 ? 1.1 : -1.1;
-                    squid.scaleY = squid.scaleY > 0 ? 1.1 : -1.1;
-                }
-                else {
-                    squid.scaleX = squid.scaleX > 0 ? 1 : -1;
-                    squid.scaleY = squid.scaleY > 0 ? 1 : -1;
                 }
             }
         }

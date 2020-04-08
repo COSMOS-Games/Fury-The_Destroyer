@@ -69,8 +69,8 @@ module scenes {
         true
       );
       this._introduction = new objects.Label(
-        "Score counts: \n\n    shot Submarine + 10\n\n    shot Mine + 5\n\n" +
-          "\n\n3 Levels: \n\n    1. Simple movement\n\n    2. Intro to Mines\n\n    3. Intro to Advanced weapon",
+        "Score counts: \n\n    shot Submarine + 100\n\n    shot Mine + 30\n\n" +
+        "\n\n3 Levels: \n\n    1. Simple movement\n\n    2. Intro to Mines\n\n    3. Intro to Advanced weapon",
         util.FONT_SIZE,
         util.FONT_FAMILY,
         util.FONT_COLOR,
@@ -139,7 +139,7 @@ module scenes {
      *
      * @memberof Instructions
      */
-    public Update(): void {}
+    public Update(): void { }
 
     /**
      * Main method of Instruction scene

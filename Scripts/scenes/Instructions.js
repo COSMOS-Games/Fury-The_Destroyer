@@ -43,7 +43,7 @@ var scenes;
             this._background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
             // labels
             this._instructionsLabel = new objects.Image(util.INSTRUCTIONS, 480, 100, 500, 150, true);
-            this._introduction = new objects.Label("Score counts: \n\n    shot Submarine + 10\n\n    shot Mine + 5\n\n" +
+            this._introduction = new objects.Label("Score counts: \n\n    shot Submarine + 100\n\n    shot Mine + 30\n\n" +
                 "\n\n3 Levels: \n\n    1. Simple movement\n\n    2. Intro to Mines\n\n    3. Intro to Advanced weapon", util.FONT_SIZE, util.FONT_FAMILY, util.FONT_COLOR, 50, 200, false);
             // button images
             this._instruction = new objects.Image(util.INSTRUCTION_PATH, 650, 200, 225, 288, false);

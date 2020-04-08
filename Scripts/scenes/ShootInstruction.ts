@@ -178,10 +178,10 @@ module scenes {
       this.detectBulletCollision(this._bulletAList, this._playerB);
       this.detectBulletCollision(this._bulletBList, this._playerA);
 
-      // detect bullet collision with squid from player A
+      // detect bullet collision with jellyfish from player A
       this.detectFishAndBulletCollision(this._bulletAList, this._fish);
 
-      // detect bullet collision with squid from player B
+      // detect bullet collision with jellyfish from player B
       this.detectFishAndBulletCollision(this._bulletBList, this._fish);
     }
 
@@ -358,7 +358,7 @@ module scenes {
           target.health -= 1;
           target.Reset();
 
-          // once squid's health goes to 0
+          // once jellyfish's health goes to 0
           if (target.health <= 0) {
             this.removeChild(target);
             this.addChild(this._mainMenuButton);
