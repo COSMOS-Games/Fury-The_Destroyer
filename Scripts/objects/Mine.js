@@ -1,9 +1,9 @@
 "use strict";
 var objects;
 (function (objects) {
-    class Mine extends objects.GameObject {
-        constructor(imagePath, x, y) {
-            super(imagePath, x, y, true);
+    class Mine extends objects.GameObjectSprite {
+        constructor(atlas, imageName, x, y) {
+            super(atlas, imageName, x, y, true);
             // private fields
             this._angle = 0;
             this.Start();

@@ -4,10 +4,10 @@ var managers;
     class ScoreBorad {
         constructor() {
             // set up the labels
-            this._livesLabelA = new objects.Label("Player A: Health 99", "24px", "Times", "white", 100, 25, true);
-            this._bulletLabelA = new objects.Label("Bullet 999", "24px", "Times", "white", 250, 25, true);
-            this._livesLabelB = new objects.Label("Player B: Health 99", "24px", "Times", "white", 750, 25, true);
-            this._bulletLabelB = new objects.Label("Bullet 999", "24px", "Times", "white", 900, 25, true);
+            this._livesLabelA = new objects.Label("Player A: Health 99", "20px", util.FONT_FAMILY, "white", 25, 25, false);
+            this._bulletLabelA = new objects.Label("Bullet 999", "20px", util.FONT_FAMILY, "white", 233, 25, false);
+            this._livesLabelB = new objects.Label("Player B: Health 99", "20px", util.FONT_FAMILY, "white", 598, 25, false);
+            this._bulletLabelB = new objects.Label("Bullet 999", "20px", util.FONT_FAMILY, "white", 805, 25, false);
             this._scoreLabelA = new objects.Label("Player A Score: 999", "24px", util.FONT_FAMILY, "white", 330, 200, true);
             this._scoreLabelB = new objects.Label("Player B Score: 999", "24px", util.FONT_FAMILY, "white", 630, 200, true);
             // initial values
@@ -66,7 +66,7 @@ var managers;
         set BulletsA(v) {
             this._bulletsA = v;
             util.GameConfig.PLAYER_A_BULLETS = this._bulletsA;
-            this.BulletLabelA.setText("Bullet " + this.BulletsA);
+            this.BulletLabelA.setText("| Bullet: " + this.BulletsA);
         }
         get BulletsB() {
             return this._bulletsB;
@@ -74,7 +74,7 @@ var managers;
         set BulletsB(v) {
             this._bulletsB = v;
             util.GameConfig.PLAYER_B_BULLETS = this._bulletsB;
-            this.BulletLabelB.setText("Bullet " + this.BulletsB);
+            this.BulletLabelB.setText("| Bullet: " + this.BulletsB);
         }
         get LivesA() {
             return this._livesA;

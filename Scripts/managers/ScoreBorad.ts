@@ -65,7 +65,7 @@ module managers {
     public set BulletsA(v: number) {
       this._bulletsA = v;
       util.GameConfig.PLAYER_A_BULLETS = this._bulletsA;
-      this.BulletLabelA.setText("Bullet " + this.BulletsA);
+      this.BulletLabelA.setText("| Bullet: " + this.BulletsA);
     }
     public get BulletsB(): number {
       return this._bulletsB;
@@ -73,7 +73,7 @@ module managers {
     public set BulletsB(v: number) {
       this._bulletsB = v;
       util.GameConfig.PLAYER_B_BULLETS = this._bulletsB;
-      this.BulletLabelB.setText("Bullet " + this.BulletsB);
+      this.BulletLabelB.setText("| Bullet: " + this.BulletsB);
     }
 
     public get LivesA(): number {
@@ -98,40 +98,40 @@ module managers {
       // set up the labels
       this._livesLabelA = new objects.Label(
         "Player A: Health 99",
-        "24px",
-        "Times",
+        "20px",
+        util.FONT_FAMILY,
         "white",
-        100,
         25,
-        true
+        25,
+        false
       );
       this._bulletLabelA = new objects.Label(
         "Bullet 999",
-        "24px",
-        "Times",
+        "20px",
+        util.FONT_FAMILY,
         "white",
-        250,
+        233,
         25,
-        true
+        false
       );
       this._livesLabelB = new objects.Label(
         "Player B: Health 99",
-        "24px",
-        "Times",
+        "20px",
+        util.FONT_FAMILY,
         "white",
-        750,
+        598,
         25,
-        true
+        false
       );
 
       this._bulletLabelB = new objects.Label(
         "Bullet 999",
-        "24px",
-        "Times",
+        "20px",
+        util.FONT_FAMILY,
         "white",
-        900,
+        805,
         25,
-        true
+        false
       );
       this._scoreLabelA = new objects.Label(
         "Player A Score: 999",

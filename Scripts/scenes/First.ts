@@ -46,7 +46,8 @@ module scenes {
       );
       // player A
       this.playerA = new objects.Player(
-        util.PALYER_A_SUBMARINE,
+        util.GameConfig.ATLAS,
+        "submarineA",
         util.PLAYER_A_POS.x,
         util.PLAYER_A_POS.y,
         "PlayerA"
@@ -56,7 +57,8 @@ module scenes {
       util.GameConfig.PLAYER_A_SCORE = 0;
       // player B
       this.playerB = new objects.Player(
-        util.PALYER_B_SUBMARINE,
+        util.GameConfig.ATLAS,
+        "submarineB",
         util.PLAYER_B_POS.x,
         util.PLAYER_B_POS.y,
         "PlayerB"
@@ -161,7 +163,7 @@ module scenes {
       if (this.keyPressedStates[util.Key.C]) {
         if (this.children.indexOf(this.playerA) !== -1) {
           let aim = objects.Vector2.right();
-          let bulletsA = this.playerA.shoot(util.PLAYER_A_BULLET, aim);
+          let bulletsA = this.playerA.shoot(util.GameConfig.ATLAS, "missileA", aim);
           this.ScoreBorad.BulletsA = this.playerA.bulletNum;
           if (bulletsA) {
             bulletsA.forEach(b => {
@@ -177,7 +179,7 @@ module scenes {
         if (this.children.indexOf(this.playerB) !== -1) {
           // aim specifies the direction of shooting
           let aim = objects.Vector2.left();
-          let bulletsB = this.playerB.shoot(util.PLAYER_B_BULLET, aim);
+          let bulletsB = this.playerB.shoot(util.GameConfig.ATLAS, "missileB", aim);
           this.ScoreBorad.BulletsB = this.playerB.bulletNum;
           if (bulletsB) {
             bulletsB.forEach(b => {
@@ -207,12 +209,16 @@ module scenes {
               {
                 this.ScoreBorad.LivesA = this.playerA.health;
                 this.ScoreBorad.ScoreB += 10;
+                let explosion = new objects.Explosion(this.playerA.x + this.playerA.halfWidth, this.playerA.y);
+                this.addChild(explosion);
               }
               break;
             case "PlayerB":
               {
                 this.ScoreBorad.LivesB = this.playerB.health;
                 this.ScoreBorad.ScoreA += 10;
+                let explosion = new objects.Explosion(this.playerB.x - this.playerB.halfWidth, this.playerB.y);
+                this.addChild(explosion);
               }
               break;
           }
@@ -295,6 +301,9 @@ module scenes {
         for (let j = 0; j < destructableB.length; j++) {
           managers.Collision.AABBCheck(destructableA[i], destructableB[j]);
           if (destructableB[j].isColliding) {
+            let explosion = new objects.Explosion(destructableA[i].x + destructableA[i].halfWidth, destructableA[i].y);
+            this.addChild(explosion);
+            
             this.removeChild(destructableA[i]); // remove the bullet from the stage
             destructableA.splice(i, 1); // remove the bullet from the list
             this.removeChild(destructableB[j]); // remove the bullet from the stage

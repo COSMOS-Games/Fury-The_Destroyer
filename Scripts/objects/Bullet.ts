@@ -1,5 +1,5 @@
 module objects {
-    export class Bullet extends GameObject {
+    export class Bullet extends GameObjectSprite {
         // variables
         private _owner: string = "";
 
@@ -13,8 +13,8 @@ module objects {
         }
 
 
-        constructor(imagePath: string, x: number, y: number, direction: Vector2, isSpecialWeapon?: true) {
-            super(imagePath, x, y, true);
+        constructor(atlas: createjs.SpriteSheet, imageName: string, x: number, y: number, direction: Vector2, isSpecialWeapon?: true) {
+            super(atlas, imageName, x, y, true);
 
             if (isSpecialWeapon) {
                 // let speed = 10;
