@@ -23,7 +23,7 @@ module scenes {
 
       this.keyPressedStates = [];
       this.background = new objects.Image(
-        util.BACKGROUND_PATH_GAME,
+        util.BACKGROUND_PATH_GAME1,
         0,
         0,
         util.STAGE_W,

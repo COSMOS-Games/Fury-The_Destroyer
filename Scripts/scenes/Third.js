@@ -11,7 +11,7 @@ var scenes;
             this.isChangedA = false;
             this.isChangedB = false;
             this.keyPressedStates = [];
-            this.background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
+            this.background = new objects.Image(util.BACKGROUND_PATH_GAME3, 0, 0, util.STAGE_W, util.STAGE_H, false);
             this.baseA = new objects.Image(util.BASE_A_PATH, 55, 90, 100, 100, true);
             this.baseB = new objects.Image(util.BASE_B_PATH, 900, 580, 100, 100, true);
             // player A
