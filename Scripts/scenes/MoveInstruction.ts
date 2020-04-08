@@ -50,6 +50,9 @@ module scenes {
     private _playerBInstruction: objects.Label;
     private _instructionLabel: objects.Label;
 
+    // buttons
+    private _nextButton: objects.Image;
+
     // PUBLIC INSTANCE MEMBER
     public keyPressedStates: boolean[]; // to detect which keys are down
 
@@ -78,7 +81,7 @@ module scenes {
         0,
         100,
         100,
-        true
+        false
       );
       this._baseA.position = this.setRandomLocation();
 
@@ -88,7 +91,7 @@ module scenes {
         0,
         100,
         100,
-        true
+        false
       );
       this._baseB.position = this.setRandomLocation();
 
@@ -143,6 +146,16 @@ module scenes {
         false
       );
 
+      // button
+      this._nextButton = new objects.Image(
+        util.NEXT_BUTTON,
+        480,
+        530,
+        150,
+        50,
+        true
+      );
+
       // key pressed state
       this.keyPressedStates = [];
 
@@ -183,7 +196,13 @@ module scenes {
       this.detectBaseCollision(this._baseB, this._playerB);
     }
 
-    public Main(): void {}
+    public Main(): void {
+      this._nextButton.HoverOn();
+      this._nextButton.on("click", function () {
+        // move to the next scene
+        util.GameConfig.SCENE_STATE = scenes.State.SHOOT_INSTRUCTION;
+      });
+    }
 
     public detectBaseCollision(
       base: objects.Image,
@@ -222,17 +241,14 @@ module scenes {
       }
 
       if (this._playerAMoveFinish && this._playerBMoveFinish) {
-        // move to the next scene
-        util.GameConfig.SCENE_STATE = scenes.State.SHOOT_INSTRUCTION;
+        this.addChild(this._nextButton);
       }
     }
 
     public setRandomLocation(): objects.Vector2 {
       // generate position at random
-      let randomX = Math.floor(Math.random() * util.STAGE_W);
-      let randomY = Math.floor(
-        Math.random() * util.STAGE_H + util.STAGE_BOUNDARY_TOP
-      );
+      let randomX = Math.floor(Math.random() * (util.STAGE_W - 100));
+      let randomY = Math.floor(Math.random() * (util.STAGE_H - 100));
 
       return new objects.Vector2(randomX, randomY);
     }

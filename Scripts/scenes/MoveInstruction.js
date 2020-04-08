@@ -45,9 +45,9 @@ var scenes;
             // background
             this._background = new objects.Image(util.BACKGROUND_PATH_GAME1, 0, 0, util.STAGE_W, util.STAGE_H, false);
             // bases
-            this._baseA = new objects.Image("./Assets/images/baseA1.png", 0, 0, 100, 100, true);
+            this._baseA = new objects.Image("./Assets/images/baseA1.png", 0, 0, 100, 100, false);
             this._baseA.position = this.setRandomLocation();
-            this._baseB = new objects.Image("./Assets/images/baseB1.png", 0, 0, 100, 100, true);
+            this._baseB = new objects.Image("./Assets/images/baseB1.png", 0, 0, 100, 100, false);
             this._baseB.position = this.setRandomLocation();
             // player A
             this._playerA = new objects.Player(util.GameConfig.ATLAS, "submarineA", util.PLAYER_A_POS.x, util.PLAYER_A_POS.y, "PlayerA");
@@ -59,6 +59,8 @@ var scenes;
             this._playerBInstruction = new objects.Label("Player B: press arrow key to move", "20px", util.FONT_FAMILY, "black", 585, 10, false);
             // instruction label
             this._instructionLabel = new objects.Label("Go find your base", "20px", util.FONT_FAMILY, "red", 380, 35, false);
+            // button
+            this._nextButton = new objects.Image(util.NEXT_BUTTON, 480, 530, 150, 50, true);
             // key pressed state
             this.keyPressedStates = [];
             this.Start();
@@ -93,7 +95,13 @@ var scenes;
             this.detectBaseCollision(this._baseA, this._playerA);
             this.detectBaseCollision(this._baseB, this._playerB);
         }
-        Main() { }
+        Main() {
+            this._nextButton.HoverOn();
+            this._nextButton.on("click", function () {
+                // move to the next scene
+                util.GameConfig.SCENE_STATE = scenes.State.SHOOT_INSTRUCTION;
+            });
+        }
         detectBaseCollision(base, target) {
             // check AABB collision
             managers.Collision.AABBCheck(base, target);
@@ -128,14 +136,13 @@ var scenes;
                 }
             }
             if (this._playerAMoveFinish && this._playerBMoveFinish) {
-                // move to the next scene
-                util.GameConfig.SCENE_STATE = scenes.State.SHOOT_INSTRUCTION;
+                this.addChild(this._nextButton);
             }
         }
         setRandomLocation() {
             // generate position at random
-            let randomX = Math.floor(Math.random() * util.STAGE_W);
-            let randomY = Math.floor(Math.random() * util.STAGE_H + util.STAGE_BOUNDARY_TOP);
+            let randomX = Math.floor(Math.random() * (util.STAGE_W - 100));
+            let randomY = Math.floor(Math.random() * (util.STAGE_H - 100));
             return new objects.Vector2(randomX, randomY);
         }
         /**
