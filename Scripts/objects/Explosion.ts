@@ -6,7 +6,9 @@ module objects {
         constructor(x: number, y: number) {
             super(util.GameConfig.ATLAS, "explosion", x, y, true);
 
-            this.Start();
+            setTimeout(() => {
+                this.Destroy();
+            }, 700);
         }
 
         // private methods
@@ -21,14 +23,11 @@ module objects {
         }        
         
         public Start(): void {
-            createjs.Ticker.framerate = 60;
-            createjs.Ticker.on("tick", () => {
-              this.Update();
-            });
+
         }
 
         public Update(): void {
-            this.position = new Vector2(this.position.x, this.position.y);
+
         }
 
         public Destroy(): void {

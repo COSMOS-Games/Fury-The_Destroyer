@@ -132,7 +132,7 @@ var scenes;
                             {
                                 this.ScoreBorad.LivesA = this.playerA.health;
                                 this.ScoreBorad.ScoreB += 10;
-                                let explosion = new objects.Explosion(10, 10);
+                                let explosion = new objects.Explosion(this.playerA.x + this.playerA.halfWidth, this.playerA.y);
                                 this.addChild(explosion);
                             }
                             break;
@@ -140,7 +140,7 @@ var scenes;
                             {
                                 this.ScoreBorad.LivesB = this.playerB.health;
                                 this.ScoreBorad.ScoreA += 10;
-                                let explosion = new objects.Explosion(10, 10);
+                                let explosion = new objects.Explosion(this.playerB.x - this.playerB.halfWidth, this.playerB.y);
                                 this.addChild(explosion);
                             }
                             break;

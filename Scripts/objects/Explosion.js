@@ -6,7 +6,9 @@ var objects;
         // constructor
         constructor(x, y) {
             super(util.GameConfig.ATLAS, "explosion", x, y, true);
-            this.Start();
+            setTimeout(() => {
+                this.Destroy();
+            }, 700);
         }
         // private methods
         _checkBounds() {
@@ -15,13 +17,8 @@ var objects;
         Reset() {
         }
         Start() {
-            createjs.Ticker.framerate = 60;
-            createjs.Ticker.on("tick", () => {
-                this.Update();
-            });
         }
         Update() {
-            this.position = new objects.Vector2(this.position.x, this.position.y);
         }
         Destroy() {
             this.parent.removeChild(this);
