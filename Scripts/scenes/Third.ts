@@ -320,6 +320,8 @@ module scenes {
             let bulletNumA = this.bulletAList.length;
             let bulletNumB = this.bulletBList.length;
 
+            let explosion = new objects.Explosion(destructableA[i].x + destructableA[i].halfWidth, destructableA[i].y);
+            this.addChild(explosion);
             this.removeChild(destructableA[i]); // remove the bullet from the stage
             destructableA.splice(i, 1); // remove the bullet from the list
             this.removeChild(destructableB[j]); // remove the bullet from the stage
