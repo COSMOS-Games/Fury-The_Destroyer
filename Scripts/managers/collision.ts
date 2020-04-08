@@ -1,18 +1,5 @@
 module managers {
     export class Collision {
-        public static squaredRadiusCheck(object1: objects.GameObject, object2: objects.GameObject) {
-            let sqrDistance = objects.Vector2.sqrDistance(object1.position, object2.position);
-            let radii = object1.halfWidth + object2.halfWidth
-
-            if (sqrDistance < (radii * radii)) {
-                if (!object2.isColliding) {
-                    object2.isColliding = true;
-                }
-            } else {
-                object2.isColliding = false;
-            }
-        }
-
         // Access Aligned Bounding Boxes
         public static AABBCheck(object1: objects.GameObject | objects.GameObjectSprite, object2: objects.GameObject | objects.GameObjectSprite) {
             let object1Offset = new objects.Vector2(0, 0);

@@ -2,18 +2,6 @@
 var managers;
 (function (managers) {
     class Collision {
-        static squaredRadiusCheck(object1, object2) {
-            let sqrDistance = objects.Vector2.sqrDistance(object1.position, object2.position);
-            let radii = object1.halfWidth + object2.halfWidth;
-            if (sqrDistance < (radii * radii)) {
-                if (!object2.isColliding) {
-                    object2.isColliding = true;
-                }
-            }
-            else {
-                object2.isColliding = false;
-            }
-        }
         // Access Aligned Bounding Boxes
         static AABBCheck(object1, object2) {
             let object1Offset = new objects.Vector2(0, 0);
