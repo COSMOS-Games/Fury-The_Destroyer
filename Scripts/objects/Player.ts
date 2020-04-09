@@ -175,7 +175,7 @@ module objects {
             }
             // check if this player still have bullet or not
             if (this.bulletNum > 0) {
-                createjs.Sound.play("shoot");
+                //                createjs.Sound.play("shoot");
 
                 this.bulletNum -= 1;
                 // return bullet;

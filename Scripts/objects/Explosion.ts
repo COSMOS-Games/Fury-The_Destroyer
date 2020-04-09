@@ -5,6 +5,7 @@ module objects {
         // constructor
         constructor(x: number, y: number) {
             super(util.GameConfig.ATLAS, "explosion", x, y, true);
+            createjs.Sound.play("shoot");
 
             setTimeout(() => {
                 this.Destroy();
@@ -20,8 +21,8 @@ module objects {
 
         public Reset(): void {
 
-        }        
-        
+        }
+
         public Start(): void {
 
         }

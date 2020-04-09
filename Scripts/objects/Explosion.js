@@ -6,6 +6,7 @@ var objects;
         // constructor
         constructor(x, y) {
             super(util.GameConfig.ATLAS, "explosion", x, y, true);
+            createjs.Sound.play("shoot");
             setTimeout(() => {
                 this.Destroy();
             }, 700);
