@@ -125,7 +125,13 @@ let Game = (function () {
         util.GameConfig.SCENE_STATE = scenes.State.SPLASH;
         // Load Files
         createjs.Sound.alternateExtensions = ["mp3"];
+        createjs.Sound.registerSound("./Assets/audio/button1.mp3", "button1");
+        createjs.Sound.registerSound("./Assets/audio/button2.mp3", "button2");
+        createjs.Sound.registerSound("./Assets/audio/explosion.mp3", "explosion");
+        createjs.Sound.registerSound("./Assets/audio/impact.mp3", "impact");
+        createjs.Sound.registerSound("./Assets/audio/play.mp3", "play");
         createjs.Sound.registerSound("./Assets/audio/shoot.mp3", "shoot");
+        createjs.Sound.registerSound("./Assets/audio/splash.mp3", "splash");
         // currentSceneState = scenes.State.NO_SCENE;
         // util.GameConfig.SCENE_STATE = scenes.State.START;
     }
