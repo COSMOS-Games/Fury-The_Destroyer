@@ -141,10 +141,18 @@ let Game = (function () {
     createjs.Sound.registerSound("./Assets/audio/button1.mp3", "button1");
     createjs.Sound.registerSound("./Assets/audio/button2.mp3", "button2");
     createjs.Sound.registerSound("./Assets/audio/explosion.mp3", "explosion");
+    createjs.Sound.registerSound("./Assets/audio/game-over.mp3", "game-over");
     createjs.Sound.registerSound("./Assets/audio/impact.mp3", "impact");
+    createjs.Sound.registerSound("./Assets/audio/menu.mp3", "menu")
     createjs.Sound.registerSound("./Assets/audio/play.mp3", "play");
+    createjs.Sound.registerSound("./Assets/audio/play1.mp3", "play1");
+    createjs.Sound.registerSound("./Assets/audio/play2.mp3", "play2");
+    createjs.Sound.registerSound("./Assets/audio/play3.mp3", "play3");
     createjs.Sound.registerSound("./Assets/audio/shoot.mp3", "shoot");
     createjs.Sound.registerSound("./Assets/audio/splash.mp3", "splash");
+    createjs.Sound.registerSound("./Assets/audio/stage-cleaned.mp3", "stage-cleaned");
+
+
 
     // currentSceneState = scenes.State.NO_SCENE;
     // util.GameConfig.SCENE_STATE = scenes.State.START;
@@ -168,41 +176,63 @@ let Game = (function () {
 
     switch (util.GameConfig.SCENE_STATE) {
       case scenes.State.SPLASH:
+        createjs.Sound.stop();
+        createjs.Sound.play("explosion");
         currentScene = new scenes.Splash();
         break;
       case scenes.State.START:
+        createjs.Sound.stop();
+        createjs.Sound.play("menu", {volume: 0.2, loop: -1});
         currentScene = new scenes.Start();
         break;
       case scenes.State.INSTRUCTIONS:
+        createjs.Sound.stop();
+        createjs.Sound.play("menu", {volume: 0.2, loop: -1});
         currentScene = new scenes.Instructions();
         break;
       case scenes.State.MOVE_INSTRUCTION:
+        createjs.Sound.stop();
+        createjs.Sound.play("menu", {volume: 0.2, loop: -1});
         MoveInstruction = new scenes.MoveInstruction();
         currentScene = MoveInstruction;
         break;
       case scenes.State.SHOOT_INSTRUCTION:
+        createjs.Sound.stop();
+        createjs.Sound.play("menu", {volume: 0.2, loop: -1});
         ShootInstruction = new scenes.ShootInstruction();
         currentScene = ShootInstruction;
         break;
       case scenes.State.FIRST:
+        createjs.Sound.stop();
+        createjs.Sound.play("play1", {volume: 0.2, loop: -1});
         FirstScene = new scenes.First();
         currentScene = FirstScene;
         break;
       case scenes.State.STAGE_CLEANED:
+        createjs.Sound.stop();
+        createjs.Sound.play("stage-cleaned", {volume: 0.5});
         currentScene = new scenes.StageCleaned();
         break;
       case scenes.State.SECOND:
+        createjs.Sound.stop();
+        createjs.Sound.play("play2", {volume: 0.2, loop: -1});
         SecondScene = new scenes.Second();
         currentScene = SecondScene;
         break;
       case scenes.State.STAGE_CLEANEDAGAIN:
+        createjs.Sound.stop();
+        createjs.Sound.play("stage-cleaned", {volume: 0.5});
         currentScene = new scenes.StageCleanedAgain();
         break;
       case scenes.State.THIRD:
+        createjs.Sound.stop();
+        createjs.Sound.play("play3", {volume: 0.2, loop: -1});
         ThirdScene = new scenes.Third();
         currentScene = ThirdScene;
         break;
       case scenes.State.END:
+        createjs.Sound.stop();
+        createjs.Sound.play("game-over", {volume: 0.5});
         currentScene = new scenes.End();
         break;
     }
