@@ -205,8 +205,8 @@ let Game = (function () {
         break;
       case scenes.State.FIRST:
         createjs.Sound.stop();
-        createjs.Sound.play("play1", { volume: 0.05, loop: -1 });
-        // createjs.Sound.play("beast", { volume: 0.05, loop: -1 });
+        // createjs.Sound.play("play1", { volume: 0.05, loop: -1 });
+        createjs.Sound.play("beast", { volume: 0.05, loop: -1 });
         FirstScene = new scenes.First();
         currentScene = FirstScene;
         break;
@@ -217,8 +217,8 @@ let Game = (function () {
         break;
       case scenes.State.SECOND:
         createjs.Sound.stop();
-        createjs.Sound.play("play2", { volume: 0.1, loop: -1 });
-        // createjs.Sound.play("beast", { volume: 0.05, loop: -1 });
+        // createjs.Sound.play("play2", { volume: 0.1, loop: -1 });
+        createjs.Sound.play("beast", { volume: 0.05, loop: -1 });
         SecondScene = new scenes.Second();
         currentScene = SecondScene;
         break;
@@ -229,8 +229,8 @@ let Game = (function () {
         break;
       case scenes.State.THIRD:
         createjs.Sound.stop();
-        // createjs.Sound.play("play3", { volume: 0.1, loop: -1 });
-        createjs.Sound.play("beast", { volume: 0.05, loop: -1 });
+        createjs.Sound.play("play3", { volume: 0.1, loop: -1 });
+        // createjs.Sound.play("beast", { volume: 0.05, loop: -1 });
         ThirdScene = new scenes.Third();
         currentScene = ThirdScene;
         break;

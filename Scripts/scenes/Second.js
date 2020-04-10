@@ -63,7 +63,7 @@ var scenes;
             // mine
             this.mineList = this.generateMines();
             // // jellyfish
-            this.jellyfish = new objects.Jellyfish(util.ENEMY, 100, 100);
+            // this.jellyfish = new objects.Jellyfish(util.ENEMY, 100, 100);
             // key pressed state
             this.keyPressedStates = [];
             // selectedd weapon type
@@ -88,7 +88,7 @@ var scenes;
             this.addChild(this.playerB);
             this.addChild(this.scoreBorad.LivesLabelB);
             this.addChild(this.scoreBorad.BulletLabelB);
-            this.addChild(this.jellyfish);
+            // this.addChild(this.jellyfish);
             // generate mines
             for (let i = 0; i < this.mineList.length; i++) {
                 this.addChild(this.mineList[i]);
@@ -117,10 +117,10 @@ var scenes;
             this.detectDestructablesCollision(this.mineList, this.bulletBList);
             // detect bullet collision with each other
             this.detectDestructablesBulletCollision(this.bulletAList, this.bulletBList);
-            // detect bullet collision with jellyfish from player A
-            this.detectJellyfishAndBulletCollision(this.bulletAList, this.jellyfish);
-            // detect bullet collision with jellyfish from player B
-            this.detectJellyfishAndBulletCollision(this.bulletBList, this.jellyfish);
+            // // detect bullet collision with jellyfish from player A
+            // this.detectJellyfishAndBulletCollision(this.bulletAList, this.jellyfish);
+            // // detect bullet collision with jellyfish from player B
+            // this.detectJellyfishAndBulletCollision(this.bulletBList, this.jellyfish);
             // update health and bullet label
             this.detectPlayerHealth();
         }

@@ -110,7 +110,7 @@ module scenes {
       this.mineList = this.generateMines();
 
       // // jellyfish
-      this.jellyfish = new objects.Jellyfish(util.ENEMY, 100, 100);
+      // this.jellyfish = new objects.Jellyfish(util.ENEMY, 100, 100);
 
       // key pressed state
       this.keyPressedStates = [];
@@ -139,7 +139,7 @@ module scenes {
       this.addChild(this.playerB);
       this.addChild(this.scoreBorad.LivesLabelB);
       this.addChild(this.scoreBorad.BulletLabelB);
-      this.addChild(this.jellyfish);
+      // this.addChild(this.jellyfish);
 
       // generate mines
       for (let i = 0; i < this.mineList.length; i++) {
@@ -180,11 +180,11 @@ module scenes {
         this.bulletBList
       );
 
-      // detect bullet collision with jellyfish from player A
-      this.detectJellyfishAndBulletCollision(this.bulletAList, this.jellyfish);
+      // // detect bullet collision with jellyfish from player A
+      // this.detectJellyfishAndBulletCollision(this.bulletAList, this.jellyfish);
 
-      // detect bullet collision with jellyfish from player B
-      this.detectJellyfishAndBulletCollision(this.bulletBList, this.jellyfish);
+      // // detect bullet collision with jellyfish from player B
+      // this.detectJellyfishAndBulletCollision(this.bulletBList, this.jellyfish);
 
       // update health and bullet label
       this.detectPlayerHealth();
