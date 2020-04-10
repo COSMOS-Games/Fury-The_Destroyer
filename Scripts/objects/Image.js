@@ -29,6 +29,7 @@ var objects;
          * @memberof Button
          */
         Start() {
+            createjs.Sound.play("button2", { volume: 0.05 });
         }
         Update() {
         }

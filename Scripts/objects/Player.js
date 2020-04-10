@@ -101,6 +101,7 @@ var objects;
             let bullets = new Array();
             switch (this.weaponType) {
                 case "normal":
+                    createjs.Sound.play("shoot", { volume: 0.5 });
                     {
                         let bullet = new objects.Bullet(atlas, imageName, this.position.x, this.position.y + 10, aim);
                         bullet.owner = this.name;
@@ -108,6 +109,7 @@ var objects;
                     }
                     break;
                 case "3way":
+                    createjs.Sound.play("shoot", { volume: 0.5 });
                     {
                         let bullet1 = new objects.Bullet(atlas, imageName, this.position.x, this.position.y + 10, objects.Vector2.scale(aim, 10), true);
                         let bullet2 = new objects.Bullet(atlas, imageName, this.position.x, this.position.y + 10, objects.Vector2.scale(objects.Vector2.add(aim, new objects.Vector2(aim.x, 1)), 3), true);

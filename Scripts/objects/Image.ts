@@ -33,7 +33,7 @@ module objects {
          * @memberof Button
          */
         public Start(): void {
-
+            createjs.Sound.play("button2", {volume: 0.05});
         }
 
 
