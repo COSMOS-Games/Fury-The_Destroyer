@@ -71,7 +71,9 @@ var objects;
         }
         // public method
         Start() {
-            this.alpha = 0.8; // transparency set to 80%
+            // this.alpha = 0.8; // transparency set to 80%
+            this.scaleX = 0.9;
+            this.scaleY = 0.9;
             this.Reset();
         }
         Update() {

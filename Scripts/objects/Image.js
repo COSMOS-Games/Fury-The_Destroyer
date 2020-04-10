@@ -18,6 +18,10 @@ var objects;
         HoverOn() {
             this.on("mouseover", this.HoverOver);
             this.on("mouseout", this.HoverOut);
+            // onclick event for button images
+            this.on("click", () => {
+                createjs.Sound.play("button2", { volume: 0.05 });
+            });
         }
         // PRIVATE LIFE CYCLE METHODS
         _checkBounds() {
@@ -29,7 +33,7 @@ var objects;
          * @memberof Button
          */
         Start() {
-            createjs.Sound.play("button2", { volume: 0.05 });
+            // createjs.Sound.play("button2", { volume: 0.05 });
         }
         Update() {
         }

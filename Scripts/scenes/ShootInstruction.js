@@ -213,6 +213,22 @@ var scenes;
                 if (target.isColliding) {
                     // remove the bullet from the stage
                     this.removeChild(bullets[i]);
+                    switch (target.name) {
+                        case "PlayerA":
+                            {
+                                // display explosion effect
+                                let explosion = new objects.Explosion(target.x + target.halfWidth, target.y);
+                                this.addChild(explosion);
+                            }
+                            break;
+                        case "PlayerB":
+                            {
+                                // display explosion effect
+                                let explosion = new objects.Explosion(target.x - target.halfWidth, target.y);
+                                this.addChild(explosion);
+                            }
+                            break;
+                    }
                     // remove the bullet from the list
                     bullets.splice(i, 1);
                 }
@@ -239,6 +255,9 @@ var scenes;
                 managers.Collision.AABBCheck(bullets[i], target);
                 // if there is a collision
                 if (target.isColliding) {
+                    // explosion
+                    let explosion = new objects.Explosion(target.x, target.y);
+                    this.addChild(explosion);
                     // update player health
                     target.health -= 1;
                     target.Reset();

@@ -4,6 +4,7 @@ module objects {
         constructor(imagePath: string, x: number = 0, y: number = 0, width: number = 0, height: number = 0, isCentered: boolean = false) {
             super(imagePath, x, y, isCentered);
             super.CustomSize(width, height, isCentered);
+
             this.Start();
         }
 
@@ -19,6 +20,11 @@ module objects {
         HoverOn(): void {
             this.on("mouseover", this.HoverOver);
             this.on("mouseout", this.HoverOut);
+
+            // onclick event for button images
+            this.on("click", () => {
+                createjs.Sound.play("button2", { volume: 0.05 });
+            })
         }
 
         // PRIVATE LIFE CYCLE METHODS
@@ -33,7 +39,7 @@ module objects {
          * @memberof Button
          */
         public Start(): void {
-            createjs.Sound.play("button2", {volume: 0.05});
+            // createjs.Sound.play("button2", { volume: 0.05 });
         }
 
 
