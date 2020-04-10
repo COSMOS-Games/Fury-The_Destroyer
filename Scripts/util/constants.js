@@ -16,6 +16,7 @@ var util;
     util.BASE_A_PATH = "./Assets/images/baseA.png";
     util.BASE_B_PATH = "./Assets/images/baseB.png";
     util.ENEMY = "./Assets/images/enemy.png";
+    util.FISH = "./Assets/images/fish.png";
     // Player image assets
     util.PALYER_A_SUBMARINE = "./Assets/images/submarineA.png";
     util.PALYER_B_SUBMARINE = "./Assets/images/submarineB.png";

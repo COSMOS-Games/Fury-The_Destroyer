@@ -88,7 +88,7 @@ module scenes {
       );
 
       // fish
-      this._fish = new objects.Fish("./Assets/images/placeholder.png", 0, 0);
+      this._fish = new objects.Fish("./Assets/images/fish.png", 0, 0);
 
       // player A instruction label
       this._playerAInstruction = new objects.Label(

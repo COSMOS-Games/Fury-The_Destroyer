@@ -46,7 +46,7 @@ var scenes;
             // player B
             this._playerB = new objects.Player(util.GameConfig.ATLAS, "submarineB", util.PLAYER_B_POS.x, util.PLAYER_B_POS.y, "PlayerB");
             // fish
-            this._fish = new objects.Fish("./Assets/images/placeholder.png", 0, 0);
+            this._fish = new objects.Fish("./Assets/images/fish.png", 0, 0);
             // player A instruction label
             this._playerAInstruction = new objects.Label("Player A: Press WASD key to move\n\n" + "          Press C to shoot", "20px", util.FONT_FAMILY, "black", 10, 10, false);
             // player B instruction label

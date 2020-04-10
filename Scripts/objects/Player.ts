@@ -123,6 +123,7 @@ module objects {
             let bullets = new Array<Bullet>();
             switch (this.weaponType) {
                 case "normal":
+                    createjs.Sound.play("shoot", {volume: 0.5});
                     {
                         let bullet = new Bullet(
                             atlas,
@@ -137,6 +138,7 @@ module objects {
                     }
                     break;
                 case "3way":
+                    createjs.Sound.play("shoot", {volume: 0.5});
                     {
                         let bullet1 = new Bullet(
                             atlas,
