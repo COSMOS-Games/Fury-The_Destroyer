@@ -62,7 +62,7 @@ var scenes;
             this.scoreBorad = new managers.ScoreBorad();
             // mine
             this.mineList = this.generateMines();
-            // jellyfish
+            // // jellyfish
             this.jellyfish = new objects.Jellyfish(util.ENEMY, 100, 100);
             // key pressed state
             this.keyPressedStates = [];
@@ -141,7 +141,7 @@ var scenes;
             // local variable
             let mines = [];
             // create mines repeatly
-            for (let i = 0; i < util.MINE_NUM; i++) {
+            for (let i = 0; i < util.MINE_NUM + 10; i++) {
                 // generate position at random
                 let mineX = Math.floor(Math.random() * util.STAGE_W);
                 let mineY = Math.floor(Math.random() * util.STAGE_H + util.STAGE_BOUNDARY_TOP);
