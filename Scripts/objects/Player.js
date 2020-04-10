@@ -11,6 +11,8 @@ var objects;
             this._health = 3;
             this._name = "player";
             this._weaponType = "normal";
+            this._isVulnerable = false;
+            this._vulnerableCount = 0;
             this.name = name;
             this.Start();
         }
@@ -38,6 +40,18 @@ var objects;
         }
         set weaponType(newWeapon) {
             this._weaponType = newWeapon;
+        }
+        get isVulnerable() {
+            return this._isVulnerable;
+        }
+        set isVulnerable(newState) {
+            this._isVulnerable = newState;
+            if (newState) {
+                this._vulnerableCount = createjs.Ticker.getTicks();
+            }
+            else {
+                this._vulnerableCount = 0;
+            }
         }
         // PRIVATE METHODS
         _checkBounds() {
@@ -74,6 +88,19 @@ var objects;
             // update player position
             this.position = new objects.Vector2(this.position.x, this.position.y);
             this._checkBounds();
+            // add blinking visual effect and invincible state
+            if (this.isVulnerable) {
+                if (createjs.Ticker.getTicks() % 15 < 7.5) {
+                    this.alpha = 0.3;
+                }
+                else {
+                    this.alpha = 1;
+                }
+                if (createjs.Ticker.getTicks() - this._vulnerableCount >= 90) {
+                    this.isVulnerable = false;
+                    this.alpha = 1;
+                }
+            }
             if (this.health == 1) {
                 let rotationDirection = this.name == "PlayerA" ? -1 : 1;
                 if (createjs.Ticker.getTicks() % 15 == 0) {

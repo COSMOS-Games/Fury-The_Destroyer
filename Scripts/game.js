@@ -162,8 +162,8 @@ let Game = (function () {
                 currentScene = new scenes.Splash();
                 break;
             case scenes.State.START:
-                createjs.Sound.stop();
-                createjs.Sound.play("menu", { volume: 0.2, loop: -1 });
+                // createjs.Sound.stop();
+                // createjs.Sound.play("menu", { volume: 0.2, loop: -1 });
                 currentScene = new scenes.Start();
                 break;
             case scenes.State.INSTRUCTIONS:

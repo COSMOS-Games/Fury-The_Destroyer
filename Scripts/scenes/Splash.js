@@ -62,6 +62,7 @@ var scenes;
         Update() {
             // after 2 seconds, open start scene
             if (createjs.Ticker.getTime() >= 2000) {
+                createjs.Sound.play("menu", { volume: 0.2, loop: -1 });
                 util.GameConfig.SCENE_STATE = scenes.State.START;
             }
         }

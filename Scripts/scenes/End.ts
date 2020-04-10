@@ -139,6 +139,8 @@ module scenes {
                 util.GameConfig.SCENE_STATE = scenes.State.FIRST;
             });
             this._mainButton.on("click", function () {
+                createjs.Sound.play("menu", { volume: 0.2, loop: -1 });
+
                 util.GameConfig.SCENE_STATE = scenes.State.START;
             });
         }

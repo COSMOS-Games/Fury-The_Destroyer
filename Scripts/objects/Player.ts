@@ -6,6 +6,8 @@ module objects {
         private _health: number = 3;
         private _name: string = "player";
         private _weaponType: String = "normal";
+        private _isVulnerable: boolean = false;
+        private _vulnerableCount: number = 0;
 
         // PUBLIC PROPERTIES
         get bulletNum(): number {
@@ -37,6 +39,19 @@ module objects {
 
         set weaponType(newWeapon: String) {
             this._weaponType = newWeapon;
+        }
+
+        get isVulnerable(): boolean {
+            return this._isVulnerable;
+        }
+
+        set isVulnerable(newState: boolean) {
+            this._isVulnerable = newState;
+            if (newState) {
+                this._vulnerableCount = createjs.Ticker.getTicks();
+            } else {
+                this._vulnerableCount = 0;
+            }
         }
 
         // CONSTRUCTOR
@@ -85,6 +100,18 @@ module objects {
             this.position = new Vector2(this.position.x, this.position.y);
             this._checkBounds();
 
+            // add blinking visual effect and invincible state
+            if (this.isVulnerable) {
+                if (createjs.Ticker.getTicks() % 15 < 7.5) {
+                    this.alpha = 0.3;
+                } else {
+                    this.alpha = 1;
+                }
+                if (createjs.Ticker.getTicks() - this._vulnerableCount >= 90) {
+                    this.isVulnerable = false; this.alpha = 1;
+                }
+            }
+
             if (this.health == 1) {
                 let rotationDirection = this.name == "PlayerA" ? -1 : 1;
 
@@ -94,6 +121,7 @@ module objects {
                     this.rotation -= 2 * rotationDirection;
                 }
             }
+
 
         }
 

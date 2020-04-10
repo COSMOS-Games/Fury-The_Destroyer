@@ -292,7 +292,12 @@ module scenes {
           bullets.splice(i, 1);
 
           // update player health
-          target.health -= 1;
+          if (!target.isVulnerable) {
+            target.health -= 1;
+            // player is in vulnerable mode
+            target.isVulnerable = true;
+          }
+
 
           // based on which player it is
           switch (target.name) {

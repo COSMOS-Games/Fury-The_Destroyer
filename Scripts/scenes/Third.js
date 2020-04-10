@@ -254,7 +254,11 @@ var scenes;
                     // remove the bullet from the list
                     weapon.splice(i, 1);
                     // update player health
-                    target.health -= 1;
+                    if (!target.isVulnerable) {
+                        target.health -= 1;
+                        // player is in vulnerable mode
+                        target.isVulnerable = true;
+                    }
                     // based on which player it is
                     switch (target.name) {
                         case "PlayerA":
@@ -308,7 +312,11 @@ var scenes;
                     this.removeChild(weapon[i]); // remove the bullet from the stage
                     weapon.splice(i, 1); // remove the bullet from the list
                     // update player health
-                    target.health -= 1;
+                    if (!target.isVulnerable) {
+                        target.health -= 1;
+                        // player is in vulnerable mode
+                        target.isVulnerable = true;
+                    }
                     this.scoreBorad.LivesA = this.playerA.health;
                     this.scoreBorad.LivesB = this.playerB.health;
                 }
