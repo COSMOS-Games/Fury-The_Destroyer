@@ -97,7 +97,7 @@ module objects {
 
         }
 
-        public Reset(): void { }
+        public Reset(): void {}
 
         public moveLeft(): void {
             this.position.add(Vector2.scale(Vector2.left(), 5));

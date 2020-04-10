@@ -63,6 +63,7 @@ module scenes {
          * @memberof Splash
          */
         public Start(): void {
+
             // add child to the stage
             this.addChild(this._splashScreen);
 
