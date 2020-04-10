@@ -97,7 +97,7 @@ module objects {
 
         }
 
-        public Reset(): void {}
+        public Reset(): void { }
 
         public moveLeft(): void {
             this.position.add(Vector2.scale(Vector2.left(), 5));
@@ -123,7 +123,6 @@ module objects {
             let bullets = new Array<Bullet>();
             switch (this.weaponType) {
                 case "normal":
-                    createjs.Sound.play("shoot", {volume: 0.5});
                     {
                         let bullet = new Bullet(
                             atlas,
@@ -138,7 +137,6 @@ module objects {
                     }
                     break;
                 case "3way":
-                    createjs.Sound.play("shoot", {volume: 0.5});
                     {
                         let bullet1 = new Bullet(
                             atlas,
@@ -177,9 +175,9 @@ module objects {
             }
             // check if this player still have bullet or not
             if (this.bulletNum > 0) {
-                //                createjs.Sound.play("shoot");
-
+                createjs.Sound.play("shoot", { volume: 0.5 });
                 this.bulletNum -= 1;
+
                 // return bullet;
                 return bullets;
             } else {
