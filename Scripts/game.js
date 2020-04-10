@@ -133,8 +133,8 @@ let Game = (function () {
         createjs.Sound.registerSound("./Assets/audio/menu.mp3", "menu");
         createjs.Sound.registerSound("./Assets/audio/play.mp3", "play");
         createjs.Sound.registerSound("./Assets/audio/play1.mp3", "play1");
-        createjs.Sound.registerSound("./Assets/audio/play1.mp3", "play2");
-        createjs.Sound.registerSound("./Assets/audio/play1.mp3", "play3");
+        createjs.Sound.registerSound("./Assets/audio/play2.mp3", "play2");
+        createjs.Sound.registerSound("./Assets/audio/play3.mp3", "play3");
         createjs.Sound.registerSound("./Assets/audio/shoot.mp3", "shoot");
         createjs.Sound.registerSound("./Assets/audio/splash.mp3", "splash");
         createjs.Sound.registerSound("./Assets/audio/stage-cleaned.mp3", "stage-cleaned");
@@ -212,7 +212,7 @@ let Game = (function () {
                 break;
             case scenes.State.END:
                 createjs.Sound.stop();
-                createjs.Sound.play("play", { volume: 0.5 });
+                createjs.Sound.play("game-over", { volume: 0.5 });
                 currentScene = new scenes.End();
                 break;
         }
