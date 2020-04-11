@@ -64,6 +64,8 @@ var scenes;
             this.mineList = this.generateMines();
             // jellyfish
             this.jellyfish = new objects.Jellyfish(util.ENEMY, 100, 100);
+            // fish
+            this._fish = new objects.Fish("./Assets/images/fish.png", 0, 0);
             // key pressed state
             this.keyPressedStates = [];
             // selectedd weapon type
@@ -89,6 +91,7 @@ var scenes;
             this.addChild(this.scoreBorad.LivesLabelB);
             this.addChild(this.scoreBorad.BulletLabelB);
             this.addChild(this.jellyfish);
+            this.addChild(this._fish);
             // generate mines
             for (let i = 0; i < this.mineList.length; i++) {
                 this.addChild(this.mineList[i]);
@@ -101,6 +104,7 @@ var scenes;
          * @memberof Third
          */
         Update() {
+            this._fish.Update();
             // detect keys to make movement
             this.detectPressedKeys();
             // detect the bullet collision with player
@@ -121,6 +125,10 @@ var scenes;
             this.detectJellyfishAndBulletCollision(this.bulletAList, this.jellyfish);
             // detect bullet collision with jellyfish from player B
             this.detectJellyfishAndBulletCollision(this.bulletBList, this.jellyfish);
+            // detect bullet collision with jellyfish from player A
+            this.detectFishAndBulletCollision(this.bulletAList, this._fish);
+            // detect bullet collision with jellyfish from player B
+            this.detectFishAndBulletCollision(this.bulletBList, this._fish);
             // update health and bullet label
             this.detectPlayerHealth();
         }
@@ -472,12 +480,12 @@ var scenes;
             }
         }
         /**
-         * Method for detecting collision between players and their own bases
-         *
-         * @param {objects.Image} base
-         * @param {objects.Player} target
-         * @memberof Third
-         */
+       * Method for detecting collision between players and their own bases
+       *
+       * @param {objects.Image} base
+       * @param {objects.Player} target
+       * @memberof Third
+       */
         detectBaseCollision(base, target) {
             // check AABB collision
             managers.Collision.AABBCheck(base, target);
@@ -497,6 +505,37 @@ var scenes;
                             this.scoreBorad.BulletsB = this.playerB.bulletNum;
                         }
                         break;
+                }
+            }
+        }
+        /**
+* Method for detecting collision between Fish and bullet
+*
+* @param {objects.Bullet[]} bullets
+* @param {objects.Fish} target
+* @memberof ShootInstruction
+*/
+        detectFishAndBulletCollision(bullets, target) {
+            // for all bullets
+            for (let i = 0; i < bullets.length; i++) {
+                // check AABB detection
+                managers.Collision.AABBCheck(bullets[i], target);
+                // if there is a collision
+                if (target.isColliding) {
+                    // explosion
+                    let explosion = new objects.Explosion(target.x, target.y);
+                    this.addChild(explosion);
+                    // update player health
+                    target.health -= 1;
+                    target.Reset();
+                    // once jellyfish's health goes to 0
+                    if (target.health <= 0) {
+                        this.removeChild(target);
+                    }
+                    // remove the bullet from the stage
+                    this.removeChild(bullets[i]);
+                    // remove the bullet from the list
+                    bullets.splice(i, 1);
                 }
             }
         }
