@@ -56,6 +56,8 @@ module scenes {
                 util.STAGE_H,
                 false
             );
+            this._background.alpha = 0.8
+
             // set buttons
             this._restartButton = new objects.Image(
                 util.RESTART_BUTTON,

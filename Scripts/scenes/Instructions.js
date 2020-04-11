@@ -41,10 +41,14 @@ var scenes;
             // initialization
             // background
             this._background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
+            this._background.alpha = 0.8;
             // labels
             this._instructionsLabel = new objects.Image(util.INSTRUCTIONS, 480, 100, 500, 150, true);
-            this._introduction = new objects.Label("Score counts: \n\n    shot Submarine + 100\n\n    shot Mine + 30\n\n" +
-                "\n\n3 Levels: \n\n    1. Simple movement\n\n    2. Intro to Mines\n\n    3. Intro to Advanced weapon", util.FONT_SIZE, util.FONT_FAMILY, util.FONT_COLOR, 50, 200, false);
+            this._introduction = new objects.Label("Levels: \n\n    1. Simple movement\n\n    2. Intro to Mines\n\n    3. Intro to Advanced weapon\n\n" +
+                "\nScore counts: \n\n    shot Submarine + 100\n\n    shot Mine      + 30\n\n" +
+                "    shot Goldfish: + 150\n\n    shot Jellyfish + 500\n\n", 
+            //        util.FONT_SIZE,
+            "23px", util.FONT_FAMILY, util.FONT_COLOR, 60, 180, false);
             // button images
             this._instruction = new objects.Image(util.INSTRUCTION_PATH, 650, 200, 225, 288, false);
             this._startButton = new objects.Image(util.PLAY_BUTTON, 300, 530, 150, 50, true);

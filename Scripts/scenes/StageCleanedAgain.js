@@ -41,6 +41,7 @@ var scenes;
             // initialization
             // background
             this._background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
+            this._background.alpha = 0.8;
             // buttons
             this._nextButton = new objects.Image(util.NEXT_BUTTON, 380, 530, 150, 50, true);
             this._nextButtonUpgradeWeapon = new objects.Image(util.NEXT_BUTTON_UPGRADE, 580, 530, 150, 50, true);

@@ -41,6 +41,7 @@ var scenes;
             // initialization
             // background
             this._background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
+            this._background.alpha = 0.8;
             // button
             this._nextButton = new objects.Image(util.NEXT_BUTTON, 480, 530, 150, 50, true);
             // labels

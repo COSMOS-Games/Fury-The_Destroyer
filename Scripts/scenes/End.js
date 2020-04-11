@@ -40,6 +40,7 @@ var scenes;
             super();
             // set background
             this._background = new objects.Image(util.BACKGROUND_PATH_GAME, 0, 0, util.STAGE_W, util.STAGE_H, false);
+            this._background.alpha = 0.8;
             // set buttons
             this._restartButton = new objects.Image(util.RESTART_BUTTON, 480, 450, 150, 50, true);
             this._mainButton = new objects.Image(util.MAIN_BUTTON, 480, 530, 150, 50, true);

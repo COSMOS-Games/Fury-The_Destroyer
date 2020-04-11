@@ -59,6 +59,7 @@ module scenes {
         util.STAGE_H,
         false
       );
+      this._background.alpha = 0.8
       // labels
       this._instructionsLabel = new objects.Image(
         util.INSTRUCTIONS,
@@ -69,13 +70,15 @@ module scenes {
         true
       );
       this._introduction = new objects.Label(
-        "Score counts: \n\n    shot Submarine + 100\n\n    shot Mine + 30\n\n" +
-        "\n\n3 Levels: \n\n    1. Simple movement\n\n    2. Intro to Mines\n\n    3. Intro to Advanced weapon",
-        util.FONT_SIZE,
+        "Levels: \n\n    1. Simple movement\n\n    2. Intro to Mines\n\n    3. Intro to Advanced weapon\n\n" +
+        "\nScore counts: \n\n    shot Submarine + 100\n\n    shot Mine      + 30\n\n" +
+        "    shot Goldfish: + 150\n\n    shot Jellyfish + 500\n\n",
+        //        util.FONT_SIZE,
+        "23px",
         util.FONT_FAMILY,
         util.FONT_COLOR,
-        50,
-        200,
+        60,
+        180,
         false
       );
       // button images

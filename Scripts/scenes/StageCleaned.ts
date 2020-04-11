@@ -58,6 +58,8 @@ module scenes {
                 util.STAGE_H,
                 false
             );
+            this._background.alpha = 0.8
+
             // button
             this._nextButton = new objects.Image(
                 util.NEXT_BUTTON,
