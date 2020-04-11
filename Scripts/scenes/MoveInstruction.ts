@@ -35,6 +35,10 @@ module scenes {
     private _baseA: objects.Image;
     private _baseB: objects.Image;
 
+    private _baseAFrame: objects.Image;
+    private _baseBFrame: objects.Image;
+
+
     // movement counts
     private _playerAMove: number = 3;
     private _playerBMove: number = 3;
@@ -76,7 +80,7 @@ module scenes {
 
       // bases
       this._baseA = new objects.Image(
-        "./Assets/images/baseA1.png",
+        util.BASE_A_PATH,
         0,
         0,
         100,
@@ -84,9 +88,21 @@ module scenes {
         false
       );
       this._baseA.position = this.setRandomLocation();
+      // bases
+      this._baseAFrame = new objects.Image(
+        "../../Assets/images/baseA1.png",
+        0,
+        0,
+        100,
+        100,
+        false
+      );
+      this._baseAFrame.position = this._baseA.position;
+      this._baseAFrame.alpha = 0.7;
+
 
       this._baseB = new objects.Image(
-        "./Assets/images/baseB1.png",
+        util.BASE_B_PATH,
         0,
         0,
         100,
@@ -94,6 +110,19 @@ module scenes {
         false
       );
       this._baseB.position = this.setRandomLocation();
+      // bases
+      this._baseBFrame = new objects.Image(
+        "../../Assets/images/baseB1.png",
+        0,
+        0,
+        100,
+        100,
+        false
+      );
+      this._baseBFrame.position = this._baseB.position;
+      this._baseBFrame.alpha = 0.7;
+
+
 
       // player A
       this._playerA = new objects.Player(
@@ -172,6 +201,8 @@ module scenes {
      */
     public Start(): void {
       this.addChild(this._background);
+      this.addChild(this._baseAFrame);
+      this.addChild(this._baseBFrame);
       this.addChild(this._baseA);
       this.addChild(this._baseB);
       this.addChild(this._playerA);
@@ -188,6 +219,17 @@ module scenes {
      * @memberof MoveInstruction
      */
     public Update(): void {
+
+
+      if (createjs.Ticker.getTicks() % 80 < 40) {
+        this._baseA.alpha = 0.2;
+        this._baseB.alpha = 0.2;
+      } else {
+        this._baseA.alpha = 1;
+        this._baseB.alpha = 1;
+      }
+
+
       // detect keys to make movement
       this.detectPressedKeys();
 
@@ -234,6 +276,7 @@ module scenes {
                 this._playerAMoveFinish = true;
               } else {
                 this._baseA.position = this.setRandomLocation();
+                this._baseAFrame.position = this._baseA.position;
               }
             }
             break;
@@ -246,6 +289,7 @@ module scenes {
                 this._playerBMoveFinish = true;
               } else {
                 this._baseB.position = this.setRandomLocation();
+                this._baseBFrame.position = this._baseB.position;
               }
             }
             break;
