@@ -90,7 +90,7 @@ module scenes {
       this._baseA.position = this.setRandomLocation();
       // bases
       this._baseAFrame = new objects.Image(
-        "../../Assets/images/baseA1.png",
+        util.BASE_AFRAME_PATH,
         0,
         0,
         100,
@@ -112,7 +112,7 @@ module scenes {
       this._baseB.position = this.setRandomLocation();
       // bases
       this._baseBFrame = new objects.Image(
-        "../../Assets/images/baseB1.png",
+        util.BASE_BFRAME_PATH,
         0,
         0,
         100,

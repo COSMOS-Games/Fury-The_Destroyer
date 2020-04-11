@@ -15,6 +15,8 @@ var util;
     util.INSTRUCTION_PATH = "./Assets/images/instruction.png";
     util.BASE_A_PATH = "./Assets/images/baseA.png";
     util.BASE_B_PATH = "./Assets/images/baseB.png";
+    util.BASE_AFRAME_PATH = "./Assets/images/baseA1.png";
+    util.BASE_BFRAME_PATH = "./Assets/images/baseB1.png";
     util.ENEMY = "./Assets/images/enemy.png";
     util.FISH = "./Assets/images/fish.png";
     // Player image assets

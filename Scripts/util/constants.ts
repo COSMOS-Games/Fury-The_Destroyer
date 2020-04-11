@@ -17,6 +17,9 @@ module util {
   export const INSTRUCTION_PATH: string = "./Assets/images/instruction.png";
   export const BASE_A_PATH: string = "./Assets/images/baseA.png";
   export const BASE_B_PATH: string = "./Assets/images/baseB.png";
+  export const BASE_AFRAME_PATH: string = "./Assets/images/baseA1.png";
+  export const BASE_BFRAME_PATH: string = "./Assets/images/baseB1.png";
+
   export const ENEMY: string = "./Assets/images/enemy.png";
   export const FISH: string = "./Assets/images/fish.png";
 

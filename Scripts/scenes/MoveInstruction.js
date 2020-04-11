@@ -48,13 +48,13 @@ var scenes;
             this._baseA = new objects.Image(util.BASE_A_PATH, 0, 0, 100, 100, false);
             this._baseA.position = this.setRandomLocation();
             // bases
-            this._baseAFrame = new objects.Image("../../Assets/images/baseA1.png", 0, 0, 100, 100, false);
+            this._baseAFrame = new objects.Image(util.BASE_AFRAME_PATH, 0, 0, 100, 100, false);
             this._baseAFrame.position = this._baseA.position;
             this._baseAFrame.alpha = 0.7;
             this._baseB = new objects.Image(util.BASE_B_PATH, 0, 0, 100, 100, false);
             this._baseB.position = this.setRandomLocation();
             // bases
-            this._baseBFrame = new objects.Image("../../Assets/images/baseB1.png", 0, 0, 100, 100, false);
+            this._baseBFrame = new objects.Image(util.BASE_BFRAME_PATH, 0, 0, 100, 100, false);
             this._baseBFrame.position = this._baseB.position;
             this._baseBFrame.alpha = 0.7;
             // player A
