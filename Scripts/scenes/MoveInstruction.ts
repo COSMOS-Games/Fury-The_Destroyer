@@ -273,6 +273,7 @@ module scenes {
               this._playerAMove -= 1;
               if (this._playerAMove < 1) {
                 this.removeChild(this._baseA);
+                this.removeChild(this._baseAFrame);
                 this._playerAMoveFinish = true;
               } else {
                 this._baseA.position = this.setRandomLocation();
@@ -286,6 +287,7 @@ module scenes {
               this._playerBMove -= 1;
               if (this._playerBMove < 1) {
                 this.removeChild(this._baseB);
+                this.removeChild(this._baseBFrame);
                 this._playerBMoveFinish = true;
               } else {
                 this._baseB.position = this.setRandomLocation();
