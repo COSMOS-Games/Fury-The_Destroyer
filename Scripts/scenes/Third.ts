@@ -152,7 +152,13 @@ module scenes {
             this.addChild(this.scoreBorad.LivesLabelB);
             this.addChild(this.scoreBorad.BulletLabelB);
             this.addChild(this.jellyfish);
+
+            // change starting position
+            this._fish.position.x = util.STAGE_W / 2;
+            this._fish.position.x = util.Mathf.RandomRange(util.STAGE_W / 4, util.STAGE_W - this._fish.width);
+
             this.addChild(this._fish);
+
 
             // generate mines
             for (let i = 0; i < this.mineList.length; i++) {
@@ -212,6 +218,10 @@ module scenes {
             // detect bullet collision with jellyfish from player B
             this.detectFishAndBulletCollision(this.bulletBList, this._fish);
 
+
+            // detect mine collision with player
+            this.detectFishCollision(this._fish, this.playerA);
+            this.detectFishCollision(this._fish, this.playerB);
 
             // update health and bullet label
             this.detectPlayerHealth();
@@ -450,6 +460,37 @@ module scenes {
                     // remove the bullet from the list
                     weapon.splice(i, 1);
                 }
+            }
+        }
+
+        /**
+ * Method to detect collision betwen mine and player
+ *
+ * @param {objects.Fish} fish
+ * @param {objects.Player} target
+ * @memberof Third
+ */
+        public detectFishCollision(fish: objects.Fish, target: objects.Player): void {
+            // for all mines
+            // check AABB detectiion
+            managers.Collision.AABBCheck(fish, target);
+
+            // if there is a collision
+            if (target.isColliding) {
+                // display explosion effect
+                let explosion = new objects.Explosion(fish.x, fish.y);
+                this.addChild(explosion);
+
+                fish.Reset();
+
+                // update player health
+                if (!target.isVulnerable) {
+                    target.health -= 1;
+                    // player is in vulnerable mode
+                    target.isVulnerable = true;
+                }
+                this.scoreBorad.LivesA = this.playerA.health;
+                this.scoreBorad.LivesB = this.playerB.health;
             }
         }
 
