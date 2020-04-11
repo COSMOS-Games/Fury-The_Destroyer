@@ -729,14 +729,33 @@ module scenes {
                     this.addChild(explosion);
 
 
-                    // update player health
-                    target.health -= 1;
+                    // // update player health
+                    // target.health -= 1;
+                    // target.Reset();
+
+                    // // once jellyfish's health goes to 0
+                    // if (target.health <= 0) {
+                    //     this.removeChild(target);
+                    // }
+
+                    // if jellyfish dies, update score
+                    switch (bullets[i].owner) {
+                        case "PlayerA":
+                            {
+                                this.scoreBorad.ScoreA += 150;
+                            }
+                            break;
+                        case "PlayerB":
+                            {
+                                this.scoreBorad.ScoreB += 150;
+                            }
+                            break;
+                    }
+
+                    // reset jellyfish
                     target.Reset();
 
-                    // once jellyfish's health goes to 0
-                    if (target.health <= 0) {
-                        this.removeChild(target);
-                    }
+
 
                     // remove the bullet from the stage
                     this.removeChild(bullets[i]);

@@ -558,13 +558,28 @@ var scenes;
                     // explosion
                     let explosion = new objects.Explosion(target.x, target.y);
                     this.addChild(explosion);
-                    // update player health
-                    target.health -= 1;
-                    target.Reset();
-                    // once jellyfish's health goes to 0
-                    if (target.health <= 0) {
-                        this.removeChild(target);
+                    // // update player health
+                    // target.health -= 1;
+                    // target.Reset();
+                    // // once jellyfish's health goes to 0
+                    // if (target.health <= 0) {
+                    //     this.removeChild(target);
+                    // }
+                    // if jellyfish dies, update score
+                    switch (bullets[i].owner) {
+                        case "PlayerA":
+                            {
+                                this.scoreBorad.ScoreA += 150;
+                            }
+                            break;
+                        case "PlayerB":
+                            {
+                                this.scoreBorad.ScoreB += 150;
+                            }
+                            break;
                     }
+                    // reset jellyfish
+                    target.Reset();
                     // remove the bullet from the stage
                     this.removeChild(bullets[i]);
                     // remove the bullet from the list
