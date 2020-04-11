@@ -42,6 +42,8 @@ module scenes {
         bulletBList: objects.Bullet[] = [];
         mineList: objects.Mine[] = [];
         jellyfish: objects.Jellyfish;
+        private _fish: objects.Fish;
+
         // status
         isChangedA: boolean = false;
         isChangedB: boolean = false;
@@ -119,6 +121,9 @@ module scenes {
             // jellyfish
             this.jellyfish = new objects.Jellyfish(util.ENEMY, 100, 100);
 
+            // fish
+            this._fish = new objects.Fish("./Assets/images/fish.png", 0, 0);
+
             // key pressed state
             this.keyPressedStates = [];
 
@@ -148,6 +153,13 @@ module scenes {
             this.addChild(this.scoreBorad.BulletLabelB);
             this.addChild(this.jellyfish);
 
+            // change starting position
+            this._fish.position.x = util.STAGE_W / 2;
+            this._fish.position.x = util.Mathf.RandomRange(util.STAGE_W / 4, util.STAGE_W - this._fish.width);
+
+            this.addChild(this._fish);
+
+
             // generate mines
             for (let i = 0; i < this.mineList.length; i++) {
                 this.addChild(this.mineList[i]);
@@ -162,6 +174,7 @@ module scenes {
          * @memberof Third
          */
         public Update(): void {
+            this._fish.Update();
             // detect keys to make movement
             this.detectPressedKeys();
 
@@ -199,6 +212,16 @@ module scenes {
                 this.jellyfish
             );
 
+            // detect bullet collision with jellyfish from player A
+            this.detectFishAndBulletCollision(this.bulletAList, this._fish);
+
+            // detect bullet collision with jellyfish from player B
+            this.detectFishAndBulletCollision(this.bulletBList, this._fish);
+
+
+            // detect mine collision with player
+            this.detectFishCollision(this._fish, this.playerA);
+            this.detectFishCollision(this._fish, this.playerB);
 
             // update health and bullet label
             this.detectPlayerHealth();
@@ -441,6 +464,37 @@ module scenes {
         }
 
         /**
+ * Method to detect collision betwen mine and player
+ *
+ * @param {objects.Fish} fish
+ * @param {objects.Player} target
+ * @memberof Third
+ */
+        public detectFishCollision(fish: objects.Fish, target: objects.Player): void {
+            // for all mines
+            // check AABB detectiion
+            managers.Collision.AABBCheck(fish, target);
+
+            // if there is a collision
+            if (target.isColliding) {
+                // display explosion effect
+                let explosion = new objects.Explosion(fish.x, fish.y);
+                this.addChild(explosion);
+
+                fish.Reset();
+
+                // update player health
+                if (!target.isVulnerable) {
+                    target.health -= 1;
+                    // player is in vulnerable mode
+                    target.isVulnerable = true;
+                }
+                this.scoreBorad.LivesA = this.playerA.health;
+                this.scoreBorad.LivesB = this.playerB.health;
+            }
+        }
+
+        /**
          * Method for detecting collision between bullet and mine
          *
          * @param {(objects.Bullet[] | objects.Mine[])} destructableA
@@ -616,12 +670,12 @@ module scenes {
         }
 
         /**
-         * Method for detecting collision between players and their own bases
-         *
-         * @param {objects.Image} base
-         * @param {objects.Player} target
-         * @memberof Third
-         */
+       * Method for detecting collision between players and their own bases
+       *
+       * @param {objects.Image} base
+       * @param {objects.Player} target
+       * @memberof Third
+       */
         public detectBaseCollision(
             base: objects.Image,
             target: objects.Player
@@ -648,5 +702,52 @@ module scenes {
                 }
             }
         }
+
+        /**
+* Method for detecting collision between Fish and bullet
+*
+* @param {objects.Bullet[]} bullets
+* @param {objects.Fish} target
+* @memberof ShootInstruction
+*/
+        public detectFishAndBulletCollision(
+            bullets: objects.Bullet[],
+            target: objects.Fish
+        ): void {
+            // for all bullets
+            for (let i = 0; i < bullets.length; i++) {
+                // check AABB detection
+                managers.Collision.AABBCheck(bullets[i], target);
+
+                // if there is a collision
+                if (target.isColliding) {
+                    // explosion
+                    let explosion = new objects.Explosion(
+                        target.x,
+                        target.y
+                    );
+                    this.addChild(explosion);
+
+
+                    // update player health
+                    target.health -= 1;
+                    target.Reset();
+
+                    // once jellyfish's health goes to 0
+                    if (target.health <= 0) {
+                        this.removeChild(target);
+                    }
+
+                    // remove the bullet from the stage
+                    this.removeChild(bullets[i]);
+                    // remove the bullet from the list
+                    bullets.splice(i, 1);
+                }
+            }
+        }
+
+
     }
+
+
 }
